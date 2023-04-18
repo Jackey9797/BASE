@@ -1,0 +1,38 @@
+data
+├── district3F11T17
+│   ├── FastData
+│   │   ├── 2011_30day.npz
+│   │   ├── 2012_30day.npz
+│   │   ├── 2013_30day.npz
+│   │   ├── 2014_30day.npz
+│   │   ├── 2015_30day.npz
+│   │   ├── 2016_30day.npz
+│   │   └── 2017_30day.npz
+│   ├── finaldata
+│   │   ├── 2011.npz
+│   │   ├── 2012.npz
+│   │   ├── 2013.npz
+│   │   ├── 2014.npz
+│   │   ├── 2015.npz
+│   │   ├── 2016.npz
+│   │   └── 2017.npz
+│   ├── graph
+│   │   ├── 2011_adj.npz
+│   │   ├── 2012_adj.npz
+│   │   ├── 2013_adj.npz
+│   │   ├── 2014_adj.npz
+│   │   ├── 2015_adj.npz
+│   │   ├── 2016_adj.npz
+│   │   └── 2017_adj.npz
+│   └── tmp.ipynb
+└── SensorID
+    ├── 2011.pkl
+    ├── 2012.pkl
+    ├── 2013.pkl
+    ├── 2014.pkl
+    ├── 2015.pkl
+    ├── 2016.pkl
+    ├── 2017.pkl
+    └── read_id.py
+
+5 directories, 30 files
