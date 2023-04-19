@@ -1,0 +1,236 @@
+2023-04-19 01:43:45,795 - logger name:exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/incremental-TrafficStream.log
+2023-04-19 01:43:45,796 - params : {'conf': 'incremental-TrafficStream', 'load_config': 'configs/', 'data_process': False, 'auto_test': 1, 'load': True, 'device': device(type='cuda', index=1), 'data_name': 'PEMS3-Stream', 'raw_data_path': 'data/district3F11T17/finaldata/', 'graph_path': 'data/district3F11T17/graph/', 'save_data_path': 'data/district3F11T17/FastData/', 'model_path': 'exp/district3F11T17/', 'year': 2012, 'days': 31, 'logname': 'incremental-TrafficStream', '/* model related args*/': '//', 'x_len': 12, 'y_len': 12, 'dropout': 0.0, 'gcn': {'in_channel': 12, 'out_channel': 12, 'hidden_channel': 64}, 'tcn': {'in_channel': 1, 'out_channel': 1, 'kernel_size': 3, 'dilation': 1}, '/*train related args*/': '//', 'train': True, 'begin_year': 2011, 'end_year': 2017, 'epoch': 100, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': True, 'detect': True, 'detect_strategy': 'feature', 'replay': True, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': True, 'ewc_strategy': 'ewc', 'ewc_lambda': 1.0, 'subgraph_train': True, 'num_hops': 2, 'time': '2023-04-19-01:43:45.169043', 'path': 'exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043', 'logger': <Logger __main__ (INFO)>}
+2023-04-19 01:43:45,796 - [*] Year 2011 load from data/district3F11T17/FastData/2011_30day.npz
+2023-04-19 01:44:01,885 - [*] Year 2011 Dataset load!
+/Disk/fhyega/miniconda3/envs/torch/lib/python3.10/site-packages/torch_geometric/deprecation.py:12: UserWarning: 'data.DataLoader' is deprecated, use 'loader.DataLoader' instead
+  warnings.warn(out)
+2023-04-19 01:44:18,638 - [*] Year 2011 Training start
+2023-04-19 01:44:21,040 - node number torch.Size([83840, 12])
+2023-04-19 01:44:46,672 - epoch:0, training loss:93.8839 validation loss:53.6565
+2023-04-19 01:44:48,559 - epoch:1, training loss:44.9367 validation loss:37.4060
+2023-04-19 01:44:50,258 - epoch:2, training loss:34.8963 validation loss:31.2212
+2023-04-19 01:44:52,021 - epoch:3, training loss:27.8402 validation loss:24.2145
+2023-04-19 01:44:53,782 - epoch:4, training loss:22.5487 validation loss:20.5038
+2023-04-19 01:44:55,581 - epoch:5, training loss:20.2232 validation loss:19.4817
+2023-04-19 01:44:57,315 - epoch:6, training loss:19.2733 validation loss:18.6869
+2023-04-19 01:44:59,041 - epoch:7, training loss:18.6435 validation loss:17.9542
+2023-04-19 01:45:00,807 - epoch:8, training loss:18.2797 validation loss:17.7765
+2023-04-19 01:45:02,542 - epoch:9, training loss:18.0797 validation loss:17.4700
+2023-04-19 01:45:04,284 - epoch:10, training loss:17.9556 validation loss:17.7326
+2023-04-19 01:45:06,084 - epoch:11, training loss:17.9412 validation loss:17.5001
+2023-04-19 01:45:07,848 - epoch:12, training loss:17.7959 validation loss:17.4830
+2023-04-19 01:45:09,576 - epoch:13, training loss:17.8440 validation loss:17.5423
+2023-04-19 01:45:11,324 - epoch:14, training loss:17.8767 validation loss:17.4262
+2023-04-19 01:45:13,045 - epoch:15, training loss:17.6970 validation loss:17.4330
+2023-04-19 01:45:14,805 - epoch:16, training loss:17.7424 validation loss:17.5325
+2023-04-19 01:45:16,550 - epoch:17, training loss:17.6518 validation loss:17.3332
+2023-04-19 01:45:18,314 - epoch:18, training loss:17.5967 validation loss:17.4511
+2023-04-19 01:45:20,132 - epoch:19, training loss:17.5746 validation loss:17.3366
+2023-04-19 01:45:21,895 - epoch:20, training loss:17.4792 validation loss:17.3212
+2023-04-19 01:45:23,679 - epoch:21, training loss:17.5240 validation loss:17.4318
+2023-04-19 01:45:25,445 - epoch:22, training loss:17.3346 validation loss:17.2924
+2023-04-19 01:45:27,344 - epoch:23, training loss:17.3134 validation loss:17.1487
+2023-04-19 01:45:29,113 - epoch:24, training loss:17.1544 validation loss:16.8161
+2023-04-19 01:45:30,909 - epoch:25, training loss:17.0258 validation loss:16.8921
+2023-04-19 01:45:32,712 - epoch:26, training loss:16.9861 validation loss:16.7866
+2023-04-19 01:45:34,451 - epoch:27, training loss:16.9887 validation loss:16.9484
+2023-04-19 01:45:36,207 - epoch:28, training loss:17.0691 validation loss:16.7719
+2023-04-19 01:45:38,102 - epoch:29, training loss:16.9137 validation loss:16.7342
+2023-04-19 01:45:39,869 - epoch:30, training loss:17.0142 validation loss:16.9193
+2023-04-19 01:45:41,601 - epoch:31, training loss:16.9176 validation loss:16.7306
+2023-04-19 01:45:43,506 - epoch:32, training loss:17.0125 validation loss:16.8449
+2023-04-19 01:45:45,253 - epoch:33, training loss:16.8701 validation loss:16.7614
+2023-04-19 01:45:47,028 - epoch:34, training loss:16.8450 validation loss:16.6195
+2023-04-19 01:45:48,884 - epoch:35, training loss:16.8459 validation loss:16.6951
+2023-04-19 01:45:50,639 - epoch:36, training loss:16.8365 validation loss:16.7780
+2023-04-19 01:45:52,401 - epoch:37, training loss:16.9534 validation loss:16.5595
+2023-04-19 01:45:54,294 - epoch:38, training loss:16.8773 validation loss:17.0651
+2023-04-19 01:45:56,155 - epoch:39, training loss:16.8414 validation loss:16.6582
+2023-04-19 01:45:57,930 - epoch:40, training loss:16.8010 validation loss:16.5616
+2023-04-19 01:45:59,775 - epoch:41, training loss:16.7755 validation loss:16.7250
+2023-04-19 01:46:01,567 - epoch:42, training loss:16.8369 validation loss:16.9599
+2023-04-19 01:46:03,303 - epoch:43, training loss:16.8812 validation loss:16.5326
+2023-04-19 01:46:05,086 - epoch:44, training loss:16.8776 validation loss:16.4614
+2023-04-19 01:46:06,866 - epoch:45, training loss:16.7397 validation loss:16.6753
+2023-04-19 01:46:08,617 - epoch:46, training loss:16.8832 validation loss:16.4794
+2023-04-19 01:46:10,389 - epoch:47, training loss:16.8731 validation loss:16.7573
+2023-04-19 01:46:12,143 - epoch:48, training loss:16.6929 validation loss:16.6800
+2023-04-19 01:46:13,859 - epoch:49, training loss:16.9716 validation loss:16.8821
+2023-04-19 01:46:15,658 - epoch:50, training loss:17.0427 validation loss:16.6409
+2023-04-19 01:46:15,969 - Finished optimization, total time:93.10 s, best model:exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/2011/16.4614_epoch_44.pkl
+2023-04-19 01:46:17,746 - [*] loss:638.0565
+2023-04-19 01:46:17,929 - [*] year 2011, testing
+2023-04-19 01:46:18,071 - T:3	MAE	13.0518	RMSE	19.8972	MAPE	17.2383
+2023-04-19 01:46:18,493 - T:6	MAE	14.0621	RMSE	21.6954	MAPE	18.9995
+2023-04-19 01:46:19,563 - T:12	MAE	16.3058	RMSE	25.4703	MAPE	23.7451
+2023-04-19 01:46:19,566 - [*] Year 2012 load from data/district3F11T17/FastData/2012_30day.npz
+2023-04-19 01:46:20,023 - [*] Year 2012 Dataset load!
+2023-04-19 01:46:20,123 - [*] detect strategy feature
+2023-04-19 01:46:24,481 - [*] replay node number 64
+2023-04-19 01:46:28,681 - number of increase nodes:71, nodes after 2 hop:torch.Size([239]), total nodes this year 715
+2023-04-19 01:46:28,695 - [*] load from exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/2011/best_model.pkl
+2023-04-19 01:46:28,701 - [*] EWC! lambda 1.000000
+2023-04-19 01:46:56,925 - [*] Year 2012 Training start
+2023-04-19 01:46:57,880 - node number torch.Size([30592, 12])
+2023-04-19 01:47:01,532 - epoch:0, training loss:17.9534 validation loss:17.0611
+2023-04-19 01:47:02,940 - epoch:1, training loss:17.1434 validation loss:16.9830
+2023-04-19 01:47:03,963 - epoch:2, training loss:17.0849 validation loss:16.8615
+2023-04-19 01:47:04,937 - epoch:3, training loss:17.1338 validation loss:16.9120
+2023-04-19 01:47:05,928 - epoch:4, training loss:17.0685 validation loss:16.7912
+2023-04-19 01:47:06,873 - epoch:5, training loss:17.1214 validation loss:16.8001
+2023-04-19 01:47:07,821 - epoch:6, training loss:17.0739 validation loss:16.8657
+2023-04-19 01:47:08,759 - epoch:7, training loss:17.0944 validation loss:16.8472
+2023-04-19 01:47:09,713 - epoch:8, training loss:17.0755 validation loss:16.8286
+2023-04-19 01:47:10,713 - epoch:9, training loss:17.0745 validation loss:16.8134
+2023-04-19 01:47:11,696 - epoch:10, training loss:17.0883 validation loss:16.9707
+2023-04-19 01:47:11,726 - Finished optimization, total time:10.96 s, best model:exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/2012/16.7912_epoch_4.pkl
+2023-04-19 01:47:12,228 - [*] loss:639.8273
+2023-04-19 01:47:12,320 - [*] year 2012, testing
+2023-04-19 01:47:12,475 - T:3	MAE	12.7260	RMSE	19.7833	MAPE	18.4798
+2023-04-19 01:47:12,950 - T:6	MAE	13.6988	RMSE	21.5662	MAPE	20.1678
+2023-04-19 01:47:13,623 - T:12	MAE	15.9148	RMSE	25.5014	MAPE	24.2841
+2023-04-19 01:47:13,623 - [*] Year 2013 load from data/district3F11T17/FastData/2013_30day.npz
+2023-04-19 01:47:13,838 - [*] Year 2013 Dataset load!
+2023-04-19 01:47:14,320 - [*] detect strategy feature
+2023-04-19 01:47:18,861 - [*] replay node number 70
+2023-04-19 01:47:24,046 - number of increase nodes:78, nodes after 2 hop:torch.Size([246]), total nodes this year 786
+2023-04-19 01:47:24,050 - [*] load from exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/2012/best_model.pkl
+2023-04-19 01:47:24,112 - [*] EWC! lambda 1.000000
+2023-04-19 01:47:42,195 - [*] Year 2013 Training start
+2023-04-19 01:47:43,459 - node number torch.Size([31488, 12])
+2023-04-19 01:47:45,111 - epoch:0, training loss:15.4656 validation loss:15.4786
+2023-04-19 01:47:46,210 - epoch:1, training loss:14.5492 validation loss:15.1337
+2023-04-19 01:47:47,251 - epoch:2, training loss:14.5184 validation loss:15.3372
+2023-04-19 01:47:48,218 - epoch:3, training loss:14.5222 validation loss:15.3401
+2023-04-19 01:47:49,177 - epoch:4, training loss:14.5351 validation loss:15.1386
+2023-04-19 01:47:50,123 - epoch:5, training loss:14.5039 validation loss:15.1736
+2023-04-19 01:47:51,083 - epoch:6, training loss:14.5846 validation loss:15.5801
+2023-04-19 01:47:52,067 - epoch:7, training loss:14.5356 validation loss:15.2604
+2023-04-19 01:47:52,087 - Finished optimization, total time:7.41 s, best model:exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/2013/15.1337_epoch_1.pkl
+2023-04-19 01:47:52,577 - [*] loss:712.6371
+2023-04-19 01:47:52,730 - [*] year 2013, testing
+2023-04-19 01:47:52,921 - T:3	MAE	12.5664	RMSE	20.1646	MAPE	18.3186
+2023-04-19 01:47:53,431 - T:6	MAE	13.8268	RMSE	22.4853	MAPE	20.4813
+2023-04-19 01:47:54,513 - T:12	MAE	16.3973	RMSE	26.9144	MAPE	25.1082
+2023-04-19 01:47:54,514 - [*] Year 2014 load from data/district3F11T17/FastData/2014_30day.npz
+2023-04-19 01:47:54,878 - [*] Year 2014 Dataset load!
+2023-04-19 01:47:54,999 - [*] detect strategy feature
+2023-04-19 01:47:59,485 - [*] replay node number 73
+2023-04-19 01:48:03,888 - number of increase nodes:81, nodes after 2 hop:torch.Size([305]), total nodes this year 822
+2023-04-19 01:48:03,936 - [*] load from exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/2013/best_model.pkl
+2023-04-19 01:48:03,940 - [*] EWC! lambda 1.000000
+2023-04-19 01:48:27,300 - [*] Year 2014 Training start
+2023-04-19 01:48:28,518 - node number torch.Size([39040, 12])
+2023-04-19 01:48:30,521 - epoch:0, training loss:16.8667 validation loss:15.9519
+2023-04-19 01:48:31,684 - epoch:1, training loss:16.2206 validation loss:16.0525
+2023-04-19 01:48:32,750 - epoch:2, training loss:16.2616 validation loss:15.9237
+2023-04-19 01:48:33,827 - epoch:3, training loss:16.2747 validation loss:16.1443
+2023-04-19 01:48:35,213 - epoch:4, training loss:16.2793 validation loss:16.0271
+2023-04-19 01:48:36,304 - epoch:5, training loss:16.2762 validation loss:15.8307
+2023-04-19 01:48:37,416 - epoch:6, training loss:16.2465 validation loss:15.8888
+2023-04-19 01:48:38,504 - epoch:7, training loss:16.2365 validation loss:16.2016
+2023-04-19 01:48:39,596 - epoch:8, training loss:16.2354 validation loss:16.0344
+2023-04-19 01:48:40,662 - epoch:9, training loss:16.2564 validation loss:15.9359
+2023-04-19 01:48:41,762 - epoch:10, training loss:16.2376 validation loss:16.0985
+2023-04-19 01:48:42,887 - epoch:11, training loss:16.2482 validation loss:15.8508
+2023-04-19 01:48:42,902 - Finished optimization, total time:11.25 s, best model:exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/2014/15.8307_epoch_5.pkl
+2023-04-19 01:48:43,455 - [*] loss:773.9935
+2023-04-19 01:48:43,644 - [*] year 2014, testing
+2023-04-19 01:48:43,881 - T:3	MAE	13.5168	RMSE	21.4954	MAPE	24.7165
+2023-04-19 01:48:44,561 - T:6	MAE	14.7183	RMSE	23.7176	MAPE	26.3400
+2023-04-19 01:48:45,588 - T:12	MAE	17.2533	RMSE	28.1155	MAPE	29.7174
+2023-04-19 01:48:45,591 - [*] Year 2015 load from data/district3F11T17/FastData/2015_30day.npz
+2023-04-19 01:48:45,834 - [*] Year 2015 Dataset load!
+2023-04-19 01:48:45,896 - [*] detect strategy feature
+2023-04-19 01:48:50,864 - [*] replay node number 75
+2023-04-19 01:48:56,522 - number of increase nodes:80, nodes after 2 hop:torch.Size([246]), total nodes this year 834
+2023-04-19 01:48:56,530 - [*] load from exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/2014/best_model.pkl
+2023-04-19 01:48:56,543 - [*] EWC! lambda 1.000000
+2023-04-19 01:49:27,165 - [*] Year 2015 Training start
+2023-04-19 01:49:27,470 - node number torch.Size([31488, 12])
+2023-04-19 01:49:29,136 - epoch:0, training loss:16.5451 validation loss:16.5012
+2023-04-19 01:49:30,225 - epoch:1, training loss:16.2172 validation loss:16.3258
+2023-04-19 01:49:31,230 - epoch:2, training loss:16.2439 validation loss:16.4419
+2023-04-19 01:49:32,213 - epoch:3, training loss:16.2667 validation loss:16.3200
+2023-04-19 01:49:33,161 - epoch:4, training loss:16.2091 validation loss:16.2926
+2023-04-19 01:49:34,465 - epoch:5, training loss:16.2654 validation loss:16.2769
+2023-04-19 01:49:35,478 - epoch:6, training loss:16.1995 validation loss:16.4062
+2023-04-19 01:49:36,460 - epoch:7, training loss:16.2540 validation loss:16.5581
+2023-04-19 01:49:37,515 - epoch:8, training loss:16.2343 validation loss:16.3927
+2023-04-19 01:49:38,556 - epoch:9, training loss:16.2058 validation loss:16.4007
+2023-04-19 01:49:39,812 - epoch:10, training loss:16.2808 validation loss:16.2993
+2023-04-19 01:49:40,816 - epoch:11, training loss:16.2344 validation loss:16.2747
+2023-04-19 01:49:41,814 - epoch:12, training loss:16.2625 validation loss:16.3957
+2023-04-19 01:49:42,788 - epoch:13, training loss:16.2183 validation loss:16.3259
+2023-04-19 01:49:43,768 - epoch:14, training loss:16.2381 validation loss:16.3982
+2023-04-19 01:49:44,747 - epoch:15, training loss:16.2876 validation loss:16.5095
+2023-04-19 01:49:45,740 - epoch:16, training loss:16.2527 validation loss:16.5779
+2023-04-19 01:49:46,712 - epoch:17, training loss:16.2712 validation loss:16.3894
+2023-04-19 01:49:47,023 - Finished optimization, total time:13.27 s, best model:exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/2015/16.2747_epoch_11.pkl
+2023-04-19 01:49:47,554 - [*] loss:748.6542
+2023-04-19 01:49:47,691 - [*] year 2015, testing
+2023-04-19 01:49:48,033 - T:3	MAE	12.8791	RMSE	20.7069	MAPE	19.6859
+2023-04-19 01:49:48,843 - T:6	MAE	14.0842	RMSE	23.1316	MAPE	21.3956
+2023-04-19 01:49:49,782 - T:12	MAE	16.5370	RMSE	27.6463	MAPE	25.2393
+2023-04-19 01:49:49,784 - [*] Year 2016 load from data/district3F11T17/FastData/2016_30day.npz
+2023-04-19 01:49:50,170 - [*] Year 2016 Dataset load!
+2023-04-19 01:49:50,285 - [*] detect strategy feature
+2023-04-19 01:49:56,728 - [*] replay node number 76
+2023-04-19 01:50:03,470 - number of increase nodes:85, nodes after 2 hop:torch.Size([304]), total nodes this year 850
+2023-04-19 01:50:03,506 - [*] load from exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/2015/best_model.pkl
+2023-04-19 01:50:03,519 - [*] EWC! lambda 1.000000
+2023-04-19 01:50:32,263 - [*] Year 2016 Training start
+2023-04-19 01:50:33,126 - node number torch.Size([38912, 12])
+2023-04-19 01:50:36,876 - epoch:0, training loss:15.3623 validation loss:14.4893
+2023-04-19 01:50:38,073 - epoch:1, training loss:14.6274 validation loss:14.4313
+2023-04-19 01:50:39,111 - epoch:2, training loss:14.6232 validation loss:14.4225
+2023-04-19 01:50:40,171 - epoch:3, training loss:14.6165 validation loss:14.4252
+2023-04-19 01:50:41,243 - epoch:4, training loss:14.6307 validation loss:14.4763
+2023-04-19 01:50:42,288 - epoch:5, training loss:14.6202 validation loss:14.5037
+2023-04-19 01:50:43,452 - epoch:6, training loss:14.6433 validation loss:14.4230
+2023-04-19 01:50:44,518 - epoch:7, training loss:14.6541 validation loss:14.6722
+2023-04-19 01:50:45,600 - epoch:8, training loss:14.6899 validation loss:14.5822
+2023-04-19 01:50:45,818 - Finished optimization, total time:10.19 s, best model:exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/2016/14.4225_epoch_2.pkl
+2023-04-19 01:50:46,407 - [*] loss:807.9315
+2023-04-19 01:50:46,543 - [*] year 2016, testing
+2023-04-19 01:50:46,773 - T:3	MAE	12.2206	RMSE	21.7323	MAPE	17.3368
+2023-04-19 01:50:47,760 - T:6	MAE	13.4178	RMSE	24.2121	MAPE	19.0549
+2023-04-19 01:50:48,787 - T:12	MAE	15.8773	RMSE	28.6757	MAPE	23.1153
+2023-04-19 01:50:48,789 - [*] Year 2017 load from data/district3F11T17/FastData/2017_30day.npz
+2023-04-19 01:50:49,018 - [*] Year 2017 Dataset load!
+2023-04-19 01:50:49,250 - [*] detect strategy feature
+2023-04-19 01:50:54,873 - [*] replay node number 78
+2023-04-19 01:51:01,779 - number of increase nodes:86, nodes after 2 hop:torch.Size([320]), total nodes this year 871
+2023-04-19 01:51:01,794 - [*] load from exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/2016/best_model.pkl
+2023-04-19 01:51:01,858 - [*] EWC! lambda 1.000000
+2023-04-19 01:51:34,346 - [*] Year 2017 Training start
+2023-04-19 01:51:35,616 - node number torch.Size([40960, 12])
+2023-04-19 01:51:38,927 - epoch:0, training loss:21.2436 validation loss:18.9313
+2023-04-19 01:51:40,070 - epoch:1, training loss:20.6510 validation loss:19.3364
+2023-04-19 01:51:41,181 - epoch:2, training loss:20.6813 validation loss:19.3209
+2023-04-19 01:51:42,281 - epoch:3, training loss:20.6711 validation loss:19.3518
+2023-04-19 01:51:43,356 - epoch:4, training loss:20.6710 validation loss:19.3087
+2023-04-19 01:51:44,461 - epoch:5, training loss:20.6806 validation loss:19.3346
+2023-04-19 01:51:45,505 - epoch:6, training loss:20.6609 validation loss:19.3641
+2023-04-19 01:51:45,508 - Finished optimization, total time:8.79 s, best model:exp/district3F11T17/incremental-TrafficStream2023-04-19-01:43:45.169043/2017/18.9313_epoch_0.pkl
+2023-04-19 01:51:46,081 - [*] loss:879.6270
+2023-04-19 01:51:46,174 - [*] year 2017, testing
+2023-04-19 01:51:46,764 - T:3	MAE	15.7342	RMSE	23.7607	MAPE	22.0447
+2023-04-19 01:51:47,449 - T:6	MAE	16.7466	RMSE	25.8965	MAPE	21.9712
+2023-04-19 01:51:49,079 - T:12	MAE	18.8618	RMSE	29.9220	MAPE	24.1512
+2023-04-19 01:51:49,081 - 3	mae	13.05	12.73	12.57	13.52	12.88	12.22	15.73	
+2023-04-19 01:51:49,081 - 3	rmse	19.90	19.78	20.16	21.50	20.71	21.73	23.76	
+2023-04-19 01:51:49,081 - 3	mape	17.24	18.48	18.32	24.72	19.69	17.34	22.04	
+2023-04-19 01:51:49,081 - 6	mae	14.06	13.70	13.83	14.72	14.08	13.42	16.75	
+2023-04-19 01:51:49,081 - 6	rmse	21.70	21.57	22.49	23.72	23.13	24.21	25.90	
+2023-04-19 01:51:49,081 - 6	mape	19.00	20.17	20.48	26.34	21.40	19.05	21.97	
+2023-04-19 01:51:49,081 - 12	mae	16.31	15.91	16.40	17.25	16.54	15.88	18.86	
+2023-04-19 01:51:49,081 - 12	rmse	25.47	25.50	26.91	28.12	27.65	28.68	29.92	
+2023-04-19 01:51:49,081 - 12	mape	23.75	24.28	25.11	29.72	25.24	23.12	24.15	
+2023-04-19 01:51:49,081 - year	2011	total_time	93.10356499999999	average_time	1.8259669411764712	epoch	51
+2023-04-19 01:51:49,081 - year	2012	total_time	10.961138	average_time	0.996476181818182	epoch	11
+2023-04-19 01:51:49,081 - year	2013	total_time	7.406911	average_time	0.9258722500000002	epoch	8
+2023-04-19 01:51:49,081 - year	2014	total_time	11.250439	average_time	0.9375447499999999	epoch	12
+2023-04-19 01:51:49,081 - year	2015	total_time	13.273745	average_time	0.7374389444444444	epoch	18
+2023-04-19 01:51:49,081 - year	2016	total_time	10.191446	average_time	1.1323911111111111	epoch	9
+2023-04-19 01:51:49,081 - year	2017	total_time	8.792254999999999	average_time	1.256044142857143	epoch	7

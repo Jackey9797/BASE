@@ -1,0 +1,115 @@
+2023-04-18 23:20:06,484 - logger name:exp/district3F11T17/static_model2023-04-18-23:20:06.334852/static_model.log
+2023-04-18 23:20:06,485 - params : {'conf': 'static_model', 'load_config': 'configs/', 'data_process': False, 'auto_test': 1, 'load': True, 'device': device(type='cuda', index=0), 'data_name': 'PEMS3-Stream', 'raw_data_path': 'data/district3F11T17/finaldata/', 'graph_path': 'data/district3F11T17/graph/', 'save_data_path': 'data/district3F11T17/FastData/', 'model_path': 'exp/district3F11T17/', 'year': 2012, 'days': 31, 'logname': 'static_model', '/* model related args*/': '//', 'y_len': 12, 'dropout': 0.0, 'gcn': {'in_channel': 12, 'out_channel': 12, 'hidden_channel': 64}, 'tcn': {'in_channel': 1, 'out_channel': 1, 'kernel_size': 3, 'dilation': 1}, '/*train related args*/': '//', 'train': True, 'begin_year': 2011, 'end_year': 2017, 'epoch': 100, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*strategy related args*/': '//', 'strategy': 'static', 'increase': False, 'detect': False, 'replay': False, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 1.0, 'subgraph_train': False, 'time': '2023-04-18-23:20:06.334852', 'path': 'exp/district3F11T17/static_model2023-04-18-23:20:06.334852', 'logger': <Logger __main__ (INFO)>}
+2023-04-18 23:20:06,485 - [*] Year 2011 load from data/district3F11T17/FastData/2011_30day.npz
+2023-04-18 23:20:23,668 - [*] Year 2011 Dataset load!
+2023-04-18 23:20:36,754 - [*] Year 2011 Training start
+2023-04-18 23:20:39,041 - node number torch.Size([83840, 12])
+2023-04-18 23:21:05,591 - epoch:0, training loss:93.8839 validation loss:53.6565
+2023-04-18 23:21:07,327 - epoch:1, training loss:44.9367 validation loss:37.4060
+2023-04-18 23:21:08,889 - epoch:2, training loss:34.8963 validation loss:31.2212
+2023-04-18 23:21:10,472 - epoch:3, training loss:27.8402 validation loss:24.2145
+2023-04-18 23:21:12,036 - epoch:4, training loss:22.5487 validation loss:20.5038
+2023-04-18 23:21:13,642 - epoch:5, training loss:20.2232 validation loss:19.4817
+2023-04-18 23:21:15,195 - epoch:6, training loss:19.2733 validation loss:18.6869
+2023-04-18 23:21:16,768 - epoch:7, training loss:18.6435 validation loss:17.9542
+2023-04-18 23:21:18,395 - epoch:8, training loss:18.2797 validation loss:17.7765
+2023-04-18 23:21:19,966 - epoch:9, training loss:18.0797 validation loss:17.4700
+2023-04-18 23:21:21,590 - epoch:10, training loss:17.9556 validation loss:17.7326
+2023-04-18 23:21:23,156 - epoch:11, training loss:17.9412 validation loss:17.5001
+2023-04-18 23:21:24,739 - epoch:12, training loss:17.7959 validation loss:17.4830
+2023-04-18 23:21:26,335 - epoch:13, training loss:17.8440 validation loss:17.5423
+2023-04-18 23:21:27,983 - epoch:14, training loss:17.8767 validation loss:17.4262
+2023-04-18 23:21:29,591 - epoch:15, training loss:17.6970 validation loss:17.4330
+2023-04-18 23:21:31,202 - epoch:16, training loss:17.7424 validation loss:17.5325
+2023-04-18 23:21:32,859 - epoch:17, training loss:17.6518 validation loss:17.3332
+2023-04-18 23:21:34,481 - epoch:18, training loss:17.5967 validation loss:17.4511
+2023-04-18 23:21:36,060 - epoch:19, training loss:17.5746 validation loss:17.3366
+2023-04-18 23:21:37,703 - epoch:20, training loss:17.4792 validation loss:17.3212
+2023-04-18 23:21:39,288 - epoch:21, training loss:17.5240 validation loss:17.4318
+2023-04-18 23:21:40,891 - epoch:22, training loss:17.3346 validation loss:17.2924
+2023-04-18 23:21:42,481 - epoch:23, training loss:17.3134 validation loss:17.1487
+2023-04-18 23:21:44,075 - epoch:24, training loss:17.1544 validation loss:16.8161
+2023-04-18 23:21:45,645 - epoch:25, training loss:17.0258 validation loss:16.8921
+2023-04-18 23:21:47,241 - epoch:26, training loss:16.9861 validation loss:16.7866
+2023-04-18 23:21:48,849 - epoch:27, training loss:16.9887 validation loss:16.9484
+2023-04-18 23:21:50,465 - epoch:28, training loss:17.0691 validation loss:16.7719
+2023-04-18 23:21:52,032 - epoch:29, training loss:16.9137 validation loss:16.7342
+2023-04-18 23:21:53,627 - epoch:30, training loss:17.0142 validation loss:16.9193
+2023-04-18 23:21:55,221 - epoch:31, training loss:16.9176 validation loss:16.7306
+2023-04-18 23:21:56,827 - epoch:32, training loss:17.0125 validation loss:16.8449
+2023-04-18 23:21:58,427 - epoch:33, training loss:16.8701 validation loss:16.7614
+2023-04-18 23:22:00,002 - epoch:34, training loss:16.8450 validation loss:16.6195
+2023-04-18 23:22:01,727 - epoch:35, training loss:16.8459 validation loss:16.6951
+2023-04-18 23:22:03,294 - epoch:36, training loss:16.8365 validation loss:16.7780
+2023-04-18 23:22:04,884 - epoch:37, training loss:16.9534 validation loss:16.5595
+2023-04-18 23:22:06,483 - epoch:38, training loss:16.8773 validation loss:17.0651
+2023-04-18 23:22:08,093 - epoch:39, training loss:16.8414 validation loss:16.6582
+2023-04-18 23:22:09,685 - epoch:40, training loss:16.8010 validation loss:16.5616
+2023-04-18 23:22:11,242 - epoch:41, training loss:16.7755 validation loss:16.7250
+2023-04-18 23:22:12,920 - epoch:42, training loss:16.8369 validation loss:16.9599
+2023-04-18 23:22:14,501 - epoch:43, training loss:16.8812 validation loss:16.5326
+2023-04-18 23:22:16,083 - epoch:44, training loss:16.8776 validation loss:16.4614
+2023-04-18 23:22:17,752 - epoch:45, training loss:16.7397 validation loss:16.6753
+2023-04-18 23:22:19,362 - epoch:46, training loss:16.8832 validation loss:16.4794
+2023-04-18 23:22:21,047 - epoch:47, training loss:16.8731 validation loss:16.7573
+2023-04-18 23:22:22,665 - epoch:48, training loss:16.6929 validation loss:16.6800
+2023-04-18 23:22:24,342 - epoch:49, training loss:16.9716 validation loss:16.8821
+2023-04-18 23:22:25,995 - epoch:50, training loss:17.0427 validation loss:16.6409
+2023-04-18 23:22:26,334 - Finished optimization, total time:87.93 s, best model:exp/district3F11T17/static_model2023-04-18-23:20:06.334852/2011/16.4614_epoch_44.pkl
+2023-04-18 23:22:27,897 - [*] loss:638.0565
+2023-04-18 23:22:28,002 - [*] year 2011, testing
+2023-04-18 23:22:28,143 - T:3	MAE	13.0518	RMSE	19.8972	MAPE	17.2383
+2023-04-18 23:22:28,753 - T:6	MAE	14.0621	RMSE	21.6954	MAPE	18.9995
+2023-04-18 23:22:29,654 - T:12	MAE	16.3058	RMSE	25.4703	MAPE	23.7451
+2023-04-18 23:22:29,658 - [*] Year 2012 load from data/district3F11T17/FastData/2012_30day.npz
+2023-04-18 23:22:30,181 - [*] Year 2012 Dataset load!
+2023-04-18 23:22:54,202 - [*] loss:656.7773
+2023-04-18 23:22:54,378 - [*] year 2012, testing
+2023-04-18 23:22:54,534 - T:3	MAE	13.0440	RMSE	20.1265	MAPE	20.3134
+2023-04-18 23:22:55,007 - T:6	MAE	14.0300	RMSE	21.9033	MAPE	22.5144
+2023-04-18 23:22:55,960 - T:12	MAE	16.2606	RMSE	25.8321	MAPE	27.2750
+2023-04-18 23:22:55,963 - [*] Year 2013 load from data/district3F11T17/FastData/2013_30day.npz
+2023-04-18 23:22:56,392 - [*] Year 2013 Dataset load!
+2023-04-18 23:23:24,688 - [*] loss:706.4708
+2023-04-18 23:23:24,841 - [*] year 2013, testing
+2023-04-18 23:23:25,055 - T:3	MAE	12.6076	RMSE	19.9587	MAPE	22.8879
+2023-04-18 23:23:25,557 - T:6	MAE	13.8932	RMSE	22.3143	MAPE	25.3969
+2023-04-18 23:23:26,196 - T:12	MAE	16.4896	RMSE	26.7843	MAPE	30.4786
+2023-04-18 23:23:26,197 - [*] Year 2014 load from data/district3F11T17/FastData/2014_30day.npz
+2023-04-18 23:23:26,790 - [*] Year 2014 Dataset load!
+2023-04-18 23:24:37,675 - [*] loss:804.6015
+2023-04-18 23:24:38,102 - [*] year 2014, testing
+2023-04-18 23:24:38,506 - T:3	MAE	14.7776	RMSE	22.2150	MAPE	43.0877
+2023-04-18 23:24:39,072 - T:6	MAE	15.9739	RMSE	24.3988	MAPE	45.3623
+2023-04-18 23:24:39,893 - T:12	MAE	18.4516	RMSE	28.6338	MAPE	49.9196
+2023-04-18 23:24:39,898 - [*] Year 2015 load from data/district3F11T17/FastData/2015_30day.npz
+2023-04-18 23:24:40,094 - [*] Year 2015 Dataset load!
+2023-04-18 23:25:58,933 - [*] loss:782.0168
+2023-04-18 23:25:59,548 - [*] year 2015, testing
+2023-04-18 23:25:59,807 - T:3	MAE	14.3253	RMSE	21.5362	MAPE	40.9574
+2023-04-18 23:26:00,264 - T:6	MAE	15.5236	RMSE	23.9132	MAPE	43.1588
+2023-04-18 23:26:01,164 - T:12	MAE	17.8989	RMSE	28.2256	MAPE	47.4910
+2023-04-18 23:26:01,168 - [*] Year 2016 load from data/district3F11T17/FastData/2016_30day.npz
+2023-04-18 23:26:01,511 - [*] Year 2016 Dataset load!
+2023-04-18 23:27:13,025 - [*] loss:844.2951
+2023-04-18 23:27:13,339 - [*] year 2016, testing
+2023-04-18 23:27:13,494 - T:3	MAE	13.7677	RMSE	22.5746	MAPE	37.7269
+2023-04-18 23:27:14,084 - T:6	MAE	14.9413	RMSE	25.0062	MAPE	39.7934
+2023-04-18 23:27:15,124 - T:12	MAE	17.3115	RMSE	29.2951	MAPE	43.9629
+2023-04-18 23:27:15,128 - [*] Year 2017 load from data/district3F11T17/FastData/2017_30day.npz
+2023-04-18 23:27:15,415 - [*] Year 2017 Dataset load!
+2023-04-18 23:28:38,368 - [*] loss:936.2930
+2023-04-18 23:28:39,067 - [*] year 2017, testing
+2023-04-18 23:28:39,264 - T:3	MAE	15.4064	RMSE	24.8283	MAPE	17.9210
+2023-04-18 23:28:39,864 - T:6	MAE	16.6053	RMSE	27.0281	MAPE	19.9505
+2023-04-18 23:28:41,102 - T:12	MAE	18.9019	RMSE	30.8917	MAPE	24.8847
+2023-04-18 23:28:41,107 - 3	mae	13.05	13.04	12.61	14.78	14.33	13.77	15.41	
+2023-04-18 23:28:41,107 - 3	rmse	19.90	20.13	19.96	22.21	21.54	22.57	24.83	
+2023-04-18 23:28:41,107 - 3	mape	17.24	20.31	22.89	43.09	40.96	37.73	17.92	
+2023-04-18 23:28:41,107 - 6	mae	14.06	14.03	13.89	15.97	15.52	14.94	16.61	
+2023-04-18 23:28:41,108 - 6	rmse	21.70	21.90	22.31	24.40	23.91	25.01	27.03	
+2023-04-18 23:28:41,108 - 6	mape	19.00	22.51	25.40	45.36	43.16	39.79	19.95	
+2023-04-18 23:28:41,108 - 12	mae	16.31	16.26	16.49	18.45	17.90	17.31	18.90	
+2023-04-18 23:28:41,108 - 12	rmse	25.47	25.83	26.78	28.63	28.23	29.30	30.89	
+2023-04-18 23:28:41,108 - 12	mape	23.75	27.27	30.48	49.92	47.49	43.96	24.88	
+2023-04-18 23:28:41,108 - year	2011	total_time	87.92580199999999	average_time	1.724307098039215	epoch	51
