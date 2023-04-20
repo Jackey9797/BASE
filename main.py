@@ -12,6 +12,7 @@ from datetime import datetime
 
 
 from models.TrafficStream import Basic_Model as TrafficStream 
+from models.TrafficStream import graph_constructor 
 from utils import common_tools as ct
 from utils.my_math import masked_mae_np, masked_mape_np, masked_mse_np
 from models import detect
@@ -46,6 +47,7 @@ def z_score(data):
 
 class PEMS3_Stream: #* 从PEMS raw data中生成训练验证测试数据集 + graph
     def __init__(self, args, savepath, train_rate=0.6, val_rate=0.2, test_rate=0.2, val_test_mix=False):
+        self.args = args 
         raw_data = np.load(osp.join(args.raw_data_path, str(args.year)+".npz"))["x"]
         
         self.data = raw_data[0:args.days*288, :]
@@ -83,6 +85,8 @@ class PEMS3_Stream: #* 从PEMS raw data中生成训练验证测试数据集 + gr
         # return prepared_data
     
     def slice_dataset(self, idx, x_len=12, y_len=12):
+        x = self.args.x_len 
+        y = self.args.y_len 
         res = self.data[idx]
         node_size = self.data.shape[1]
         t = len(idx)-1
@@ -98,7 +102,7 @@ class PEMS3_Stream: #* 从PEMS raw data中生成训练验证测试数据集 + gr
         y_index = np.asarray(y_index)
         x = res[x_index].reshape((-1, x_len, node_size))
         y = res[y_index].reshape((-1, y_len, node_size))
-    
+                        
         return x, y
 
 class TrafficDataset(Dataset): #? 意义？ 仅仅是作为dataloader的中介吗？
@@ -131,6 +135,7 @@ def init_args(args):
         "auto_test": 1,
         "load": True,
         "device": "cuda:0",
+        "build_graph": False,
         
         ##* dataset related args
         "data_name": "PEMS3-Stream",
@@ -182,14 +187,19 @@ class base_framework:
             del state_dict['tcn2.bias']
 
         #* model + load_state_dict
+        
+
         model = TrafficStream(self.args) #TODO   modify model name
         model.load_state_dict(state_dict)
+        
+
         model = model.to(self.args.device)
         self.model = model 
 
     def prepare(self): 
         ##* 1.init graph 
-        init_graph(self.args)               
+        self.args.gc = None    ##todo 改到前面来， increment strategy不需要 gc 
+        init_graph(self.args)             
         ##* 2.prep complete data (form as follow ) 
         self.inputs = get_dataset(self.args) 
         # to show: print(inputs["train_x"].shape, inputs["train_y"].shape, inputs["val_x"].shape, inputs["val_y"].shape, inputs["test_x"].shape, inputs["test_y"].shape, inputs["edge_index"].shape)
@@ -200,6 +210,10 @@ class base_framework:
             self.incremental_strategy()
         else:
             self.static_strategy()
+
+        if self.args.build_graph: 
+            self.args.gc = graph_constructor(len(self.args.subgraph), self.args.build_subgraph_size, self.args.node_emb_dim, self.args.device, alpha=self.args.tanhalpha, static_feat=None).to(self.args.device)
+            self.args.idx = torch.arange(len(self.args.subgraph)).to(self.args.device)
 
         ##* prep dl 
         self.train_loader = DataLoader(TrafficDataset(self.args.subgraph.numpy(), self.inputs, "train"), batch_size=self.args.batch_size, shuffle=True, pin_memory=pin_memory, num_workers=n_work)
@@ -274,7 +288,7 @@ class base_framework:
             adj = nx.to_numpy_array(graph)
             adj = adj / (np.sum(adj, 1, keepdims=True) + 1e-6)
             self.args.sub_adj = torch.from_numpy(adj).to(torch.float).to(self.args.device) 
-        else : 
+        else :  ##* no subgraph train
             self.args.subgraph = torch.arange(self.args.graph_size) 
             self.args.sub_adj = self.args.adj   
 
@@ -287,6 +301,7 @@ class base_framework:
             ewc_loader = DataLoader(TrafficDataset(np.arange(0, self.args.graph_size), self.inputs, "train"), batch_size=self.args.batch_size, shuffle=False, pin_memory=pin_memory, num_workers=n_work)
             self.model.register_ewc_params(ewc_loader, func.mse_loss, self.args.device)
             pass
+        
     
     def static_strategy(self):    
         self.args.subgraph = torch.arange(self.args.graph_size) 
@@ -394,6 +409,7 @@ class base_framework:
         pass
         epoch_idx = np.argmin(validation_loss_list)
         best_model_path = osp.join(path, str(lowest_validation_loss)+("_epoch_%d.pkl" % epoch_idx))
+        
         best_model = TrafficStream(self.args)
         best_model.load_state_dict(torch.load(best_model_path, self.args.device)["model_state_dict"])
         torch.save({'model_state_dict': best_model.state_dict()}, osp.join(path, "best_model.pkl"))
@@ -421,6 +437,9 @@ class base_framework:
                 self.args.logger.info(info)
 
     def test_model(self):
+        ##! 
+        self.args.idx = torch.arange(self.args.graph_size).to(self.args.device, non_blocking=pin_memory)
+
         self.model.eval()
         pred_ = []
         truth_ = []
@@ -482,10 +501,20 @@ class base_framework:
         self.report_result()
 
 def init_graph(args):
-    adj = np.load(osp.join(args.graph_path, str(args.year)+"_adj.npz"))["x"]
-    adj = adj / (np.sum(adj, 1, keepdims=True) + 1e-6)
-    args.adj = torch.from_numpy(adj).to(torch.float).to(args.device) #* adj -> normalized 邻接矩阵
-    args.graph_size = adj.shape[0]
+    if args.build_graph == False:  ##TODO 这里要分类讨论吗 ？ 
+        adj = np.load(osp.join(args.graph_path, str(args.year)+"_adj.npz"))["x"]
+        adj = adj / (np.sum(adj, 1, keepdims=True) + 1e-6)
+        args.adj = torch.from_numpy(adj).to(torch.float).to(args.device) #* adj -> normalized 邻接矩阵
+        args.graph_size = adj.shape[0]
+    else : 
+        adj = np.load(osp.join(args.graph_path, str(args.year)+"_adj.npz"))["x"]
+        adj = adj / (np.sum(adj, 1, keepdims=True) + 1e-6)
+        args.adj = torch.from_numpy(adj).to(torch.float).to(args.device) #* adj -> normalized 邻接矩阵
+        args.graph_size = adj.shape[0]
+        # adj = np.load(osp.join(args.graph_path, str(args.year)+"_adj.npz"))["x"]
+        # args.adj = None 
+        # args.graph_size = adj.shape[0]
+
 
 def init_log(args):
     log_dir, log_filename = args.path, args.logname
