@@ -32,7 +32,7 @@ def get_feature(data, graph, args, model, adj):
         feature, _ = to_dense_batch(model.feature(data, adj), batch=data.batch)
         node_size = feature.size()[1]
         # print("before permute:", feature.size())
-        feature = feature.permute(1,0,2)
+        feature = feature.permute(1,0,2) ##* N * B * D
 
         # [N, T', feature_dim]
         return feature.cpu().detach().numpy()
@@ -65,8 +65,8 @@ def influence_node_selection(model, args, pre_data, cur_data, pre_graph, cur_gra
     # pre_data/cur_data: data of seven day, shape [T, N] T=288*7
     # assert pre_data.shape[0] == 288*7
     # assert cur_data.shape[0] == 288*7
-    if args.detect_strategy == 'original':
-        pre_data = pre_data[-288*7-1:-1,:]
+    if args.detect_strategy == 'original':  ##* raw data 检测 pattern evovle
+        pre_data = pre_data[-288*7-1:-1,:] ##* 最后一周data
         cur_data = cur_data[-288*7-1:-1,:]
         node_size = pre_data.shape[1]
         score = []
@@ -80,7 +80,7 @@ def influence_node_selection(model, args, pre_data, cur_data, pre_graph, cur_gra
             score.append(kldiv(pre_prob, cur_prob))
         # return staiton_id of topk max score, station with larger KL score needs more training
         return np.argpartition(np.asarray(score), -args.topk)[-args.topk:]
-    elif args.detect_strategy == 'feature':
+    elif args.detect_strategy == 'feature':   ##* feature 检测 pattern evovle
         model.eval()
         pre_adj = get_adj(args.year-1, args)
         cur_adj = get_adj(args.year, args)

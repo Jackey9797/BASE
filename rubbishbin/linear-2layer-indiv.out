@@ -1,0 +1,79 @@
+2023-05-11 19:43:21,605 - logger name:exp/district3F11T17/incremental-linear2023-05-11-19:43:21.604905/incremental-linear.log
+2023-05-11 19:43:21,606 - params : {'conf': 'incremental-linear', 'load_config': 'configs/', 'data_process': False, 'auto_test': 1, 'load': True, 'device': device(type='cuda', index=1), 'build_graph': False, 'dynamic_graph': False, 'graph_input': False, 'model_name': 'Linear', 'data_name': 'PEMS3-Stream', 'raw_data_path': 'data/district3F11T17/finaldata/', 'graph_path': 'data/district3F11T17/graph/', 'save_data_path': 'data/district3F11T17/FastData/', 'model_path': 'exp/district3F11T17/', 'year': 2012, 'days': 31, 'logname': 'incremental-linear', '/* model related args*/': '//', 'x_len': 12, 'y_len': 12, 'dropout': 0.0, 'individual': True, '/*train related args*/': '//', 'train': True, 'begin_year': 2011, 'end_year': 2017, 'epoch': 100, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'time': '2023-05-11-19:43:21.604905', 'path': 'exp/district3F11T17/incremental-linear2023-05-11-19:43:21.604905', 'logger': <Logger __main__ (INFO)>}
+2023-05-11 19:43:21,606 - [*] Year 2011 load from data/district3F11T17/FastData/2011_30day.npz
+2023-05-11 19:43:22,532 - [*] Year 2011 Dataset load!
+2023-05-11 19:43:23,716 - [*] Year 2011 Training start
+2023-05-11 19:43:23,894 - node number torch.Size([83840, 12])
+2023-05-11 19:43:39,340 - epoch:0, training loss:118.6503 validation loss:81.7585
+2023-05-11 19:43:54,771 - epoch:1, training loss:70.7353 validation loss:61.7521
+2023-05-11 19:44:10,187 - epoch:2, training loss:50.2384 validation loss:40.4029
+2023-05-11 19:44:25,660 - epoch:3, training loss:35.2196 validation loss:30.3645
+2023-05-11 19:44:41,154 - epoch:4, training loss:27.7144 validation loss:24.5610
+2023-05-11 19:44:56,599 - epoch:5, training loss:23.0248 validation loss:21.0404
+2023-05-11 19:45:11,962 - epoch:6, training loss:20.3943 validation loss:19.2676
+2023-05-11 19:45:27,494 - epoch:7, training loss:19.1215 validation loss:18.4151
+2023-05-11 19:45:43,047 - epoch:8, training loss:18.5025 validation loss:18.0112
+2023-05-11 19:45:58,547 - epoch:9, training loss:18.2134 validation loss:17.8364
+2023-05-11 19:46:14,090 - epoch:10, training loss:18.0709 validation loss:17.7708
+2023-05-11 19:46:29,621 - epoch:11, training loss:17.9956 validation loss:17.6917
+2023-05-11 19:46:45,048 - epoch:12, training loss:17.9581 validation loss:17.7728
+2023-05-11 19:47:00,221 - epoch:13, training loss:17.9206 validation loss:17.6270
+2023-05-11 19:47:15,639 - epoch:14, training loss:17.8942 validation loss:17.6350
+2023-05-11 19:47:30,828 - epoch:15, training loss:17.8904 validation loss:17.5881
+2023-05-11 19:47:46,336 - epoch:16, training loss:17.8530 validation loss:17.6670
+2023-05-11 19:48:01,550 - epoch:17, training loss:17.8309 validation loss:17.6363
+2023-05-11 19:48:16,899 - epoch:18, training loss:17.8107 validation loss:17.5592
+2023-05-11 19:48:32,370 - epoch:19, training loss:17.8104 validation loss:17.6691
+2023-05-11 19:48:47,729 - epoch:20, training loss:17.7888 validation loss:17.5364
+2023-05-11 19:49:03,186 - epoch:21, training loss:17.7844 validation loss:17.6354
+2023-05-11 19:49:18,564 - epoch:22, training loss:17.7700 validation loss:17.5394
+2023-05-11 19:49:33,780 - epoch:23, training loss:17.7757 validation loss:17.6332
+2023-05-11 19:49:49,129 - epoch:24, training loss:17.7673 validation loss:17.5260
+2023-05-11 19:50:04,539 - epoch:25, training loss:17.7340 validation loss:17.4560
+2023-05-11 19:50:19,920 - epoch:26, training loss:17.7283 validation loss:17.6447
+2023-05-11 19:50:35,248 - epoch:27, training loss:17.7341 validation loss:17.4902
+2023-05-11 19:50:50,620 - epoch:28, training loss:17.7054 validation loss:17.7644
+2023-05-11 19:51:06,002 - epoch:29, training loss:17.7158 validation loss:17.4426
+2023-05-11 19:51:21,535 - epoch:30, training loss:17.7004 validation loss:17.5833
+2023-05-11 19:51:36,973 - epoch:31, training loss:17.6563 validation loss:17.5173
+2023-05-11 19:51:52,429 - epoch:32, training loss:17.6642 validation loss:17.4067
+2023-05-11 19:52:07,894 - epoch:33, training loss:17.6501 validation loss:17.4216
+2023-05-11 19:52:23,262 - epoch:34, training loss:17.6212 validation loss:17.3810
+2023-05-11 19:52:38,795 - epoch:35, training loss:17.6252 validation loss:17.4590
+2023-05-11 19:52:54,201 - epoch:36, training loss:17.6310 validation loss:17.3605
+2023-05-11 19:53:09,688 - epoch:37, training loss:17.6110 validation loss:17.3808
+2023-05-11 19:53:24,971 - epoch:38, training loss:17.5719 validation loss:17.4048
+2023-05-11 19:53:40,240 - epoch:39, training loss:17.6009 validation loss:17.3212
+2023-05-11 19:53:55,597 - epoch:40, training loss:17.6103 validation loss:17.3282
+2023-05-11 19:54:10,830 - epoch:41, training loss:17.5456 validation loss:17.3934
+2023-05-11 19:54:26,178 - epoch:42, training loss:17.5646 validation loss:17.3809
+2023-05-11 19:54:41,532 - epoch:43, training loss:17.5631 validation loss:17.3318
+2023-05-11 19:54:56,776 - epoch:44, training loss:17.5570 validation loss:17.3112
+2023-05-11 19:55:12,360 - epoch:45, training loss:17.5632 validation loss:17.3480
+2023-05-11 19:55:27,612 - epoch:46, training loss:17.5469 validation loss:17.3127
+2023-05-11 19:55:42,839 - epoch:47, training loss:17.5083 validation loss:17.3636
+2023-05-11 19:55:58,228 - epoch:48, training loss:17.5257 validation loss:17.3233
+2023-05-11 19:56:13,544 - epoch:49, training loss:17.5269 validation loss:17.3434
+2023-05-11 19:56:28,805 - epoch:50, training loss:17.5280 validation loss:17.2923
+2023-05-11 19:56:44,207 - epoch:51, training loss:17.5456 validation loss:17.4308
+2023-05-11 19:56:59,546 - epoch:52, training loss:17.5283 validation loss:17.4217
+2023-05-11 19:57:14,857 - epoch:53, training loss:17.5453 validation loss:17.2458
+2023-05-11 19:57:30,270 - epoch:54, training loss:17.5045 validation loss:17.3391
+2023-05-11 19:57:45,546 - epoch:55, training loss:17.5239 validation loss:17.3640
+2023-05-11 19:58:00,776 - epoch:56, training loss:17.5137 validation loss:17.2769
+2023-05-11 19:58:16,133 - epoch:57, training loss:17.5174 validation loss:17.2198
+2023-05-11 19:58:31,757 - epoch:58, training loss:17.4949 validation loss:17.2344
+2023-05-11 19:58:47,120 - epoch:59, training loss:17.4905 validation loss:17.3086
+2023-05-11 19:59:02,475 - epoch:60, training loss:17.5165 validation loss:17.2274
+2023-05-11 19:59:17,779 - epoch:61, training loss:17.5225 validation loss:17.2534
+2023-05-11 19:59:33,082 - epoch:62, training loss:17.5055 validation loss:17.2882
+2023-05-11 19:59:48,366 - epoch:63, training loss:17.4892 validation loss:17.3269
+2023-05-11 19:59:49,019 - Finished optimization, total time:914.55 s, best model:exp/district3F11T17/incremental-linear2023-05-11-19:43:21.604905/2011/17.2198_epoch_57.pkl
+2023-05-11 19:59:50,077 - [*] loss:703.9339
+2023-05-11 19:59:50,094 - [*] year 2011, testing
+2023-05-11 19:59:50,200 - T:3	MAE	13.1855	RMSE	20.2325	MAPE	16.8432
+2023-05-11 19:59:50,371 - T:6	MAE	14.4000	RMSE	22.3675	MAPE	18.2413
+2023-05-11 19:59:50,618 - T:12	MAE	17.0514	RMSE	26.7419	MAPE	22.3381
+2023-05-11 19:59:50,618 - [*] Year 2012 load from data/district3F11T17/FastData/2012_30day.npz
+2023-05-11 19:59:50,634 - [*] Year 2012 Dataset load!
+2023-05-11 19:59:50,634 - [*] load from exp/district3F11T17/incremental-linear2023-05-11-19:43:21.604905/2011/best_model.pkl

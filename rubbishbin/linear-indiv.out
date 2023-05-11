@@ -1,0 +1,49 @@
+2023-05-11 19:17:13,560 - logger name:exp/district3F11T17/incremental-linear2023-05-11-19:17:13.560520/incremental-linear.log
+2023-05-11 19:17:13,561 - params : {'conf': 'incremental-linear', 'load_config': 'configs/', 'data_process': False, 'auto_test': 1, 'load': True, 'device': device(type='cuda', index=1), 'build_graph': False, 'dynamic_graph': False, 'graph_input': False, 'model_name': 'Linear', 'data_name': 'PEMS3-Stream', 'raw_data_path': 'data/district3F11T17/finaldata/', 'graph_path': 'data/district3F11T17/graph/', 'save_data_path': 'data/district3F11T17/FastData/', 'model_path': 'exp/district3F11T17/', 'year': 2012, 'days': 31, 'logname': 'incremental-linear', '/* model related args*/': '//', 'x_len': 12, 'y_len': 12, 'dropout': 0.0, 'individual': True, '/*train related args*/': '//', 'train': True, 'begin_year': 2011, 'end_year': 2017, 'epoch': 100, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'time': '2023-05-11-19:17:13.560520', 'path': 'exp/district3F11T17/incremental-linear2023-05-11-19:17:13.560520', 'logger': <Logger __main__ (INFO)>}
+2023-05-11 19:17:13,561 - [*] Year 2011 load from data/district3F11T17/FastData/2011_30day.npz
+2023-05-11 19:17:14,489 - [*] Year 2011 Dataset load!
+2023-05-11 19:17:15,591 - [*] Year 2011 Training start
+2023-05-11 19:17:15,731 - node number torch.Size([83840, 12])
+2023-05-11 19:17:25,103 - epoch:0, training loss:137.2587 validation loss:137.3890
+2023-05-11 19:17:34,305 - epoch:1, training loss:134.4562 validation loss:134.7994
+2023-05-11 19:17:43,589 - epoch:2, training loss:132.0535 validation loss:132.4881
+2023-05-11 19:17:52,853 - epoch:3, training loss:129.9886 validation loss:130.3770
+2023-05-11 19:18:02,144 - epoch:4, training loss:127.8201 validation loss:128.3982
+2023-05-11 19:18:11,495 - epoch:5, training loss:126.1009 validation loss:126.5544
+2023-05-11 19:18:20,755 - epoch:6, training loss:124.2500 validation loss:124.7916
+2023-05-11 19:18:29,986 - epoch:7, training loss:122.5527 validation loss:123.1109
+2023-05-11 19:18:39,289 - epoch:8, training loss:121.0137 validation loss:121.4960
+2023-05-11 19:18:48,521 - epoch:9, training loss:119.4490 validation loss:119.9263
+2023-05-11 19:18:57,814 - epoch:10, training loss:117.9294 validation loss:118.4097
+2023-05-11 19:19:07,110 - epoch:11, training loss:116.3595 validation loss:116.9331
+2023-05-11 19:19:16,418 - epoch:12, training loss:114.9893 validation loss:115.4953
+2023-05-11 19:19:25,700 - epoch:13, training loss:113.5164 validation loss:114.0904
+2023-05-11 19:19:34,967 - epoch:14, training loss:112.2651 validation loss:112.7116
+2023-05-11 19:19:44,276 - epoch:15, training loss:110.8241 validation loss:111.3669
+2023-05-11 19:19:53,609 - epoch:16, training loss:109.5736 validation loss:110.0546
+2023-05-11 19:20:02,905 - epoch:17, training loss:108.3566 validation loss:108.7647
+2023-05-11 19:20:12,227 - epoch:18, training loss:107.0015 validation loss:107.5041
+2023-05-11 19:20:21,507 - epoch:19, training loss:105.7745 validation loss:106.2689
+2023-05-11 19:20:30,896 - epoch:20, training loss:104.5741 validation loss:105.0637
+2023-05-11 19:20:40,230 - epoch:21, training loss:103.3801 validation loss:103.8841
+2023-05-11 19:20:49,468 - epoch:22, training loss:102.2538 validation loss:102.7312
+2023-05-11 19:20:58,775 - epoch:23, training loss:101.1310 validation loss:101.6021
+2023-05-11 19:21:08,121 - epoch:24, training loss:100.0574 validation loss:100.5010
+2023-05-11 19:21:17,396 - epoch:25, training loss:98.9325 validation loss:99.4272
+2023-05-11 19:21:26,657 - epoch:26, training loss:97.8796 validation loss:98.3793
+2023-05-11 19:21:35,978 - epoch:27, training loss:96.8834 validation loss:97.3562
+2023-05-11 19:21:45,316 - epoch:28, training loss:95.8582 validation loss:96.3639
+2023-05-11 19:21:54,659 - epoch:29, training loss:94.9403 validation loss:95.4000
+2023-05-11 19:22:03,905 - epoch:30, training loss:93.9525 validation loss:94.4555
+2023-05-11 19:22:13,164 - epoch:31, training loss:93.0332 validation loss:93.5434
+2023-05-11 19:22:22,496 - epoch:32, training loss:92.1177 validation loss:92.6594
+2023-05-11 19:22:31,819 - epoch:33, training loss:91.2898 validation loss:91.8008
+2023-05-11 19:22:41,234 - epoch:34, training loss:90.4538 validation loss:90.9719
+2023-05-11 19:22:50,634 - epoch:35, training loss:89.6950 validation loss:90.1679
+2023-05-11 19:23:00,012 - epoch:36, training loss:88.9052 validation loss:89.3871
+2023-05-11 19:23:09,446 - epoch:37, training loss:88.1525 validation loss:88.6342
+2023-05-11 19:23:18,806 - epoch:38, training loss:87.4096 validation loss:87.9102
+2023-05-11 19:23:28,172 - epoch:39, training loss:86.7075 validation loss:87.2041
+2023-05-11 19:23:37,562 - epoch:40, training loss:86.1010 validation loss:86.5335
+2023-05-11 19:23:46,841 - epoch:41, training loss:85.4249 validation loss:85.8801
+2023-05-11 19:23:56,223 - epoch:42, training loss:84.7403 validation loss:85.2563

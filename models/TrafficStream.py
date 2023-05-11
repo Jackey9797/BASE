@@ -108,6 +108,34 @@ class Basic_Model(nn.Module):
         if self.args.build_graph and self.args.gc != None:
             adj = self.args.gc(self.args.idx)   
         N = adj.shape[0]
+        
+        if self.args.dynamic_graph: 
+            x = data.x.reshape((-1, N, self.args.gcn["in_channel"]))   # [bs, N, feature]
+            # caculate correlation matrix
+            def corrcoef(x):
+                x_reducemean = x - torch.mean(x, dim=-1, keepdim=True)
+                numerator = torch.matmul(x_reducemean, x_reducemean.permute(0,2,1))
+                no = torch.norm(x_reducemean, dim=-1).unsqueeze(1)
+                denominator = torch.matmul(no.permute(0,2,1),no)
+                corrcoef = numerator / (denominator + 1e-8)
+                return corrcoef
+            adj_d = corrcoef(x[:10])
+            adj_d = torch.abs(adj_d)
+            mask = torch.zeros(10,N, N).to(self.args.device)
+            mask.fill_(float('0'))
+            s1,t1 = adj_d.topk(self.args.DG_k,2)
+            mask.scatter_(2,t1,s1.fill_(1))
+            adj_d = adj_d*mask
+            adj_d = torch.mean(adj_d, dim=0)
+
+            if self.args.DG_type == "add":
+                adj = (adj + adj_d) / 2
+            if self.args.DG_type == "mul":
+                adj = adj * adj_d
+
+            del adj_d, mask, s1, t1
+            # keep topk elements of the last 2 dimension of adj_d, and set others to 0
+
         # print("check on number of N" + str(N))
         x = data.x.reshape((-1, N, self.args.gcn["in_channel"]))   # [bs, N, feature]
         x = F.relu(self.gcn1(x, adj))                              # [bs, N, feature]
@@ -131,7 +159,31 @@ class Basic_Model(nn.Module):
         if self.args.build_graph and self.args.gc != None:
             adj = self.args.gc(self.args.idx)   
         N = adj.shape[0]
-        
+
+        if self.args.dynamic_graph: 
+            x = data.x.reshape((-1, N, self.args.gcn["in_channel"]))   # [bs, N, feature]
+            # caculate correlation matrix
+            def corrcoef(x):
+                x_reducemean = x - torch.mean(x, dim=-1, keepdim=True)
+                numerator = torch.matmul(x_reducemean, x_reducemean.permute(0,2,1))
+                no = torch.norm(x_reducemean, dim=-1).unsqueeze(1)
+                denominator = torch.matmul(no.permute(0,2,1),no)
+                corrcoef = numerator / (denominator + 1e-8)
+                return corrcoef
+            adj_d = corrcoef(x[:10])
+            adj_d = torch.abs(adj_d)
+            mask = torch.zeros(10,N, N).to(self.args.device)
+            mask.fill_(float('0'))
+            s1,t1 = adj_d.topk(self.args.DG_k,2)
+            mask.scatter_(2,t1,s1.fill_(1))
+            adj_d = adj_d*mask
+            adj_d = torch.mean(adj_d, dim=0)
+
+            if self.args.DG_type == "add":
+                adj = (adj + adj_d) / 2
+            if self.args.DG_type == "mul":
+                adj = adj * adj_d
+
         x = data.x.reshape((-1, N, self.args.gcn["in_channel"]))   # [bs, N, feature]
         x = F.relu(self.gcn1(x, adj))                              # [bs, N, feature]
         x = x.reshape((-1, 1, self.args.gcn["hidden_channel"]))    # [bs * N, 1, feature]

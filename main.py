@@ -12,6 +12,7 @@ from datetime import datetime
 
 
 from models.TrafficStream import Basic_Model as TrafficStream 
+from models.Linear import MLP 
 from models.TrafficStream import graph_constructor 
 from utils import common_tools as ct
 from utils.my_math import masked_mae_np, masked_mape_np, masked_mse_np
@@ -136,8 +137,11 @@ def init_args(args):
         "load": True,
         "device": "cuda:0",
         "build_graph": False,
+        "dynamic_graph": False, 
+        "graph_input": True, 
         
         ##* dataset related args
+        "model_name": "TrafficStream",
         "data_name": "PEMS3-Stream",
         "raw_data_path": "data/district3F11T17/finaldata/",
         "graph_path": "data/district3F11T17/graph/",
@@ -166,6 +170,7 @@ def init_args(args):
         if not hasattr(args, key):
             setattr(args, key, value)
 
+    args.logname = args.conf
     args.device = torch.device(args.device if torch.cuda.is_available() else 'cpu')
     args.time = datetime.now().strftime("%Y-%m-%d-%H:%M:%S.%f")
     args.path = osp.join(args.model_path, args.logname+args.time)
@@ -189,7 +194,7 @@ class base_framework:
         #* model + load_state_dict
         
 
-        model = TrafficStream(self.args) #TODO   modify model name
+        model = eval(self.args.model_name)(self.args) #TODO   modify model name
         model.load_state_dict(state_dict)
         
 
@@ -229,7 +234,7 @@ class base_framework:
             ##* increase nodes
             if self.args.increase:
                 cur_node_size = np.load(osp.join(self.args.graph_path, str(self.args.year)+"_adj.npz"))["x"].shape[0]
-                pre_node_size = np.load(osp.join(self.args.graph_path, str(self.args.year-1)+"_adj.npz"))["x"].shape[0] #! args.year changed?
+                pre_node_size = np.load(osp.join(self.args.graph_path, str(self.args.year-1)+"_adj.npz"))["x"].shape[0] 
                 node_list.extend(list(range(pre_node_size, cur_node_size)))
                 pass
 
@@ -308,11 +313,11 @@ class base_framework:
         self.args.sub_adj = self.args.adj   
 
         if self.args.year == self.args.begin_year: 
-            self.model = TrafficStream(self.args).to(self.args.device)
+            self.model = eval(self.args.model_name)(self.args).to(self.args.device)
         if self.args.strategy == "static" and self.args.year > self.args.begin_year: 
             self.args.train = False 
         if self.args.strategy == "retrain": 
-            self.model = TrafficStream(self.args).to(self.args.device)
+            self.model = eval(self.args.model_name)(self.args).to(self.args.device)
 
 
     def train(self): 
@@ -349,13 +354,19 @@ class base_framework:
                 data = data.to(self.args.device, non_blocking=pin_memory)
                 
                 optimizer.zero_grad()
-                pred = self.model(data, self.args.sub_adj)
+                
+                if self.args.graph_input: 
+                    pred = self.model(data, self.args.sub_adj)
+                else : 
+                    pred = self.model(data)
             
                 if self.args.subgraph_train and self.inc_state:
                     pred, _ = to_dense_batch(pred, batch=data.batch)
                     data.y, _ = to_dense_batch(data.y, batch=data.batch) ##? 不知所云
                     pred = pred[:, self.args.mapping, :]
                     data.y = data.y[:, self.args.mapping, :] 
+
+                # print(data.y.shape, pred.shape)
                 loss = lossfunc(data.y, pred, reduction="mean")
                 loss2 = masked_mae_np(data.y.cpu().data.numpy(), pred.cpu().data.numpy(), 0) 
                 if self.args.ewc and self.inc_state:
@@ -379,7 +390,10 @@ class base_framework:
             with torch.no_grad():
                 for batch_idx, data in enumerate(self.val_loader):
                     data = data.to(self.args.device, non_blocking=pin_memory)
-                    pred = self.model(data, self.args.sub_adj)
+                    if self.args.graph_input: 
+                        pred = self.model(data, self.args.sub_adj)
+                    else : 
+                        pred = self.model(data)
                     if self.args.subgraph_train and self.inc_state:
                         pred, _ = to_dense_batch(pred, batch=data.batch)
                         data.y, _ = to_dense_batch(data.y, batch=data.batch)
@@ -410,7 +424,7 @@ class base_framework:
         epoch_idx = np.argmin(validation_loss_list)
         best_model_path = osp.join(path, str(lowest_validation_loss)+("_epoch_%d.pkl" % epoch_idx))
         
-        best_model = TrafficStream(self.args)
+        best_model = eval(self.args.model_name)(self.args)
         best_model.load_state_dict(torch.load(best_model_path, self.args.device)["model_state_dict"])
         torch.save({'model_state_dict': best_model.state_dict()}, osp.join(path, "best_model.pkl"))
         self.model = best_model
@@ -448,7 +462,10 @@ class base_framework:
             cn = 0
             for data in self.test_loader:
                 data = data.to(self.args.device, non_blocking=pin_memory)
-                pred = self.model(data, self.args.adj)
+                if self.args.graph_input: 
+                    pred = self.model(data, self.args.sub_adj)
+                else : 
+                    pred = self.model(data)
                 loss += func.mse_loss(data.y, pred, reduction="mean")
                 pred, _ = to_dense_batch(pred, batch=data.batch)
                 data.y, _ = to_dense_batch(data.y, batch=data.batch)
@@ -549,7 +566,7 @@ def parse_args():
     return args
 
 if __name__ == "__main__":
-    args = parse_args()
-    # args = None  ##* pre set args
+    args = parse_args() ##* parse args
+    # args = None  
     seed_set(13) ##* set seed
     main(args) ##* run any framework for a time 
