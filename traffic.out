@@ -1,0 +1,25 @@
+2023-05-18 20:22:16,758 - logger name:exp/district3F11T17/test_all2023-05-18-20:22:16.757710/test_all.log
+2023-05-18 20:22:16,758 - params : {'conf': 'test_all', 'data_name': 'traffic', 'load_config': 'configs/', 'data_process': True, 'auto_test': 1, 'load': True, 'device': device(type='cuda', index=1), 'build_graph': False, 'dynamic_graph': False, 'graph_input': False, 'model_name': 'Linear', 'root_path': '', 'raw_data_path': 'data/district3F11T17/finaldata/', 'graph_path': 'data/district3F11T17/graph/', 'save_data_path': 'data/district3F11T17/FastData/', 'model_path': 'exp/district3F11T17/', 'phase': 2012, 'days': 31, '/* model related args*/': '//', 'x_len': 96, 'y_len': 96, 'label_len': 48, 'features': 'M', 'target': 'OT', 'dropout': 0.0, 'individual': False, 'test_model_path': 'exp/district3F11T17/CUSTOM-TEST2023-05-14-19:41:54.522136/1/0.2784_epoch_7.pkl', 'linear_output': 1, '/*train related args*/': '//', 'train': True, 'epoch': 1, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*dataset related args*/': '//', 'embed': 'timeF', 'freq': 'H', 'begin_phase': 1, 'end_phase': 2, 'phase_len': 2192, 'val_ratio': 0.5, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'test_all', 'time': '2023-05-18-20:22:16.757710', 'path': 'exp/district3F11T17/test_all2023-05-18-20:22:16.757710', 'logger': <Logger __main__ (INFO)>}
+2023-05-18 20:22:16,758 - [*] phase 1 load from data/district3F11T17/FastData/1_30day.npz
+2023-05-18 20:23:27,167 - [*] phase 1 Dataset load!
+2023-05-18 20:23:41,456 - [*] phase 1 Training start
+2023-05-18 20:23:41,733 - node number torch.Size([110336, 96])
+2023-05-18 20:23:46,250 - epoch:0, training loss:0.5397 validation loss:0.4123
+2023-05-18 20:23:47,257 - [*] loss:0.4505
+2023-05-18 20:23:47,365 - [*] phase 1, testing
+2023-05-18 20:23:47,520 - T:3	MAE	0.4276	RMSE	0.6559	MAPE	965.9825
+2023-05-18 20:23:47,721 - T:6	MAE	0.4365	RMSE	0.6806	MAPE	1013.9596
+2023-05-18 20:23:48,028 - T:12	MAE	0.4236	RMSE	0.6761	MAPE	1041.1580
+2023-05-18 20:23:49,593 - T:96	MAE	0.4140	RMSE	0.6717	MAPE	832.3451
+2023-05-18 20:23:49,594 - 3	mae	0.43	
+2023-05-18 20:23:49,594 - 3	rmse	0.66	
+2023-05-18 20:23:49,594 - 3	mape	965.98	
+2023-05-18 20:23:49,595 - 6	mae	0.44	
+2023-05-18 20:23:49,595 - 6	rmse	0.68	
+2023-05-18 20:23:49,595 - 6	mape	1013.96	
+2023-05-18 20:23:49,595 - 12	mae	0.42	
+2023-05-18 20:23:49,595 - 12	rmse	0.68	
+2023-05-18 20:23:49,595 - 12	mape	1041.16	
+2023-05-18 20:23:49,595 - 96	mae	0.41	
+2023-05-18 20:23:49,595 - 96	rmse	0.67	
+2023-05-18 20:23:49,595 - 96	mape	832.35	

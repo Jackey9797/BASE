@@ -1,0 +1,40 @@
+2023-05-17 16:44:17,621 - logger name:exp/district3F11T17/ECL-NLinear2023-05-17-16:44:17.621009/ECL-NLinear.log
+2023-05-17 16:44:17,622 - params : {'conf': 'ECL-NLinear', 'load_config': 'configs/', 'data_process': False, 'auto_test': 1, 'load': True, 'device': device(type='cuda', index=1), 'build_graph': False, 'dynamic_graph': False, 'graph_input': False, 'model_name': 'NLinear', 'data_name': 'electricity', 'root_path': '', 'raw_data_path': 'data/district3F11T17/finaldata/', 'graph_path': 'data/district3F11T17/graph/', 'save_data_path': 'data/ECL/', 'model_path': 'exp/district3F11T17/', 'phase': 2012, 'days': 31, '/* model related args*/': '//', 'x_len': 96, 'y_len': 96, 'label_len': 48, 'features': 'M', 'target': 'OT', 'dropout': 0.0, 'individual': False, 'test_model_path': 'exp/district3F11T17/CUSTOM-TEST2023-05-14-19:41:54.522136/1/0.2784_epoch_7.pkl', 'linear_output': 1, '/*train related args*/': '//', 'train': True, 'epoch': 100, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*dataset related args*/': '//', 'embed': 'timeF', 'freq': 'H', 'begin_phase': 1, 'end_phase': 1, 'phase_len': 15667, 'val_ratio': 0.5, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-NLinear', 'time': '2023-05-17-16:44:17.621009', 'path': 'exp/district3F11T17/ECL-NLinear2023-05-17-16:44:17.621009', 'logger': <Logger __main__ (INFO)>}
+2023-05-17 16:44:17,622 - [*] phase 1 load from data/ECL/1_30day.npz
+2023-05-17 16:44:17,623 - [*] phase 1 Dataset load!
+2023-05-17 16:45:25,465 - [*] phase 1 Training start
+2023-05-17 16:45:26,022 - node number torch.Size([41088, 96])
+2023-05-17 16:45:38,447 - epoch:0, training loss:0.3621 validation loss:0.2894
+2023-05-17 16:45:50,233 - epoch:1, training loss:0.2894 validation loss:0.2803
+2023-05-17 16:46:02,024 - epoch:2, training loss:0.2850 validation loss:0.2774
+2023-05-17 16:46:13,973 - epoch:3, training loss:0.2830 validation loss:0.2765
+2023-05-17 16:46:26,032 - epoch:4, training loss:0.2819 validation loss:0.2767
+2023-05-17 16:46:37,947 - epoch:5, training loss:0.2827 validation loss:0.2770
+2023-05-17 16:46:50,151 - epoch:6, training loss:0.2822 validation loss:0.2769
+2023-05-17 16:47:02,488 - epoch:7, training loss:0.2824 validation loss:0.2761
+2023-05-17 16:47:14,807 - epoch:8, training loss:0.2826 validation loss:0.2785
+2023-05-17 16:47:26,897 - epoch:9, training loss:0.2834 validation loss:0.2768
+2023-05-17 16:47:39,161 - epoch:10, training loss:0.2826 validation loss:0.2783
+2023-05-17 16:47:51,870 - epoch:11, training loss:0.2827 validation loss:0.2865
+2023-05-17 16:48:04,636 - epoch:12, training loss:0.2837 validation loss:0.2778
+2023-05-17 16:48:17,879 - epoch:13, training loss:0.2840 validation loss:0.2764
+2023-05-17 16:48:17,896 - Finished optimization, total time:126.29 s, best model:exp/district3F11T17/ECL-NLinear2023-05-17-16:44:17.621009/1/0.2761_epoch_7.pkl
+2023-05-17 16:48:21,089 - [*] loss:0.1982
+2023-05-17 16:48:25,411 - [*] phase 1, testing
+2023-05-17 16:48:25,834 - T:3	MAE	0.1924	RMSE	0.3092	MAPE	218.7863
+2023-05-17 16:48:26,284 - T:6	MAE	0.2224	RMSE	0.3538	MAPE	244.6087
+2023-05-17 16:48:26,936 - T:12	MAE	0.2398	RMSE	0.3883	MAPE	255.6550
+2023-05-17 16:48:48,846 - T:96	MAE	0.2749	RMSE	0.4437	MAPE	269.9787
+2023-05-17 16:48:48,897 - 3	mae	0.19	
+2023-05-17 16:48:48,897 - 3	rmse	0.31	
+2023-05-17 16:48:48,897 - 3	mape	218.79	
+2023-05-17 16:48:48,897 - 6	mae	0.22	
+2023-05-17 16:48:48,897 - 6	rmse	0.35	
+2023-05-17 16:48:48,897 - 6	mape	244.61	
+2023-05-17 16:48:48,897 - 12	mae	0.24	
+2023-05-17 16:48:48,897 - 12	rmse	0.39	
+2023-05-17 16:48:48,898 - 12	mape	255.66	
+2023-05-17 16:48:48,898 - 96	mae	0.27	
+2023-05-17 16:48:48,898 - 96	rmse	0.44	
+2023-05-17 16:48:48,898 - 96	mape	269.98	
+2023-05-17 16:48:48,898 - phase	1	total_time	126.290335	average_time	9.020746857142857	epoch	14

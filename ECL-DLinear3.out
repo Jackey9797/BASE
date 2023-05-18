@@ -1,0 +1,50 @@
+2023-05-18 18:40:46,922 - logger name:exp/district3F11T17/ECL-DLinear2023-05-18-18:40:46.922109/ECL-DLinear.log
+2023-05-18 18:40:46,922 - params : {'conf': 'ECL-DLinear', 'load_config': 'configs/', 'data_process': False, 'auto_test': 1, 'load': True, 'device': device(type='cuda', index=1), 'build_graph': False, 'dynamic_graph': False, 'graph_input': False, 'model_name': 'DLinear', 'data_name': 'electricity', 'root_path': '', 'raw_data_path': 'data/district3F11T17/finaldata/', 'graph_path': 'data/district3F11T17/graph/', 'save_data_path': 'data/ECL/', 'model_path': 'exp/district3F11T17/', 'phase': 2012, 'days': 31, '/* model related args*/': '//', 'x_len': 96, 'y_len': 96, 'label_len': 48, 'features': 'M', 'target': 'OT', 'dropout': 0.0, 'individual': False, 'test_model_path': 'exp/district3F11T17/CUSTOM-TEST2023-05-14-19:41:54.522136/1/0.2784_epoch_7.pkl', 'linear_output': 1, '/*train related args*/': '//', 'train': True, 'epoch': 100, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*dataset related args*/': '//', 'embed': 'timeF', 'freq': 'H', 'begin_phase': 1, 'end_phase': 3, 'phase_len': 8768, 'val_ratio': 0.5, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-DLinear', 'time': '2023-05-18-18:40:46.922109', 'path': 'exp/district3F11T17/ECL-DLinear2023-05-18-18:40:46.922109', 'logger': <Logger __main__ (INFO)>}
+2023-05-18 18:40:46,922 - [*] phase 1 load from data/ECL/1_30day.npz
+2023-05-18 18:40:46,927 - [*] phase 1 Dataset load!
+2023-05-18 18:41:17,255 - [*] phase 1 Training start
+2023-05-18 18:41:17,554 - node number torch.Size([41088, 96])
+2023-05-18 18:41:24,774 - epoch:0, training loss:0.3689 validation loss:0.2982
+2023-05-18 18:41:31,877 - epoch:1, training loss:0.2931 validation loss:0.2898
+2023-05-18 18:41:39,071 - epoch:2, training loss:0.2884 validation loss:0.2844
+2023-05-18 18:41:46,270 - epoch:3, training loss:0.2867 validation loss:0.2856
+2023-05-18 18:41:53,452 - epoch:4, training loss:0.2870 validation loss:0.2846
+2023-05-18 18:42:00,702 - epoch:5, training loss:0.2866 validation loss:0.2831
+2023-05-18 18:42:07,960 - epoch:6, training loss:0.2865 validation loss:0.2849
+2023-05-18 18:42:15,141 - epoch:7, training loss:0.2870 validation loss:0.2903
+2023-05-18 18:42:22,319 - epoch:8, training loss:0.2868 validation loss:0.2841
+2023-05-18 18:42:29,547 - epoch:9, training loss:0.2870 validation loss:0.2882
+2023-05-18 18:42:36,732 - epoch:10, training loss:0.2873 validation loss:0.2875
+2023-05-18 18:42:44,333 - epoch:11, training loss:0.2864 validation loss:0.2840
+2023-05-18 18:42:44,335 - Finished optimization, total time:56.96 s, best model:exp/district3F11T17/ECL-DLinear2023-05-18-18:40:46.922109/1/0.2831_epoch_5.pkl
+2023-05-18 18:42:46,644 - [*] loss:0.2008
+2023-05-18 18:42:47,919 - [*] phase 1, testing
+2023-05-18 18:42:48,185 - T:3	MAE	0.1985	RMSE	0.3128	MAPE	179.3221
+2023-05-18 18:42:48,518 - T:6	MAE	0.2238	RMSE	0.3523	MAPE	191.1597
+2023-05-18 18:42:48,971 - T:12	MAE	0.2436	RMSE	0.3869	MAPE	203.7464
+2023-05-18 18:43:13,308 - T:96	MAE	0.2838	RMSE	0.4466	MAPE	232.8446
+2023-05-18 18:43:13,321 - [*] phase 2 load from data/ECL/2_30day.npz
+2023-05-18 18:43:13,321 - [*] phase 2 Dataset load!
+2023-05-18 18:43:13,321 - [*] load from exp/district3F11T17/ECL-DLinear2023-05-18-18:40:46.922109/1/best_model.pkl
+2023-05-18 18:44:01,041 - [*] phase 2 Training start
+2023-05-18 18:44:01,308 - node number torch.Size([41088, 96])
+2023-05-18 18:44:08,331 - epoch:0, training loss:0.3043 validation loss:0.2735
+2023-05-18 18:44:15,803 - epoch:1, training loss:0.2847 validation loss:0.2723
+2023-05-18 18:44:23,080 - epoch:2, training loss:0.2854 validation loss:0.2714
+2023-05-18 18:44:30,318 - epoch:3, training loss:0.2853 validation loss:0.2753
+2023-05-18 18:44:37,611 - epoch:4, training loss:0.2851 validation loss:0.2765
+2023-05-18 18:44:44,814 - epoch:5, training loss:0.2853 validation loss:0.2704
+2023-05-18 18:44:52,137 - epoch:6, training loss:0.2857 validation loss:0.2717
+2023-05-18 18:44:59,855 - epoch:7, training loss:0.2860 validation loss:0.2739
+2023-05-18 18:45:07,575 - epoch:8, training loss:0.2861 validation loss:0.2753
+2023-05-18 18:45:15,082 - epoch:9, training loss:0.2872 validation loss:0.2792
+2023-05-18 18:45:22,489 - epoch:10, training loss:0.2858 validation loss:0.2761
+2023-05-18 18:45:30,047 - epoch:11, training loss:0.2872 validation loss:0.2743
+2023-05-18 18:45:30,049 - Finished optimization, total time:59.05 s, best model:exp/district3F11T17/ECL-DLinear2023-05-18-18:40:46.922109/2/0.2704_epoch_5.pkl
+2023-05-18 18:45:32,040 - [*] loss:0.1914
+2023-05-18 18:45:32,190 - [*] phase 2, testing
+2023-05-18 18:45:32,431 - T:3	MAE	0.1903	RMSE	0.3056	MAPE	230.1311
+2023-05-18 18:45:32,738 - T:6	MAE	0.2142	RMSE	0.3432	MAPE	245.3451
+2023-05-18 18:45:33,164 - T:12	MAE	0.2320	RMSE	0.3752	MAPE	247.7950
+2023-05-18 18:45:44,278 - T:96	MAE	0.2700	RMSE	0.4330	MAPE	265.0502
+2023-05-18 18:45:44,280 - [*] phase 3 load from data/ECL/3_30day.npz
