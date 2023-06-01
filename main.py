@@ -53,6 +53,19 @@ def seed_set(seed=0):
 def z_score(data):
     return (data - np.mean(data)) / np.std(data)
 
+num = 0 
+def visualize(X, GT, Y): 
+    global num 
+    print(X.x[1].detach().numpy().shape,Y[0][1].detach().numpy().shape)
+
+    import matplotlib.pyplot as plt
+    plt.plot(np.concatenate( [X.x[1].detach().numpy(),Y[1].detach().numpy()]), label="pred")
+    plt.plot(np.concatenate( [X.x[1].detach().numpy(),GT[1].numpy()]), label="GT")
+    plt.legend()
+    num += 1
+    plt.savefig("figs2/"+str(num)+".png")
+    plt.close()
+
 class PEMS3_Stream: #* 从PEMS raw data中生成训练验证测试数据集 + graph
     def __init__(self, args, savepath, train_rate=0.6, val_rate=0.2, test_rate=0.2, val_test_mix=False):
         self.args = args 
@@ -528,6 +541,7 @@ def init_args(args):
     args.time = datetime.now().strftime("%Y-%m-%d-%H:%M:%S.%f")
     args.path = osp.join(args.model_path, args.logname+args.time)
     ct.mkdirs(args.path)
+    if args.train == False: args.load = False
     # global result
     # result[args.y_len] = {"mae":{}, "mape":{}, "rmse":{}}
     return args
@@ -711,6 +725,8 @@ class base_framework:
             for batch_idx, (data, batch_x_mark, batch_y_mark) in enumerate(self.train_loader):
                 if epoch == 0 and batch_idx == 0:
                     self.args.logger.info("node number {}".format(data.x.shape))
+                
+                # data.x[:, 48:48+24] = 0
                 data = data.to(self.args.device, non_blocking=pin_memory)
 
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
@@ -750,6 +766,8 @@ class base_framework:
                 optimizer.step()
                 
                 cn += 1
+                if cn % 10 == 1: 
+                    visualize(data.cpu(), data.y.cpu(), pred.cpu())
 
             if epoch == 0:
                 total_time = (datetime.now() - start_time).total_seconds()
@@ -835,10 +853,10 @@ class base_framework:
                                 info+="{:.2f}\t".format(result[i][j][phase])
                 self.args.logger.info("{}\t{}\t".format(i,j) + info)
 
-        for phase in range(self.args.begin_phase, self.args.end_phase+1):
-            if phase in result:
-                info = "phase\t{}\ttotal_time\t{}\taverage_time\t{}\tepoch\t{}".format(phase, result[phase]["total_time"], result[phase]["average_time"], result[phase]['epoch_num'])
-                self.args.logger.info(info)
+        # for phase in range(self.args.begin_phase, self.args.end_phase+1):
+        #     if phase in result:
+        #         info = "phase\t{}\ttotal_time\t{}\taverage_time\t{}\tepoch\t{}".format(phase, result[phase]["total_time"], result[phase]["average_time"], result[phase]['epoch_num'])
+        #         self.args.logger.info(info)
 
     def test_model(self):
         ##! 
@@ -852,6 +870,8 @@ class base_framework:
             cn = 0
             for data,  batch_x_mark, batch_y_mark in self.test_loader:
                 data = data.to(self.args.device, non_blocking=pin_memory)
+                data.x[:, 24:] = 0
+
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
                 batch_y_mark = batch_y_mark.float().to(self.args.device)
 
@@ -869,12 +889,27 @@ class base_framework:
                         pred = self.model(data, batch_x_mark, dec_inp, batch_y_mark)
                 pred = pred[:, -self.args.y_len:]
                 data.y = data.y[:, -self.args.y_len:]
+                
+
                 loss += func.mse_loss(data.y, pred, reduction="mean")
+
+                cn += 1
+
+                print(cn)
+                if cn % 10 == 1: 
+                    visualize(data.cpu(), data.y.cpu(), pred.cpu())
+
+                data.to(self.args.device)
+                data.y.to(self.args.device)
+                pred.to(self.args.device)
+
                 pred, _ = to_dense_batch(pred, batch=data.batch)
                 data.y, _ = to_dense_batch(data.y, batch=data.batch)
                 pred_.append(pred.cpu().data.numpy())
                 truth_.append(data.y.cpu().data.numpy())
-                cn += 1
+                
+
+
             loss = loss/cn
             self.args.logger.info("[*] loss:{:.4f}".format(loss))
             pred_ = np.concatenate(pred_, 0)

@@ -11,11 +11,11 @@
     "dropout":0.0, 
     "graph_input": false,
     "individual": false,
-    "test_model_path": "exp/district3F11T17/CUSTOM-TEST2023-05-14-19:41:54.522136/1/0.2784_epoch_7.pkl",
+    "test_model_path": "/Disk/fhyega/code/BASE/exp/district3F11T17/ECL-DLinear2023-05-19-16:30:51.224506/1/best_model.pkl",
     "linear_output":1,
 
     "/*train related args*/": "//",
-    "train": true,
+    "train": false,
     "epoch": 100,
     "batch_size": 128,
     "lr": 0.01,
