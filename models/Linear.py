@@ -25,7 +25,6 @@ class MLP(nn.Module):
 
     def forward(self, x):
         # x: [Batch, Input length, Channel]
-        x = x.x.reshape((-1,self.channels ,self.x_len)).permute(0, 2, 1)
         if self.individual:
             output = torch.zeros([x.size(0),self.y_len,x.size(2)],dtype=x.dtype).to(x.device)
             for i in range(self.channels):
@@ -35,9 +34,8 @@ class MLP(nn.Module):
             x = self.Linear(x.permute(0,2,1)).permute(0,2,1)
             # print(x.shape)
         # print(x.shape)
-        x = x.permute(0, 2, 1)
         # print(x.shape)
-        return x.reshape(-1, x.shape[2]) # [Batch, Output length, Channel]
+        return x # [Batch, Output length, Channel]
     
 class Linear(nn.Module):
     """
@@ -61,7 +59,6 @@ class Linear(nn.Module):
 
     def forward(self, x):
         # x: [Batch, Input length, Channel]
-        x = x.x.reshape((-1,self.channels ,self.x_len)).permute(0, 2, 1)
         if self.individual:
             output = torch.zeros([x.size(0),self.y_len,x.size(2)],dtype=x.dtype).to(x.device)
             for i in range(self.channels):
@@ -71,9 +68,7 @@ class Linear(nn.Module):
             x = self.Linear(x.permute(0,2,1)).permute(0,2,1)
             # print(x.shape)
         # print(x.shape)
-        x = x.permute(0, 2, 1)
-        # print(x.shape)
-        return x.reshape(-1, x.shape[2]) # [Batch, Output length, Channel]
+        return x # [Batch, Output length, Channel]
     
 
 class moving_avg(nn.Module):
@@ -145,7 +140,6 @@ class DLinear(nn.Module):
 
     def forward(self, x):
         # x: [Batch, Input length, Channel]
-        x = x.x.reshape((-1,self.channels ,self.seq_len)).permute(0, 2, 1)
 
         seasonal_init, trend_init = self.decompsition(x)
         seasonal_init, trend_init = seasonal_init.permute(0,2,1), trend_init.permute(0,2,1)
@@ -161,7 +155,7 @@ class DLinear(nn.Module):
 
         x = seasonal_output + trend_output
         # print(x.shape)
-        return x.reshape(-1, x.shape[2])  # to [Batch, Output length, Channel]
+        return x.permute(0, 2, 1)  # to [Batch, Output length, Channel]
     
 class NLinear(nn.Module):
     """
@@ -185,6 +179,5 @@ class NLinear(nn.Module):
         x = self.Linear(x.permute(0,2,1)).permute(0,2,1)
         x = x + seq_last
 
-        x = x.permute(0, 2, 1)
         # print(x.shape)
-        return x.reshape(-1, x.shape[2]) # [Batch, Output length, Channel]
+        return x # [Batch, Output length, Channel]

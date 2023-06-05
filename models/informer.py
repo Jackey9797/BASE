@@ -17,7 +17,7 @@ class informer(nn.Module):
         self.configs = configs
         self.pred_len = configs.y_len
         self.output_attention = configs.output_attention
-        configs.enc_in = configs.c_out = configs.dec_in = configs.graph_size
+        configs.enc_in = configs.c_out = configs.dec_in = configs.nodes
 
         # Embedding
         if configs.embed_type == 0:
