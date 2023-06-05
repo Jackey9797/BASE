@@ -67,7 +67,7 @@
     "ewc_strategy": "ewc", 
     "ewc_lambda": 0.0001,
     "subgraph_train": false,
-    "num_hops": 2
+    "num_hops": 2,
 
 
 }

@@ -3,6 +3,7 @@ import os
 import os.path as osp
 import tqdm
 import torch 
+import json
 import sys
 import logging
 from torch import optim
@@ -494,56 +495,27 @@ def get_dataset(args):
     return inputs 
 
 def init_args(args): 
-    static_args = {
-        ##* static args
-        "load_config": "configs/", 
-        "data_process": False ,
-        "auto_test": 1,
-        "load": True,
-        "device": "cuda:0",
-        "build_graph": False,
-        "dynamic_graph": False, 
-        "graph_input": True, 
-        
-        ##* dataset related args
-        "model_name": "TrafficStream",
-        "data_name": "PEMS3-Stream",
-        "root_path": "",
-        "raw_data_path": "data/district3F11T17/finaldata/",
-        "graph_path": "data/district3F11T17/graph/",
-        "save_data_path": "data/district3F11T17/FastData/",
-        "model_path": "exp/district3F11T17/",
-        "phase": 2012,
-        "days": 31,        
-    }
+    # config_args = {
+    #     "raw_data_path": "data/district3F11T17/finaldata/",
+    #     "graph_path": "data/district3F11T17/graph/",
+    #     "save_data_path": "data/district3F11T17/FastData/",
+    #     
 
-    import json
-
-    ##* load model related args 
-    with open(static_args["load_config"] + args.conf + ".json", "r") as f:
+    #* complete args 
+    with open("configs/" + args.conf + ".json", "r") as f:
         config = json.load(f)
-    for key, value in config.items():
-        static_args[key] = value
-
-
-    # merge static_args into args, the key is the attribute of args, the value is the value of args
-    if args is None:
-        class Args:
-            pass
-        args = Args()
-    
-    for key, value in static_args.items():
-        if not hasattr(args, key):
-            setattr(args, key, value)
+        for key, value in config.items():
+            if not hasattr(args, key):
+                setattr(args, key, value)
 
     args.logname = args.conf
     args.device = torch.device(args.device if torch.cuda.is_available() else 'cpu')
     args.time = datetime.now().strftime("%Y-%m-%d-%H:%M:%S.%f")
-    args.path = osp.join(args.model_path, args.logname+args.time)
+    args.path = osp.join(args.exp_path, args.logname+args.time)
     ct.mkdirs(args.path)
     if args.train == False: args.load = False
-    # global result
-    # result[args.y_len] = {"mae":{}, "mape":{}, "rmse":{}}
+    print(args)
+    exit(0)
     return args
 
 class base_framework: 
@@ -551,7 +523,7 @@ class base_framework:
         self.args = args 
 
     def load_best_model(self):
-        load_path = osp.join(self.args.model_path, self.args.logname+self.args.time, str(self.args.phase-1), "best_model.pkl")
+        load_path = osp.join(self.args.exp_path, self.args.logname+self.args.time, str(self.args.phase-1), "best_model.pkl")
         ##!! file name file name file name 
     
         self.args.logger.info("[*] load from {}".format(load_path))
@@ -994,22 +966,27 @@ def init_log(args):
     return logger
 
 def main(args):
-    args = init_args(args) ##* init args
+    args = init_args(args) ##* initialize specialized args
     fm = base_framework(args)
     fm.run()
-        
-    
 
 def parse_args():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--conf", type=str, default="incremental-naive")
     parser.add_argument("--data_name", type=str, default="electricity")
-    args = parser.parse_args()
-    return args
+    parser.add_argument("--iteration", type=int, default=1)
+
+    parser.add_argument("--auto_test", type=int, default=1)
+    parser.add_argument("--load", action="store_true", default=False)
+    parser.add_argument("--build_graph", action="store_true", default=False)
+    parser.add_argument("--root_path", type=str, default="")
+    parser.add_argument("--exp_path", type=str, default="exp/")
+    args = parser.parse_args() 
+    return args 
 
 if __name__ == "__main__":
-    args = parse_args() ##* parse args
-    # args = None  
-    seed_set(13) ##* set seed
-    main(args) ##* run any framework for a time 
+    args = parse_args() #* args needs adjust frequently and static
+    seed_set(13) 
+    for i in range(args.iteration):
+        main(args) #* run framework for one time 
