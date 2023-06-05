@@ -17,7 +17,7 @@ class informer(nn.Module):
         self.configs = configs
         self.pred_len = configs.y_len
         self.output_attention = configs.output_attention
-        configs.enc_in = configs.c_out = configs.dec_in = configs.nodes
+        configs.enc_in = configs.c_out = configs.dec_in = configs.enc_in
 
         # Embedding
         if configs.embed_type == 0:
@@ -90,7 +90,6 @@ class informer(nn.Module):
 
     def forward(self, x_enc, x_mark_enc, x_dec, x_mark_dec,
                 enc_self_mask=None, dec_self_mask=None, dec_enc_mask=None):
-        x_enc = x_enc.x.reshape((-1,self.configs.graph_size ,self.configs.x_len)).permute(0, 2, 1)
 
         enc_out = self.enc_embedding(x_enc, x_mark_enc)
         enc_out, attns = self.encoder(enc_out, attn_mask=enc_self_mask)
@@ -99,8 +98,7 @@ class informer(nn.Module):
         dec_out = self.decoder(dec_out, enc_out, x_mask=dec_self_mask, cross_mask=dec_enc_mask)
 
         dec_out = dec_out[:, -self.pred_len:, :]
-        dec_out = dec_out.permute(0, 2, 1)
         if self.output_attention:
-            return dec_out.reshape(-1, dec_out.shape[2]), attns
+            return dec_out, attns
         else:
-            return dec_out.reshape(-1, dec_out.shape[2])  # [B, L, D]
+            return dec_out  # [B, L, D]

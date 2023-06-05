@@ -356,7 +356,7 @@ class base_framework:
 
         #* multi-phase train 
         self.inc_state = False 
-        for phase in range(self.args.begin_phase, self.args.end_phase): ##todo 将第一年拿出来单独处理 
+        for phase in range(self.args.begin_phase, self.args.end_phase+1):
             self.args.phase = phase 
             self.args.logger.info("[*] phase {} start training".format(self.args.phase)) 
             

@@ -247,10 +247,7 @@ class Dataset_Custom(Dataset):
         cols = list(df_raw.columns)
         cols.remove(self.target)
         cols.remove('date')
-        print(df_raw.columns)
         df_raw = df_raw[['date'] + cols + [self.target]]
-        print(df_raw.columns)
-        print(cols)
         num_train = int(len(df_raw) * 0.7)
         num_test = int(len(df_raw) * 0.2)
         num_vali = len(df_raw) - num_train - num_test
@@ -333,7 +330,7 @@ def process_data_stream(args):
         target=args.target,
         timeenc=timeenc,
         freq=freq)
-    if args.phase_len < 1: args.phase_len = int(len(ds) * args.phase_len_ratio) 
+    args.phase_len = int(len(ds) * args.phase_len_ratio) 
     t = 0; tmp_phase = 1
     while t + args.phase_len < len(ds):
         train_x, train_y = ds[t:t+args.phase_len][0], ds[t:t+args.phase_len][1] 
@@ -352,10 +349,10 @@ def process_data_stream(args):
         test_x, test_y = ds[test_idx][0], ds[test_idx][1]
         test_x_mask, test_y_mask = ds[test_idx][2], ds[test_idx][3]
         # detect dir exist or not, if not, create it
-        if not osp.exists(osp.join(args.save_data_path, "_".join([str(args.phase_len_ratio),  str(args.x_len), str(args.y_len), str(tmp_phase)]))):
-            os.makedirs(osp.join(args.save_data_path, "_".join([str(args.phase_len_ratio),  str(args.x_len), str(args.y_len), str(tmp_phase)])))
+        if not osp.exists(osp.join(args.save_data_path, "_".join([str(args.phase_len_ratio),  str(args.x_len), str(args.y_len)]))):
+            os.makedirs(osp.join(args.save_data_path, "_".join([str(args.phase_len_ratio),  str(args.x_len), str(args.y_len)])))
 
-        np.savez(osp.join(args.save_data_path, "_".join([str(args.phase_len_ratio),  str(args.x_len), str(args.y_len), str(tmp_phase)])), train_x=train_x, train_y=train_y, val_x=val_x, val_y=val_y, test_x=test_x, test_y=test_y, train_x_mask=train_x_mask, train_y_mask = train_y_mask, val_x_mask=val_x_mask, val_y_mask=val_y_mask, test_x_mask= test_x_mask, test_y_mask=test_y_mask)
+        np.savez(osp.join(args.save_data_path, "_".join([str(args.phase_len_ratio),  str(args.x_len), str(args.y_len)]),str(tmp_phase)), train_x=train_x, train_y=train_y, val_x=val_x, val_y=val_y, test_x=test_x, test_y=test_y, train_x_mask=train_x_mask, train_y_mask = train_y_mask, val_x_mask=val_x_mask, val_y_mask=val_y_mask, test_x_mask= test_x_mask, test_y_mask=test_y_mask)
         t += args.phase_len
         tmp_phase += 1
 
@@ -369,7 +366,7 @@ def get_dataset(args):
         process_data_stream(args)
         args.data_process = False 
             
-    inputs = np.load(osp.join(args.save_data_path, "_".join([str(args.phase_len_ratio), str(args.x_len), str(args.y_len), str(args.phase)])+".npz"), allow_pickle=True)
+    inputs = np.load(osp.join(args.save_data_path, "_".join([str(args.phase_len_ratio), str(args.x_len), str(args.y_len)]), str(args.phase)+".npz"), allow_pickle=True)
     args.nodes = torch.arange(inputs['train_x'].shape[-1])
     args.enc_in = len(args.nodes)
 
