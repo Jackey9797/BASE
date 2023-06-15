@@ -129,7 +129,7 @@ class base_framework:
         ct.mkdirs(path)
 
         ##* Model Optimizer
-        optimizer = optim.AdamW(self.model.parameters(), lr=self.args.lr)
+        optimizer = optim.Adam(self.model.parameters(), lr=self.args.lr)
         if self.args.loss == "mse": lossfunc = func.mse_loss
         elif self.args.loss == "huber": lossfunc = func.smooth_l1_loss
 
@@ -141,13 +141,14 @@ class base_framework:
         iters = len(self.train_loader)
         lowest_validation_loss = 1e7
         counter = 0
-        patience = 5
-        self.model.train()
+        patience = 10
         use_time = []
         validation_loss_list = []
         for epoch in range(self.args.epoch): #* train body 
             training_loss = 0.0
             start_time = datetime.now()
+            self.model.train()
+
             loss2=0#*
             # Train Model
             cn = 0
@@ -198,6 +199,8 @@ class base_framework:
             training_loss = training_loss/cn 
     
             # Validate Model
+            self.model.eval()
+
             validation_loss = 0.0
             cn = 0
             with torch.no_grad():
@@ -415,6 +418,6 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args() #* args needs adjust frequently and static
-    seed_set(2021) 
+    seed_set(13) 
     for i in range(args.iteration):
         main(args) #* run framework for one time 

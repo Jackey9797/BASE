@@ -1,0 +1,55 @@
+2023-06-15 01:53:19,187 - logger name:exp/ECL-Informer2023-06-15-01:53:19.187158/ECL-Informer.log
+2023-06-15 01:53:19,187 - params : {'conf': 'ECL-Informer', 'data_name': 'electricity', 'iteration': 1, 'auto_test': 1, 'load': False, 'build_graph': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'end_phase': 1, 'x_len': 96, 'y_len': 96, 'device': device(type='cuda', index=1), '/* model related args*/': '//', 'model_name': 'informer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'test_model_path': '/Disk/fhyega/code/PatchTST/PatchTST_supervised/checkpoints/electricity_96_96_Informer_custom_ftM_sl96_ll48_pl96_dm512_nh8_el2_dl1_df2048_fc3_ebtimeF_dtTrue_Exp_0/checkpoint.pth', 'e_layers': 2, 'd_layers': 1, 'factor': 3, 'n_heads': 8, 'd_model': 512, 'd_ff': 2048, 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, '/*train related args*/': '//', 'train': True, 'epoch': 100, 'batch_size': 128, 'lr': 0.0001, 'loss': 'mse', '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 1, 'phase_len_ratio': 0.7, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Informer', 'time': '2023-06-15-01:53:19.187158', 'path': 'exp/ECL-Informer2023-06-15-01:53:19.187158', 'pred_len': 96, 'logger': <Logger __main__ (INFO)>}
+2023-06-15 01:53:19,187 - [*] phase 1 start training
+2023-06-15 01:56:51,966 - [*] phase 1 Dataset load!
+2023-06-15 01:57:58,149 - [*] phase 1 Training start
+2023-06-15 01:58:54,158 - epoch:0, training loss:0.7342 validation loss:0.5239
+2023-06-15 01:59:39,617 - epoch:1, training loss:0.4417 validation loss:0.3795
+2023-06-15 02:00:24,975 - epoch:2, training loss:0.2786 validation loss:0.3340
+2023-06-15 02:01:13,732 - epoch:3, training loss:0.2261 validation loss:0.2896
+2023-06-15 02:02:01,480 - epoch:4, training loss:0.2055 validation loss:0.2814
+2023-06-15 02:02:49,387 - epoch:5, training loss:0.1922 validation loss:0.2607
+2023-06-15 02:03:38,606 - epoch:6, training loss:0.1820 validation loss:0.2606
+2023-06-15 02:04:24,597 - epoch:7, training loss:0.1746 validation loss:0.2488
+2023-06-15 02:05:13,157 - epoch:8, training loss:0.1679 validation loss:0.2451
+2023-06-15 02:06:01,997 - epoch:9, training loss:0.1608 validation loss:0.2482
+2023-06-15 02:06:51,270 - epoch:10, training loss:0.1550 validation loss:0.2412
+2023-06-15 02:07:40,408 - epoch:11, training loss:0.1514 validation loss:0.2447
+2023-06-15 02:08:26,523 - epoch:12, training loss:0.1464 validation loss:0.2321
+2023-06-15 02:09:16,060 - epoch:13, training loss:0.1430 validation loss:0.2306
+2023-06-15 02:10:02,511 - epoch:14, training loss:0.1402 validation loss:0.2256
+2023-06-15 02:10:52,039 - epoch:15, training loss:0.1381 validation loss:0.2274
+2023-06-15 02:11:40,253 - epoch:16, training loss:0.1344 validation loss:0.2242
+2023-06-15 02:12:29,496 - epoch:17, training loss:0.1321 validation loss:0.2295
+2023-06-15 02:13:17,847 - epoch:18, training loss:0.1301 validation loss:0.2269
+2023-06-15 02:14:07,525 - epoch:19, training loss:0.1282 validation loss:0.2247
+2023-06-15 02:14:57,224 - epoch:20, training loss:0.1258 validation loss:0.2224
+2023-06-15 02:15:47,928 - epoch:21, training loss:0.1244 validation loss:0.2269
+2023-06-15 02:16:36,131 - epoch:22, training loss:0.1231 validation loss:0.2203
+2023-06-15 02:17:24,036 - epoch:23, training loss:0.1208 validation loss:0.2231
+2023-06-15 02:18:12,403 - epoch:24, training loss:0.1195 validation loss:0.2226
+2023-06-15 02:19:01,764 - epoch:25, training loss:0.1180 validation loss:0.2206
+2023-06-15 02:19:50,518 - epoch:26, training loss:0.1163 validation loss:0.2290
+2023-06-15 02:20:38,917 - epoch:27, training loss:0.1151 validation loss:0.2189
+2023-06-15 02:21:27,829 - epoch:28, training loss:0.1139 validation loss:0.2179
+2023-06-15 02:22:17,037 - epoch:29, training loss:0.1132 validation loss:0.2272
+2023-06-15 02:23:07,054 - epoch:30, training loss:0.1116 validation loss:0.2228
+2023-06-15 02:23:55,537 - epoch:31, training loss:0.1107 validation loss:0.2190
+2023-06-15 02:24:43,904 - epoch:32, training loss:0.1098 validation loss:0.2164
+2023-06-15 02:25:31,925 - epoch:33, training loss:0.1087 validation loss:0.2181
+2023-06-15 02:26:22,547 - epoch:34, training loss:0.1080 validation loss:0.2195
+2023-06-15 02:27:11,236 - epoch:35, training loss:0.1073 validation loss:0.2220
+2023-06-15 02:27:59,082 - epoch:36, training loss:0.1063 validation loss:0.2207
+2023-06-15 02:28:50,244 - epoch:37, training loss:0.1058 validation loss:0.2221
+2023-06-15 02:29:37,412 - epoch:38, training loss:0.1048 validation loss:0.2220
+2023-06-15 02:30:25,194 - epoch:39, training loss:0.1039 validation loss:0.2227
+2023-06-15 02:31:14,728 - epoch:40, training loss:0.1033 validation loss:0.2232
+2023-06-15 02:32:05,443 - epoch:41, training loss:0.1024 validation loss:0.2211
+2023-06-15 02:32:53,985 - epoch:42, training loss:0.1018 validation loss:0.2226
+2023-06-15 02:33:43,532 - epoch:43, training loss:0.1013 validation loss:0.2198
+2023-06-15 02:33:50,262 - [*] loss:0.3359
+2023-06-15 02:33:50,478 - [*] phase 1, testing
+2023-06-15 02:33:56,442 - T:96	MAE	0.4587	RMSE	0.4067	MAPE	759.2888
+2023-06-15 02:33:56,444 - 96	mae	0.4587	
+2023-06-15 02:33:56,445 - 96	rmse	0.4067	
+2023-06-15 02:33:56,445 - 96	mape	759.2888	

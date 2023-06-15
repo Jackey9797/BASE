@@ -17,8 +17,8 @@
     "n_heads": 8,
     "d_model": 512,
     "d_ff": 2048,
-    "dropout": 0.2,
-    "fc_dropout": 0.2,
+    "dropout": 0.05,
+    "fc_dropout": 0.05,
     "head_dropout": 0,
     "patch_len": 16,
     "stride": 8,
@@ -50,8 +50,8 @@
     "freq": "h",
     "begin_phase": 1,
     "end_phase": 1,
-    "phase_len_ratio": 0.6,
-    "val_ratio": 0.5,
+    "phase_len_ratio": 0.7,
+    "val_ratio": 0.33,
     "graph_size":321, 
 
     
