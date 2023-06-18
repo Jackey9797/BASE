@@ -45,7 +45,7 @@
     "/*dataset related args*/": "//",
     "data_name":"electricity",
     "save_data_path": "data/ECL/",
-    "data_process": true,
+    "data_process": false,
     "embed": "timeF",
     "freq": "h",
     "begin_phase": 1,

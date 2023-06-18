@@ -8,6 +8,9 @@ import sys
 import logging
 from torch import optim
 import torch.nn.functional as func
+from torch.optim import lr_scheduler
+from torch.optim import lr_scheduler
+
 import random
 from datetime import datetime
 
@@ -36,6 +39,37 @@ from torch.utils.data import DataLoader, dataloader, Dataset
 result = {}
 pin_memory = True 
 n_work = 4
+
+
+def adjust_learning_rate(optimizer, scheduler, epoch, args, printout=True):
+    # lr = args.lr * (0.2 ** (epoch // 2))
+    if args.lradj == 'type1':
+        lr_adjust = {epoch: args.lr * (0.5 ** ((epoch - 1) // 1))}
+    elif args.lradj == 'type2':
+        lr_adjust = {
+            2: 5e-5, 4: 1e-5, 6: 5e-6, 8: 1e-6,
+            10: 5e-7, 15: 1e-7, 20: 5e-8
+        }
+    elif args.lradj == 'type3':
+        lr_adjust = {epoch: args.lr if epoch < 3 else args.lr * (0.9 ** ((epoch - 3) // 1))}
+    elif args.lradj == 'constant':
+        lr_adjust = {epoch: args.lr}
+    elif args.lradj == '3':
+        lr_adjust = {epoch: args.lr if epoch < 10 else args.lr*0.1}
+    elif args.lradj == '4':
+        lr_adjust = {epoch: args.lr if epoch < 15 else args.lr*0.1}
+    elif args.lradj == '5':
+        lr_adjust = {epoch: args.lr if epoch < 25 else args.lr*0.1}
+    elif args.lradj == '6':
+        lr_adjust = {epoch: args.lr if epoch < 5 else args.lr*0.1}  
+    elif args.lradj == 'TST':
+        lr_adjust = {epoch: scheduler.get_last_lr()[0]}
+    
+    if epoch in lr_adjust.keys():
+        lr = lr_adjust[epoch]
+        for param_group in optimizer.param_groups:
+            param_group['lr'] = lr
+        if printout: print('Updating learning rate to {}'.format(lr))
 
 def seed_set(seed=0):
     max_seed = (1 << 32) - 1
@@ -133,6 +167,14 @@ class base_framework:
         if self.args.loss == "mse": lossfunc = func.mse_loss
         elif self.args.loss == "huber": lossfunc = func.smooth_l1_loss
 
+        self.args.lradj="type3"
+        (self.args.pct_start,self.args.train_epochs,self.args.lr,train_steps) = (0.3, self.args.epoch, self.args.lr, len(self.train_loader))
+        scheduler = lr_scheduler.OneCycleLR(optimizer = optimizer,
+                                            steps_per_epoch = train_steps,
+                                            pct_start = self.args.pct_start,
+                                            epochs = self.args.train_epochs,
+                                            max_lr = self.args.lr)
+
 
         ##* train start
         self.args.logger.info("[*] phase " + str(self.args.phase) + " Training start")
@@ -154,6 +196,19 @@ class base_framework:
             cn = 0
             for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark) in enumerate(self.train_loader):
                 # data.x[:, 48:48+24] = 0
+                def checkStationary(batch_x, batch_y): 
+                    batch_x = batch_x.cpu().numpy() 
+                    batch_y = batch_y.cpu().numpy() 
+                    # batch_x = batch_x.reshape(-1, batch_x.shape[-1]) 
+                    # batch_y = batch_y.reshape(-1, batch_y.shape[-1]) 
+                    batch_x = batch_x[0, :, 0] 
+                    batch_y = batch_y[0, :, 0] 
+                    # print(np.std(batch_x), np.std(batch_y))
+                    if np.std(batch_x) > 1.1 : 
+                        return 0   
+                    return 1
+                # if checkStationary(batch_x, batch_y) == 0 : 
+                #     continue 
                 batch_x = batch_x.float().to(self.args.device, non_blocking=pin_memory)
                 batch_y = batch_y.float()
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
@@ -251,6 +306,8 @@ class base_framework:
                 counter += 1
                 if counter > patience:
                     break
+            adjust_learning_rate(optimizer, lr_scheduler, epoch + 1, self.args)
+
         pass
         epoch_idx = np.argmin(validation_loss_list)
         best_model_path = osp.join(path, str(lowest_validation_loss)+("_epoch_%d.pkl" % epoch_idx))
@@ -418,6 +475,6 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args() #* args needs adjust frequently and static
-    seed_set(13) 
+    seed_set(202) 
     for i in range(args.iteration):
         main(args) #* run framework for one time 
