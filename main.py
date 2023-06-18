@@ -38,7 +38,7 @@ from torch.utils.data import DataLoader, dataloader, Dataset
 
 result = {}
 pin_memory = True 
-n_work = 4
+num_workers = 4
 
 
 def adjust_learning_rate(optimizer, scheduler, epoch, args, printout=True):
@@ -99,21 +99,6 @@ def init_log(args):
     args.logger = logger
     return logger
 
-class TSDataset(Dataset):
-    def __init__(self, nodes, inputs, split, x='', y='', edge_index=''): #* mode means nodes or not
-            self.x = inputs[split+'_x'][:, :, nodes] # [T, Len, N]
-            self.y = inputs[split+'_y'][:, :, nodes] # [T, Len, N]
-            self.x_mask = inputs[split+'_x_mask']
-            self.y_mask = inputs[split+'_y_mask']
-    
-    def __len__(self):
-        return self.x.shape[0]
-
-    def __getitem__(self, index):
-        x = torch.Tensor(self.x[index])  
-        y = torch.Tensor(self.y[index])
-        return x, y, torch.Tensor(self.x_mask[index]), torch.Tensor(self.y_mask[index])  #* the input form is a graph, x and y seen as attribute of each node
-
 class base_framework: 
     def __init__(self, args) -> None:
         self.args = args 
@@ -144,9 +129,9 @@ class base_framework:
 
         ##* prep dl 
         if self.args.train:
-            self.train_loader = DataLoader(TSDataset(self.args.nodes.numpy(), self.inputs, "train"), batch_size=self.args.batch_size, shuffle=True, pin_memory=pin_memory, num_workers=n_work,drop_last=True)
-            self.val_loader = DataLoader(TSDataset(self.args.nodes.numpy(), self.inputs,"val"), batch_size=self.args.batch_size, shuffle=False, pin_memory=pin_memory, num_workers=n_work,drop_last=False)
-        self.test_loader = DataLoader(TSDataset(np.arange(self.args.enc_in), self.inputs,"test"), batch_size=self.args.batch_size, shuffle=False, pin_memory=pin_memory, num_workers=n_work,drop_last=False)
+            self.train_loader = self.inputs["train_loader"]
+            self.val_loader = self.inputs["val_loader"]
+        self.test_loader = self.inputs["test_loader"]
 
     def incremental_strategy(self):  
         if self.args.load: 
@@ -155,7 +140,7 @@ class base_framework:
     def static_strategy(self):    
         self.model = eval(self.args.model_name)(self.args).to(self.args.device)
         global result
-        result[self.args.y_len] = {"mae":{}, "mape":{}, "rmse":{}}
+        result[self.args.pred_len] = {"mae":{}, "mape":{}, "rmse":{}}
 
     def train(self): 
         global result
@@ -325,10 +310,10 @@ class base_framework:
     
     def report_result(self):
         global result
-        for i in [self.args.y_len]:
+        for i in [self.args.pred_len]:
             for j in ['mae', 'rmse', 'mape']:
                 info = ""
-                for phase in range(self.args.begin_phase, self.args.end_phase+1):
+                for phase in range(self.args.begin_phase, self.args.end_phase):
                     if i in result:
                         if j in result[i]:
                             if phase in result[i][j]:
@@ -396,7 +381,7 @@ class base_framework:
     @staticmethod
     def metric(ground_truth, prediction, args):
         global result
-        pred_time = [args.y_len]
+        pred_time = [args.pred_len]
         args.logger.info("[*] phase {}, testing".format(args.phase))
         for i in pred_time:
             mae = masked_mae_np(ground_truth[:, :, :i], prediction[:, :, :i], 0)
@@ -444,7 +429,7 @@ def init_args(args):
     args.device = torch.device(args.device if torch.cuda.is_available() else 'cpu')
     args.time = datetime.now().strftime("%Y-%m-%d-%H:%M:%S.%f")
     args.path = osp.join(args.exp_path, args.logname+args.time)
-    args.pred_len = args.y_len
+    args.num_workers = 4
     ct.mkdirs(args.path)
     if args.train == False: args.load = False
     return args
@@ -468,13 +453,13 @@ def parse_args():
     parser.add_argument("--exp_path", type=str, default="exp/")
     parser.add_argument("--val_test_mix", action="store_true", default=False)
     parser.add_argument("--end_phase", type=int, default=1)
-    parser.add_argument("--x_len", type=int, default=96)
-    parser.add_argument("--y_len", type=int, default=96)
+    parser.add_argument("--seq_len", type=int, default=96)
+    parser.add_argument("--pred_len", type=int, default=96)
     args = parser.parse_args() 
     return args 
 
 if __name__ == "__main__":
     args = parse_args() #* args needs adjust frequently and static
-    seed_set(202) 
+    seed_set(2021) 
     for i in range(args.iteration):
         main(args) #* run framework for one time 
