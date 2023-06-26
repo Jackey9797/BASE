@@ -8,18 +8,17 @@ from models.layers.Embed import DataEmbedding,DataEmbedding_wo_pos,DataEmbedding
 import numpy as np
 
 
-class informer(nn.Module):
+class Model(nn.Module):
     """
     Informer with Propspare attention in O(LlogL) complexity
     """
     def __init__(self, configs):
-        super(informer, self).__init__()
-        self.configs = configs
-        self.pred_len = configs.y_len
+        super(Model, self).__init__()
+        self.pred_len = configs.pred_len
         self.output_attention = configs.output_attention
-        configs.enc_in = configs.c_out = configs.dec_in = configs.enc_in
 
         # Embedding
+        # print(configs.enc_in)
         if configs.embed_type == 0:
             self.enc_embedding = DataEmbedding(configs.enc_in, configs.d_model, configs.embed, configs.freq,
                                             configs.dropout)
@@ -92,13 +91,13 @@ class informer(nn.Module):
                 enc_self_mask=None, dec_self_mask=None, dec_enc_mask=None):
 
         enc_out = self.enc_embedding(x_enc, x_mark_enc)
-        enc_out, attns = self.encoder(enc_out, attn_mask=enc_self_mask)
 
+        enc_out, attns = self.encoder(enc_out, attn_mask=enc_self_mask)
+        # print("enc_out ", enc_out)
         dec_out = self.dec_embedding(x_dec, x_mark_dec)
         dec_out = self.decoder(dec_out, enc_out, x_mask=dec_self_mask, cross_mask=dec_enc_mask)
 
-        dec_out = dec_out[:, -self.pred_len:, :]
         if self.output_attention:
-            return dec_out, attns
+            return dec_out[:, -self.pred_len:, :], attns
         else:
-            return dec_out  # [B, L, D]
+            return dec_out[:, -self.pred_len:, :]  # [B, L, D]

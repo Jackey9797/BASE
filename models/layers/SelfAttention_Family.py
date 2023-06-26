@@ -140,6 +140,7 @@ class AttentionLayer(nn.Module):
         d_values = d_values or (d_model // n_heads)
 
         self.inner_attention = attention
+        # self.query_projection = nn.Linear(2, 2)
         self.query_projection = nn.Linear(d_model, d_keys * n_heads)
         self.key_projection = nn.Linear(d_model, d_keys * n_heads)
         self.value_projection = nn.Linear(d_model, d_values * n_heads)
@@ -150,10 +151,23 @@ class AttentionLayer(nn.Module):
         B, L, _ = queries.shape
         _, S, _ = keys.shape
         H = self.n_heads
+        # torch.cuda.manual_seed_all(42)
+
+
+        # SAVE  queries to file
+        # queries = queries.cpu().detach().numpy()
+        # np.savetxt("queries.txt", queries, delimiter=",")
+
+        # print("q ", queries, queries.dtype)
+        # print(B,L,H)
 
         queries = self.query_projection(queries).view(B, L, H, -1)
+        # print("q ", queries, queries.dtype)
+
+
         keys = self.key_projection(keys).view(B, S, H, -1)
         values = self.value_projection(values).view(B, S, H, -1)
+        # print("value ", values)
 
         out, attn = self.inner_attention(
             queries,

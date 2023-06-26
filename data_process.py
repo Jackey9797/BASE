@@ -413,7 +413,7 @@ def process_data_stream(args):
     while t + args.phase_len <= len(df_raw):
         df_phase = df_raw[t:t+args.phase_len]
         # write df_phase to file "data_path_phase_{}.csv".format(tmp_phase)
-        df_phase.to_csv('./data/' + args.data_name + "_phase_{}.csv".format(tmp_phase))
+        df_phase.to_csv('./data/' + args.data_name + "_phase_{}.csv".format(tmp_phase), index=False)
         t += args.phase_len
         tmp_phase += 1
 
@@ -458,6 +458,7 @@ def data_provider(args, flag):
         timeenc=timeenc,
         freq=freq
     )
+    
     print(flag, len(data_set))
     data_loader = DataLoader(
         data_set,
@@ -481,9 +482,9 @@ def get_dataset(args):
     _, inputs["train_loader"] = data_provider(args, 'train')     
     _, inputs["val_loader"] = data_provider(args, 'val')
     ds, inputs["test_loader"] = data_provider(args, 'test')
-    print(len(ds))
-    args.nodes = torch.arange(ds[0][0].shape[0])
-    args.enc_in = len(args.nodes)
+    # print(len(ds), ds[0][0].shape[0], ds[0][0].shape)
+    args.nodes = torch.arange(ds[0][0].shape[1])
+    args.enc_in = args.dec_in = args.c_out = len(args.nodes)
 
     return inputs 
 
