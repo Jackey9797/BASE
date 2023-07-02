@@ -11,8 +11,7 @@ import numpy as np
 from models.layers.PatchTST_backbone import PatchTST_backbone
 from models.layers.PatchTST_layers import series_decomp
 
-
-class PatchTST(nn.Module):
+class Model(nn.Module):
     def __init__(self, configs, max_seq_len:Optional[int]=1024, d_k:Optional[int]=None, d_v:Optional[int]=None, norm:str='BatchNorm', attn_dropout:float=0., 
                  act:str="gelu", key_padding_mask:bool='auto',padding_var:Optional[int]=None, attn_mask:Optional[Tensor]=None, res_attention:bool=True, 
                  pre_norm:bool=False, store_attn:bool=False, pe:str='zeros', learn_pe:bool=True, pretrain_head:bool=False, head_type = 'flatten', verbose:bool=False, **kwargs):
@@ -22,8 +21,8 @@ class PatchTST(nn.Module):
         # load parameters
         self.configs = configs
         c_in = configs.graph_size
-        context_window = configs.x_len
-        target_window = configs.y_len
+        context_window = configs.seq_len
+        target_window = configs.pred_len
         
         n_layers = configs.e_layers
         n_heads = configs.n_heads
@@ -79,7 +78,6 @@ class PatchTST(nn.Module):
     
     
     def forward(self, x):      
-        x = x.x.reshape((-1,self.configs.graph_size ,self.configs.x_len)).permute(0, 2, 1)
              # x: [Batch, Input length, Channel]
         if self.decomposition:
             res_init, trend_init = self.decomp_module(x)
@@ -92,5 +90,4 @@ class PatchTST(nn.Module):
             x = x.permute(0,2,1)    # x: [Batch, Channel, Input length]
             x = self.model(x)
             x = x.permute(0,2,1)    # x: [Batch, Input length, Channel]
-        x = x.permute(0, 2, 1)
-        return x.reshape(-1, x.shape[2])
+        return x

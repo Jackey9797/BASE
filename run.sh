@@ -1,6 +1,6 @@
 # python main.py --conf PEMS-MLP > PEMS-MLP.out 
 # python main.py --conf ECL-PatchTST > ECL-PatchTST336.out 
-python main.py --conf ECL-Informer > new_datald_every_good.log
+python main.py --conf ECL-PatchTST > PatchTST.log
 # python main.py --conf ECL-Informer > test.log
 # python main.py --conf ECL-Informer > dataset_reprocess3.log
 # python main.py --conf test_all --data_name ETTh2 > ETTh2.out 

@@ -1,0 +1,40 @@
+2023-06-26 11:39:33,868 - logger name:exp/ECL-Informer2023-06-26-11:39:33.868351/ECL-Informer.log
+2023-06-26 11:39:33,868 - params : {'conf': 'ECL-Informer', 'data_name': 'electricity', 'iteration': 1, 'load': False, 'build_graph': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'end_phase': 1, 'pred_len': 96, 'device': device(type='cuda', index=0), '/* model related args*/': '//', 'model_name': 'informer', 'seq_len': 48, 'label_len': 24, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'test_model_path': '/Disk/fhyega/code/PatchTST/PatchTST_supervised/checkpoints/electricity_96_96_Informer_custom_ftM_sl96_ll48_pl96_dm512_nh8_el2_dl1_df2048_fc3_ebtimeF_dtTrue_Exp_0/checkpoint.pth', 'e_layers': 2, 'd_layers': 1, 'factor': 3, 'n_heads': 8, 'd_model': 512, 'd_ff': 2048, 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'type3', 'distil': 1, 'linear_output': 0, '/*train related args*/': '//', 'train': True, 'epoch': 100, 'batch_size': 128, 'lr': 0.0001, 'loss': 'mse', '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Informer', 'time': '2023-06-26-11:39:33.868351', 'path': 'exp/ECL-Informer2023-06-26-11:39:33.868351', 'num_workers': 4, 'logger': <Logger __main__ (INFO)>}
+2023-06-26 11:39:33,869 - [*] phase 0 start training
+train 18269
+val 2537
+test 5165
+2023-06-26 11:39:35,737 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+2023-06-26 11:39:36,640 - [*] phase 0 Training start
+2023-06-26 11:40:11,496 - epoch:0, training loss:1.1957 validation loss:0.9884
+Updating learning rate to 0.0001
+2023-06-26 11:40:45,937 - epoch:1, training loss:0.6856 validation loss:0.5180
+Updating learning rate to 0.0001
+2023-06-26 11:41:21,525 - epoch:2, training loss:0.4353 validation loss:0.3639
+Updating learning rate to 0.0001
+2023-06-26 11:41:56,726 - epoch:3, training loss:0.2911 validation loss:0.3138
+Updating learning rate to 9e-05
+2023-06-26 11:42:32,093 - epoch:4, training loss:0.2409 validation loss:0.2706
+Updating learning rate to 8.1e-05
+2023-06-26 11:43:07,255 - epoch:5, training loss:0.2135 validation loss:0.2516
+Updating learning rate to 7.290000000000001e-05
+2023-06-26 11:43:42,608 - epoch:6, training loss:0.1983 validation loss:0.2393
+Updating learning rate to 6.561e-05
+2023-06-26 11:44:18,114 - epoch:7, training loss:0.1893 validation loss:0.2346
+Updating learning rate to 5.904900000000001e-05
+2023-06-26 11:44:53,803 - epoch:8, training loss:0.1821 validation loss:0.2310
+Updating learning rate to 5.3144100000000005e-05
+2023-06-26 11:45:29,126 - epoch:9, training loss:0.1755 validation loss:0.2259
+Updating learning rate to 4.782969000000001e-05
+2023-06-26 11:46:04,643 - epoch:10, training loss:0.1710 validation loss:0.2246
+Updating learning rate to 4.304672100000001e-05
+2023-06-26 11:46:39,874 - epoch:11, training loss:0.1667 validation loss:0.2231
+Updating learning rate to 3.874204890000001e-05
+2023-06-26 11:47:14,905 - epoch:12, training loss:0.1635 validation loss:0.2233
+Updating learning rate to 3.486784401000001e-05
+2023-06-26 11:47:50,115 - epoch:13, training loss:0.1606 validation loss:0.2216
+Updating learning rate to 3.138105960900001e-05
+2023-06-26 11:48:25,426 - epoch:14, training loss:0.1578 validation loss:0.2180
+Updating learning rate to 2.824295364810001e-05

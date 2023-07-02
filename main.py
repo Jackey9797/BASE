@@ -16,8 +16,8 @@ from datetime import datetime
 
 
 from models.TrafficStream import Basic_Model as TrafficStream 
-from models.Linear import MLP, Linear, NLinear, DLinear
-from models.PatchTST import PatchTST
+from models import DLinear
+from models import PatchTST 
 from models import informer
 from models.TrafficStream import graph_constructor 
 from utils import common_tools as ct
@@ -33,16 +33,11 @@ import pandas as pd
 from data_process import get_dataset
 from torch.utils.data import DataLoader, dataloader, Dataset
 
-
-
-
 result = {}
 pin_memory = True 
 num_workers = 4
 
-
 def adjust_learning_rate(optimizer, scheduler, epoch, args, printout=True):
-    # lr = args.lr * (0.2 ** (epoch // 2))
     if args.lradj == 'type1':
         lr_adjust = {epoch: args.lr * (0.5 ** ((epoch - 1) // 1))}
     elif args.lradj == 'type2':
@@ -75,17 +70,6 @@ def seed_set(seed=0):
     random.seed(seed)
     torch.manual_seed(seed)
     np.random.seed(seed)
-    # torch.use_deterministic_algorithms(True)
-
-
-    # max_seed = (1 << 32) - 1
-    # random.seed(seed)
-    # np.random.seed(random.randint(0, max_seed))
-    # torch.manual_seed(random.randint(0, max_seed))
-    # torch.cuda.manual_seed(random.randint(0, max_seed))
-    # torch.cuda.manual_seed_all(random.randint(0, max_seed))
-    # torch.backends.cudnn.benchmark = False  # if benchmark=True, deterministic will be False
-    # torch.backends.cudnn.deterministic = True
 
 def init_log(args):
     log_dir, log_filename = args.path, args.logname
@@ -121,7 +105,6 @@ class base_framework:
     def prepare(self): 
 
         self.inputs = get_dataset(self.args) 
-        # to show: print(inputs["train_x"].shape, inputs["train_y"].shape, inputs["val_x"].shape, inputs["val_y"].shape, inputs["test_x"].shape, inputs["test_y"].shape, inputs["edge_index"].shape)
         self.args.logger.info("[*] phase " + str(self.args.phase) + " Dataset load!")
         
         #* apply strategy 
@@ -129,10 +112,6 @@ class base_framework:
             self.incremental_strategy()
         else:
             self.static_strategy()
-
-        # if self.args.build_graph: 
-        #     self.args.gc = graph_constructor(len(self.args.nodes), self.args.build_subgraph_size, self.args.node_emb_dim, self.args.device, alpha=self.args.tanhalpha, static_feat=None).to(self.args.device)
-        #     self.args.idx = torch.arange(len(self.args.nodes)).to(self.args.device)
 
         ##* prep dl 
         if self.args.train:
@@ -145,18 +124,13 @@ class base_framework:
             self.load_best_model() 
     
     def static_strategy(self):    
-        # print(torch.rand((1,5)))
-
         self.model = eval(self.args.model_name).Model(self.args).float() 
-        print("mode p ", )
-        for i in self.model.parameters():
-            print(i)
-
         self.model = self.model.to(self.args.device)
         global result
         result[self.args.pred_len] = {"mae":{}, "mape":{}, "rmse":{}}
 
     def train(self): 
+        for i in self.model.parameters(): print(i)
         global result
         path = osp.join(self.args.path, str(self.args.phase))
         ct.mkdirs(path)
@@ -166,8 +140,7 @@ class base_framework:
         if self.args.loss == "mse": lossfunc = func.mse_loss
         elif self.args.loss == "huber": lossfunc = func.smooth_l1_loss
 
-        self.args.lradj="type3"
-        (self.args.pct_start,self.args.train_epochs,self.args.lr,train_steps) = (0.3, self.args.epoch, self.args.lr, len(self.train_loader))
+        (self.args.pct_start,self.args.train_epochs,self.args.lr,train_steps) = (self.args.pct_start, self.args.epoch, self.args.lr, len(self.train_loader))
         scheduler = lr_scheduler.OneCycleLR(optimizer = optimizer,
                                             steps_per_epoch = train_steps,
                                             pct_start = self.args.pct_start,
@@ -187,16 +160,14 @@ class base_framework:
         validation_loss_list = []
 
         for epoch in range(self.args.epoch): #* train body 
-            training_loss = 0.0
-            start_time = datetime.now()
-            self.model.train()
-
-            # Train Model
-            cn = 0
-            print(len(self.train_loader))
-
+            training_loss = 0.0 
+            start_time = datetime.now() 
+            self.model.train() 
+ 
+            # Train Model 
+            cn = 0 
             for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark) in enumerate(self.train_loader):
-                # data.x[:, 48:48+24] = 0
+                # data.x[:, 48:48+24] = 0 
                 def checkStationary(batch_x, batch_y): 
                     batch_x = batch_x.cpu().numpy() 
                     batch_y = batch_y.cpu().numpy() 
@@ -257,6 +228,10 @@ class base_framework:
                 # if cn % 10 == 1: 
                 #     visualize(data.cpu(), data.y.cpu(), pred.cpu())
 
+                if self.args.lradj == 'TST':
+                    adjust_learning_rate(optimizer, scheduler, epoch + 1, self.args, printout=False)
+                    scheduler.step()
+
             if epoch == 0:
                 total_time = (datetime.now() - start_time).total_seconds()
             else:
@@ -288,8 +263,6 @@ class base_framework:
                         else: 
                             pred = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                 
-
-                    # print(data.y.shape, pred.shape)
                     f_dim = -1 if self.args.features == 'MS' else 0
                     outputs = pred[:, -self.args.pred_len:, f_dim:]
                     batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
@@ -317,9 +290,10 @@ class base_framework:
                 counter += 1
                 if counter > patience:
                     break
-            # print(self.model.state_dict()["enc_embedding.value_embedding.tokenConv.weight"])
-
-            adjust_learning_rate(optimizer, lr_scheduler, epoch + 1, self.args)
+            if self.args.lradj != 'TST':
+                adjust_learning_rate(model_optim, scheduler, epoch + 1, self.args)
+            else:
+                print('Updating learning rate to {}'.format(scheduler.get_last_lr()[0]))
 
         
         epoch_idx = np.argmin(validation_loss_list)
@@ -331,11 +305,6 @@ class base_framework:
         self.model = best_model
         self.model = self.model.to(self.args.device)        
         
-        # result[self.args.phase]["total_time"] =  total_time
-        # result[self.args.phase]["average_time"] =  sum(use_time)/len(use_time)
-        # result[self.args.phase]["epoch_num"] =  epoch+1
-        # self.args.logger.info("Finished optimization, total time:{:.2f} s, best model:{}".format(total_time, best_model_path))
-    
     def report_result(self):
         global result
         for i in [self.args.pred_len]:
@@ -348,15 +317,7 @@ class base_framework:
                                 info+="{:.4f}\t".format(result[i][j][phase])
                 self.args.logger.info("{}\t{}\t".format(i,j) + info)
 
-        # for phase in range(self.args.begin_phase, self.args.end_phase+1):
-        #     if phase in result:
-        #         info = "phase\t{}\ttotal_time\t{}\taverage_time\t{}\tepoch\t{}".format(phase, result[phase]["total_time"], result[phase]["average_time"], result[phase]['epoch_num'])
-        #         self.args.logger.info(info)
-
     def test_model(self):
-        ##! 
-        self.args.idx = torch.arange(self.args.enc_in).to(self.args.device, non_blocking=pin_memory)
-
         self.model.eval()
         pred_ = []
         truth_ = []
@@ -380,8 +341,6 @@ class base_framework:
                     else: 
                         pred = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
             
-
-                # print(data.y.shape, pred.shape)
                 f_dim = -1 if self.args.features == 'MS' else 0
                 outputs = pred[:, -self.args.pred_len:, f_dim:]
                 batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
@@ -416,7 +375,6 @@ class base_framework:
             rmse = masked_mse_np(ground_truth[:, -i:, :], prediction[:, -i:, :], 0) 
             mape = masked_mape_np(ground_truth[:, -i:, :], prediction[:, -i:, :], 0)
             args.logger.info("T:{:d}\tMAE\t{:.6f}\tRMSE\t{:.6f}\tMAPE\t{:.6f}".format(i,mae,rmse,mape))
-            # print(result[i],i)            
             result[i]["mae"][args.phase] = mae
             result[i]["mape"][args.phase] = mape
             result[i]["rmse"][args.phase] = rmse
@@ -474,7 +432,6 @@ def parse_args():
     parser.add_argument("--data_name", type=str, default="electricity")
     parser.add_argument("--iteration", type=int, default=1)
 
-    parser.add_argument("--auto_test", type=int, default=1)
     parser.add_argument("--load", action="store_true", default=False)
     parser.add_argument("--build_graph", action="store_true", default=False)
     parser.add_argument("--root_path", type=str, default="")
@@ -487,6 +444,6 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args() #* args needs adjust frequently and static
-    seed_set(202) 
+    seed_set(2021) 
     for i in range(args.iteration):
         main(args) #* run framework for one time 
