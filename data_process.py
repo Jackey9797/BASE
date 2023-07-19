@@ -21,7 +21,8 @@ from sklearn.preprocessing import StandardScaler
 import pandas as pd
 from utils.timefeatures import time_features
 
-
+TRAIN_RATIO = 0.7 
+TEST_RATIO = 0.2
 class Dataset_ETT_hour(Dataset):
     def __init__(self, root_path, flag='train', size=None,
                  features='S', data_path='ETTh1.csv',
@@ -201,6 +202,7 @@ class Dataset_ETT_minute(Dataset):
 
 
 class Dataset_Custom(Dataset):
+    global TRAIN_RATIO, TEST_RATIO
     def __init__(self, root_path, flag='train', size=None,
                  features='S', data_path='ETTh1.csv',
                  target='OT', scale=True, timeenc=0, freq='h'):
@@ -242,10 +244,10 @@ class Dataset_Custom(Dataset):
         cols.remove('date')
         df_raw = df_raw[['date'] + cols + [self.target]]
         # print(cols)
-        num_train = int(len(df_raw) * 0.5)
-        num_test = int(len(df_raw) * 0.05)
+        num_train = int(len(df_raw) * TRAIN_RATIO)
+        num_test = int(len(df_raw) * TEST_RATIO)
         num_vali = len(df_raw) - num_train - num_test
-        print(num_train, num_vali, num_test)
+        print(num_train, num_vali, num_test, TRAIN_RATIO, TEST_RATIO, len(df_raw))
         border1s = [0, num_train - self.seq_len, len(df_raw) - num_test - self.seq_len]
         border2s = [num_train, num_train + num_vali, len(df_raw)]
         border1 = border1s[self.set_type]
@@ -415,8 +417,10 @@ def process_data_stream(args):
         df_phase = df_raw[t:t+args.phase_len]
         print(t, t+args.phase_len)
         # write df_phase to file "data_path_phase_{}.csv".format(tmp_phase)
-        # tmp_path = './data/'  + args.data_name + "/" + str(args.end_phase) 
-        # check if path exist, if not, create it 
+        tmp_path = './data/'  + args.data_name + "/" + str(args.end_phase) 
+        # check if path exist, if not, create it
+        if not os.path.exists(tmp_path):
+            os.makedirs(tmp_path) 
 
         df_phase.to_csv('./data/'  + args.data_name + "/" + str(args.end_phase) + "/" + "_phase_{}.csv".format(tmp_phase), index=False)
         t += int(args.phase_len * args.val_ratio)
@@ -476,6 +480,10 @@ def data_provider(args, flag):
     
 
 def get_dataset(args):
+    global TRAIN_RATIO, TEST_RATIO
+    if args.end_phase > 1:  
+        TRAIN_RATIO = 0.5 
+        TEST_RATIO = 0.05
     args.save_data_path = "data/processed_data/" + args.data_name + "/"
     args.data_path = './data/' + args.data_name + "/" + str(args.end_phase) +  "/" + "_phase_" + str(args.phase) + '.csv'
 

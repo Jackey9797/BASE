@@ -124,9 +124,9 @@ class base_framework:
             self.load_best_model() 
         load_path = osp.join(self.args.exp_path, self.args.logname+self.args.time, str(self.args.phase-1)) 
         # delete all the file end with .pkl
-        for file in os.listdir(load_path):
-            if file.endswith(".pkl"):
-                os.remove(os.path.join(load_path, file))
+        # for file in os.listdir(load_path):
+        #     if file.endswith(".pkl"):
+        #         os.remove(os.path.join(load_path, file))
     
     def static_strategy(self):    
         self.model = eval(self.args.model_name).Model(self.args).float() 
@@ -393,6 +393,7 @@ class base_framework:
         #* multi-phase train 
         self.inc_state = False 
         for phase in range(self.args.begin_phase, self.args.end_phase):
+            if phase == 2: break
             self.args.phase = phase 
             self.args.logger.info("[*] phase {} start training".format(self.args.phase)) 
             
@@ -442,7 +443,7 @@ def parse_args():
     parser.add_argument("--root_path", type=str, default="")
     parser.add_argument("--exp_path", type=str, default="exp/")
     parser.add_argument("--val_test_mix", action="store_true", default=False)
-    parser.add_argument("--end_phase", type=int, default=5)
+    # parser.add_argument("--end_phase", type=int, default=1)
     parser.add_argument("--pred_len", type=int, default=96)
     args = parser.parse_args() 
     return args 
