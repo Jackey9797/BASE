@@ -122,6 +122,11 @@ class base_framework:
     def incremental_strategy(self):  
         if self.args.load: 
             self.load_best_model() 
+        load_path = osp.join(self.args.exp_path, self.args.logname+self.args.time, str(self.args.phase-1)) 
+        # delete all the file end with .pkl
+        for file in os.listdir(load_path):
+            if file.endswith(".pkl"):
+                os.remove(os.path.join(load_path, file))
     
     def static_strategy(self):    
         self.model = eval(self.args.model_name).Model(self.args).float() 
@@ -130,7 +135,7 @@ class base_framework:
         result[self.args.pred_len] = {"mae":{}, "mape":{}, "rmse":{}}
 
     def train(self): 
-        for i in self.model.parameters(): print(i)
+        # for i in self.model.parameters(): print(i)
         global result
         path = osp.join(self.args.path, str(self.args.phase))
         ct.mkdirs(path)
@@ -291,7 +296,7 @@ class base_framework:
                 if counter > patience:
                     break
             if self.args.lradj != 'TST':
-                adjust_learning_rate(model_optim, scheduler, epoch + 1, self.args)
+                adjust_learning_rate(optimizer, scheduler, epoch + 1, self.args)
             else:
                 print('Updating learning rate to {}'.format(scheduler.get_last_lr()[0]))
 
@@ -432,12 +437,12 @@ def parse_args():
     parser.add_argument("--data_name", type=str, default="electricity")
     parser.add_argument("--iteration", type=int, default=1)
 
-    parser.add_argument("--load", action="store_true", default=False)
+    parser.add_argument("--load", action="store_true", default=True)
     parser.add_argument("--build_graph", action="store_true", default=False)
     parser.add_argument("--root_path", type=str, default="")
     parser.add_argument("--exp_path", type=str, default="exp/")
     parser.add_argument("--val_test_mix", action="store_true", default=False)
-    parser.add_argument("--end_phase", type=int, default=1)
+    parser.add_argument("--end_phase", type=int, default=5)
     parser.add_argument("--pred_len", type=int, default=96)
     args = parser.parse_args() 
     return args 

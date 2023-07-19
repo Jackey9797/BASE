@@ -1,0 +1,169 @@
+2023-07-19 14:53:30,933 - logger name:exp/ECL-DLinear2023-07-19-14:53:30.933513/ECL-DLinear.log
+2023-07-19 14:53:30,933 - params : {'conf': 'ECL-DLinear', 'data_name': 'electricity', 'iteration': 1, 'load': True, 'build_graph': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'end_phase': 5, 'pred_len': 96, 'device': device(type='cuda', index=0), '/* model related args*/': '//', 'model_name': 'DLinear', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'test_model_path': '/Disk/fhyega/code/PatchTST/PatchTST_supervised/checkpoints/electricity_96_96_Informer_custom_ftM_sl96_ll48_pl96_dm512_nh8_el2_dl1_df2048_fc3_ebtimeF_dtTrue_Exp_0/checkpoint.pth', 'e_layers': 2, 'd_layers': 1, 'factor': 3, 'n_heads': 8, 'd_model': 512, 'd_ff': 2048, 'dropout': 0.0, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'type3', 'distil': 1, 'linear_output': 1, 'pct_start': 0.3, '/*train related args*/': '//', 'train': True, 'epoch': 10, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'phase_len': 7014, 'val_ratio': 0.5, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-DLinear', 'time': '2023-07-19-14:53:30.933513', 'path': 'exp/ECL-DLinear2023-07-19-14:53:30.933513', 'num_workers': 4, 'logger': <Logger __main__ (INFO)>}
+2023-07-19 14:53:30,934 - [*] phase 0 start training
+3507 2806 701
+train 3076
+3507 2806 701
+val 3412
+3507 2806 701
+test 606
+2023-07-19 14:53:31,467 - [*] phase 0 Dataset load!
+2023-07-19 14:53:32,313 - [*] phase 0 Training start
+2023-07-19 14:53:38,644 - epoch:0, training loss:0.5880 validation loss:0.5281
+Updating learning rate to 0.01
+2023-07-19 14:53:44,621 - epoch:1, training loss:0.8980 validation loss:0.7558
+Updating learning rate to 0.01
+2023-07-19 14:53:50,636 - epoch:2, training loss:0.3733 validation loss:0.4282
+Updating learning rate to 0.01
+2023-07-19 14:53:56,965 - epoch:3, training loss:0.2244 validation loss:0.3217
+Updating learning rate to 0.009000000000000001
+2023-07-19 14:54:03,409 - epoch:4, training loss:0.1712 validation loss:0.2865
+Updating learning rate to 0.008100000000000001
+2023-07-19 14:54:10,046 - epoch:5, training loss:0.1541 validation loss:0.2787
+Updating learning rate to 0.007290000000000001
+2023-07-19 14:54:16,873 - epoch:6, training loss:0.1478 validation loss:0.2694
+Updating learning rate to 0.006561
+2023-07-19 14:54:23,523 - epoch:7, training loss:0.1454 validation loss:0.2666
+Updating learning rate to 0.005904900000000001
+2023-07-19 14:54:30,148 - epoch:8, training loss:0.1440 validation loss:0.2641
+Updating learning rate to 0.00531441
+2023-07-19 14:54:36,879 - epoch:9, training loss:0.1434 validation loss:0.2621
+Updating learning rate to 0.004782969000000001
+2023-07-19 14:54:37,326 - [*] loss:0.2523
+2023-07-19 14:54:37,346 - [*] phase 0, testing
+2023-07-19 14:54:37,915 - T:96	MAE	0.285908	RMSE	0.252294	MAPE	177.514338
+2023-07-19 14:54:37,916 - [*] phase 1 start training
+3507 2806 701
+train 3076
+3507 2806 701
+val 3412
+3507 2806 701
+test 606
+2023-07-19 14:54:38,414 - [*] phase 1 Dataset load!
+2023-07-19 14:54:38,416 - [*] load from exp/ECL-DLinear2023-07-19-14:53:30.933513/0/best_model.pkl
+2023-07-19 14:54:38,417 - [*] phase 1 Training start
+2023-07-19 14:54:44,636 - epoch:0, training loss:0.1744 validation loss:16.5076
+Updating learning rate to 0.01
+2023-07-19 14:54:50,803 - epoch:1, training loss:0.2011 validation loss:29.6554
+Updating learning rate to 0.01
+2023-07-19 14:54:57,446 - epoch:2, training loss:0.1835 validation loss:20.3483
+Updating learning rate to 0.01
+2023-07-19 14:55:04,073 - epoch:3, training loss:0.1785 validation loss:21.8630
+Updating learning rate to 0.009000000000000001
+2023-07-19 14:55:10,816 - epoch:4, training loss:0.1770 validation loss:16.5975
+Updating learning rate to 0.008100000000000001
+2023-07-19 14:55:17,601 - epoch:5, training loss:0.1757 validation loss:22.8210
+Updating learning rate to 0.007290000000000001
+2023-07-19 14:55:24,482 - epoch:6, training loss:0.1742 validation loss:20.2628
+Updating learning rate to 0.006561
+2023-07-19 14:55:31,270 - epoch:7, training loss:0.1733 validation loss:17.9985
+Updating learning rate to 0.005904900000000001
+2023-07-19 14:55:38,103 - epoch:8, training loss:0.1728 validation loss:25.7061
+Updating learning rate to 0.00531441
+2023-07-19 14:55:44,757 - epoch:9, training loss:0.1725 validation loss:14.7399
+Updating learning rate to 0.004782969000000001
+2023-07-19 14:55:45,196 - [*] loss:17.3139
+2023-07-19 14:55:45,216 - [*] phase 1, testing
+2023-07-19 14:55:45,549 - T:96	MAE	0.481862	RMSE	17.313948	MAPE	296.925092
+2023-07-19 14:55:45,553 - [*] phase 2 start training
+3507 2806 701
+train 3076
+3507 2806 701
+val 3412
+3507 2806 701
+test 606
+2023-07-19 14:55:46,049 - [*] phase 2 Dataset load!
+2023-07-19 14:55:46,050 - [*] load from exp/ECL-DLinear2023-07-19-14:53:30.933513/1/best_model.pkl
+2023-07-19 14:55:46,051 - [*] phase 2 Training start
+2023-07-19 14:55:52,117 - epoch:0, training loss:0.1677 validation loss:0.3178
+Updating learning rate to 0.01
+2023-07-19 14:55:59,264 - epoch:1, training loss:0.1916 validation loss:0.3635
+Updating learning rate to 0.01
+2023-07-19 14:56:05,953 - epoch:2, training loss:0.1788 validation loss:0.3417
+Updating learning rate to 0.01
+2023-07-19 14:56:12,233 - epoch:3, training loss:0.1743 validation loss:0.3477
+Updating learning rate to 0.009000000000000001
+2023-07-19 14:56:19,134 - epoch:4, training loss:0.1721 validation loss:0.3202
+Updating learning rate to 0.008100000000000001
+2023-07-19 14:56:25,768 - epoch:5, training loss:0.1706 validation loss:0.3540
+Updating learning rate to 0.007290000000000001
+2023-07-19 14:56:32,507 - epoch:6, training loss:0.1706 validation loss:0.3505
+Updating learning rate to 0.006561
+2023-07-19 14:56:39,396 - epoch:7, training loss:0.1706 validation loss:0.3288
+Updating learning rate to 0.005904900000000001
+2023-07-19 14:56:46,061 - epoch:8, training loss:0.1686 validation loss:0.3232
+Updating learning rate to 0.00531441
+2023-07-19 14:56:52,786 - epoch:9, training loss:0.1673 validation loss:0.3538
+Updating learning rate to 0.004782969000000001
+2023-07-19 14:56:53,270 - [*] loss:0.4428
+2023-07-19 14:56:53,291 - [*] phase 2, testing
+2023-07-19 14:56:53,627 - T:96	MAE	0.390164	RMSE	0.444181	MAPE	178.137004
+2023-07-19 14:56:53,628 - [*] phase 3 start training
+3507 2806 701
+train 3076
+3507 2806 701
+val 3412
+3507 2806 701
+test 606
+2023-07-19 14:56:54,114 - [*] phase 3 Dataset load!
+2023-07-19 14:56:54,115 - [*] load from exp/ECL-DLinear2023-07-19-14:53:30.933513/2/best_model.pkl
+2023-07-19 14:56:54,116 - [*] phase 3 Training start
+2023-07-19 14:57:00,450 - epoch:0, training loss:0.1724 validation loss:0.1844
+Updating learning rate to 0.01
+2023-07-19 14:57:06,815 - epoch:1, training loss:0.2021 validation loss:0.2136
+Updating learning rate to 0.01
+2023-07-19 14:57:13,371 - epoch:2, training loss:0.1867 validation loss:0.1994
+Updating learning rate to 0.01
+2023-07-19 14:57:19,968 - epoch:3, training loss:0.1811 validation loss:0.2004
+Updating learning rate to 0.009000000000000001
+2023-07-19 14:57:26,677 - epoch:4, training loss:0.1766 validation loss:0.1939
+Updating learning rate to 0.008100000000000001
+2023-07-19 14:57:33,250 - epoch:5, training loss:0.1739 validation loss:0.1927
+Updating learning rate to 0.007290000000000001
+2023-07-19 14:57:40,029 - epoch:6, training loss:0.1738 validation loss:0.1895
+Updating learning rate to 0.006561
+2023-07-19 14:57:46,813 - epoch:7, training loss:0.1737 validation loss:0.1901
+Updating learning rate to 0.005904900000000001
+2023-07-19 14:57:53,668 - epoch:8, training loss:0.1720 validation loss:0.1873
+Updating learning rate to 0.00531441
+2023-07-19 14:58:00,553 - epoch:9, training loss:0.1715 validation loss:0.1878
+Updating learning rate to 0.004782969000000001
+2023-07-19 14:58:01,012 - [*] loss:0.2688
+2023-07-19 14:58:01,033 - [*] phase 3, testing
+2023-07-19 14:58:01,548 - T:96	MAE	0.313847	RMSE	0.270493	MAPE	219.326568
+2023-07-19 14:58:01,550 - [*] phase 4 start training
+3507 2806 701
+train 3076
+3507 2806 701
+val 3412
+3507 2806 701
+test 606
+2023-07-19 14:58:02,044 - [*] phase 4 Dataset load!
+2023-07-19 14:58:02,045 - [*] load from exp/ECL-DLinear2023-07-19-14:53:30.933513/3/best_model.pkl
+2023-07-19 14:58:02,046 - [*] phase 4 Training start
+2023-07-19 14:58:08,313 - epoch:0, training loss:0.1449 validation loss:1.5334
+Updating learning rate to 0.01
+2023-07-19 14:58:14,867 - epoch:1, training loss:0.1678 validation loss:1.6018
+Updating learning rate to 0.01
+2023-07-19 14:58:21,195 - epoch:2, training loss:0.1554 validation loss:1.5753
+Updating learning rate to 0.01
+2023-07-19 14:58:27,903 - epoch:3, training loss:0.1514 validation loss:1.5581
+Updating learning rate to 0.009000000000000001
+2023-07-19 14:58:34,656 - epoch:4, training loss:0.1489 validation loss:1.5514
+Updating learning rate to 0.008100000000000001
+2023-07-19 14:58:41,471 - epoch:5, training loss:0.1470 validation loss:1.5566
+Updating learning rate to 0.007290000000000001
+2023-07-19 14:58:48,150 - epoch:6, training loss:0.1464 validation loss:1.5734
+Updating learning rate to 0.006561
+2023-07-19 14:58:54,845 - epoch:7, training loss:0.1462 validation loss:1.5708
+Updating learning rate to 0.005904900000000001
+2023-07-19 14:59:01,940 - epoch:8, training loss:0.1460 validation loss:1.5508
+Updating learning rate to 0.00531441
+2023-07-19 14:59:08,535 - epoch:9, training loss:0.1450 validation loss:1.5427
+Updating learning rate to 0.004782969000000001
+2023-07-19 14:59:09,050 - [*] loss:0.9777
+2023-07-19 14:59:09,066 - [*] phase 4, testing
+2023-07-19 14:59:09,411 - T:96	MAE	0.254784	RMSE	0.980797	MAPE	190.390050
+2023-07-19 14:59:09,411 - 96	mae	0.2859	0.4819	0.3902	0.3138	0.2548	
+2023-07-19 14:59:09,411 - 96	rmse	0.2523	17.3139	0.4442	0.2705	0.9808	
+2023-07-19 14:59:09,411 - 96	mape	177.5143	296.9251	178.1370	219.3266	190.3901	

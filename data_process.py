@@ -242,11 +242,12 @@ class Dataset_Custom(Dataset):
         cols.remove('date')
         df_raw = df_raw[['date'] + cols + [self.target]]
         # print(cols)
-        num_train = int(len(df_raw) * 0.7)
-        num_test = int(len(df_raw) * 0.2)
+        num_train = int(len(df_raw) * 0.5)
+        num_test = int(len(df_raw) * 0.1)
         num_vali = len(df_raw) - num_train - num_test
+        print(num_train, num_vali, num_test)
         border1s = [0, num_train - self.seq_len, len(df_raw) - num_test - self.seq_len]
-        border2s = [num_train, num_train + num_vali, len(df_raw)]
+        border2s = [num_train, len(df_raw), len(df_raw)]
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
 
@@ -410,11 +411,15 @@ class Dataset_Pred(Dataset):
 def process_data_stream(args):
     df_raw = pd.read_csv('./data/' + args.data_name + ".csv")
     t = 0; tmp_phase = 0
-    while t + args.phase_len <= len(df_raw):
+    while tmp_phase < args.end_phase:
         df_phase = df_raw[t:t+args.phase_len]
+        print(t, t+args.phase_len)
         # write df_phase to file "data_path_phase_{}.csv".format(tmp_phase)
-        df_phase.to_csv('./data/' + args.data_name + "_phase_{}.csv".format(tmp_phase), index=False)
-        t += args.phase_len
+        # tmp_path = './data/'  + args.data_name + "/" + str(args.end_phase) 
+        # check if path exist, if not, create it 
+
+        df_phase.to_csv('./data/'  + args.data_name + "/" + str(args.end_phase) + "/" + "_phase_{}.csv".format(tmp_phase), index=False)
+        t += int(args.phase_len * args.val_ratio)
         tmp_phase += 1
 
 data_dict = {
@@ -472,7 +477,7 @@ def data_provider(args, flag):
 
 def get_dataset(args):
     args.save_data_path = "data/processed_data/" + args.data_name + "/"
-    args.data_path = './data/' + args.data_name + "_phase_" + str(args.phase) + '.csv'
+    args.data_path = './data/' + args.data_name + "/" + str(args.end_phase) +  "/" + "_phase_" + str(args.phase) + '.csv'
 
     if args.data_process:
         process_data_stream(args)
