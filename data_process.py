@@ -248,8 +248,10 @@ class Dataset_Custom(Dataset):
         num_test = int(len(df_raw) * TEST_RATIO)
         num_vali = len(df_raw) - num_train - num_test
         print(num_train, num_vali, num_test, TRAIN_RATIO, TEST_RATIO, len(df_raw))
-        border1s = [0, num_train - self.seq_len, len(df_raw) - num_test - self.seq_len]
-        border2s = [num_train, num_train + num_vali, len(df_raw)]
+        # border1s = [0, num_train - self.seq_len, len(df_raw) - num_test - self.seq_len] # this line changed
+        border1s = [0, num_train - self.seq_len, num_train - self.seq_len] # this line changed
+        border2s = [num_train, len(df_raw), len(df_raw)] # this line changed
+        # border2s = [num_train, num_train + num_vali, len(df_raw)]
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
 
@@ -258,7 +260,8 @@ class Dataset_Custom(Dataset):
             df_data = df_raw[cols_data]
         elif self.features == 'S':
             df_data = df_raw[[self.target]]
-
+        #! before align the position, you have to set scale = False
+        # self.scale = False
         if self.scale:
             train_data = df_data[border1s[0]:border2s[0]]
             self.scaler.fit(train_data.values)
@@ -282,6 +285,7 @@ class Dataset_Custom(Dataset):
 
         self.data_x = data[border1:border2]
         self.data_y = data[border1:border2]
+        # print(self.data_x[336 ,123],self.data_x[0,123], border1, border2, self.set_type)
         self.data_stamp = data_stamp
 
     def __getitem__(self, index):
@@ -411,7 +415,12 @@ class Dataset_Pred(Dataset):
 
 
 def process_data_stream(args):
-    df_raw = pd.read_csv('./data/' + args.data_name + ".csv")
+    df_raw = pd.read_csv('./data/' + args.data_name + ".csv")  #!注意 normalize只在Custom做了更改 ,之后如果跑ETT数据集要注意了
+    # scaler = StandardScaler()
+    # scaler.fit(df_raw.values)
+    # df_raw = scaler.transform(df_raw.values)
+    # df_raw = pd.DataFrame(df_raw)
+
     t = 0; tmp_phase = 0
     while tmp_phase < args.end_phase:
         df_phase = df_raw[t:t+args.phase_len]
@@ -434,15 +443,51 @@ data_dict = {
     'custom': Dataset_Custom,
 }
 
+def get_noise_label(Score, noise_rate): 
+    # sort Score from small to large, label the biggest noise_rate as 1, return a list of labels
+    noise_label = np.zeros(len(Score))
+    # Score = np.arange(len(Score))
+    # print(Score, noise_label.shape)
+    idx = np.argsort(Score)[::-1]
+    # print(idx[:100])
+    noise_label[idx[:int(len(Score)*noise_rate)]] = 1
+    # print(int(len(Score)*noise_rate), "noise rate: ", np.sum(noise_label)/len(noise_label))
+    # print(noise_label[:100])
+    return noise_label 
+
+class new_DS(Dataset):
+    def __init__(self, ds, args, flag):
+        self.args = args
+        self.flag = flag 
+        self.data = ds
+        # args.Score = np.random.uniform(0,1,len(self.data))
+
+        # if hasattr(args, "Score") == False: 
+        # if args.flag != 'train' or hasattr(args, "Score") == False: args.Score = np.random.uniform(0,1,len(self.data))
+        # print(len(args.Score), len(self.data))
+        
+        # args.Score = np.random.uniform(0,1,len(self.data))
+        self.noise_label = np.zeros(len(self.data))
+        if args.phase != 0 and args.flag == 'train':
+            self.noise_label = get_noise_label(args.Score[args.seq_len:], args.noise_rate)
+        self.index = np.arange(len(self.data))
+
+    def __len__(self):
+        return len(self.index)
+    def __getitem__(self, idx):
+        return (self.data[self.index[idx]][0])[:,self.args.idx].reshape(-1,1), (self.data[self.index[idx]][1])[:,self.args.idx].reshape(-1,1), (self.data[self.index[idx]][2]), (self.data[self.index[idx]][3]), self.noise_label[idx]
+          
+
 def data_provider(args, flag):
     data_label = args.data_name
     if args.data_name != "ETTh2" and args.data_name != "ETTm1": data_label = "custom"
     Data = data_dict[data_label]
     timeenc = 0 if args.embed != 'timeF' else 1
 
-    if flag == 'test':
+    args.flag = flag
+    if flag == 'test' or flag == 'val':
         shuffle_flag = False
-        drop_last = True
+        drop_last = False
         batch_size = args.batch_size
         freq = args.freq
     elif flag == 'pred':
@@ -465,8 +510,11 @@ def data_provider(args, flag):
         features=args.features,
         target=args.target,
         timeenc=timeenc,
-        freq=freq
+        freq=freq,
+        scale=False
     )
+
+    data_set = new_DS(data_set, args, flag) #* multivariate -> univariate
     
     print(flag, len(data_set))
     data_loader = DataLoader(

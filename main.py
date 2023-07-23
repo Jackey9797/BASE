@@ -171,7 +171,7 @@ class base_framework:
  
             # Train Model 
             cn = 0 
-            for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark) in enumerate(self.train_loader):
+            for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.train_loader):
                 # data.x[:, 48:48+24] = 0 
                 def checkStationary(batch_x, batch_y): 
                     batch_x = batch_x.cpu().numpy() 
@@ -196,6 +196,8 @@ class base_framework:
                 # print(batch_x[1,1,1])
                 # print(self.model.state_dict()["enc_embedding.value_embedding.tokenConv.weight"])
 
+                # count how many 1 and 0 in the label , print the number of 1 and 0
+                # print(np.sum(label.cpu().numpy()), np.sum(1-label.cpu().numpy()))
 
                 optimizer.zero_grad()
                 dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
@@ -249,8 +251,9 @@ class base_framework:
 
             validation_loss = 0.0
             cn = 0
+            self.args.Score = []
             with torch.no_grad():
-                for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark) in enumerate(self.val_loader):
+                for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.val_loader):
                     batch_x = batch_x.float().to(self.args.device)
                     batch_y = batch_y.float()
                     batch_x_mark = batch_x_mark.float().to(self.args.device)
@@ -277,6 +280,8 @@ class base_framework:
                     
                     loss = lossfunc(pred, true, reduction="mean")
                     validation_loss += float(loss)
+                    # print(len(list(lossfunc(pred, true, reduction="none").mean(dim=0).detach().cpu().numpy())))
+                    self.args.Score += lossfunc(pred, true, reduction="none").mean(dim=1).flatten().detach().cpu().tolist()
                     cn += 1
             validation_loss = float(validation_loss/cn)
             validation_loss_list.append(validation_loss)
@@ -286,7 +291,7 @@ class base_framework:
             # Early Stop
             if validation_loss <= lowest_validation_loss:
                 counter = 0
-                lowest_validation_loss = round(validation_loss, 4)
+                lowest_validation_loss = validation_loss
                 save_model = self.model
                 if self.inc_state and self.args.ewc:
                     save_model = self.model.model 
@@ -302,7 +307,7 @@ class base_framework:
 
         
         epoch_idx = np.argmin(validation_loss_list)
-        best_model_path = osp.join(path, str(lowest_validation_loss)+("_epoch_%d.pkl" % epoch_idx))
+        best_model_path = osp.join(path, str(round(lowest_validation_loss,4))+("_epoch_%d.pkl" % epoch_idx))
         
         best_model = eval(self.args.model_name).Model(self.args).float()
         best_model.load_state_dict(torch.load(best_model_path, self.args.device)["model_state_dict"])
@@ -329,7 +334,7 @@ class base_framework:
         loss = 0.0
         with torch.no_grad():
             cn = 0
-            for batch_x, batch_y,  batch_x_mark, batch_y_mark in self.test_loader:
+            for batch_x, batch_y,  batch_x_mark, batch_y_mark, label in self.test_loader:
                 batch_x = batch_x.float().to(self.args.device, non_blocking=pin_memory)
                 batch_y = batch_y.float()
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
@@ -393,7 +398,6 @@ class base_framework:
         #* multi-phase train 
         self.inc_state = False 
         for phase in range(self.args.begin_phase, self.args.end_phase):
-            if phase == 2: break
             self.args.phase = phase 
             self.args.logger.info("[*] phase {} start training".format(self.args.phase)) 
             
@@ -445,6 +449,9 @@ def parse_args():
     parser.add_argument("--val_test_mix", action="store_true", default=False)
     # parser.add_argument("--end_phase", type=int, default=1)
     parser.add_argument("--pred_len", type=int, default=96)
+    parser.add_argument("--noise_rate", type=float)
+    parser.add_argument("--device", type=str, default="cuda:0")
+    parser.add_argument("--idx", type=int, default=213)
     args = parser.parse_args() 
     return args 
 
