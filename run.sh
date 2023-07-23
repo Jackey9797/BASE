@@ -8,5 +8,5 @@
 # python main.py --conf test_all --data_name weather > weather.out 
 # python main.py --conf test_all --data_name traffic > traffic.out 
 # python main.py --conf ECL-DLinear > ECL-DLinear3.out 
-python main.py --conf ECL-DLinear_t
+python main.py --conf ECL-PatchTST_t
 # python main.py --conf ECL-DLinear > ECL-DLinear.out 

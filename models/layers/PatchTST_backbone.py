@@ -20,7 +20,7 @@ class PatchTST_backbone(nn.Module):
                  padding_var:Optional[int]=None, attn_mask:Optional[Tensor]=None, res_attention:bool=True, pre_norm:bool=False, store_attn:bool=False,
                  pe:str='zeros', learn_pe:bool=True, fc_dropout:float=0., head_dropout = 0, padding_patch = None,
                  pretrain_head:bool=False, head_type = 'flatten', individual = False, revin = True, affine = True, subtract_last = False,
-                 verbose:bool=False, **kwargs):
+                 verbose:bool=False, cm = None, **kwargs):
         
         super().__init__()
         
@@ -50,6 +50,7 @@ class PatchTST_backbone(nn.Module):
         self.pretrain_head = pretrain_head
         self.head_type = head_type
         self.individual = individual
+        self.cm = cm
 
         if self.pretrain_head: 
             self.head = self.create_pretrain_head(self.head_nf, c_in, fc_dropout) # custom head passed as a partial func with all its kwargs
@@ -59,6 +60,7 @@ class PatchTST_backbone(nn.Module):
     
     def forward(self, z):                                                                   # z: [bs x nvars x seq_len]
         # norm
+        # print(self.revin) true
         if self.revin: 
             z = z.permute(0,2,1)
             z = self.revin_layer(z, 'norm')
@@ -71,15 +73,18 @@ class PatchTST_backbone(nn.Module):
         z = z.permute(0,1,3,2)                                                              # z: [bs x nvars x patch_len x patch_num]
         
         # model
-        z = self.backbone(z)                                                                # z: [bs x nvars x d_model x patch_num]
-        z = self.head(z)                                                                    # z: [bs x nvars x target_window] 
+        z_ = self.backbone(z)     
+                   
+        z_, F = self.cm(z_)
+                                                                   # z: [bs x nvars x d_model x patch_num]
+        z = self.head(z_)                                                                    # z: [bs x nvars x target_window] 
         
         # denorm
         if self.revin: 
             z = z.permute(0,2,1)
             z = self.revin_layer(z, 'denorm')
             z = z.permute(0,2,1)
-        return z
+        return z, F
     
     def create_pretrain_head(self, head_nf, vars, dropout):
         return nn.Sequential(nn.Dropout(dropout),

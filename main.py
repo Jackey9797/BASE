@@ -129,11 +129,9 @@ class base_framework:
         #     if file.endswith(".pkl"):
         #         os.remove(os.path.join(load_path, file))
     
-    def static_strategy(self):    
-        self.model = eval(self.args.model_name).Model(self.args).float() 
-        self.S = Source_Network.Model(self.args, self.model).float().to(self.args.device)
-        self.model = eval(self.args.model_name).Model(self.args).float() 
-        self.T = Target_Network.Model(self.args, self.model).float().to(self.args.device)
+    def static_strategy(self):     
+        self.S = Source_Network.Model(self.args).float().to(self.args.device)
+        self.T = Target_Network.Model(self.args).float().to(self.args.device)
         global result
         result[self.args.pred_len] = {"mae":{}, "mape":{}, "rmse":{}}
 
@@ -398,8 +396,8 @@ class base_framework:
                 pred_T = self.T(batch_x, self.args.sub_adj)
             else : 
                 if self.args.linear_output:
-                    pred_S = self.S(batch_x)
-                    pred_T = self.T(batch_x)
+                    pred_S, F_S = self.S(batch_x, feature=True)
+                    pred_T, F_T = self.T(batch_x, feature=True)
                 else: 
                     pred_S = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                     pred_T = self.T(batch_x, batch_x_mark, dec_inp, batch_y_mark)
@@ -413,11 +411,14 @@ class base_framework:
             true = batch_y
             # print("batch_x ", batch_y[1,1,1])
             # print("pred ", outputs, outputs.dtype)
-
+            normal_mask = (1 - label).reshape(len(label),1,1,1).to(self.args.device)
+            # print(F_S[2,0,2:3,23:29], F_T[2,0,2:3,23:29]) 
+            loss_KD = self.lossfunc(pred_S * normal_mask, pred_T.detach() * normal_mask, reduction="mean")
+            # [Batch, C，P, d ]
             loss_S = self.lossfunc(pred_S, true, reduction="mean")
             loss_T = self.lossfunc(pred_T, true, reduction="none").mean(dim=1)
             loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
-            loss = loss_S + loss_T
+            loss = loss_S + loss_T + loss_KD
             # print(batch_x[1, 1, 1])
 
             # print("loss {:.7f}".format(loss.item()))
@@ -554,7 +555,7 @@ class base_framework:
         epoch_idx = np.argmin(self.validation_loss_list)
         best_model_path = osp.join(path, str(round(lowest_validation_loss,4))+("_epoch_%d.pkl" % epoch_idx))
         
-        best_S = Source_Network.Model(self.args, self.model).float()
+        best_S = Source_Network.Model(self.args).float()
         best_S.load_state_dict(torch.load(best_model_path, self.args.device)["model_state_dict"])
         torch.save({'model_state_dict': best_S.state_dict()}, osp.join(path, "best_model.pkl"))
         import os 
@@ -700,7 +701,7 @@ def parse_args():
     parser.add_argument("--pred_len", type=int, default=96)
     parser.add_argument("--noise_rate", type=float)
     parser.add_argument("--device", type=str, default="cuda:0")
-    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-DLinear2023-07-23-15:55:44.736530/0/0.04_epoch_78.pkl")
+    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl")
     parser.add_argument("--idx", type=int, default=213)
     args = parser.parse_args() 
     return args 

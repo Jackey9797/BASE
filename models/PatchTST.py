@@ -74,11 +74,12 @@ class Model(nn.Module):
                                   attn_mask=attn_mask, res_attention=res_attention, pre_norm=pre_norm, store_attn=store_attn,
                                   pe=pe, learn_pe=learn_pe, fc_dropout=fc_dropout, head_dropout=head_dropout, padding_patch = padding_patch,
                                   pretrain_head=pretrain_head, head_type=head_type, individual=individual, revin=revin, affine=affine,
-                                  subtract_last=subtract_last, verbose=verbose, **kwargs)
+                                  subtract_last=subtract_last, verbose=verbose, cm = configs.cm, **kwargs)
     
     
     def forward(self, x):      
              # x: [Batch, Input length, Channel]
+        # print(self.decomposition) false
         if self.decomposition:
             res_init, trend_init = self.decomp_module(x)
             res_init, trend_init = res_init.permute(0,2,1), trend_init.permute(0,2,1)  # x: [Batch, Channel, Input length]
@@ -88,6 +89,6 @@ class Model(nn.Module):
             x = x.permute(0,2,1)    # x: [Batch, Input length, Channel]
         else:
             x = x.permute(0,2,1)    # x: [Batch, Channel, Input length]
-            x = self.model(x)
+            x, F = self.model(x)
             x = x.permute(0,2,1)    # x: [Batch, Input length, Channel]
-        return x
+        return x, F
