@@ -1,16 +1,16 @@
-2023-07-23 10:34:13,993 - logger name:exp/ECL-DLinear_t2023-07-23-10:34:13.993448/ECL-DLinear_t.log
-2023-07-23 10:34:13,994 - params : {'conf': 'ECL-DLinear_t', 'data_name': 'electricity', 'iteration': 1, 'load': False, 'build_graph': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': None, 'device': device(type='cuda', index=0), 'test_model_path': 'exp/ECL-DLinear2023-07-23-10:31:40.766165/4/best_model.pkl', 'idx': 213, '/* model related args*/': '//', 'model_name': 'DLinear', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 2, 'd_layers': 1, 'factor': 3, 'n_heads': 8, 'd_model': 512, 'd_ff': 2048, 'dropout': 0.0, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'type3', 'distil': 1, 'linear_output': 1, 'pct_start': 0.3, '/*train related args*/': '//', 'train': False, 'epoch': 10, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.5, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-DLinear_t', 'time': '2023-07-23-10:34:13.993448', 'path': 'exp/ECL-DLinear_t2023-07-23-10:34:13.993448', 'num_workers': 4, 'logger': <Logger __main__ (INFO)>}
-2023-07-23 10:34:13,994 - [*] phase 0 start training
+2023-07-23 11:10:12,083 - logger name:exp/ECL-DLinear_t2023-07-23-11:10:12.083457/ECL-DLinear_t.log
+2023-07-23 11:10:12,084 - params : {'conf': 'ECL-DLinear_t', 'data_name': 'electricity', 'iteration': 1, 'load': False, 'build_graph': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': None, 'device': device(type='cuda', index=0), 'test_model_path': 'exp/ECL-DLinear2023-07-23-11:02:32.904739/2/best_model.pkl', 'idx': 213, '/* model related args*/': '//', 'model_name': 'DLinear', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 2, 'd_layers': 1, 'factor': 3, 'n_heads': 8, 'd_model': 512, 'd_ff': 2048, 'dropout': 0.0, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'type3', 'distil': 1, 'linear_output': 1, 'pct_start': 0.3, '/*train related args*/': '//', 'train': False, 'epoch': 10, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.5, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-DLinear_t', 'time': '2023-07-23-11:10:12.083457', 'path': 'exp/ECL-DLinear_t2023-07-23-11:10:12.083457', 'num_workers': 4, 'logger': <Logger __main__ (INFO)>}
+2023-07-23 11:10:12,084 - [*] phase 0 start training
 18412 2632 5260 0.7 0.2 26304
 train 17981
 18412 2632 5260 0.7 0.2 26304
 val 7797
 18412 2632 5260 0.7 0.2 26304
 test 7797
-2023-07-23 10:34:17,825 - [*] phase 0 Dataset load!
-2023-07-23 10:34:19,601 - [*] loss:0.0597
-2023-07-23 10:34:19,603 - [*] phase 0, testing
-2023-07-23 10:34:19,617 - T:96	MAE	0.169584	RMSE	0.058999	MAPE	102.187276
-2023-07-23 10:34:19,617 - 96	mae	0.1696	
-2023-07-23 10:34:19,617 - 96	rmse	0.0590	
-2023-07-23 10:34:19,617 - 96	mape	102.1873	
+2023-07-23 11:10:17,113 - [*] phase 0 Dataset load!
+2023-07-23 11:10:22,193 - [*] loss:0.0632
+2023-07-23 11:10:22,195 - [*] phase 0, testing
+2023-07-23 11:10:22,210 - T:96	MAE	0.171961	RMSE	0.062406	MAPE	105.429113
+2023-07-23 11:10:22,210 - 96	mae	0.1720	
+2023-07-23 11:10:22,210 - 96	rmse	0.0624	
+2023-07-23 11:10:22,210 - 96	mape	105.4291	

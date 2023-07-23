@@ -39,7 +39,7 @@
 
     "/*train related args*/": "//",
     "train": true,
-    "epoch": 30,
+    "epoch": 100,
     "batch_size": 128,
     "lr": 0.01,
     "loss": "mse",
@@ -51,8 +51,8 @@
     "embed": "timeF",
     "freq": "h",
     "begin_phase": 0,
-    "end_phase": 5,
-    "phase_len": 7014,
+    "end_phase": 3,
+    "phase_len": 12274,
     "val_ratio": 0.5,
     "graph_size":321, 
 
