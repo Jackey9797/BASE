@@ -10,7 +10,7 @@
     "target":"OT", 
     "graph_input": false,
     "individual": false,
-    "test_model_path": "/Disk/fhyega/code/BASE/exp/ECL-DLinear2023-07-19-14:53:30.933513/4/best_model.pkl",
+    "test_model_path": "/Disk/fhyega/code/BASE/exp/ECL-DLinear2023-07-23-15:55:44.736530/0/0.04_epoch_78.pkl",
     "e_layers": 2,
     "d_layers": 1,
     "factor" : 3, 
