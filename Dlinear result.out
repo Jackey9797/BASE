@@ -1,0 +1,72 @@
+DLinear 情景下结果参考： 分别为: 多元正常训练模型 多元流式训练模型 单元流式训练模型-10epoch 单元流式训练模型-30epoch
+
+2023-07-23 09:32:52,701 - logger name:exp/ECL-DLinear_t2023-07-23-09:32:52.701106/ECL-DLinear_t.log
+2023-07-23 09:32:52,701 - params : {'conf': 'ECL-DLinear_t', 'data_name': 'electricity', 'iteration': 1, 'load': False, 'build_graph': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': None, 'device': device(type='cuda', index=0), 'idx': 213, '/* model related args*/': '//', 'model_name': 'DLinear', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-DLinear2023-07-01-10:46:56.758106/0/best_model.pkl', 'e_layers': 2, 'd_layers': 1, 'factor': 3, 'n_heads': 8, 'd_model': 512, 'd_ff': 2048, 'dropout': 0.0, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'type3', 'distil': 1, 'linear_output': 1, 'pct_start': 0.3, '/*train related args*/': '//', 'train': False, 'epoch': 10, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.5, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-DLinear_t', 'time': '2023-07-23-09:32:52.701106', 'path': 'exp/ECL-DLinear_t2023-07-23-09:32:52.701106', 'num_workers': 4, 'logger': <Logger __main__ (INFO)>}
+2023-07-23 09:32:52,701 - [*] phase 0 start training
+0 26304
+18412 2632 5260 0.7 0.2 26304
+train 17981
+18412 2632 5260 0.7 0.2 26304
+val 7797
+18412 2632 5260 0.7 0.2 26304
+test 7797
+2023-07-23 09:33:05,359 - [*] phase 0 Dataset load!
+2023-07-23 09:33:07,204 - [*] loss:0.0561
+2023-07-23 09:33:07,206 - [*] phase 0, testing
+2023-07-23 09:33:07,219 - T:96	MAE	0.161472	RMSE	0.055442	MAPE	100.107324
+2023-07-23 09:33:07,219 - 96	mae	0.1615	
+2023-07-23 09:33:07,219 - 96	rmse	0.0554	
+2023-07-23 09:33:07,219 - 96	mape	100.1073	
+
+
+2023-07-23 09:35:05,537 - logger name:exp/ECL-DLinear_t2023-07-23-09:35:05.537445/ECL-DLinear_t.log
+2023-07-23 09:35:05,538 - params : {'conf': 'ECL-DLinear_t', 'data_name': 'electricity', 'iteration': 1, 'load': False, 'build_graph': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': None, 'device': device(type='cuda', index=0), 'idx': 213, '/* model related args*/': '//', 'model_name': 'DLinear', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-DLinear2023-07-19-14:53:30.933513/4/best_model.pkl', 'e_layers': 2, 'd_layers': 1, 'factor': 3, 'n_heads': 8, 'd_model': 512, 'd_ff': 2048, 'dropout': 0.0, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'type3', 'distil': 1, 'linear_output': 1, 'pct_start': 0.3, '/*train related args*/': '//', 'train': False, 'epoch': 10, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.5, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-DLinear_t', 'time': '2023-07-23-09:35:05.537445', 'path': 'exp/ECL-DLinear_t2023-07-23-09:35:05.537445', 'num_workers': 4, 'logger': <Logger __main__ (INFO)>}
+2023-07-23 09:35:05,538 - [*] phase 0 start training
+18412 2632 5260 0.7 0.2 26304
+train 17981
+18412 2632 5260 0.7 0.2 26304
+val 7797
+18412 2632 5260 0.7 0.2 26304
+test 7797
+2023-07-23 09:35:09,703 - [*] phase 0 Dataset load!
+2023-07-23 09:35:11,608 - [*] loss:0.0569
+2023-07-23 09:35:11,611 - [*] phase 0, testing
+2023-07-23 09:35:11,624 - T:96	MAE	0.164110	RMSE	0.056298	MAPE	100.363576
+2023-07-23 09:35:11,624 - 96	mae	0.1641	
+2023-07-23 09:35:11,624 - 96	rmse	0.0563	
+2023-07-23 09:35:11,624 - 96	mape	100.3636	
+
+2023-07-23 09:30:32,034 - logger name:exp/ECL-DLinear_t2023-07-23-09:30:32.033874/ECL-DLinear_t.log
+2023-07-23 09:30:32,034 - params : {'conf': 'ECL-DLinear_t', 'data_name': 'electricity', 'iteration': 1, 'load': False, 'build_graph': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': None, 'device': device(type='cuda', index=0), 'idx': 213, '/* model related args*/': '//', 'model_name': 'DLinear', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-DLinear2023-07-23-09:08:10.319835/4/best_model.pkl', 'e_layers': 2, 'd_layers': 1, 'factor': 3, 'n_heads': 8, 'd_model': 512, 'd_ff': 2048, 'dropout': 0.0, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'type3', 'distil': 1, 'linear_output': 1, 'pct_start': 0.3, '/*train related args*/': '//', 'train': False, 'epoch': 10, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.5, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-DLinear_t', 'time': '2023-07-23-09:30:32.033874', 'path': 'exp/ECL-DLinear_t2023-07-23-09:30:32.033874', 'num_workers': 4, 'logger': <Logger __main__ (INFO)>}
+2023-07-23 09:30:32,034 - [*] phase 0 start training
+0 26304
+18412 2632 5260 0.7 0.2 26304
+train 17981
+18412 2632 5260 0.7 0.2 26304
+val 7797
+18412 2632 5260 0.7 0.2 26304
+test 7797
+2023-07-23 09:30:44,603 - [*] phase 0 Dataset load!
+2023-07-23 09:30:46,639 - [*] loss:0.0642
+2023-07-23 09:30:46,642 - [*] phase 0, testing
+2023-07-23 09:30:46,656 - T:96  MAE     0.179939        RMSE    0.063572        MAPE    100.800359
+2023-07-23 09:30:46,656 - 96    mae     0.1799
+2023-07-23 09:30:46,656 - 96    rmse    0.0636
+2023-07-23 09:30:46,656 - 96    mape    100.8004
+
+2023-07-23 10:34:13,993 - logger name:exp/ECL-DLinear_t2023-07-23-10:34:13.993448/ECL-DLinear_t.log
+2023-07-23 10:34:13,994 - params : {'conf': 'ECL-DLinear_t', 'data_name': 'electricity', 'iteration': 1, 'load': False, 'build_graph': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': None, 'device': device(type='cuda', index=0), 'test_model_path': 'exp/ECL-DLinear2023-07-23-10:31:40.766165/4/best_model.pkl', 'idx': 213, '/* model related args*/': '//', 'model_name': 'DLinear', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 2, 'd_layers': 1, 'factor': 3, 'n_heads': 8, 'd_model': 512, 'd_ff': 2048, 'dropout': 0.0, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'type3', 'distil': 1, 'linear_output': 1, 'pct_start': 0.3, '/*train related args*/': '//', 'train': False, 'epoch': 10, 'batch_size': 128, 'lr': 0.01, 'loss': 'mse', '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.5, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-DLinear_t', 'time': '2023-07-23-10:34:13.993448', 'path': 'exp/ECL-DLinear_t2023-07-23-10:34:13.993448', 'num_workers': 4, 'logger': <Logger __main__ (INFO)>}
+2023-07-23 10:34:13,994 - [*] phase 0 start training
+18412 2632 5260 0.7 0.2 26304
+train 17981
+18412 2632 5260 0.7 0.2 26304
+val 7797
+18412 2632 5260 0.7 0.2 26304
+test 7797
+2023-07-23 10:34:17,825 - [*] phase 0 Dataset load!
+2023-07-23 10:34:19,601 - [*] loss:0.0597
+2023-07-23 10:34:19,603 - [*] phase 0, testing
+2023-07-23 10:34:19,617 - T:96	MAE	0.169584	RMSE	0.058999	MAPE	102.187276
+2023-07-23 10:34:19,617 - 96	mae	0.1696	
+2023-07-23 10:34:19,617 - 96	rmse	0.0590	
+2023-07-23 10:34:19,617 - 96	mape	102.1873	

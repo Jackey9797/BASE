@@ -39,7 +39,7 @@
 
     "/*train related args*/": "//",
     "train": true,
-    "epoch": 10,
+    "epoch": 30,
     "batch_size": 128,
     "lr": 0.01,
     "loss": "mse",

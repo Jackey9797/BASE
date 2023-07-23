@@ -312,6 +312,9 @@ class base_framework:
         best_model = eval(self.args.model_name).Model(self.args).float()
         best_model.load_state_dict(torch.load(best_model_path, self.args.device)["model_state_dict"])
         torch.save({'model_state_dict': best_model.state_dict()}, osp.join(path, "best_model.pkl"))
+        import os 
+        if self.args.phase + 1 == self.args.end_phase:
+            os.system('python main.py --conf ECL-DLinear_t --test_model_path {} > test.out'.format(osp.join(path, "best_model.pkl")))
         self.model = best_model
         self.model = self.model.to(self.args.device)        
         
@@ -451,6 +454,7 @@ def parse_args():
     parser.add_argument("--pred_len", type=int, default=96)
     parser.add_argument("--noise_rate", type=float)
     parser.add_argument("--device", type=str, default="cuda:0")
+    parser.add_argument("--test_model_path", type=str, default="")
     parser.add_argument("--idx", type=int, default=213)
     args = parser.parse_args() 
     return args 
