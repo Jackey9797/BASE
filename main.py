@@ -115,7 +115,7 @@ class base_framework:
 
         ##* prep dl 
         if self.args.train:
-            self.train_loader = self.inputs["train_loader"]
+            self.score_loader = self.inputs["train_loader"]
             self.val_loader = self.inputs["val_loader"]
         self.test_loader = self.inputs["test_loader"]
 
@@ -130,7 +130,8 @@ class base_framework:
     
     def static_strategy(self):    
         self.model = eval(self.args.model_name).Model(self.args).float() 
-        self.model = self.model.to(self.args.device)
+        self.S = Source_Network(self.args, self.model).float().to(self.args.device)
+        self.T = eval(self.args.model_name).Model(self.args).float().to(self.args.device)
         global result
         result[self.args.pred_len] = {"mae":{}, "mape":{}, "rmse":{}}
 
@@ -155,156 +156,419 @@ class base_framework:
 
         ##* train start
         self.args.logger.info("[*] phase " + str(self.args.phase) + " Training start")
-        global_train_steps = len(self.train_loader) // self.args.batch_size +1
 
-        iters = len(self.train_loader)
         lowest_validation_loss = 1e7
         counter = 0
         patience = 100
         use_time = []
         validation_loss_list = []
 
+        self.args.start_train = 1
+
         for epoch in range(self.args.epoch): #* train body 
-            training_loss = 0.0 
-            start_time = datetime.now() 
-            self.model.train() 
- 
-            # Train Model 
-            cn = 0 
-            for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.train_loader):
-                # data.x[:, 48:48+24] = 0 
-                def checkStationary(batch_x, batch_y): 
-                    batch_x = batch_x.cpu().numpy() 
-                    batch_y = batch_y.cpu().numpy() 
-                    # batch_x = batch_x.reshape(-1, batch_x.shape[-1]) 
-                    # batch_y = batch_y.reshape(-1, batch_y.shape[-1]) 
-                    batch_x = batch_x[0, :, 0] 
-                    batch_y = batch_y[0, :, 0] 
-                    
-                    # print(np.std(batch_x), np.std(batch_y))
-                    if np.std(batch_x) > 1.1 : 
-                        return 0   
-                    return 1
-                # if checkStationary(batch_x, batch_y) == 0 : 
-                #     continue 
-                batch_x = batch_x.float().to(self.args.device)
-                batch_y = batch_y.float().to(self.args.device)
-                batch_x_mark = batch_x_mark.float().to(self.args.device)
-                batch_y_mark = batch_y_mark.float().to(self.args.device)
-                # print(batch_x.shape)
-                # print("batch_x ", batch_x[1,1,1])
-                # print(batch_x[1,1,1])
-                # print(self.model.state_dict()["enc_embedding.value_embedding.tokenConv.weight"])
-
-                # count how many 1 and 0 in the label , print the number of 1 and 0
-                # print(np.sum(label.cpu().numpy()), np.sum(1-label.cpu().numpy()))
-
-                optimizer.zero_grad()
-                dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
-                dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
-
-                if self.args.graph_input: 
-                    pred = self.model(batch_x, self.args.sub_adj)
-                else : 
-                    if self.args.linear_output:
-                        pred = self.model(batch_x)
-                    else: 
-                        pred = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+            
             
 
-                f_dim = -1 if self.args.features == 'MS' else 0
-                outputs = pred[:, -self.args.pred_len:, f_dim:]
-                batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
-
-                pred = outputs
-                true = batch_y
-                # print("batch_x ", batch_y[1,1,1])
-                # print("pred ", outputs, outputs.dtype)
-
-                loss = lossfunc(pred, true, reduction="mean")
-                # print(batch_x[1, 1, 1])
-
-                # print("loss {:.7f}".format(loss.item()))
-                # if self.args.ewc and self.inc_state:
-                #     loss += self.model.compute_consolidation_loss()
-                training_loss += float(loss)
-                loss.backward()
-                optimizer.step()
+            if args.train_mode == 'pretrain': 
+                _, self.train_loader = data_provider(args, 'train')     
                 
-                cn += 1
-                # if cn % 10 == 1: 
-                #     visualize(data.cpu(), data.y.cpu(), pred.cpu())
-
-                if self.args.lradj == 'TST':
-                    adjust_learning_rate(optimizer, scheduler, epoch + 1, self.args, printout=False)
-                    scheduler.step()
-
-            if epoch == 0:
-                total_time = (datetime.now() - start_time).total_seconds()
-            else:
-                total_time += (datetime.now() - start_time).total_seconds()
-            use_time.append((datetime.now() - start_time).total_seconds())
-            training_loss = training_loss/cn 
-    
-            # Validate Model
-            self.model.eval()
-
-            validation_loss = 0.0
-            cn = 0
-            self.args.Score = []
-            with torch.no_grad():
-                for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.val_loader):
+                training_loss = 0.0 
+                start_time = datetime.now() 
+                self.S.train() 
+                cn = 0 
+                for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.train_loader):
                     batch_x = batch_x.float().to(self.args.device)
-                    batch_y = batch_y.float()
+                    batch_y = batch_y.float().to(self.args.device)
                     batch_x_mark = batch_x_mark.float().to(self.args.device)
                     batch_y_mark = batch_y_mark.float().to(self.args.device)
+                    # print(batch_x.shape)
+                    # print("batch_x ", batch_x[1,1,1])
+                    # print(batch_x[1,1,1])
+                    # print(self.model.state_dict()["enc_embedding.value_embedding.tokenConv.weight"])
+
+                    # count how many 1 and 0 in the label , print the number of 1 and 0
+                    # print(np.sum(label.cpu().numpy()), np.sum(1-label.cpu().numpy()))
 
                     optimizer.zero_grad()
                     dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
                     dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
 
                     if self.args.graph_input: 
-                        pred = self.model(batch_x, self.args.sub_adj)
+                        pred = self.S(batch_x, self.args.sub_adj)
                     else : 
                         if self.args.linear_output:
-                            pred = self.model(batch_x)
+                            pred = self.S(batch_x)
                         else: 
-                            pred = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                            pred = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                 
+
                     f_dim = -1 if self.args.features == 'MS' else 0
                     outputs = pred[:, -self.args.pred_len:, f_dim:]
                     batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
 
-                    pred = outputs.detach().cpu()
-                    true = batch_y.detach().cpu()
-                    
+                    pred = outputs
+                    true = batch_y
+                    # print("batch_x ", batch_y[1,1,1])
+                    # print("pred ", outputs, outputs.dtype)
+
                     loss = lossfunc(pred, true, reduction="mean")
-                    validation_loss += float(loss)
-                    # print(len(list(lossfunc(pred, true, reduction="none").mean(dim=0).detach().cpu().numpy())))
-                    self.args.Score += lossfunc(pred, true, reduction="none").mean(dim=1).flatten().detach().cpu().tolist()
+                    # print(batch_x[1, 1, 1])
+
+                    # print("loss {:.7f}".format(loss.item()))
+                    # if self.args.ewc and self.inc_state:
+                    #     loss += self.model.compute_consolidation_loss()
+                    training_loss += float(loss)
+                    loss.backward()
+                    optimizer.step()
+                    
                     cn += 1
-            validation_loss = float(validation_loss/cn)
-            validation_loss_list.append(validation_loss)
+                    # if cn % 10 == 1: 
+                    #     visualize(data.cpu(), data.y.cpu(), pred.cpu())
 
-            self.args.logger.info(f"epoch:{epoch}, training loss:{training_loss:.4f} validation loss:{validation_loss:.4f}")
+                    if self.args.lradj == 'TST':
+                        adjust_learning_rate(optimizer, scheduler, epoch + 1, self.args, printout=False)
+                        scheduler.step()
 
-            # Early Stop
-            if validation_loss <= lowest_validation_loss:
-                counter = 0
-                lowest_validation_loss = validation_loss
-                save_model = self.model
-                if self.inc_state and self.args.ewc:
-                    save_model = self.model.model 
-                torch.save({'model_state_dict': save_model.state_dict()}, osp.join(path, str(round(validation_loss,4))+("_epoch_%d.pkl" % epoch)))
-            else:
-                counter += 1
-                if counter > patience:
-                    break
-            if self.args.lradj != 'TST':
-                adjust_learning_rate(optimizer, scheduler, epoch + 1, self.args)
-            else:
-                print('Updating learning rate to {}'.format(scheduler.get_last_lr()[0]))
+                if epoch == 0:
+                    total_time = (datetime.now() - start_time).total_seconds()
+                else:
+                    total_time += (datetime.now() - start_time).total_seconds()
+                use_time.append((datetime.now() - start_time).total_seconds())
+                training_loss = training_loss/cn 
+                #todo pretrain_iter()
+                self.S.eval()
 
+                validation_loss = 0.0
+                cn = 0
+                with torch.no_grad():
+                    for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.val_loader):
+                        batch_x = batch_x.float().to(self.args.device)
+                        batch_y = batch_y.float()
+                        batch_x_mark = batch_x_mark.float().to(self.args.device)
+                        batch_y_mark = batch_y_mark.float().to(self.args.device)
+
+                        optimizer.zero_grad()
+                        dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
+                        dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
+
+                        if self.args.graph_input: 
+                            pred = self.S(batch_x, self.args.sub_adj)
+                        else : 
+                            if self.args.linear_output:
+                                pred = self.S(batch_x)
+                            else: 
+                                pred = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                    
+                        f_dim = -1 if self.args.features == 'MS' else 0
+                        outputs = pred[:, -self.args.pred_len:, f_dim:]
+                        batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
+
+                        pred = outputs.detach().cpu()
+                        true = batch_y.detach().cpu()
+                        
+                        loss = lossfunc(pred, true, reduction="mean")
+                        validation_loss += float(loss)
+                        # print(len(list(lossfunc(pred, true, reduction="none").mean(dim=0).detach().cpu().numpy())))
+                        # self.args.Score += lossfunc(pred, true, reduction="none").mean(dim=1).flatten().detach().cpu().tolist()
+                        cn += 1
+                validation_loss = float(validation_loss/cn)
+                validation_loss_list.append(validation_loss)
+
+                self.args.Score = []
+                with torch.no_grad():
+                    for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.score_loader):
+                        batch_x = batch_x.float().to(self.args.device)
+                        batch_y = batch_y.float()
+                        batch_x_mark = batch_x_mark.float().to(self.args.device)
+                        batch_y_mark = batch_y_mark.float().to(self.args.device)
+
+                        optimizer.zero_grad()
+                        dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
+                        dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
+
+                        if self.args.graph_input: 
+                            pred = self.S(batch_x, self.args.sub_adj)
+                        else : 
+                            if self.args.linear_output:
+                                pred = self.S(batch_x)
+                            else: 
+                                pred = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                    
+                        f_dim = -1 if self.args.features == 'MS' else 0
+                        outputs = pred[:, -self.args.pred_len:, f_dim:]
+                        batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
+
+                        pred = outputs.detach().cpu()
+                        true = batch_y.detach().cpu()
+                        
+                        # print(len(list(lossfunc(pred, true, reduction="none").mean(dim=0).detach().cpu().numpy())))
+                        self.args.Score += lossfunc(pred, true, reduction="none").mean(dim=1).flatten().detach().cpu().tolist()
+                        cn += 1
+
+                self.args.logger.info(f"epoch:{epoch}, training loss:{training_loss:.4f} validation loss:{validation_loss:.4f}")
+
+                #todo val + score 
+
+                _, self.train_loader = data_provider(args, 'train')     
+            
+                training_loss = 0.0 
+                start_time = datetime.now() 
+
+                self.T.train() 
+                cn = 0 
+                for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.train_loader):
+                    batch_x = batch_x.float().to(self.args.device)
+                    batch_y = batch_y.float().to(self.args.device)
+                    batch_x_mark = batch_x_mark.float().to(self.args.device)
+                    batch_y_mark = batch_y_mark.float().to(self.args.device)
+                    # print(batch_x.shape)
+                    # print("batch_x ", batch_x[1,1,1])
+                    # print(batch_x[1,1,1])
+                    # print(self.model.state_dict()["enc_embedding.value_embedding.tokenConv.weight"])
+
+                    # count how many 1 and 0 in the label , print the number of 1 and 0
+                    # print(np.sum(label.cpu().numpy()), np.sum(1-label.cpu().numpy()))
+
+                    optimizer.zero_grad()
+                    dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
+                    dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
+
+                    if self.args.graph_input: 
+                        pred = self.T(batch_x, self.args.sub_adj)
+                    else : 
+                        if self.args.linear_output:
+                            pred = self.T(batch_x)
+                        else: 
+                            pred = self.T(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                
+
+                    f_dim = -1 if self.args.features == 'MS' else 0
+                    outputs = pred[:, -self.args.pred_len:, f_dim:]
+                    batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
+
+                    pred = outputs
+                    true = batch_y
+                    # print("batch_x ", batch_y[1,1,1])
+                    # print("pred ", outputs, outputs.dtype)
+
+                    loss = lossfunc(pred, true, reduction="none").mean(dim=1)
+                    loss = (loss * (1 - label.to(self.args.device))).mean()
+                    #! adjust here
+                    # print(batch_x[1, 1, 1])
+
+                    # print("loss {:.7f}".format(loss.item()))
+                    # if self.args.ewc and self.inc_state:
+                    #     loss += self.model.compute_consolidation_loss()
+                    training_loss += float(loss)
+                    loss.backward()
+                    optimizer.step()
+                    
+                    cn += 1
+                    # if cn % 10 == 1: 
+                    #     visualize(data.cpu(), data.y.cpu(), pred.cpu())
+
+                    if self.args.lradj == 'TST':
+                        adjust_learning_rate(optimizer, scheduler, epoch + 1, self.args, printout=False)
+                        scheduler.step()
+
+                if epoch == 0:
+                    total_time = (datetime.now() - start_time).total_seconds()
+                else:
+                    total_time += (datetime.now() - start_time).total_seconds()
+                use_time.append((datetime.now() - start_time).total_seconds())
+                training_loss = training_loss/cn 
+                #todo train T()
+
+                # Early Stop
+                if validation_loss <= lowest_validation_loss:
+                    counter = 0
+                    lowest_validation_loss = validation_loss
+                    save_model = self.S
+                    if self.inc_state and self.args.ewc:
+                        save_model = self.S.model 
+                    torch.save({'model_state_dict': save_model.state_dict()}, osp.join(path, str(round(validation_loss,4))+("_epoch_%d.pkl" % epoch)))
+                else:
+                    counter += 1  
+                    if counter > patience:
+                        break
+                if self.args.lradj != 'TST':
+                    adjust_learning_rate(optimizer, scheduler, epoch + 1, self.args)
+                else:
+                    print('Updating learning rate to {}'.format(scheduler.get_last_lr()[0]))
+                #todo post process() 
+            elif args.train_mode == 'joint': 
+                _, self.train_loader = data_provider(args, 'train')     
+                
+                training_loss = 0.0 
+                start_time = datetime.now() 
+                self.S.train() 
+                self.T.train() 
+                cn = 0 
+                for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.train_loader):
+                    batch_x = batch_x.float().to(self.args.device)
+                    batch_y = batch_y.float().to(self.args.device)
+                    batch_x_mark = batch_x_mark.float().to(self.args.device)
+                    batch_y_mark = batch_y_mark.float().to(self.args.device)
+                    # print(batch_x.shape)
+                    # print("batch_x ", batch_x[1,1,1])
+                    # print(batch_x[1,1,1])
+                    # print(self.model.state_dict()["enc_embedding.value_embedding.tokenConv.weight"])
+
+                    # count how many 1 and 0 in the label , print the number of 1 and 0
+                    # print(np.sum(label.cpu().numpy()), np.sum(1-label.cpu().numpy()))
+
+                    optimizer.zero_grad()
+                    dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
+                    dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
+
+                    if self.args.graph_input: 
+                        pred_S = self.S(batch_x, self.args.sub_adj)
+                        pred_T = self.T(batch_x, self.args.sub_adj)
+                    else : 
+                        if self.args.linear_output:
+                            pred_S = self.S(batch_x)
+                            pred_T = self.T(batch_x)
+                        else: 
+                            pred_S = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                            pred_T = self.T(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                
+
+                    f_dim = -1 if self.args.features == 'MS' else 0
+                    pred_S = pred_S[:, -self.args.pred_len:, f_dim:]
+                    pred_T = pred_T[:, -self.args.pred_len:, f_dim:]
+                    batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
+
+                    true = batch_y
+                    # print("batch_x ", batch_y[1,1,1])
+                    # print("pred ", outputs, outputs.dtype)
+
+                    loss_S = lossfunc(pred_S, true, reduction="mean")
+                    loss_T = lossfunc(pred_T, true, reduction="none").mean(dim=1)
+                    loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
+                    loss = loss_S + loss_T
+                    # print(batch_x[1, 1, 1])
+
+                    # print("loss {:.7f}".format(loss.item()))
+                    # if self.args.ewc and self.inc_state:
+                    #     loss += self.model.compute_consolidation_loss()
+                    training_loss += float(loss)
+                    loss.backward()
+                    optimizer.step()
+                    
+                    cn += 1
+                    # if cn % 10 == 1: 
+                    #     visualize(data.cpu(), data.y.cpu(), pred.cpu())
+
+                    if self.args.lradj == 'TST':
+                        adjust_learning_rate(optimizer, scheduler, epoch + 1, self.args, printout=False)
+                        scheduler.step()
+
+                if epoch == 0:
+                    total_time = (datetime.now() - start_time).total_seconds()
+                else:
+                    total_time += (datetime.now() - start_time).total_seconds()
+                use_time.append((datetime.now() - start_time).total_seconds())
+                training_loss = training_loss/cn 
+
+
+                #todo
+                self.S.eval()
+
+                validation_loss = 0.0
+                cn = 0
+                with torch.no_grad():
+                    for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.val_loader):
+                        batch_x = batch_x.float().to(self.args.device)
+                        batch_y = batch_y.float()
+                        batch_x_mark = batch_x_mark.float().to(self.args.device)
+                        batch_y_mark = batch_y_mark.float().to(self.args.device)
+
+                        optimizer.zero_grad()
+                        dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
+                        dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
+
+                        if self.args.graph_input: 
+                            pred = self.S(batch_x, self.args.sub_adj)
+                        else : 
+                            if self.args.linear_output:
+                                pred = self.S(batch_x)
+                            else: 
+                                pred = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                    
+                        f_dim = -1 if self.args.features == 'MS' else 0
+                        outputs = pred[:, -self.args.pred_len:, f_dim:]
+                        batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
+
+                        pred = outputs.detach().cpu()
+                        true = batch_y.detach().cpu()
+                        
+                        loss = lossfunc(pred, true, reduction="mean")
+                        validation_loss += float(loss)
+                        # print(len(list(lossfunc(pred, true, reduction="none").mean(dim=0).detach().cpu().numpy())))
+                        # self.args.Score += lossfunc(pred, true, reduction="none").mean(dim=1).flatten().detach().cpu().tolist()
+                        cn += 1
+                validation_loss = float(validation_loss/cn)
+                validation_loss_list.append(validation_loss)
+
+                self.args.Score = []
+                with torch.no_grad():
+                    for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.score_loader):
+                        batch_x = batch_x.float().to(self.args.device)
+                        batch_y = batch_y.float()
+                        batch_x_mark = batch_x_mark.float().to(self.args.device)
+                        batch_y_mark = batch_y_mark.float().to(self.args.device)
+
+                        optimizer.zero_grad()
+                        dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
+                        dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
+
+                        if self.args.graph_input: 
+                            pred = self.S(batch_x, self.args.sub_adj)
+                        else : 
+                            if self.args.linear_output:
+                                pred = self.S(batch_x)
+                            else: 
+                                pred = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                    
+                        f_dim = -1 if self.args.features == 'MS' else 0
+                        outputs = pred[:, -self.args.pred_len:, f_dim:]
+                        batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
+
+                        pred = outputs.detach().cpu()
+                        true = batch_y.detach().cpu()
+                        
+                        # print(len(list(lossfunc(pred, true, reduction="none").mean(dim=0).detach().cpu().numpy())))
+                        self.args.Score += lossfunc(pred, true, reduction="none").mean(dim=1).flatten().detach().cpu().tolist()
+                        cn += 1
+
+                self.args.logger.info(f"epoch:{epoch}, training loss:{training_loss:.4f} validation loss:{validation_loss:.4f}")
+
+                #todo
+                if validation_loss <= lowest_validation_loss:
+                    counter = 0
+                    lowest_validation_loss = validation_loss
+                    save_model = self.S
+                    if self.inc_state and self.args.ewc:
+                        save_model = self.S.model 
+                    torch.save({'model_state_dict': save_model.state_dict()}, osp.join(path, str(round(validation_loss,4))+("_epoch_%d.pkl" % epoch)))
+                else:
+                    counter += 1  
+                    if counter > patience:
+                        break
+                if self.args.lradj != 'TST':
+                    adjust_learning_rate(optimizer, scheduler, epoch + 1, self.args)
+                else:
+                    print('Updating learning rate to {}'.format(scheduler.get_last_lr()[0]))
+            elif args.train_mode == 'normal':
+                pass 
+
+            # Train Model 
+            
+            
+    
+            # Validate Model
+            
+        # after training has been done
         
         epoch_idx = np.argmin(validation_loss_list)
         best_model_path = osp.join(path, str(round(lowest_validation_loss,4))+("_epoch_%d.pkl" % epoch_idx))
@@ -429,6 +693,7 @@ def init_args(args):
     args.time = datetime.now().strftime("%Y-%m-%d-%H:%M:%S.%f")
     args.path = osp.join(args.exp_path, args.logname+args.time)
     args.num_workers = 4
+    args.start_train = 0
     ct.mkdirs(args.path)
     if args.train == False: args.load = False
     return args

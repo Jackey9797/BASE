@@ -248,10 +248,10 @@ class Dataset_Custom(Dataset):
         num_test = int(len(df_raw) * TEST_RATIO)
         num_vali = len(df_raw) - num_train - num_test
         print(num_train, num_vali, num_test, TRAIN_RATIO, TEST_RATIO, len(df_raw))
-        # border1s = [0, num_train - self.seq_len, len(df_raw) - num_test - self.seq_len] # this line changed
-        border1s = [0, num_train - self.seq_len, num_train - self.seq_len] # this line changed
-        border2s = [num_train, len(df_raw), len(df_raw)] # this line changed
-        # border2s = [num_train, num_train + num_vali, len(df_raw)]
+        border1s = [0, num_train - self.seq_len, len(df_raw) - num_test - self.seq_len] # this line changed
+        # border1s = [0, num_train - self.seq_len, num_train - self.seq_len] # this line changed
+        # border2s = [num_train, len(df_raw), len(df_raw)] # this line changed
+        border2s = [num_train, num_train + num_vali, len(df_raw)]
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
 
@@ -496,6 +496,11 @@ def data_provider(args, flag):
         batch_size = 1
         freq = args.freq
         Data = Dataset_Pred
+    elif flag == 'train' and args.start_train == 0: 
+        shuffle_flag = False
+        drop_last = False
+        batch_size = args.batch_size
+        freq = args.freq
     else:
         shuffle_flag = True
         drop_last = True
