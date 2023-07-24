@@ -20,6 +20,7 @@ from models import DLinear
 from models import PatchTST 
 from models import informer
 from models import Source_Network, Target_Network
+from models.Enhancer import Enhancer
 from models.TrafficStream import graph_constructor 
 from utils import common_tools as ct
 from utils.tools import visualize
@@ -372,7 +373,9 @@ class base_framework:
         training_loss = 0.0 
         self.S.train() 
         self.T.train() 
+        enhancer = Enhancer(args)
         cn = 0 
+
         for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.train_loader):
             batch_x = batch_x.float().to(self.args.device)
             batch_y = batch_y.float().to(self.args.device)
@@ -402,8 +405,13 @@ class base_framework:
                     pred_S = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                     pred_T = self.T(batch_x, batch_x_mark, dec_inp, batch_y_mark)
 
-            # if self.args.enhanced_training: 
-            #     enhanced_x = 
+            loss_rec = 0
+            if self.args.enhance: 
+                enhanced_x = enhancer(batch_x) 
+                _, F_T_wn = self.T(enhanced_x, feature=True)
+                normal_mask = (1 - label).reshape(len(label),1,1,1).to(self.args.device)
+                loss_rec = self.lossfunc(F_T * normal_mask, self.S.correction_module.Refiner(F_T_wn) * normal_mask, reduction="mean") 
+                # loss_n_pred = self.
 
             f_dim = -1 if self.args.features == 'MS' else 0
             pred_S = pred_S[:, -self.args.pred_len:, f_dim:]
@@ -415,17 +423,14 @@ class base_framework:
             # print("pred ", outputs, outputs.dtype)
             # print(F_S[2,0,2:3,23:29], F_T[2,0,2:3,23:29]) 
             loss_KD = 0
-            print(args.aligner)
-            print(self.args == args)
             if args.aligner: 
                 normal_mask = (1 - label).reshape(len(label),1,1,1).to(self.args.device)
-                loss_KD = self.lossfunc(pred_S * normal_mask, pred_T.detach() * normal_mask, reduction="mean")
-            print(loss_KD)
+                loss_KD = self.lossfunc(F_S * normal_mask, F_T.detach() * normal_mask, reduction="mean")
             # [Batch, C，P, d ]
             loss_S = self.lossfunc(pred_S, true, reduction="mean")
             loss_T = self.lossfunc(pred_T, true, reduction="none").mean(dim=1)
             loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
-            loss = loss_S + loss_T + loss_KD
+            loss = loss_S + loss_T + loss_KD + loss_rec
             # print(batch_x[1, 1, 1])
 
             # print("loss {:.7f}".format(loss.item()))
@@ -712,6 +717,7 @@ def parse_args():
     parser.add_argument("--idx", type=int, default=213)
     parser.add_argument("--aligner", type=int, default=0)
     parser.add_argument("--refiner", type=int, default=0)
+    parser.add_argument("--enhance", type=int, default=0)
     parser.add_argument("--seed", type=int, default=2021)
     args = parser.parse_args() 
     return args 

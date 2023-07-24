@@ -160,7 +160,7 @@ class Correction_Module(nn.Module):
         x_ = x.permute(0, 1, 3, 2)
         #todo x also be refined
         x_refined = x 
-        print(self.args.refiner)
+        # print(self.args.refiner)
         if self.args.refiner:
             x_refined = self.Refiner(x_).permute(0, 1, 3, 2)
 
