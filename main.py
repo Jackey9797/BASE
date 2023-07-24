@@ -268,6 +268,10 @@ class base_framework:
                 cn += 1
         validation_loss = float(validation_loss/cn)
         # self.validation_loss_list.append(validation_loss)
+        if validation_loss < self.args.valid_loss_T : 
+            self.args.valid_loss_T = validation_loss 
+            import copy
+            self.args.best_T =  copy.deepcopy(self.T)
         return validation_loss
 
     def get_Score(self):
@@ -353,6 +357,7 @@ class base_framework:
             loss = self.lossfunc(pred, true, reduction="none").mean(dim=1)
             # print(label.shape, loss.shape)
             loss = (loss * (1 - label.to(self.args.device))).mean()
+            if self.args.grad_norm: loss = loss * (len(label.flatten()) / label.sum()) 
             #! adjust here
             # print(batch_x[1, 1, 1])
 
@@ -429,6 +434,14 @@ class base_framework:
             # print("pred ", outputs, outputs.dtype)
             # print(F_S[2,0,2:3,23:29], F_T[2,0,2:3,23:29]) 
             loss_KD = 0
+
+            # import matplotlib.pyplot as plt
+            # for i in range(len(label)): 
+            #     if label[i].item() == 1:
+            #         plt.plot(batch_x[i].cpu().numpy()) 
+            #         plt.savefig('before{}.png'.format(i))
+            #         plt.close()
+
             if args.aligner: 
                 normal_mask = (1 - label).reshape(len(label),1,1,1).to(self.args.device)
                 loss_KD = self.lossfunc(F_S * normal_mask, F_T.detach() * normal_mask, reduction="mean")
@@ -436,6 +449,7 @@ class base_framework:
             loss_S = self.lossfunc(pred_S, true, reduction="mean")
             loss_T = self.lossfunc(pred_T, true, reduction="none").mean(dim=1)
             loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
+            if self.args.grad_norm: loss_T = loss_T * (len(label.flatten()) / label.sum()) 
             loss = loss_S + loss_T + loss_KD + loss_rec
             # print(batch_x[1, 1, 1])
 
@@ -489,6 +503,7 @@ class base_framework:
         self.args.logger.info("[*] phase " + str(self.args.phase) + " Training start")
 
         lowest_validation_loss = 1e7
+        self.args.valid_loss_T = 1e7
         counter = 0
         patience = 100
         use_time = []
@@ -684,6 +699,10 @@ class base_framework:
             self.inc_state = True 
 
         self.report_result()
+        self.S = self.args.best_T.to(self.args.device) 
+        self.test_model()
+        self.report_result()
+
 
 def init_args(args): 
     #* complete args 
@@ -721,6 +740,7 @@ def parse_args():
 
     parser.add_argument("--load", action="store_true", default=True)
     parser.add_argument("--build_graph", action="store_true", default=False)
+    parser.add_argument("--grad_norm", action="store_true", default=False)
     parser.add_argument("--root_path", type=str, default="")
     parser.add_argument("--exp_path", type=str, default="exp/")
     parser.add_argument("--val_test_mix", action="store_true", default=False)

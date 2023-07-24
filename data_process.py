@@ -465,7 +465,7 @@ class new_DS(Dataset):
         self.args = args
         self.flag = flag 
         self.data = ds
-        args.enc_in = ds[0][0].shape[1]
+        args.enc_in = ds[0][0].shape[1] if args.idx == -1 else 1
         # args.Score = np.random.uniform(0,1,len(self.data))
 
         # if hasattr(args, "Score") == False: 
