@@ -443,16 +443,21 @@ data_dict = {
     'custom': Dataset_Custom,
 }
 
-def get_noise_label(Score, noise_rate): 
+def get_noise_label(Score, noise_rate, enc_in): 
     # sort Score from small to large, label the biggest noise_rate as 1, return a list of labels
-    noise_label = np.zeros(len(Score))
+    noise_label = np.zeros((len(Score), enc_in))
+    # print(noise_label.shape)
     # Score = np.arange(len(Score))
     # print(Score, noise_label.shape)
-    idx = np.argsort(Score)[::-1]
+    idx = np.argsort(-Score, axis=0)
     # print(idx[:100])
-    noise_label[idx[:int(len(Score)*noise_rate)]] = 1
+    tmp = np.arange(enc_in).reshape(1, -1)
+    tmp = np.tile(tmp, int(len(Score)*noise_rate)).reshape(int(len(Score)*noise_rate), -1)
+    # print(idx[:int(len(Score)*noise_rate)].shape, tmp.shape, "wew")
+    noise_label[idx[:int(len(Score)*noise_rate)], tmp] = 1
     # print(int(len(Score)*noise_rate), "noise rate: ", np.sum(noise_label)/len(noise_label))
     # print(noise_label[:100])
+    # print(noise_label.shape)
     return noise_label 
 
 class new_DS(Dataset):
@@ -460,6 +465,7 @@ class new_DS(Dataset):
         self.args = args
         self.flag = flag 
         self.data = ds
+        args.enc_in = ds[0][0].shape[1]
         # args.Score = np.random.uniform(0,1,len(self.data))
 
         # if hasattr(args, "Score") == False: 
@@ -467,14 +473,16 @@ class new_DS(Dataset):
         # print(len(args.Score), len(self.data))
         
         # args.Score = np.random.uniform(0,1,len(self.data))
-        self.noise_label = np.zeros(len(self.data))
-        if args.phase != 0 and args.flag == 'train':
-            self.noise_label = get_noise_label(args.Score[args.seq_len:], args.noise_rate)
+        self.noise_label = np.zeros((len(self.data), args.enc_in))
+        if args.get_score == True and args.flag == 'train': #todo
+            self.noise_label = get_noise_label(args.Score, args.noise_rate, args.enc_in)
         self.index = np.arange(len(self.data))
 
     def __len__(self):
         return len(self.index)
     def __getitem__(self, idx):
+        if self.args.idx == -1: 
+            return (self.data[self.index[idx]][0]), (self.data[self.index[idx]][1]), (self.data[self.index[idx]][2]), (self.data[self.index[idx]][3]), self.noise_label[idx]
         return (self.data[self.index[idx]][0])[:,self.args.idx].reshape(-1,1), (self.data[self.index[idx]][1])[:,self.args.idx].reshape(-1,1), (self.data[self.index[idx]][2]), (self.data[self.index[idx]][3]), self.noise_label[idx]
           
 
@@ -516,7 +524,7 @@ def data_provider(args, flag):
         target=args.target,
         timeenc=timeenc,
         freq=freq,
-        scale=False
+        scale=True
     )
 
     data_set = new_DS(data_set, args, flag) #* multivariate -> univariate

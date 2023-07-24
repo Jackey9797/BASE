@@ -46,9 +46,9 @@
     "loss": "mse",
 
     "/*dataset related args*/": "//",
-    "data_name":"electricity",
+    "data_name":"ETTh1",
     "save_data_path": "data/ECL/",
-    "data_process": false,
+    "data_process": true,
     "embed": "timeF",
     "freq": "h",
     "begin_phase": 0,

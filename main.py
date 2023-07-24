@@ -272,6 +272,8 @@ class base_framework:
 
     def get_Score(self):
         self.args.Score = []
+        self.args.use_cm = False
+        self.args.get_score = True
         cn = 0
         with torch.no_grad():
             for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.score_loader):
@@ -299,8 +301,12 @@ class base_framework:
                 true = batch_y.detach().cpu()
                 
                 # print(len(list(self.lossfunc(pred, true, reduction="none").mean(dim=0).detach().cpu().numpy())))
-                self.args.Score += self.lossfunc(pred, true, reduction="none").mean(dim=1).flatten().detach().cpu().tolist()
-                cn += 1
+                if self.args.Score == []: self.args.Score = self.lossfunc(pred, true, reduction="none").mean(dim=1).detach().cpu().numpy()
+                else : self.args.Score = np.concatenate([self.args.Score, self.lossfunc(pred, true, reduction="none").mean(dim=1).detach().cpu().numpy()])
+                cn += 1 #todo discard correction when get score
+
+        self.args.use_cm = True
+        
 
     def pretrain_T(self):
         _, self.train_loader = data_provider(args, 'train')     
@@ -344,8 +350,8 @@ class base_framework:
             true = batch_y
             # print("batch_x ", batch_y[1,1,1])
             # print("pred ", outputs, outputs.dtype)
-
             loss = self.lossfunc(pred, true, reduction="none").mean(dim=1)
+            # print(label.shape, loss.shape)
             loss = (loss * (1 - label.to(self.args.device))).mean()
             #! adjust here
             # print(batch_x[1, 1, 1])
@@ -492,12 +498,15 @@ class base_framework:
         self.args.train_mode = 'pretrain'
         for self.epoch in range(self.args.epoch): #* train body 
             if self.args.train_mode == 'pretrain': 
+                self.args.train_mode = 'joint' #*
                 training_loss = self.pretrain_S()
                 #todo train S()
                 validation_loss = self.valid_S()
                 self.get_Score()
                 #todo val + score 
                 self.args.logger.info(f"epoch:{self.epoch}, training loss:{training_loss:.4f} validation loss:{validation_loss:.4f}")
+                
+
                 self.pretrain_T()
                 ##
                 validation_loss_T = self.valid_T()
@@ -524,6 +533,7 @@ class base_framework:
                 else:
                     print('Updating learning rate to {}'.format(self.scheduler_T.get_last_lr()[0]))
                     print('Updating learning rate to {}'.format(self.scheduler_S.get_last_lr()[0]))
+                
                 #todo post process() 
             elif self.args.train_mode == 'joint': 
                 training_loss = self.joint_train()
@@ -559,7 +569,8 @@ class base_framework:
             elif self.args.train_mode == 'normal':
                 pass 
 
-            self.args.train_mode = 'joint'
+            
+            
 
 
         # after training has been done
@@ -688,6 +699,10 @@ def init_args(args):
     args.path = osp.join(args.exp_path, args.logname+args.time)
     args.num_workers = 4
     args.start_train = 0
+    args.train_mode = 'pretrain'
+    args.get_score = False
+    args.use_cm = True
+
     ct.mkdirs(args.path)
     if args.train == False: args.load = False
     return args

@@ -155,6 +155,7 @@ class Correction_Module(nn.Module):
         self.args = args 
 
     def forward(self, x):
+        if not self.args.use_cm: return x, x
         # x: [Batch, C，d, P ]
         # x = self.Refiner(x)
         x_ = x.permute(0, 1, 3, 2)

@@ -12,12 +12,27 @@ class Enhancer(object):
     def identity(self, x): 
         return x 
 
-    def jitter(self, x, sigma=0.08):
-        # https://arxiv.org/pdf/1706.00527.pdf
-        return x + torch.randn(size=x.shape).to(self.args.device) * sigma
+    def jitter(self, x, sigma=0.2):
+        # use the plot to visualize x[3]
+        import matplotlib.pyplot as plt
+
+        plt.plot(x[3].cpu().numpy()) 
+        plt.savefig('before.png')
+        plt.close()
+
+        x = x + torch.randn(size=x.shape).to(self.args.device) * sigma
+        plt.plot(x[3].cpu().numpy()) 
+        plt.savefig('after.png')
+        return x
 
     def spike(self, x): 
         x = x.permute(0, 2, 1)
+
+        import matplotlib.pyplot as plt
+        plt.plot(x[3].cpu().numpy()) 
+        plt.savefig('before1.png')
+        plt.close()
+        
         idx = torch.randint(low=0, high=self.args.seq_len-1, size=(x.shape[0], x.shape[1], 1), device=x.device) 
         amplify = torch.randint(low=5, high=20, size=(x.shape[0], x.shape[1], 1), device=x.device) 
         sign = torch.sign(torch.randn( size=(x.shape[0], x.shape[1], 1), device=x.device)) 
@@ -29,17 +44,26 @@ class Enhancer(object):
 
         # idx = torch.cat([first_axis, second_axis, idx], dim=-1).reshape(-1, 3)
         x[first_axis, second_axis, idx] += sign * max_value * amplify 
+        plt.plot(x[3].cpu().numpy()) 
+        plt.savefig('after1.png')
+        
         return x.permute(0, 2, 1) 
 
     def substitude(self, x): 
         if x.shape[2] == 1: return x
         x = x.permute(0, 2, 1)
+        import matplotlib.pyplot as plt
+        plt.plot(x[3].cpu().numpy()) 
+        plt.savefig('before2.png')
+        plt.close()
         b = x.shape[0] 
         for i in range(len(b)): 
             c_idx = torch.randint(low=0, high=x.shape[1] - 1, size=(x.shape[1],), device=x.device) 
             t_idx = torch.randint(low=0, high=x.shape[2] - 24, size=(1,), device=x.device) 
             x[i, :, t_idx:t_idx+24] = x[i, c_idx, t_idx:t_idx+24]
-
+        plt.plot(x[3].cpu().numpy()) 
+        plt.savefig('after2.png')
+        exit(0)
         return x.permute(0, 2, 1)
     
     def __call__(self, x) -> Any:
