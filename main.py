@@ -401,7 +401,9 @@ class base_framework:
                 else: 
                     pred_S = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                     pred_T = self.T(batch_x, batch_x_mark, dec_inp, batch_y_mark)
-        
+
+            # if self.args.enhanced_training: 
+            #     enhanced_x = 
 
             f_dim = -1 if self.args.features == 'MS' else 0
             pred_S = pred_S[:, -self.args.pred_len:, f_dim:]
@@ -411,9 +413,14 @@ class base_framework:
             true = batch_y
             # print("batch_x ", batch_y[1,1,1])
             # print("pred ", outputs, outputs.dtype)
-            normal_mask = (1 - label).reshape(len(label),1,1,1).to(self.args.device)
             # print(F_S[2,0,2:3,23:29], F_T[2,0,2:3,23:29]) 
-            loss_KD = self.lossfunc(pred_S * normal_mask, pred_T.detach() * normal_mask, reduction="mean")
+            loss_KD = 0
+            print(args.aligner)
+            print(self.args == args)
+            if args.aligner: 
+                normal_mask = (1 - label).reshape(len(label),1,1,1).to(self.args.device)
+                loss_KD = self.lossfunc(pred_S * normal_mask, pred_T.detach() * normal_mask, reduction="mean")
+            print(loss_KD)
             # [Batch, C，P, d ]
             loss_S = self.lossfunc(pred_S, true, reduction="mean")
             loss_T = self.lossfunc(pred_T, true, reduction="none").mean(dim=1)
@@ -703,11 +710,14 @@ def parse_args():
     parser.add_argument("--device", type=str, default="cuda:0")
     parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl")
     parser.add_argument("--idx", type=int, default=213)
+    parser.add_argument("--aligner", type=int, default=0)
+    parser.add_argument("--refiner", type=int, default=0)
+    parser.add_argument("--seed", type=int, default=2021)
     args = parser.parse_args() 
     return args 
 
 if __name__ == "__main__":
     args = parse_args() #* args needs adjust frequently and static
-    seed_set(2021) 
+    seed_set(args.seed) 
     for i in range(args.iteration):
         main(args) #* run framework for one time 
