@@ -277,6 +277,7 @@ class base_framework:
         return validation_loss
 
     def get_Score(self):
+        self.S.eval()
         self.args.Score = []
         self.args.use_cm = False
         self.args.get_score = True
@@ -443,9 +444,9 @@ class base_framework:
             #         plt.plot(batch_x[i].cpu().numpy()) 
             #         plt.savefig('before{}.png'.format(i))
             #         plt.close()
-
-            if args.aligner: 
+            if args.aligner and self.args.need_align: 
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
+                # print(F_T.shape, F_S.shape, label.shape, normal_mask.shape)
                 loss_KD = self.lossfunc(F_S * normal_mask, F_T.detach() * normal_mask, reduction="mean")
             # [Batch, C，P, d ]
             loss_S = self.lossfunc(pred_S, true, reduction="mean")
@@ -530,6 +531,10 @@ class base_framework:
 
                 print("vs, vt", validation_loss, validation_loss_T)
                 ##
+                if validation_loss > validation_loss_T: 
+                    self.args.need_align = True
+                else : 
+                    self.args.need_align = False
                 #todo train T()
 
                 # Early Stop
@@ -560,6 +565,10 @@ class base_framework:
                 validation_loss_T = self.valid_T()
 
                 print("vs, vt", validation_loss, validation_loss_T)
+                if validation_loss > validation_loss_T: 
+                    self.args.need_align = True
+                else :
+                    self.args.need_align = False
                 ##
                 self.get_Score()
 
@@ -603,6 +612,7 @@ class base_framework:
             os.system('python main.py --conf ECL-DLinear_t --test_model_path {} > test.out'.format(osp.join(path, "best_model.pkl")))
         self.S = best_S
         self.S = self.S.to(self.args.device)        
+        print("check", best_model_path, " & ", self.args.valid_loss_T)
         
     def report_result(self):
         global result
@@ -756,6 +766,9 @@ def parse_args():
     parser.add_argument("--refiner", type=int, default=0)
     parser.add_argument("--enhance", type=int, default=0)
     parser.add_argument("--seed", type=int, default=2021)
+
+    parser.add_argument("--batch_size", type=int, default=128)
+
     args = parser.parse_args() 
     return args 
 

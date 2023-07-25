@@ -166,7 +166,7 @@ class Correction_Module(nn.Module):
         if self.args.refiner:
             x_refined = self.Refiner(x_).permute(0, 1, 3, 2)
 
-        return x_refined, self.Aligner(x_)
+        return x_refined, self.Aligner(x_).permute(0, 1, 3, 2)
 
 class Model(nn.Module):
     def __init__(self, args):
