@@ -128,7 +128,7 @@ class Refiner(nn.Module):
     def __init__(self, args):
         super(Refiner, self).__init__()
         self.args = args 
-        self.refiner_block_num = 1 
+        self.refiner_block_num = args.refiner_block_num
         self.blocks = nn.ModuleList([
             Refiner_block(args.d_model) for _ in range(self.refiner_block_num)
         ])

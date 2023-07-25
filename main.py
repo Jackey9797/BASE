@@ -134,6 +134,9 @@ class base_framework:
     
     def static_strategy(self):     
         self.S = Source_Network.Model(self.args).float().to(self.args.device)
+        if self.args.same_init: 
+            import copy
+            self.args.Base_T = copy.deepcopy(self.S.base_model)
         self.T = Target_Network.Model(self.args).float().to(self.args.device)
         global result
         result[self.args.pred_len] = {"mae":{}, "mape":{}, "rmse":{}}
@@ -486,6 +489,11 @@ class base_framework:
         ##* Model Optimizer
         self.optimizer_S = optim.Adam(self.S.parameters(), lr=self.args.lr)
         self.optimizer_T = optim.Adam(self.T.parameters(), lr=self.args.lr)
+
+        # for i in self.S.named_parameters(): print(i) 
+        # print("T:\n")
+        # for i in self.T.named_parameters(): print(i) 
+
         if self.args.loss == "mse": self.lossfunc = func.mse_loss
         elif self.args.loss == "huber": self.lossfunc = func.smooth_l1_loss
 
@@ -752,6 +760,7 @@ def parse_args():
 
     parser.add_argument("--load", action="store_true", default=True)
     parser.add_argument("--build_graph", action="store_true", default=False)
+    parser.add_argument("--same_init", action="store_true", default=False)
     parser.add_argument("--grad_norm", action="store_true", default=False)
     parser.add_argument("--root_path", type=str, default="")
     parser.add_argument("--exp_path", type=str, default="exp/")
@@ -764,6 +773,7 @@ def parse_args():
     parser.add_argument("--idx", type=int, default=213)
     parser.add_argument("--aligner", type=int, default=0)
     parser.add_argument("--refiner", type=int, default=0)
+    parser.add_argument("--refiner_block_num", type=int, default=1)
     parser.add_argument("--enhance", type=int, default=0)
     parser.add_argument("--seed", type=int, default=2021)
 

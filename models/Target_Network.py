@@ -8,7 +8,10 @@ from models import informer
 class Model(nn.Module):
     def __init__(self, args):
         super(Model, self).__init__()
-        self.base_model = eval(args.model_name).Model(args)
+        if not args.same_init:
+            self.base_model = eval(args.model_name).Model(args)
+        else : 
+            self.base_model = args.Base_T
         self.args = args 
         #todo 
 
