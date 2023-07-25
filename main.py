@@ -34,6 +34,8 @@ import pandas as pd
 
 from data_process import get_dataset, data_provider
 from torch.utils.data import DataLoader, dataloader, Dataset
+import warnings
+warnings.filterwarnings("ignore")
 
 result = {}
 pin_memory = True 
@@ -420,7 +422,7 @@ class base_framework:
             if self.args.enhance: 
                 enhanced_x = enhancer(batch_x) 
                 _, F_T_wn = self.T(enhanced_x, feature=True)
-                normal_mask = (1 - label).reshape(len(label),1,1,1).to(self.args.device)
+                normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
                 loss_rec = self.lossfunc(F_T * normal_mask, self.S.correction_module.Refiner(F_T_wn) * normal_mask, reduction="mean") 
                 # loss_n_pred = self.
 
@@ -443,7 +445,7 @@ class base_framework:
             #         plt.close()
 
             if args.aligner: 
-                normal_mask = (1 - label).reshape(len(label),1,1,1).to(self.args.device)
+                normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
                 loss_KD = self.lossfunc(F_S * normal_mask, F_T.detach() * normal_mask, reduction="mean")
             # [Batch, C，P, d ]
             loss_S = self.lossfunc(pred_S, true, reduction="mean")

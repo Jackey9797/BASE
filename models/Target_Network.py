@@ -9,11 +9,14 @@ class Model(nn.Module):
     def __init__(self, args):
         super(Model, self).__init__()
         self.base_model = eval(args.model_name).Model(args)
+        self.args = args 
         #todo 
 
     def forward(self, x, feature=False):
         # x: [Batch, Input length, Channel]
+        self.args.use_cm = False
         x, F = self.base_model(x)
+        self.args.use_cm = True
         if not feature:
             return x
         return x, F # to [Batch, Output length, Channel]
