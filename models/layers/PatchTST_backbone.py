@@ -58,7 +58,7 @@ class PatchTST_backbone(nn.Module):
             self.head = Flatten_Head(self.individual, self.n_vars, self.head_nf, target_window, head_dropout=head_dropout)
         
     
-    def forward(self, z):                                                                   # z: [bs x nvars x seq_len]
+    def forward(self, z, cm_forward=True):                                                                   # z: [bs x nvars x seq_len]
         # norm
         # print(self.revin) true
         if self.revin: 
@@ -75,7 +75,10 @@ class PatchTST_backbone(nn.Module):
         # model
         z_ = self.backbone(z)     
                    
-        z_, F = self.cm(z_)
+        # print(self.cm.args.use_cm)
+        F = z_
+        if cm_forward == True: 
+            z_, F = self.cm(z_)
                                                                    # z: [bs x nvars x d_model x patch_num]
         z = self.head(z_)                                                                    # z: [bs x nvars x target_window] 
         

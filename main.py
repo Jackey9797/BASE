@@ -137,6 +137,7 @@ class base_framework:
         if self.args.same_init: 
             import copy
             self.args.Base_T = copy.deepcopy(self.S.base_model)
+            self.args.Base_T.configs = self.S.args
         self.T = Target_Network.Model(self.args).float().to(self.args.device)
         global result
         result[self.args.pred_len] = {"mae":{}, "mape":{}, "rmse":{}}
@@ -426,8 +427,9 @@ class base_framework:
             if self.args.enhance: 
                 enhanced_x = enhancer(batch_x) 
                 _, F_T_wn = self.T(enhanced_x, feature=True)
+                # print(F_T.shape, F_T_wn.shape)
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
-                loss_rec = self.lossfunc(F_T * normal_mask, self.S.correction_module.Refiner(F_T_wn) * normal_mask, reduction="mean") 
+                loss_rec = self.lossfunc(F_T.detach() * normal_mask, self.S.correction_module.Refiner(F_T_wn.permute(0, 1, 3, 2)).permute(0, 1, 3, 2) * normal_mask, reduction="mean") 
                 # loss_n_pred = self.
 
             f_dim = -1 if self.args.features == 'MS' else 0
@@ -457,7 +459,7 @@ class base_framework:
             loss_T = self.lossfunc(pred_T, true, reduction="none").mean(dim=1)
             loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
             if self.args.grad_norm: loss_T = loss_T * (len(label.flatten()) / label.sum()) 
-            loss = loss_S + loss_T + loss_KD * 10 + loss_rec
+            loss = loss_S + loss_T + loss_KD * 10 + loss_rec * 1
             # print(batch_x[1, 1, 1])
 
             # print("loss {:.7f}".format(loss.item()))
@@ -523,6 +525,8 @@ class base_framework:
 
         self.args.start_train = 1
         self.args.train_mode = 'pretrain'
+
+
         for self.epoch in range(self.args.epoch): #* train body 
             if self.args.train_mode == 'pretrain': 
                 self.args.train_mode = 'joint' #*
@@ -603,7 +607,8 @@ class base_framework:
             
             elif self.args.train_mode == 'normal':
                 pass 
-
+            
+            
             
             
 

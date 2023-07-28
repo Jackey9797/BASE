@@ -7,6 +7,7 @@ python main.py --conf ECL-PatchTST --noise_rate 0.5 --idx -1 --data_name ETTh2 -
 # python main.py --conf ECL-PatchTST --noise_rate 0.5 --idx -1 --data_name ETTh2 --device "cuda:1" --seed 2034 --same_init  --aligner 1 > exp_a/ETT_34_always_a_si_A10.log
 # python main.py --conf ECL-PatchTST --noise_rate 0.5 --idx -1 --data_name ETTh2 --device "cuda:1" --seed 2035 --same_init   > exp_a/ETT_35_always_a_si_A10_b.log
 # python main.py --conf ECL-PatchTST --noise_rate 0.5 --idx -1 --data_name ETTh2 --device "cuda:1" --seed 2035 --same_init  --aligner 1 > exp_a/ETT_35_always_a_si_A10.log
+python main.py --conf ECL-PatchTST --noise_rate 0.5 --idx -1 --data_name ETTh2 --device "cuda:1" --seed 2034 --same_init   > exp_a/ETT_t34_always_a_si_A10_b.log; python main.py --conf ECL-PatchTST --noise_rate 0.5 --idx -1 --data_name ETTh2 --device "cuda:1" --seed 2034 --same_init  --aligner 1 > exp_a/ETT_t34_always_a_si_A10.log
 
 
 # python main.py --conf ECL-PatchTST --noise_rate 0.1 --idx 166 --device "cuda:1" --seed 2040 --same_init  > exp_a/166_2_4_always_a_si_A10_base.log

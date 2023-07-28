@@ -59,7 +59,7 @@ class Refiner_block(nn.Module):
         expansion_factor = 2.,
         add_residual = True, ##todo
         causal = False,
-        dropout = 0.,
+        dropout = 0.2,
         laplace_attn_fn = False,
         rel_pos_bias = False,
         norm_klass = nn.LayerNorm
@@ -151,12 +151,12 @@ class Correction_Module(nn.Module):
         self.label = np.zeros(args.batch_size)
         self.Aligner = nn.Linear(args.d_model, args.d_model)
         # self.Refiner = nn.Linear(args.d_model, args.d_model) # simplest implementation of Refiner
+        # self.Refiner = nn.Sequential(*[nn.Linear(args.d_model, 32), nn.ReLU(), nn.Linear(32, args.d_model)])
         self.Refiner = Refiner(args)
+        
         self.args = args 
 
     def forward(self, x):
-        if not self.args.use_cm: 
-            return x, x
         # x: [Batch, C，d, P ]
         # x = self.Refiner(x)
         x_ = x.permute(0, 1, 3, 2)
@@ -174,6 +174,7 @@ class Model(nn.Module):
         self.correction_module = Correction_Module(args)
         args.cm = self.correction_module
         self.base_model = eval(args.model_name).Model(args) # cm 通过args嵌入到模型内部
+        self.args = args
         #todo 
 
     def forward(self, x, feature=False):

@@ -1,0 +1,45 @@
+2023-07-28 15:28:16,282 - logger name:exp/ECL-PatchTST2023-07-28-15:28:16.282402/ECL-PatchTST.log
+2023-07-28 15:28:16,283 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-07-28 15:28:16,484 - [*] phase 0 Dataset load!
+2023-07-28 15:28:17,451 - [*] phase 0 Training start
+train 8209
+2023-07-28 15:28:37,489 - epoch:0, training loss:0.6227 validation loss:0.3658
+train 8209
+vs, vt 0.36583254316991026 0.36910859935662965
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.3073001517490907 0.3178049163384871
+2023-07-28 15:29:26,127 - epoch:1, training loss:0.7268 validation loss:0.3073
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.2856984588910233 0.29690903035754507
+2023-07-28 15:30:04,267 - epoch:2, training loss:0.5876 validation loss:0.2857
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.281349689276381 0.28900189071216364
+2023-07-28 15:30:42,389 - epoch:3, training loss:0.4979 validation loss:0.2813
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.2816881417212161 0.2826673440973867
+2023-07-28 15:31:19,639 - epoch:4, training loss:0.4621 validation loss:0.2817
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.288281534883109 0.2830117434601892
+2023-07-28 15:31:57,274 - epoch:5, training loss:0.4384 validation loss:0.2883
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.2935817724263126 0.28058166039938276
+2023-07-28 15:32:41,165 - epoch:6, training loss:0.4170 validation loss:0.2936
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209

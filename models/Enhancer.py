@@ -71,5 +71,6 @@ class Enhancer(object):
     
     def __call__(self, x) -> Any:
         bs = x.shape[0] // 4
+        # x = torch.cat([x[:bs], self.substitude(x[bs:])], dim=0)
         x = torch.cat([x[:bs], self.jitter(x[bs:bs*2]), self.spike(x[bs*2:bs*3]), self.substitude(x[bs*3:])], dim=0)
         return x

@@ -89,6 +89,6 @@ class Model(nn.Module):
             x = x.permute(0,2,1)    # x: [Batch, Input length, Channel]
         else:
             x = x.permute(0,2,1)    # x: [Batch, Channel, Input length]
-            x, F = self.model(x)
+            x, F = self.model(x, cm_forward = self.configs.use_cm)
             x = x.permute(0,2,1)    # x: [Batch, Input length, Channel]
         return x, F

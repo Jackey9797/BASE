@@ -18,8 +18,12 @@ class Model(nn.Module):
     def forward(self, x, feature=False):
         # x: [Batch, Input length, Channel]
         self.args.use_cm = False
+        # print("now T start")
+        # print(self.args.use_cm)
         x, F = self.base_model(x)
         self.args.use_cm = True
+        # print("now T end")
+        
         if not feature:
             return x
         return x, F # to [Batch, Output length, Channel]
