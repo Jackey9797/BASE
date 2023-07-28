@@ -10,3 +10,47 @@ test 2785
 train 8209
 2023-07-28 18:29:08,073 - epoch:0, training loss:0.6227 validation loss:0.3658
 train 8209
+vs, vt 0.36583254316991026 0.36897858672521333
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.3074102760715918 0.31744103438474913
+2023-07-28 18:30:00,393 - epoch:1, training loss:1.0439 validation loss:0.3074
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.2855317375876687 0.2978882786225189
+2023-07-28 18:30:41,142 - epoch:2, training loss:0.8205 validation loss:0.2855
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.28116836974566634 0.2873935377733274
+2023-07-28 18:31:22,159 - epoch:3, training loss:0.6658 validation loss:0.2812
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.2819214188917117 0.28467216495085845
+2023-07-28 18:32:03,690 - epoch:4, training loss:0.6166 validation loss:0.2819
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.2900056564672427 0.2958530475470153
+2023-07-28 18:32:44,346 - epoch:5, training loss:0.5846 validation loss:0.2900
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.29306790469722316 0.3004996634342454
+2023-07-28 18:33:25,250 - epoch:6, training loss:0.5501 validation loss:0.2931
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.2984007600356232 0.3166331230578097
+2023-07-28 18:34:06,216 - epoch:7, training loss:0.5157 validation loss:0.2984
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.3197586837817322 0.31101197173649614
+2023-07-28 18:34:47,046 - epoch:8, training loss:0.4498 validation loss:0.3198
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209

@@ -283,7 +283,7 @@ class base_framework:
     def get_Score(self):
         self.S.eval()
         self.args.Score = []
-        self.args.use_cm = False
+        # self.args.use_cm = False
         self.args.get_score = True
         cn = 0
         with torch.no_grad():
@@ -429,7 +429,7 @@ class base_framework:
                 _, F_T_wn = self.T(enhanced_x, feature=True)
                 # print(F_T.shape, F_T_wn.shape)
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
-                loss_rec = self.lossfunc(F_T.detach() * normal_mask, self.S.correction_module.Refiner(F_T_wn.permute(0, 1, 3, 2)).permute(0, 1, 3, 2) * normal_mask, reduction="mean") 
+                loss_rec = self.lossfunc(F_T.detach() * normal_mask, self.S.correction_module.Refiner(F_T_wn.detach().permute(0, 1, 3, 2)).permute(0, 1, 3, 2) * normal_mask, reduction="mean") 
                 # loss_n_pred = self.
 
             f_dim = -1 if self.args.features == 'MS' else 0
