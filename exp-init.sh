@@ -14,3 +14,4 @@ python main.py --conf ECL-PatchTST --noise_rate 0.5 --idx -1 --device "cuda:0" -
 建文件夹
 记得改 process = True
 然后再跑
+5

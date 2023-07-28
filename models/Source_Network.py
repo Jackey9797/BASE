@@ -130,7 +130,7 @@ class Refiner(nn.Module):
         self.args = args 
         self.refiner_block_num = args.refiner_block_num
         self.blocks = nn.ModuleList([
-            Refiner_block(args.d_model) for _ in range(self.refiner_block_num)
+            Refiner_block(args.d_model, add_residual= (not args.refiner_no_residual)) for _ in range(self.refiner_block_num)
         ])
 
     def forward(self, x):

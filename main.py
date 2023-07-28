@@ -447,7 +447,8 @@ class base_framework:
             #         plt.plot(batch_x[i].cpu().numpy()) 
             #         plt.savefig('before{}.png'.format(i))
             #         plt.close()
-            if args.aligner and self.args.need_align: 
+            if self.args.always_align: self.args.need_align = 1 #! 
+            if self.args.aligner and self.args.need_align: 
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
                 # print(F_T.shape, F_S.shape, label.shape, normal_mask.shape)
                 loss_KD = self.lossfunc(F_S * normal_mask, F_T.detach() * normal_mask, reduction="mean")
@@ -456,7 +457,7 @@ class base_framework:
             loss_T = self.lossfunc(pred_T, true, reduction="none").mean(dim=1)
             loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
             if self.args.grad_norm: loss_T = loss_T * (len(label.flatten()) / label.sum()) 
-            loss = loss_S + loss_T + loss_KD + loss_rec
+            loss = loss_S + loss_T + loss_KD * 10 + loss_rec
             # print(batch_x[1, 1, 1])
 
             # print("loss {:.7f}".format(loss.item()))
@@ -762,6 +763,7 @@ def parse_args():
     parser.add_argument("--build_graph", action="store_true", default=False)
     parser.add_argument("--same_init", action="store_true", default=False)
     parser.add_argument("--grad_norm", action="store_true", default=False)
+    parser.add_argument("--refiner_no_residual", action="store_true", default=False)
     parser.add_argument("--root_path", type=str, default="")
     parser.add_argument("--exp_path", type=str, default="exp/")
     parser.add_argument("--val_test_mix", action="store_true", default=False)
@@ -772,6 +774,7 @@ def parse_args():
     parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl")
     parser.add_argument("--idx", type=int, default=213)
     parser.add_argument("--aligner", type=int, default=0)
+    parser.add_argument("--always_align", type=int, default=1)
     parser.add_argument("--refiner", type=int, default=0)
     parser.add_argument("--refiner_block_num", type=int, default=1)
     parser.add_argument("--enhance", type=int, default=0)
