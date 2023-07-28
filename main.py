@@ -203,7 +203,7 @@ class base_framework:
         validation_loss = 0.0
         cn = 0
         with torch.no_grad():
-            for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.val_loader):
+            for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.test_loader):
                 batch_x = batch_x.float().to(self.args.device)
                 batch_y = batch_y.float()
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
@@ -242,7 +242,7 @@ class base_framework:
         validation_loss = 0.0
         cn = 0
         with torch.no_grad():
-            for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.val_loader):
+            for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.test_loader):
                 batch_x = batch_x.float().to(self.args.device)
                 batch_y = batch_y.float()
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
