@@ -283,7 +283,7 @@ class base_framework:
     def get_Score(self):
         self.S.eval()
         self.args.Score = []
-        # self.args.use_cm = False
+        self.args.use_cm = False
         self.args.get_score = True
         cn = 0
         with torch.no_grad():
@@ -609,7 +609,7 @@ class base_framework:
                 pass 
             
             
-            
+            if self.epoch == 8: break
             
 
 
@@ -783,6 +783,7 @@ def parse_args():
     parser.add_argument("--refiner", type=int, default=0)
     parser.add_argument("--refiner_block_num", type=int, default=1)
     parser.add_argument("--enhance", type=int, default=0)
+    parser.add_argument("--enhance_type", type=int, default=0)
     parser.add_argument("--seed", type=int, default=2021)
 
     parser.add_argument("--batch_size", type=int, default=128)
