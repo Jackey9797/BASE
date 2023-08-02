@@ -139,7 +139,8 @@ class base_framework:
             self.args.Base_T = copy.deepcopy(self.S.base_model)
             self.args.Base_T.configs = self.S.args
         self.T = Target_Network.Model(self.args).float().to(self.args.device)
-        # self.S.base_model.model.head = self.T.base_model.model.head
+        if self.args.share_head:
+            self.S.base_model.model.head = self.T.base_model.model.head
         self.args.S = self.S 
         self.args.T = self.T 
         global result
@@ -318,7 +319,7 @@ class base_framework:
                 # print(len(list(self.lossfunc(pred, true, reduction="none").mean(dim=0).detach().cpu().numpy())))
                 if self.args.Score == []: self.args.Score = self.lossfunc(pred, true, reduction="none").mean(dim=1).detach().cpu().numpy()
                 else : self.args.Score = np.concatenate([self.args.Score, self.lossfunc(pred, true, reduction="none").mean(dim=1).detach().cpu().numpy()])
-                cn += 1 #todo discard correction when get score
+                cn += 1 
 
         self.args.use_cm = True
         
@@ -506,7 +507,18 @@ class base_framework:
             loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
             if self.args.grad_norm: loss_T = loss_T * (len(label.flatten()) / label.sum()) 
             
-            loss = loss_S + loss_T + loss_KD * 10 + loss_anchor 
+            if self.args.share_head: 
+                loss_S.backward(retain_graph=True) 
+                # eliminate the grad of the self.S.base_model.model.head 
+                for param in self.S.base_model.model.head.parameters():
+                    # print("before", param.grad)
+                    param.grad = torch.zeros_like(param.grad)
+                    # print("after", param.grad)
+
+                loss = loss_T + loss_KD * 10 + loss_anchor 
+
+            else: 
+                loss = loss_S + loss_T + loss_KD * 10 + loss_anchor * self.args.beta
             # print(batch_x[1, 1, 1])
             #* label 1 for normal
             # print("loss {:.7f}".format(loss.item()))
@@ -515,6 +527,12 @@ class base_framework:
             training_loss += float(loss)
             loss.backward()
             self.optimizer_S.step()
+            # for param in self.S.base_model.model.head.parameters():
+            #         print("before", param.grad)
+            if self.args.share_head: 
+                self.optimizer_S.zero_grad()
+            # for param in self.S.base_model.model.head.parameters():
+            #         print("after", param.grad)
             self.optimizer_T.step()
             
             cn += 1
@@ -657,7 +675,7 @@ class base_framework:
             
             self.args.train_mode = 'joint' #*
             
-            if self.epoch == 8: break
+            if self.epoch == 30: break
             
 
 
@@ -838,8 +856,13 @@ def parse_args():
     parser.add_argument("--seed", type=int, default=2021)
 
     parser.add_argument("--batch_size", type=int, default=128)
+    parser.add_argument("--share_head", type=int, default=0)
 
-    parser.add_argument("--jitter_sigma", type=float, default=0.01)
+    parser.add_argument("--jitter_sigma", type=float, default=0.2)
+    parser.add_argument("--slope_rate", type=float, default=0.01)
+    parser.add_argument("--slope_range", type=float, default=0.5)
+
+    parser.add_argument("--beta", type=float, default=1.0)
     args = parser.parse_args() 
     return args 
 

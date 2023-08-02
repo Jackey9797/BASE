@@ -151,7 +151,8 @@ class Correction_Module(nn.Module):
         self.label = np.zeros(args.batch_size)
         self.Aligner = nn.Linear(args.d_model, args.d_model)
         self.Refiner = nn.Linear(args.d_model, args.d_model) # simplest implementation of Refiner
-        # self.Refiner = nn.Sequential(*[nn.Linear(args.d_model, 32), nn.ReLU(), nn.Linear(32, args.d_model)])
+        # self.Refiner = nn.Linear(args.d_model, args.d_model) # simplest implementation of Refiner
+        # self.Refiner = nn.Sequential(*[nn.Linear(args.d_model, args.d_model), nn.ReLU(), nn.Linear(args.d_model, args.d_model)])
         # self.Refiner = Refiner(args)
         
         self.args = args 
@@ -165,6 +166,8 @@ class Correction_Module(nn.Module):
         # print(self.args.refiner)
         if self.args.refiner:
             x_refined = self.Refiner(x_).permute(0, 1, 3, 2)
+        if self.args.share_head:  #* use the T forecastor after aligne
+            x_refined = self.Aligner(x_refined.permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
 
         return x_refined, self.Aligner(x_).permute(0, 1, 3, 2)
 
@@ -179,10 +182,11 @@ class Model(nn.Module):
 
     def forward(self, x, feature=False, given_feature=None):
         # x: [Batch, Input length, Channel]
-        if self.args.train_mode == 'joint': #!todo 
+        if not self.args.share_head: #* controling use the F from Aligner 
             x, F = self.base_model(x, given_feature=given_feature)
         else: 
             x, F = self.base_model(x, given_feature=given_feature)
+            x, _ = self.base_model(x, given_feature=F)
         # print(x_.shape) #* 16 * 1 * 128 * 42
         # print(x.shape) #* 16 * 96 * 1
         # x = self.correction_module(x)
