@@ -6,6 +6,7 @@ import numpy as np
 from models import DLinear
 from models import PatchTST 
 from models import informer
+from models.layers.PatchTST_backbone import _MultiheadAttention
 
 class OffsetScale(nn.Module):
     def __init__(self, dim, heads = 1):
@@ -85,13 +86,16 @@ class Refiner_block(nn.Module):
         self.offsetscale = OffsetScale(query_key_dim, heads = 2)
 
         self.to_out = nn.Sequential(
-            nn.Linear(hidden_dim, dim),
-            nn.Dropout(dropout)
-        )
+            nn.Linear(dim, dim)
+            
+        ) #*
 
         self.shrinkage = Shrinkage(dim, gap_size=(1)) #todo
         self.add_residual = add_residual
+        self.self_attn = _MultiheadAttention(dim, 16, 64, 64, attn_dropout=0, proj_dropout=0, res_attention=False)
 
+        # Add & Norm
+        self.dropout_attn = nn.Dropout(dropout)
 
     def forward(
         self,
@@ -99,25 +103,12 @@ class Refiner_block(nn.Module):
         rel_pos_bias = None,
         mask = None
     ):
-        seq_len, device = x.shape[-2], x.device
-
-        normed_x = self.norm(x)
-        v, gate = self.to_hidden(normed_x).chunk(2, dim = -1)
         
-        qk = self.to_qk(normed_x)
-        q, k = self.offsetscale(qk)
 
-        sim = einsum('b i d, b j d -> b i j', q, k)
-
-        attn = self.attn_fn(sim / seq_len)
-        attn = self.dropout(attn)
-
-        out = einsum('b i j, b j d -> b i d', attn, v)
-        out = out * gate
-
+        out, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=None)
+        # out = self.shrinkage(out.permute(0, 2, 1)).permute(0, 2, 1) #* soft threshold before residual
+        out  = self.dropout_attn(out)
         out = self.to_out(out)
-
-        out = self.shrinkage(out.permute(0, 2, 1)).permute(0, 2, 1) #* soft threshold before residual
 
         if self.add_residual:
             out = out + x

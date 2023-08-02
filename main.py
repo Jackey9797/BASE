@@ -518,7 +518,8 @@ class base_framework:
                 loss = loss_T + loss_KD * 10 + loss_anchor 
 
             else: 
-                loss = loss_S + loss_T + loss_KD * 10 + loss_anchor * self.args.beta
+                loss = loss_S + loss_T + loss_KD * 10  + loss_anchor * self.args.beta
+                #* here KD decay
             # print(batch_x[1, 1, 1])
             #* label 1 for normal
             # print("loss {:.7f}".format(loss.item()))
