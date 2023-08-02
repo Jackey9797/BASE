@@ -77,7 +77,7 @@ class Model(nn.Module):
                                   subtract_last=subtract_last, verbose=verbose, cm = configs.cm, **kwargs)
     
     
-    def forward(self, x):      
+    def forward(self, x, given_feature = None):      
              # x: [Batch, Input length, Channel]
         # print(self.decomposition) false
         if self.decomposition:
@@ -89,6 +89,6 @@ class Model(nn.Module):
             x = x.permute(0,2,1)    # x: [Batch, Input length, Channel]
         else:
             x = x.permute(0,2,1)    # x: [Batch, Channel, Input length]
-            x, F = self.model(x, cm_forward = self.configs.use_cm)
+            x, F = self.model(x, cm_forward = self.configs.use_cm, given_feature = given_feature)
             x = x.permute(0,2,1)    # x: [Batch, Input length, Channel]
         return x, F

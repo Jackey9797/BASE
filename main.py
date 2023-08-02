@@ -139,12 +139,15 @@ class base_framework:
             self.args.Base_T = copy.deepcopy(self.S.base_model)
             self.args.Base_T.configs = self.S.args
         self.T = Target_Network.Model(self.args).float().to(self.args.device)
+        # self.S.base_model.model.head = self.T.base_model.model.head
+        self.args.S = self.S 
+        self.args.T = self.T 
         global result
         result[self.args.pred_len] = {"mae":{}, "mape":{}, "rmse":{}}
 
     def pretrain_S(self): 
         _, self.train_loader = data_provider(args, 'train')     
-                
+        # self.args.use_cm = False
         training_loss = 0.0 
         self.S.train() 
         cn = 0 
@@ -196,6 +199,7 @@ class base_framework:
                 self.scheduler_S.step()
                 
         training_loss = training_loss/cn 
+        # self.args.use_cm = True
         return training_loss
 
     def valid_S(self):
@@ -423,21 +427,42 @@ class base_framework:
                     pred_S = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                     pred_T = self.T(batch_x, batch_x_mark, dec_inp, batch_y_mark)
 
-            loss_rec = 0
-            if self.args.enhance: 
-                enhanced_x = enhancer(batch_x) 
-                _, F_T_wn = self.T(enhanced_x, feature=True)
-                # print(F_T.shape, F_T_wn.shape)
-                normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
-                loss_rec = self.lossfunc(F_T.detach() * normal_mask, self.S.correction_module.Refiner(F_T_wn.detach().permute(0, 1, 3, 2)).permute(0, 1, 3, 2) * normal_mask, reduction="mean") 
-                # loss_n_pred = self.
-
             f_dim = -1 if self.args.features == 'MS' else 0
             pred_S = pred_S[:, -self.args.pred_len:, f_dim:]
             pred_T = pred_T[:, -self.args.pred_len:, f_dim:]
             batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
 
             true = batch_y
+
+            loss_rec = 0
+            loss_anchor = 0
+            if self.args.enhance: 
+                enhanced_x = enhancer(batch_x) 
+
+                self.T.eval() #! add eval  
+                _, F_T_wn = self.T(enhanced_x, feature=True)
+                # eval_pred_T, eval_F_T = 
+                # F_T = torch.ones_like(F_T) #!
+                # print(F_T.shape, F_T_wn.shape)
+                normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
+                anchor_pred, anchor_F = self.T(batch_x, feature=True)
+                # refined_F = self.S.correction_module.Refiner(F_T_wn.permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
+                refined_F = self.S.correction_module.Refiner(F_T_wn.detach().permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
+                loss_rec = self.lossfunc(anchor_F.detach() * normal_mask, refined_F * normal_mask, reduction="mean") 
+                # loss_n_pred = self.
+                self.T.train()
+
+                loss_MSE_R = self.lossfunc(self.T(batch_x, given_feature=refined_F), true)
+                # print("before backward:\n")
+                # for i in self.S.correction_module.Refiner.parameters(): 
+                #     print(i)
+                # loss_rec.backward()
+                # print("after backward:\n")
+                # for i in self.S.correction_module.Refiner.parameters(): 
+                #     print(i.grad)
+                # loss_rec = 0 
+                loss_anchor = loss_rec + loss_MSE_R 
+
             # print("batch_x ", batch_y[1,1,1])
             # print("pred ", outputs, outputs.dtype)
             # print(F_S[2,0,2:3,23:29], F_T[2,0,2:3,23:29]) 
@@ -446,6 +471,26 @@ class base_framework:
             # import matplotlib.pyplot as plt
             # for i in range(len(label)): 
             #     if label[i].item() == 1:
+            def vis(idx, channel): 
+                import matplotlib.pyplot as plt 
+                pred_S, F_S = self.S(batch_x, feature=True)
+                pred_T, F_T = self.T(batch_x, feature=True)
+                plt.plot(torch.cat([batch_x[idx,-96:,channel].cpu(), pred_S[idx,:,channel].cpu()]).detach().numpy(), color='g') 
+                plt.plot(torch.cat([batch_x[idx,-96:,channel].cpu(), pred_T[idx,:,channel].cpu()]).detach().numpy(), color='orange') 
+                plt.plot(torch.cat([batch_x[idx,-96:,channel].cpu(), batch_y[idx,:,channel].cpu()]).detach().numpy())
+                plt.legend(['S', 'T', 'GT'])
+                # show loss by text
+                plt.text(0,0, "loss S: {:.5f}; loss T: {:.5f}".format(self.lossfunc(batch_y[idx,:,channel], pred_S[idx,:,channel],reduction='mean').item(), self.lossfunc(batch_y[idx,:,channel], pred_T[idx,:,channel],reduction='mean').item()))
+                plt.savefig('before{}.png'.format(1))
+                plt.close()
+
+                plt.plot(torch.cat([batch_x[idx,:,channel].cpu(), pred_T[idx,:,channel].cpu()]).detach().numpy(), color='orange') 
+                plt.plot(torch.cat([batch_x[idx,:,channel].cpu(), batch_y[idx,:,channel].cpu()]).detach().numpy())
+                plt.savefig('all{}.png'.format(1))
+                plt.close()
+                
+                #todo add loss, see if the sample selection is correct 
+                print(label[idx, channel])
             #         plt.plot(batch_x[i].cpu().numpy()) 
             #         plt.savefig('before{}.png'.format(i))
             #         plt.close()
@@ -455,13 +500,15 @@ class base_framework:
                 # print(F_T.shape, F_S.shape, label.shape, normal_mask.shape)
                 loss_KD = self.lossfunc(F_S * normal_mask, F_T.detach() * normal_mask, reduction="mean")
             # [Batch, C，P, d ]
+            #! here to set point 
             loss_S = self.lossfunc(pred_S, true, reduction="mean")
             loss_T = self.lossfunc(pred_T, true, reduction="none").mean(dim=1)
             loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
             if self.args.grad_norm: loss_T = loss_T * (len(label.flatten()) / label.sum()) 
-            loss = loss_S + loss_T + loss_KD * 10 + loss_rec * 1
+            
+            loss = loss_S + loss_T + loss_KD * 10 + loss_anchor 
             # print(batch_x[1, 1, 1])
-
+            #* label 1 for normal
             # print("loss {:.7f}".format(loss.item()))
             # if self.args.ewc and self.inc_state:
             #     loss += self.model.compute_consolidation_loss()
@@ -492,7 +539,8 @@ class base_framework:
         ##* Model Optimizer
         self.optimizer_S = optim.Adam(self.S.parameters(), lr=self.args.lr)
         self.optimizer_T = optim.Adam(self.T.parameters(), lr=self.args.lr)
-
+        # self.optimizer_T = optim.Adam(self.T.base_model.parameters(), lr=self.args.lr)
+        # self.S.base_model.model.head = self.T.base_model.model.head
         # for i in self.S.named_parameters(): print(i) 
         # print("T:\n")
         # for i in self.T.named_parameters(): print(i) 
@@ -529,7 +577,6 @@ class base_framework:
 
         for self.epoch in range(self.args.epoch): #* train body 
             if self.args.train_mode == 'pretrain': 
-                self.args.train_mode = 'joint' #*
                 training_loss = self.pretrain_S()
                 #todo train S()
                 validation_loss = self.valid_S()
@@ -608,6 +655,7 @@ class base_framework:
             elif self.args.train_mode == 'normal':
                 pass 
             
+            self.args.train_mode = 'joint' #*
             
             if self.epoch == 8: break
             
@@ -642,6 +690,8 @@ class base_framework:
 
     def test_model(self):
         self.S.eval()
+        # self.T.eval()
+        # self.S.base_model.model.head = self.T.base_model.model.head
         pred_ = []
         truth_ = []
         loss = 0.0
@@ -760,6 +810,7 @@ def main(args):
 def parse_args():
     import argparse
     parser = argparse.ArgumentParser()
+    parser.add_argument("--loss", type=str, default="mse")
     parser.add_argument("--conf", type=str, default="incremental-naive")
     parser.add_argument("--data_name", type=str, default="electricity")
     parser.add_argument("--iteration", type=int, default=1)
@@ -788,6 +839,7 @@ def parse_args():
 
     parser.add_argument("--batch_size", type=int, default=128)
 
+    parser.add_argument("--jitter_sigma", type=float, default=0.01)
     args = parser.parse_args() 
     return args 
 

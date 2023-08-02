@@ -150,9 +150,9 @@ class Correction_Module(nn.Module):
         super(Correction_Module, self).__init__()
         self.label = np.zeros(args.batch_size)
         self.Aligner = nn.Linear(args.d_model, args.d_model)
-        # self.Refiner = nn.Linear(args.d_model, args.d_model) # simplest implementation of Refiner
+        self.Refiner = nn.Linear(args.d_model, args.d_model) # simplest implementation of Refiner
         # self.Refiner = nn.Sequential(*[nn.Linear(args.d_model, 32), nn.ReLU(), nn.Linear(32, args.d_model)])
-        self.Refiner = Refiner(args)
+        # self.Refiner = Refiner(args)
         
         self.args = args 
 
@@ -177,9 +177,12 @@ class Model(nn.Module):
         self.args = args
         #todo 
 
-    def forward(self, x, feature=False):
+    def forward(self, x, feature=False, given_feature=None):
         # x: [Batch, Input length, Channel]
-        x, F = self.base_model(x)
+        if self.args.train_mode == 'joint': #!todo 
+            x, F = self.base_model(x, given_feature=given_feature)
+        else: 
+            x, F = self.base_model(x, given_feature=given_feature)
         # print(x_.shape) #* 16 * 1 * 128 * 42
         # print(x.shape) #* 16 * 96 * 1
         # x = self.correction_module(x)
