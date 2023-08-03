@@ -139,7 +139,6 @@ class Refiner(nn.Module):
 class Correction_Module(nn.Module):
     def __init__(self, args):
         super(Correction_Module, self).__init__()
-        self.label = np.zeros(args.batch_size)
         self.Aligner = nn.Linear(args.d_model, args.d_model)
         self.Refiner = nn.Linear(args.d_model, args.d_model) # simplest implementation of Refiner
         # self.Refiner = nn.Linear(args.d_model, args.d_model) # simplest implementation of Refiner
@@ -151,16 +150,18 @@ class Correction_Module(nn.Module):
     def forward(self, x):
         # x: [Batch, C，d, P ]
         # x = self.Refiner(x)
+        if len(x.shape) == 3: x = x.unsqueeze(1)
         x_ = x.permute(0, 1, 3, 2)
         #todo x also be refined
         x_refined = x 
         # print(self.args.refiner)
         if self.args.refiner:
+            # print(x_.shape)
             x_refined = self.Refiner(x_).permute(0, 1, 3, 2)
         if self.args.share_head:  #* use the T forecastor after aligne
             x_refined = self.Aligner(x_refined.permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
 
-        return x_refined, self.Aligner(x_).permute(0, 1, 3, 2)
+        return x_refined.squeeze(), self.Aligner(x_).permute(0, 1, 3, 2).squeeze()
 
 class Model(nn.Module):
     def __init__(self, args):
@@ -171,13 +172,13 @@ class Model(nn.Module):
         self.args = args
         #todo 
 
-    def forward(self, x, feature=False, given_feature=None):
+    def forward(self, x, *args, feature=False, given_feature=None):
         # x: [Batch, Input length, Channel]
         if not self.args.share_head: #* controling use the F from Aligner 
-            x, F = self.base_model(x, given_feature=given_feature)
+            x, F = self.base_model(x, *args, given_feature=given_feature)
         else: 
-            x, F = self.base_model(x, given_feature=given_feature)
-            x, _ = self.base_model(x, given_feature=F)
+            x, F = self.base_model(x, *args, given_feature=given_feature)
+            x, _ = self.base_model(x, *args, given_feature=F)
         # print(x_.shape) #* 16 * 1 * 128 * 42
         # print(x.shape) #* 16 * 96 * 1
         # x = self.correction_module(x)

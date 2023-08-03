@@ -15,12 +15,12 @@ class Model(nn.Module):
         self.args = args 
         #todo 
 
-    def forward(self, x, feature=False, given_feature = None):
+    def forward(self, x, *args, feature=False, given_feature = None):
         # x: [Batch, Input length, Channel]
         self.args.use_cm = False
         # print("now T start")
         # print(self.args.use_cm)
-        x, F = self.base_model(x, given_feature = given_feature)
+        x, F = self.base_model(x, *args, given_feature = given_feature)
         self.args.use_cm = True
         # print("now T end")
         
