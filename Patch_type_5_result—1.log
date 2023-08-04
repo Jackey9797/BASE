@@ -1,0 +1,2595 @@
+2023-08-03 21:28:54,636 - logger name:exp/ECL-PatchTST2023-08-03-21:28:54.636651/ECL-PatchTST.log
+2023-08-03 21:28:54,637 - params : {'loss': 'mse', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 0, 'refiner_block_num': 1, 'enhance': 0, 'enhance_type': 0, 'seed': 33, 'batch_size': 128, 'share_head': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-03-21:28:54.636651', 'path': 'exp/ECL-PatchTST2023-08-03-21:28:54.636651', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-03 21:28:54,637 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-03 21:28:54,855 - [*] phase 0 Dataset load!
+2023-08-03 21:28:55,882 - [*] phase 0 Training start
+train 8209
+2023-08-03 21:29:06,607 - epoch:0, training loss:0.6332 validation loss:0.3724
+train 8209
+vs, vt 0.37242638624527236 0.3793460506607186
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.3074986910955472 0.32513153146613727
+2023-08-03 21:29:31,959 - epoch:1, training loss:0.5794 validation loss:0.3075
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.28657778284766455 0.2905844875018705
+2023-08-03 21:29:50,207 - epoch:2, training loss:0.5024 validation loss:0.2866
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.28161217052150855 0.2800730708986521
+2023-08-03 21:30:08,016 - epoch:3, training loss:0.4622 validation loss:0.2816
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.28415513157167216 0.2799266796897758
+2023-08-03 21:30:46,664 - epoch:4, training loss:0.4388 validation loss:0.2842
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.2852906325662678 0.27566842531616037
+2023-08-03 21:31:25,463 - epoch:5, training loss:0.4225 validation loss:0.2853
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.29989477280866017 0.2745833210647106
+2023-08-03 21:32:04,673 - epoch:6, training loss:0.4012 validation loss:0.2999
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.3069686760956591 0.2790703653273257
+2023-08-03 21:32:45,365 - epoch:7, training loss:0.3833 validation loss:0.3070
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.3139139217409221 0.2765333049676635
+2023-08-03 21:33:25,645 - epoch:8, training loss:0.3672 validation loss:0.3139
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.32165006548166275 0.28240201639180834
+2023-08-03 21:34:06,516 - epoch:9, training loss:0.3569 validation loss:0.3217
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.3281228538941253 0.28739954869855533
+2023-08-03 21:34:47,799 - epoch:10, training loss:0.3473 validation loss:0.3281
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.32348879833113064 0.28135200488296425
+2023-08-03 21:35:27,919 - epoch:11, training loss:0.3401 validation loss:0.3235
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.3206664774228226 0.28411376323889603
+2023-08-03 21:36:07,020 - epoch:12, training loss:0.3350 validation loss:0.3207
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.32458650862628763 0.28547651845623145
+2023-08-03 21:36:45,939 - epoch:13, training loss:0.3298 validation loss:0.3246
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.3287224674766714 0.2833837274123322
+2023-08-03 21:37:25,580 - epoch:14, training loss:0.3241 validation loss:0.3287
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.32545281100002205 0.28818467242473905
+2023-08-03 21:38:05,439 - epoch:15, training loss:0.3212 validation loss:0.3255
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.3241425695067102 0.2837773070416667
+2023-08-03 21:38:45,234 - epoch:16, training loss:0.3186 validation loss:0.3241
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.3310545019128106 0.289254427972165
+2023-08-03 21:39:26,415 - epoch:17, training loss:0.3151 validation loss:0.3311
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.32591860910708254 0.2857224309647625
+2023-08-03 21:40:07,765 - epoch:18, training loss:0.3122 validation loss:0.3259
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.32696242969144473 0.286463356830857
+2023-08-03 21:40:48,719 - epoch:19, training loss:0.3109 validation loss:0.3270
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.329188947989182 0.2844563282348893
+2023-08-03 21:41:31,074 - epoch:20, training loss:0.3091 validation loss:0.3292
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.33167307773096993 0.2840334668078206
+2023-08-03 21:42:13,236 - epoch:21, training loss:0.3069 validation loss:0.3317
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.33301956189626997 0.2851966228336096
+2023-08-03 21:42:53,549 - epoch:22, training loss:0.3053 validation loss:0.3330
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.3278666866773909 0.2865973844785582
+2023-08-03 21:43:34,630 - epoch:23, training loss:0.3046 validation loss:0.3279
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.33048472519625316 0.28607552871108055
+2023-08-03 21:44:17,305 - epoch:24, training loss:0.3038 validation loss:0.3305
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.3310041884807023 0.2860500748184594
+2023-08-03 21:44:59,911 - epoch:25, training loss:0.3028 validation loss:0.3310
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.3290008303116668 0.285908411510966
+2023-08-03 21:45:41,693 - epoch:26, training loss:0.3031 validation loss:0.3290
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.33018512024798174 0.2861050487580625
+2023-08-03 21:46:25,956 - epoch:27, training loss:0.3017 validation loss:0.3302
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.32882892712950706 0.28568171455778857
+2023-08-03 21:47:09,414 - epoch:28, training loss:0.3011 validation loss:0.3288
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.32959123091264203 0.28610724820332095
+2023-08-03 21:47:53,024 - epoch:29, training loss:0.3011 validation loss:0.3296
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-03-21:28:54.636651/0/0.2816_epoch_3.pkl  &  0.2745833210647106
+2023-08-03 21:47:59,536 - [*] loss:0.2816
+2023-08-03 21:47:59,546 - [*] phase 0, testing
+2023-08-03 21:47:59,633 - T:96	MAE	0.342012	RMSE	0.281683	MAPE	137.707388
+2023-08-03 21:47:59,636 - 96	mae	0.3420	
+2023-08-03 21:47:59,636 - 96	rmse	0.2817	
+2023-08-03 21:47:59,636 - 96	mape	137.7074	
+2023-08-03 21:48:06,273 - [*] loss:0.2746
+2023-08-03 21:48:06,298 - [*] phase 0, testing
+2023-08-03 21:48:06,414 - T:96	MAE	0.333088	RMSE	0.274620	MAPE	132.685590
+2023-08-03 21:48:06,417 - 96	mae	0.3331	
+2023-08-03 21:48:06,417 - 96	rmse	0.2746	
+2023-08-03 21:48:06,417 - 96	mape	132.6856	
+2023-08-03 21:48:09,317 - logger name:exp/ECL-PatchTST2023-08-03-21:48:09.317541/ECL-PatchTST.log
+2023-08-03 21:48:09,318 - params : {'loss': 'mse', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'refiner_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 33, 'batch_size': 128, 'share_head': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-03-21:48:09.317541', 'path': 'exp/ECL-PatchTST2023-08-03-21:48:09.317541', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-03 21:48:09,318 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-03 21:48:09,550 - [*] phase 0 Dataset load!
+2023-08-03 21:48:10,690 - [*] phase 0 Training start
+train 8209
+2023-08-03 21:48:44,185 - epoch:0, training loss:0.5778 validation loss:0.3617
+train 8209
+vs, vt 0.36169987375086005 0.3835714899680831
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.3096125244416974 0.33385917849161406
+2023-08-03 21:49:47,051 - epoch:1, training loss:8.0713 validation loss:0.3096
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.2864416961304166 0.3048853486437689
+2023-08-03 21:50:34,811 - epoch:2, training loss:6.0989 validation loss:0.2864
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.27940390834754164 0.2949339056556875
+2023-08-03 21:51:20,893 - epoch:3, training loss:3.9415 validation loss:0.2794
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.2773919330740517 0.2865564225410873
+2023-08-03 21:52:06,877 - epoch:4, training loss:2.6385 validation loss:0.2774
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.27938966131345794 0.27820033563131635
+2023-08-03 21:52:54,112 - epoch:5, training loss:2.1959 validation loss:0.2794
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.2849861806766553 0.2812628556381572
+2023-08-03 21:53:41,686 - epoch:6, training loss:2.0571 validation loss:0.2850
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.28611975722014904 0.27930059825832193
+2023-08-03 21:54:28,002 - epoch:7, training loss:1.8980 validation loss:0.2861
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.2829241327602755 0.28191476382992486
+2023-08-03 21:55:13,822 - epoch:8, training loss:1.8248 validation loss:0.2829
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.28199378468773584 0.27622003700922837
+2023-08-03 21:55:59,173 - epoch:9, training loss:1.7584 validation loss:0.2820
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.28122289055450395 0.27798111821440136
+2023-08-03 21:56:44,990 - epoch:10, training loss:1.6440 validation loss:0.2812
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.27878274683925236 0.2753237761895765
+2023-08-03 21:57:31,594 - epoch:11, training loss:1.5979 validation loss:0.2788
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.2800181782381101 0.27692688375034114
+2023-08-03 21:58:19,370 - epoch:12, training loss:1.5879 validation loss:0.2800
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.2804249616509134 0.2752308506857265
+2023-08-03 21:59:09,621 - epoch:13, training loss:1.6306 validation loss:0.2804
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.2806178642944856 0.2753945995460857
+2023-08-03 21:59:54,970 - epoch:14, training loss:1.5833 validation loss:0.2806
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.2837018133564429 0.2771284200928428
+2023-08-03 22:00:44,374 - epoch:15, training loss:1.6407 validation loss:0.2837
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.282828927886757 0.27580736340446904
+2023-08-03 22:01:30,570 - epoch:16, training loss:1.6033 validation loss:0.2828
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.2827079893851822 0.2769728741523894
+2023-08-03 22:02:16,817 - epoch:17, training loss:1.5701 validation loss:0.2827
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.2876943866298957 0.27718440765006974
+2023-08-03 22:03:04,912 - epoch:18, training loss:1.5836 validation loss:0.2877
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.2859316718849269 0.276824104514989
+2023-08-03 22:03:50,966 - epoch:19, training loss:1.5787 validation loss:0.2859
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.2854220474308187 0.277311212298545
+2023-08-03 22:04:36,215 - epoch:20, training loss:1.5911 validation loss:0.2854
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.2869010088457303 0.27765669470483606
+2023-08-03 22:05:21,589 - epoch:21, training loss:1.5897 validation loss:0.2869
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.2854058640924367 0.2776496384970166
+2023-08-03 22:06:06,423 - epoch:22, training loss:1.5804 validation loss:0.2854
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.28725559704683046 0.2774812133813446
+2023-08-03 22:06:50,868 - epoch:23, training loss:1.6336 validation loss:0.2873
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.2864715429869565 0.27763901752504433
+2023-08-03 22:07:36,957 - epoch:24, training loss:1.6072 validation loss:0.2865
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.28772311725399713 0.27761667695912445
+2023-08-03 22:08:22,701 - epoch:25, training loss:1.6019 validation loss:0.2877
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.28792244991795585 0.27730621448294684
+2023-08-03 22:09:08,410 - epoch:26, training loss:1.5938 validation loss:0.2879
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.28685054352337663 0.2775694257156415
+2023-08-03 22:09:53,874 - epoch:27, training loss:1.5765 validation loss:0.2869
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.286730021238327 0.2771679608320648
+2023-08-03 22:10:39,988 - epoch:28, training loss:1.6012 validation loss:0.2867
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.28675062649629335 0.27733506211502984
+2023-08-03 22:11:26,468 - epoch:29, training loss:1.6068 validation loss:0.2868
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-03-21:48:09.317541/0/0.2774_epoch_4.pkl  &  0.2752308506857265
+2023-08-03 22:11:32,896 - [*] loss:0.2774
+2023-08-03 22:11:32,900 - [*] phase 0, testing
+2023-08-03 22:11:33,028 - T:96	MAE	0.339169	RMSE	0.277439	MAPE	134.365761
+2023-08-03 22:11:33,031 - 96	mae	0.3392	
+2023-08-03 22:11:33,031 - 96	rmse	0.2774	
+2023-08-03 22:11:33,031 - 96	mape	134.3658	
+2023-08-03 22:11:39,489 - [*] loss:0.2752
+2023-08-03 22:11:39,504 - [*] phase 0, testing
+2023-08-03 22:11:39,578 - T:96	MAE	0.335259	RMSE	0.274797	MAPE	131.076109
+2023-08-03 22:11:39,580 - 96	mae	0.3353	
+2023-08-03 22:11:39,580 - 96	rmse	0.2748	
+2023-08-03 22:11:39,580 - 96	mape	131.0761	
+2023-08-03 22:11:42,875 - logger name:exp/ECL-PatchTST2023-08-03-22:11:42.875115/ECL-PatchTST.log
+2023-08-03 22:11:42,876 - params : {'loss': 'huber', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'refiner_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 33, 'batch_size': 128, 'share_head': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-03-22:11:42.875115', 'path': 'exp/ECL-PatchTST2023-08-03-22:11:42.875115', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-03 22:11:42,876 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-03 22:11:43,143 - [*] phase 0 Dataset load!
+2023-08-03 22:11:44,561 - [*] phase 0 Training start
+train 8209
+2023-08-03 22:12:13,464 - epoch:0, training loss:0.2061 validation loss:0.1606
+train 8209
+vs, vt 0.16056942804293198 0.17089635912667622
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.13587671586058356 0.1487773789770224
+2023-08-03 22:13:21,680 - epoch:1, training loss:0.5796 validation loss:0.1359
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.1268500125204975 0.13696123050017792
+2023-08-03 22:14:12,749 - epoch:2, training loss:0.5040 validation loss:0.1269
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.12481063502756032 0.13125180402262646
+2023-08-03 22:15:03,870 - epoch:3, training loss:0.4466 validation loss:0.1248
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.12665519702502273 0.12904587464237754
+2023-08-03 22:15:50,293 - epoch:4, training loss:0.4001 validation loss:0.1267
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.1273648382418535 0.12505602125417103
+2023-08-03 22:16:37,187 - epoch:5, training loss:0.3784 validation loss:0.1274
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.13113528371534564 0.12532398392531005
+2023-08-03 22:17:25,239 - epoch:6, training loss:0.3692 validation loss:0.1311
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.1314053148539229 0.12480461775240573
+2023-08-03 22:18:13,278 - epoch:7, training loss:0.3684 validation loss:0.1314
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.132646051235497 0.12580866544422778
+2023-08-03 22:19:01,711 - epoch:8, training loss:0.3662 validation loss:0.1326
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.13315930048173125 0.12380051528188316
+2023-08-03 22:19:50,643 - epoch:9, training loss:0.3548 validation loss:0.1332
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.13206093970008873 0.12567512970417738
+2023-08-03 22:20:39,801 - epoch:10, training loss:0.3526 validation loss:0.1321
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.13440297306938606 0.1252428631890904
+2023-08-03 22:21:29,344 - epoch:11, training loss:0.3428 validation loss:0.1344
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.13479154387658293 0.12468667294491421
+2023-08-03 22:22:18,433 - epoch:12, training loss:0.3412 validation loss:0.1348
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.1363524008880962 0.1237152512608604
+2023-08-03 22:23:09,365 - epoch:13, training loss:0.3388 validation loss:0.1364
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.13706239922480148 0.12450105002657934
+2023-08-03 22:23:59,470 - epoch:14, training loss:0.3346 validation loss:0.1371
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.13629274019463497 0.1248122997243296
+2023-08-03 22:24:49,793 - epoch:15, training loss:0.3317 validation loss:0.1363
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.13600643300874668 0.12431465690447525
+2023-08-03 22:25:39,901 - epoch:16, training loss:0.3320 validation loss:0.1360
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.13725380235436288 0.12461891372434118
+2023-08-03 22:26:31,825 - epoch:17, training loss:0.3278 validation loss:0.1373
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.136739778671075 0.1247259159995751
+2023-08-03 22:27:21,935 - epoch:18, training loss:0.3254 validation loss:0.1367
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.13700285164470022 0.12445897558196024
+2023-08-03 22:28:13,526 - epoch:19, training loss:0.3242 validation loss:0.1370
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.13700555730611086 0.12449926205656746
+2023-08-03 22:29:03,926 - epoch:20, training loss:0.3253 validation loss:0.1370
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.13767668316987428 0.12519262671809306
+2023-08-03 22:29:53,711 - epoch:21, training loss:0.3245 validation loss:0.1377
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.13821814048357986 0.12423697723583742
+2023-08-03 22:30:45,569 - epoch:22, training loss:0.3230 validation loss:0.1382
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.13768154772167857 0.1243824598972093
+2023-08-03 22:31:35,848 - epoch:23, training loss:0.3195 validation loss:0.1377
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.13804474015804855 0.12476363744248044
+2023-08-03 22:32:26,664 - epoch:24, training loss:0.3223 validation loss:0.1380
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.13761564107103783 0.12455056590790098
+2023-08-03 22:33:16,105 - epoch:25, training loss:0.3212 validation loss:0.1376
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.13764592573385348 0.1244476219131188
+2023-08-03 22:34:04,400 - epoch:26, training loss:0.3212 validation loss:0.1376
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.13810347494753925 0.12465588181194934
+2023-08-03 22:34:52,245 - epoch:27, training loss:0.3192 validation loss:0.1381
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.13756467156450858 0.12444236408919096
+2023-08-03 22:35:40,723 - epoch:28, training loss:0.3206 validation loss:0.1376
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.1378693695772778 0.12452591058205474
+2023-08-03 22:36:28,395 - epoch:29, training loss:0.3203 validation loss:0.1379
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-03-22:11:42.875115/0/0.1248_epoch_3.pkl  &  0.1237152512608604
+2023-08-03 22:36:32,778 - [*] loss:0.2768
+2023-08-03 22:36:32,781 - [*] phase 0, testing
+2023-08-03 22:36:32,819 - T:96	MAE	0.336982	RMSE	0.276905	MAPE	134.295750
+2023-08-03 22:36:32,820 - 96	mae	0.3370	
+2023-08-03 22:36:32,820 - 96	rmse	0.2769	
+2023-08-03 22:36:32,820 - 96	mape	134.2957	
+2023-08-03 22:36:37,368 - [*] loss:0.2761
+2023-08-03 22:36:37,371 - [*] phase 0, testing
+2023-08-03 22:36:37,408 - T:96	MAE	0.333057	RMSE	0.275779	MAPE	130.024874
+2023-08-03 22:36:37,409 - 96	mae	0.3331	
+2023-08-03 22:36:37,409 - 96	rmse	0.2758	
+2023-08-03 22:36:37,409 - 96	mape	130.0249	
+2023-08-03 22:36:39,670 - logger name:exp/ECL-PatchTST2023-08-03-22:36:39.670401/ECL-PatchTST.log
+2023-08-03 22:36:39,671 - params : {'loss': 'huber', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 0, 'refiner_block_num': 1, 'enhance': 0, 'enhance_type': 0, 'seed': 33, 'batch_size': 128, 'share_head': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-03-22:36:39.670401', 'path': 'exp/ECL-PatchTST2023-08-03-22:36:39.670401', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-03 22:36:39,671 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-03 22:36:39,922 - [*] phase 0 Dataset load!
+2023-08-03 22:36:41,050 - [*] phase 0 Training start
+train 8209
+2023-08-03 22:37:14,380 - epoch:0, training loss:0.2246 validation loss:0.1641
+train 8209
+vs, vt 0.1640682899477807 0.1683508316901597
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.1381799080832438 0.1450958816673268
+2023-08-03 22:38:09,855 - epoch:1, training loss:1.3497 validation loss:0.1382
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.12862267057326707 0.1303154140372168
+2023-08-03 22:38:55,451 - epoch:2, training loss:1.0888 validation loss:0.1286
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.12450205797160213 0.12603456814858047
+2023-08-03 22:39:39,792 - epoch:3, training loss:0.8329 validation loss:0.1245
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.12499193610115485 0.12488032496449622
+2023-08-03 22:40:24,108 - epoch:4, training loss:0.6711 validation loss:0.1250
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.1230380812829191 0.12379977843639525
+2023-08-03 22:41:09,314 - epoch:5, training loss:0.5962 validation loss:0.1230
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.12349120883101766 0.1223109308630228
+2023-08-03 22:41:54,737 - epoch:6, training loss:0.5606 validation loss:0.1235
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.12512303499335592 0.12293641760267994
+2023-08-03 22:42:40,925 - epoch:7, training loss:0.5361 validation loss:0.1251
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.12339094924655827 0.1234394654800946
+2023-08-03 22:43:27,224 - epoch:8, training loss:0.5188 validation loss:0.1234
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.12391893701119856 0.12373283336108382
+2023-08-03 22:44:13,733 - epoch:9, training loss:0.5046 validation loss:0.1239
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.12451838566498323 0.12404160955074159
+2023-08-03 22:44:59,782 - epoch:10, training loss:0.4886 validation loss:0.1245
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.1235342975705862 0.12350850425321948
+2023-08-03 22:45:45,616 - epoch:11, training loss:0.4884 validation loss:0.1235
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.12358850621702996 0.12373198052360253
+2023-08-03 22:46:31,524 - epoch:12, training loss:0.4831 validation loss:0.1236
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.12501472590321844 0.12479253765195608
+2023-08-03 22:47:16,192 - epoch:13, training loss:0.4733 validation loss:0.1250
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.12506246727637269 0.12515722875568
+2023-08-03 22:48:01,799 - epoch:14, training loss:0.4695 validation loss:0.1251
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.124954488043758 0.1254292190582915
+2023-08-03 22:48:47,037 - epoch:15, training loss:0.4573 validation loss:0.1250
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.12398718805475668 0.12485983171923594
+2023-08-03 22:49:31,439 - epoch:16, training loss:0.4536 validation loss:0.1240
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.12337986608459191 0.12448273556814952
+2023-08-03 22:50:15,742 - epoch:17, training loss:0.4567 validation loss:0.1234
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.12373517309738831 0.12389934062957764
+2023-08-03 22:51:00,565 - epoch:18, training loss:0.4542 validation loss:0.1237
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.12403319361196323 0.12469878056171266
+2023-08-03 22:51:45,627 - epoch:19, training loss:0.4578 validation loss:0.1240
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.12341860520907423 0.12436582960865715
+2023-08-03 22:52:29,249 - epoch:20, training loss:0.4521 validation loss:0.1234
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.12340461513535543 0.12427986430173571
+2023-08-03 22:53:12,183 - epoch:21, training loss:0.4453 validation loss:0.1234
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.12353573612530123 0.12431844865733926
+2023-08-03 22:53:54,330 - epoch:22, training loss:0.4467 validation loss:0.1235
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.12358357960527594 0.12461289500986988
+2023-08-03 22:54:36,874 - epoch:23, training loss:0.4506 validation loss:0.1236
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.12382733635604382 0.12478512059897184
+2023-08-03 22:55:19,367 - epoch:24, training loss:0.4496 validation loss:0.1238
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.12396345693956722 0.12478620779107917
+2023-08-03 22:56:00,463 - epoch:25, training loss:0.4509 validation loss:0.1240
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.12358332010494037 0.12454025794497946
+2023-08-03 22:56:42,446 - epoch:26, training loss:0.4498 validation loss:0.1236
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.12373459957201373 0.12460211325775493
+2023-08-03 22:57:22,824 - epoch:27, training loss:0.4501 validation loss:0.1237
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.12361152334646745 0.12448216178877787
+2023-08-03 22:58:05,457 - epoch:28, training loss:0.4486 validation loss:0.1236
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.12370848300104792 0.12462282993576744
+2023-08-03 22:58:46,443 - epoch:29, training loss:0.4466 validation loss:0.1237
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-03-22:36:39.670401/0/0.123_epoch_5.pkl  &  0.1223109308630228
+2023-08-03 22:58:52,503 - [*] loss:0.2736
+2023-08-03 22:58:52,507 - [*] phase 0, testing
+2023-08-03 22:58:52,571 - T:96	MAE	0.333162	RMSE	0.273825	MAPE	133.534896
+2023-08-03 22:58:52,574 - 96	mae	0.3332	
+2023-08-03 22:58:52,574 - 96	rmse	0.2738	
+2023-08-03 22:58:52,575 - 96	mape	133.5349	
+2023-08-03 22:58:58,992 - [*] loss:0.2727
+2023-08-03 22:58:58,995 - [*] phase 0, testing
+2023-08-03 22:58:59,037 - T:96	MAE	0.330708	RMSE	0.272922	MAPE	131.886578
+2023-08-03 22:58:59,039 - 96	mae	0.3307	
+2023-08-03 22:58:59,039 - 96	rmse	0.2729	
+2023-08-03 22:58:59,039 - 96	mape	131.8866	
+2023-08-03 22:59:01,811 - logger name:exp/ECL-PatchTST2023-08-03-22:59:01.810739/ECL-PatchTST.log
+2023-08-03 22:59:01,811 - params : {'loss': 'huber', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'refiner_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 33, 'batch_size': 128, 'share_head': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-03-22:59:01.810739', 'path': 'exp/ECL-PatchTST2023-08-03-22:59:01.810739', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-03 22:59:01,812 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-03 22:59:02,059 - [*] phase 0 Dataset load!
+2023-08-03 22:59:03,159 - [*] phase 0 Training start
+train 8209
+2023-08-03 22:59:32,914 - epoch:0, training loss:0.2061 validation loss:0.1606
+train 8209
+vs, vt 0.16056942804293198 0.17089635912667622
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.13784914125095715 0.14879156784577804
+2023-08-03 23:00:43,583 - epoch:1, training loss:2.9419 validation loss:0.1378
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.128501064398072 0.13709672184830363
+2023-08-03 23:01:34,285 - epoch:2, training loss:2.3175 validation loss:0.1285
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.12484315283257853 0.1304077680476687
+2023-08-03 23:02:23,211 - epoch:3, training loss:1.5666 validation loss:0.1248
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.12423750808970495 0.12694034056568687
+2023-08-03 23:03:12,366 - epoch:4, training loss:1.0634 validation loss:0.1242
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.12379151218655435 0.12402425105260177
+2023-08-03 23:04:00,714 - epoch:5, training loss:0.8710 validation loss:0.1238
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.1257400190965696 0.12410232187672095
+2023-08-03 23:04:51,053 - epoch:6, training loss:0.7743 validation loss:0.1257
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.12607837510718542 0.12302069213580001
+2023-08-03 23:05:40,383 - epoch:7, training loss:0.7061 validation loss:0.1261
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.12495309478518637 0.12415664837780324
+2023-08-03 23:06:30,859 - epoch:8, training loss:0.6615 validation loss:0.1250
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.12475894907997413 0.12291190832514655
+2023-08-03 23:07:20,970 - epoch:9, training loss:0.6286 validation loss:0.1248
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.12507362824610688 0.12323332535610958
+2023-08-03 23:08:11,024 - epoch:10, training loss:0.5667 validation loss:0.1251
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.12359324868091127 0.12279396715827963
+2023-08-03 23:09:01,182 - epoch:11, training loss:0.5502 validation loss:0.1236
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.12411133928055113 0.12304011994803493
+2023-08-03 23:09:51,496 - epoch:12, training loss:0.5469 validation loss:0.1241
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.12430992756377567 0.12370714646848766
+2023-08-03 23:10:42,637 - epoch:13, training loss:0.5494 validation loss:0.1243
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.1241084575991739 0.1231878006153486
+2023-08-03 23:11:33,049 - epoch:14, training loss:0.5368 validation loss:0.1241
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.12457659620453011 0.12402068264782429
+2023-08-03 23:12:23,899 - epoch:15, training loss:0.5438 validation loss:0.1246
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.12332937968048183 0.12324604459784248
+2023-08-03 23:13:15,410 - epoch:16, training loss:0.5365 validation loss:0.1233
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.12387050696733323 0.12363529874181206
+2023-08-03 23:14:06,563 - epoch:17, training loss:0.5269 validation loss:0.1239
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.12409978292205116 0.12384948363019661
+2023-08-03 23:14:57,860 - epoch:18, training loss:0.5258 validation loss:0.1241
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.12429546361619775 0.12354736766693267
+2023-08-03 23:15:49,084 - epoch:19, training loss:0.5301 validation loss:0.1243
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.12390849459916353 0.12340262320569971
+2023-08-03 23:16:40,515 - epoch:20, training loss:0.5272 validation loss:0.1239
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.1243178289891644 0.12393250934440982
+2023-08-03 23:17:30,803 - epoch:21, training loss:0.5223 validation loss:0.1243
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.12360133010555398 0.12382154666226018
+2023-08-03 23:18:21,725 - epoch:22, training loss:0.5224 validation loss:0.1236
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.12375669892538678 0.12375902714715763
+2023-08-03 23:19:12,480 - epoch:23, training loss:0.5288 validation loss:0.1238
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.12359015465798703 0.12369797641242092
+2023-08-03 23:20:03,000 - epoch:24, training loss:0.5274 validation loss:0.1236
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.12390681601722132 0.12379904099824754
+2023-08-03 23:20:53,524 - epoch:25, training loss:0.5262 validation loss:0.1239
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.12382591812109406 0.12360096900639209
+2023-08-03 23:21:44,219 - epoch:26, training loss:0.5242 validation loss:0.1238
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.1237341124903072 0.1237249310890382
+2023-08-03 23:22:33,832 - epoch:27, training loss:0.5203 validation loss:0.1237
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.12361484139480373 0.12361799934032289
+2023-08-03 23:23:21,756 - epoch:28, training loss:0.5246 validation loss:0.1236
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.12363411951810122 0.12365259560333057
+2023-08-03 23:24:09,903 - epoch:29, training loss:0.5246 validation loss:0.1236
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-03-22:59:01.810739/0/0.1233_epoch_16.pkl  &  0.12279396715827963
+2023-08-03 23:24:15,122 - [*] loss:0.2746
+2023-08-03 23:24:15,126 - [*] phase 0, testing
+2023-08-03 23:24:15,167 - T:96	MAE	0.332170	RMSE	0.275007	MAPE	131.939244
+2023-08-03 23:24:15,168 - 96	mae	0.3322	
+2023-08-03 23:24:15,168 - 96	rmse	0.2750	
+2023-08-03 23:24:15,168 - 96	mape	131.9392	
+2023-08-03 23:24:19,877 - [*] loss:0.2735
+2023-08-03 23:24:19,880 - [*] phase 0, testing
+2023-08-03 23:24:19,920 - T:96	MAE	0.332163	RMSE	0.273468	MAPE	130.332291
+2023-08-03 23:24:19,920 - 96	mae	0.3322	
+2023-08-03 23:24:19,921 - 96	rmse	0.2735	
+2023-08-03 23:24:19,921 - 96	mape	130.3323	
+2023-08-03 23:24:22,463 - logger name:exp/ECL-PatchTST2023-08-03-23:24:22.462966/ECL-PatchTST.log
+2023-08-03 23:24:22,463 - params : {'loss': 'mse', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 0, 'refiner_block_num': 1, 'enhance': 0, 'enhance_type': 0, 'seed': 34, 'batch_size': 128, 'share_head': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-03-23:24:22.462966', 'path': 'exp/ECL-PatchTST2023-08-03-23:24:22.462966', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-03 23:24:22,464 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-03 23:24:22,700 - [*] phase 0 Dataset load!
+2023-08-03 23:24:23,797 - [*] phase 0 Training start
+train 8209
+2023-08-03 23:24:56,140 - epoch:0, training loss:0.6301 validation loss:0.3682
+train 8209
+vs, vt 0.3682244020429524 0.37260922349312087
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.3066694042222066 0.31960867514664476
+2023-08-03 23:25:53,363 - epoch:1, training loss:0.5779 validation loss:0.3067
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.2856113294308836 0.2879070741209117
+2023-08-03 23:26:39,156 - epoch:2, training loss:0.5033 validation loss:0.2856
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.28074249625205994 0.276738645339554
+2023-08-03 23:27:25,481 - epoch:3, training loss:0.4609 validation loss:0.2807
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.2817903467538682 0.27652400884438644
+2023-08-03 23:28:11,675 - epoch:4, training loss:0.4377 validation loss:0.2818
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.28594723174517805 0.2758761292154139
+2023-08-03 23:28:57,479 - epoch:5, training loss:0.4251 validation loss:0.2859
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.28799632598053326 0.27652609822424973
+2023-08-03 23:29:43,647 - epoch:6, training loss:0.4080 validation loss:0.2880
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.30384616096588696 0.27594479647549713
+2023-08-03 23:30:27,952 - epoch:7, training loss:0.3875 validation loss:0.3038
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.3288942402736707 0.2799882633103566
+2023-08-03 23:31:13,058 - epoch:8, training loss:0.3670 validation loss:0.3289
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.32066493142734875 0.28085716390474275
+2023-08-03 23:31:56,723 - epoch:9, training loss:0.3562 validation loss:0.3207
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.3189237720587037 0.28131487186659465
+2023-08-03 23:32:40,779 - epoch:10, training loss:0.3449 validation loss:0.3189
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.31739425083453005 0.2828795506872914
+2023-08-03 23:33:25,145 - epoch:11, training loss:0.3391 validation loss:0.3174
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.31867538832805375 0.28177338499914517
+2023-08-03 23:34:08,128 - epoch:12, training loss:0.3337 validation loss:0.3187
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.32478724589402025 0.2837614899670536
+2023-08-03 23:34:52,707 - epoch:13, training loss:0.3294 validation loss:0.3248
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.3218074424022978 0.2859441212971102
+2023-08-03 23:35:38,241 - epoch:14, training loss:0.3251 validation loss:0.3218
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.32605743171139195 0.2828873553397981
+2023-08-03 23:36:20,999 - epoch:15, training loss:0.3192 validation loss:0.3261
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.32139526172117755 0.28713293305852194
+2023-08-03 23:37:03,151 - epoch:16, training loss:0.3171 validation loss:0.3214
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.331003664908084 0.2870844502679326
+2023-08-03 23:37:46,353 - epoch:17, training loss:0.3142 validation loss:0.3310
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.32158416509628296 0.2881269365210425
+2023-08-03 23:38:29,467 - epoch:18, training loss:0.3104 validation loss:0.3216
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.3271963010457429 0.286527752537619
+2023-08-03 23:39:12,141 - epoch:19, training loss:0.3084 validation loss:0.3272
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.3209927010942589 0.2881608810275793
+2023-08-03 23:39:53,209 - epoch:20, training loss:0.3059 validation loss:0.3210
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.3276197178797288 0.28622493892908096
+2023-08-03 23:40:35,247 - epoch:21, training loss:0.3047 validation loss:0.3276
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.32581109113313933 0.28893030993640423
+2023-08-03 23:41:17,792 - epoch:22, training loss:0.3038 validation loss:0.3258
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.32693265784870496 0.28787213868715544
+2023-08-03 23:42:01,678 - epoch:23, training loss:0.3022 validation loss:0.3269
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.3257953016595407 0.2888669178567149
+2023-08-03 23:42:44,964 - epoch:24, training loss:0.3013 validation loss:0.3258
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.3259181353178891 0.2882019283080643
+2023-08-03 23:43:25,787 - epoch:25, training loss:0.3011 validation loss:0.3259
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.3258307200263847 0.2875513475049626
+2023-08-03 23:44:08,027 - epoch:26, training loss:0.3005 validation loss:0.3258
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.3231482664969834 0.28696210750124673
+2023-08-03 23:44:51,843 - epoch:27, training loss:0.2999 validation loss:0.3231
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.3256718042221936 0.28708643025972624
+2023-08-03 23:45:35,075 - epoch:28, training loss:0.2995 validation loss:0.3257
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.32397525012493134 0.28674854863096366
+2023-08-03 23:46:17,948 - epoch:29, training loss:0.2999 validation loss:0.3240
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-03-23:24:22.462966/0/0.2807_epoch_3.pkl  &  0.2758761292154139
+2023-08-03 23:46:24,751 - [*] loss:0.2807
+2023-08-03 23:46:24,756 - [*] phase 0, testing
+2023-08-03 23:46:24,799 - T:96	MAE	0.341147	RMSE	0.280896	MAPE	137.280774
+2023-08-03 23:46:24,800 - 96	mae	0.3411	
+2023-08-03 23:46:24,800 - 96	rmse	0.2809	
+2023-08-03 23:46:24,801 - 96	mape	137.2808	
+2023-08-03 23:46:31,444 - [*] loss:0.2759
+2023-08-03 23:46:31,449 - [*] phase 0, testing
+2023-08-03 23:46:31,502 - T:96	MAE	0.334808	RMSE	0.276008	MAPE	133.933806
+2023-08-03 23:46:31,503 - 96	mae	0.3348	
+2023-08-03 23:46:31,504 - 96	rmse	0.2760	
+2023-08-03 23:46:31,504 - 96	mape	133.9338	
+2023-08-03 23:46:33,909 - logger name:exp/ECL-PatchTST2023-08-03-23:46:33.908525/ECL-PatchTST.log
+2023-08-03 23:46:33,909 - params : {'loss': 'mse', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'refiner_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 128, 'share_head': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-03-23:46:33.908525', 'path': 'exp/ECL-PatchTST2023-08-03-23:46:33.908525', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-03 23:46:33,909 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-03 23:46:34,164 - [*] phase 0 Dataset load!
+2023-08-03 23:46:35,423 - [*] phase 0 Training start
+train 8209
+2023-08-03 23:47:07,482 - epoch:0, training loss:0.5786 validation loss:0.3607
+train 8209
+vs, vt 0.36074808544733306 0.37907290120016446
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.3111666322431781 0.34462471069260076
+2023-08-03 23:48:15,436 - epoch:1, training loss:7.6818 validation loss:0.3112
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.2858622417869893 0.3042089400643652
+2023-08-03 23:49:03,712 - epoch:2, training loss:5.7287 validation loss:0.2859
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.2792160331525586 0.2936050480400974
+2023-08-03 23:49:53,699 - epoch:3, training loss:3.6123 validation loss:0.2792
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.2779704743826931 0.2923145221376961
+2023-08-03 23:50:43,155 - epoch:4, training loss:2.4082 validation loss:0.2780
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.2822333596308123 0.2880254497920925
+2023-08-03 23:51:32,493 - epoch:5, training loss:2.0641 validation loss:0.2822
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.28365222398530354 0.29117753136564384
+2023-08-03 23:52:22,629 - epoch:6, training loss:1.9363 validation loss:0.2837
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.2833325288851153 0.2847817460583015
+2023-08-03 23:53:13,238 - epoch:7, training loss:1.8479 validation loss:0.2833
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.2805818933993578 0.2898680171505971
+2023-08-03 23:54:03,619 - epoch:8, training loss:1.6921 validation loss:0.2806
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.2813274342228066 0.2891680589792403
+2023-08-03 23:54:53,690 - epoch:9, training loss:1.6147 validation loss:0.2813
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.28511423617601395 0.2933228278363293
+2023-08-03 23:55:44,355 - epoch:10, training loss:1.5737 validation loss:0.2851
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.28235661289231345 0.29076225141232664
+2023-08-03 23:56:36,147 - epoch:11, training loss:1.5265 validation loss:0.2824
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.28313777036964893 0.29612505266612227
+2023-08-03 23:57:27,112 - epoch:12, training loss:1.5211 validation loss:0.2831
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.28414679335599596 0.29255594685673714
+2023-08-03 23:58:19,622 - epoch:13, training loss:1.4743 validation loss:0.2841
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.2881863857196136 0.2941638177091425
+2023-08-03 23:59:09,965 - epoch:14, training loss:1.4304 validation loss:0.2882
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.28467191535640846 0.29751485789364035
+2023-08-04 00:00:01,903 - epoch:15, training loss:1.4076 validation loss:0.2847
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.28687745959243993 0.29749244316057727
+2023-08-04 00:00:53,487 - epoch:16, training loss:1.4137 validation loss:0.2869
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.28931804052130744 0.2959130225195126
+2023-08-04 00:01:43,455 - epoch:17, training loss:1.3549 validation loss:0.2893
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.2893038105896928 0.30121589587493375
+2023-08-04 00:02:33,831 - epoch:18, training loss:1.3537 validation loss:0.2893
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.2897421985187314 0.30239138870754023
+2023-08-04 00:03:24,373 - epoch:19, training loss:1.3314 validation loss:0.2897
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.28875764831900597 0.3004139568656683
+2023-08-04 00:04:12,901 - epoch:20, training loss:1.3330 validation loss:0.2888
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.288324052806605 0.3001919128000736
+2023-08-04 00:05:04,199 - epoch:21, training loss:1.3353 validation loss:0.2883
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.2890676005997441 0.30133701606907626
+2023-08-04 00:05:54,143 - epoch:22, training loss:1.3396 validation loss:0.2891
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.2895383206619458 0.30175349133258517
+2023-08-04 00:06:43,649 - epoch:23, training loss:1.3396 validation loss:0.2895
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.2903497176752849 0.30257223461839283
+2023-08-04 00:07:32,990 - epoch:24, training loss:1.3441 validation loss:0.2903
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.2906455612656745 0.3024512016299096
+2023-08-04 00:08:21,318 - epoch:25, training loss:1.3226 validation loss:0.2906
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.28965853120792995 0.3021806083958257
+2023-08-04 00:09:09,249 - epoch:26, training loss:1.3019 validation loss:0.2897
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.2896484294059602 0.3023320519450036
+2023-08-04 00:10:01,543 - epoch:27, training loss:1.3105 validation loss:0.2896
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.29053601605648344 0.3013807289641012
+2023-08-04 00:10:53,084 - epoch:28, training loss:1.3217 validation loss:0.2905
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.2903857964345 0.3010592589324171
+2023-08-04 00:11:43,626 - epoch:29, training loss:1.3008 validation loss:0.2904
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-03-23:46:33.908525/0/0.278_epoch_4.pkl  &  0.2847817460583015
+2023-08-04 00:11:49,964 - [*] loss:0.2780
+2023-08-04 00:11:49,969 - [*] phase 0, testing
+2023-08-04 00:11:50,013 - T:96	MAE	0.339953	RMSE	0.278097	MAPE	136.152875
+2023-08-04 00:11:50,015 - 96	mae	0.3400	
+2023-08-04 00:11:50,015 - 96	rmse	0.2781	
+2023-08-04 00:11:50,015 - 96	mape	136.1529	
+2023-08-04 00:11:57,856 - [*] loss:0.2848
+2023-08-04 00:11:57,859 - [*] phase 0, testing
+2023-08-04 00:11:57,899 - T:96	MAE	0.341362	RMSE	0.283995	MAPE	129.033780
+2023-08-04 00:11:57,901 - 96	mae	0.3414	
+2023-08-04 00:11:57,901 - 96	rmse	0.2840	
+2023-08-04 00:11:57,901 - 96	mape	129.0338	
+2023-08-04 00:12:00,695 - logger name:exp/ECL-PatchTST2023-08-04-00:12:00.694997/ECL-PatchTST.log
+2023-08-04 00:12:00,695 - params : {'loss': 'huber', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'refiner_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 128, 'share_head': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-04-00:12:00.694997', 'path': 'exp/ECL-PatchTST2023-08-04-00:12:00.694997', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-04 00:12:00,695 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-04 00:12:00,954 - [*] phase 0 Dataset load!
+2023-08-04 00:12:02,744 - [*] phase 0 Training start
+train 8209
+2023-08-04 00:12:37,470 - epoch:0, training loss:0.2063 validation loss:0.1602
+train 8209
+vs, vt 0.160227874124592 0.16924411684951998
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.13632380530576815 0.15299040510911832
+2023-08-04 00:13:39,241 - epoch:1, training loss:0.5941 validation loss:0.1363
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.1269604955715212 0.13675450059500607
+2023-08-04 00:14:24,498 - epoch:2, training loss:0.5179 validation loss:0.1270
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.1250032072209499 0.1357643815942786
+2023-08-04 00:15:09,318 - epoch:3, training loss:0.4548 validation loss:0.1250
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.1266767635772174 0.12872420920228417
+2023-08-04 00:15:55,405 - epoch:4, training loss:0.4004 validation loss:0.1267
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.12863868932155045 0.12698683853853832
+2023-08-04 00:16:40,837 - epoch:5, training loss:0.3811 validation loss:0.1286
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.12885964255441318 0.12701446063477884
+2023-08-04 00:17:26,340 - epoch:6, training loss:0.3745 validation loss:0.1289
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.12843518340113488 0.12350782303308899
+2023-08-04 00:18:13,748 - epoch:7, training loss:0.3710 validation loss:0.1284
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.1313354389911348 0.12472044447944923
+2023-08-04 00:19:00,429 - epoch:8, training loss:0.3640 validation loss:0.1313
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.13062239429828795 0.12469401219013063
+2023-08-04 00:19:46,049 - epoch:9, training loss:0.3594 validation loss:0.1306
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.13053030893206596 0.12659496983343904
+2023-08-04 00:20:32,733 - epoch:10, training loss:0.3538 validation loss:0.1305
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.13283198403025215 0.1253567481921478
+2023-08-04 00:21:18,545 - epoch:11, training loss:0.3465 validation loss:0.1328
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.13177590182220394 0.12566876817833295
+2023-08-04 00:22:03,702 - epoch:12, training loss:0.3439 validation loss:0.1318
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.13339296000247652 0.12553768494928425
+2023-08-04 00:22:47,696 - epoch:13, training loss:0.3360 validation loss:0.1334
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.13319518747316164 0.1257746211168441
+2023-08-04 00:23:33,891 - epoch:14, training loss:0.3300 validation loss:0.1332
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.13386559613387694 0.1268707342784513
+2023-08-04 00:24:19,743 - epoch:15, training loss:0.3280 validation loss:0.1339
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.13408467105843805 0.12660978141833434
+2023-08-04 00:25:05,997 - epoch:16, training loss:0.3275 validation loss:0.1341
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.13628960155289283 0.1270218433981592
+2023-08-04 00:25:51,379 - epoch:17, training loss:0.3214 validation loss:0.1363
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.13509323778138918 0.12808625704862855
+2023-08-04 00:26:37,152 - epoch:18, training loss:0.3218 validation loss:0.1351
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.13571801341392778 0.1269383609972217
+2023-08-04 00:27:24,148 - epoch:19, training loss:0.3196 validation loss:0.1357
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.13439416055652229 0.1264860470017249
+2023-08-04 00:28:11,377 - epoch:20, training loss:0.3158 validation loss:0.1344
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.13610450813377445 0.12622072496874767
+2023-08-04 00:28:58,030 - epoch:21, training loss:0.3165 validation loss:0.1361
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.1363933337005702 0.1264279317110777
+2023-08-04 00:29:43,912 - epoch:22, training loss:0.3137 validation loss:0.1364
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.136011477813802 0.12671831538054076
+2023-08-04 00:30:28,911 - epoch:23, training loss:0.3145 validation loss:0.1360
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.1362404345788739 0.12702717471190475
+2023-08-04 00:31:16,517 - epoch:24, training loss:0.3144 validation loss:0.1362
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.13633109324357726 0.1268904928795316
+2023-08-04 00:32:03,819 - epoch:25, training loss:0.3133 validation loss:0.1363
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.13631024507975037 0.12696980515664275
+2023-08-04 00:32:50,053 - epoch:26, training loss:0.3122 validation loss:0.1363
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.1357997331598943 0.12681371862576765
+2023-08-04 00:33:34,613 - epoch:27, training loss:0.3131 validation loss:0.1358
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.1362083205445246 0.1265597321431745
+2023-08-04 00:34:20,662 - epoch:28, training loss:0.3143 validation loss:0.1362
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.13603930014439605 0.1264767897399989
+2023-08-04 00:35:06,886 - epoch:29, training loss:0.3128 validation loss:0.1360
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-04-00:12:00.694997/0/0.125_epoch_3.pkl  &  0.12350782303308899
+2023-08-04 00:35:13,299 - [*] loss:0.2773
+2023-08-04 00:35:13,303 - [*] phase 0, testing
+2023-08-04 00:35:13,348 - T:96	MAE	0.337278	RMSE	0.277527	MAPE	133.615327
+2023-08-04 00:35:13,349 - 96	mae	0.3373	
+2023-08-04 00:35:13,349 - 96	rmse	0.2775	
+2023-08-04 00:35:13,350 - 96	mape	133.6153	
+2023-08-04 00:35:20,144 - [*] loss:0.2768
+2023-08-04 00:35:20,147 - [*] phase 0, testing
+2023-08-04 00:35:20,186 - T:96	MAE	0.332531	RMSE	0.277062	MAPE	130.760276
+2023-08-04 00:35:20,187 - 96	mae	0.3325	
+2023-08-04 00:35:20,187 - 96	rmse	0.2771	
+2023-08-04 00:35:20,187 - 96	mape	130.7603	
+2023-08-04 00:35:22,874 - logger name:exp/ECL-PatchTST2023-08-04-00:35:22.874211/ECL-PatchTST.log
+2023-08-04 00:35:22,875 - params : {'loss': 'huber', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 0, 'refiner_block_num': 1, 'enhance': 0, 'enhance_type': 0, 'seed': 34, 'batch_size': 128, 'share_head': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-04-00:35:22.874211', 'path': 'exp/ECL-PatchTST2023-08-04-00:35:22.874211', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-04 00:35:22,875 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-04 00:35:23,119 - [*] phase 0 Dataset load!
+2023-08-04 00:35:24,216 - [*] phase 0 Training start
+train 8209
+2023-08-04 00:35:55,123 - epoch:0, training loss:0.2231 validation loss:0.1622
+train 8209
+vs, vt 0.16221966543658214 0.16526157256554475
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.13784112679687413 0.14270791309801015
+2023-08-04 00:36:55,766 - epoch:1, training loss:1.3195 validation loss:0.1378
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.12820595756850459 0.13001060485839844
+2023-08-04 00:37:36,863 - epoch:2, training loss:1.0525 validation loss:0.1282
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.12499634303491224 0.125345312228257
+2023-08-04 00:38:19,541 - epoch:3, training loss:0.7983 validation loss:0.1250
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.12397802536460487 0.1238550648770549
+2023-08-04 00:39:03,005 - epoch:4, training loss:0.6475 validation loss:0.1240
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.12440948315303434 0.12379147594963963
+2023-08-04 00:39:45,974 - epoch:5, training loss:0.5832 validation loss:0.1244
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.12402334123511206 0.12442139392210678
+2023-08-04 00:40:29,666 - epoch:6, training loss:0.5483 validation loss:0.1240
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.12414705964990637 0.1229399291121147
+2023-08-04 00:41:11,505 - epoch:7, training loss:0.5212 validation loss:0.1241
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.1240542878142812 0.12348150292580778
+2023-08-04 00:41:55,633 - epoch:8, training loss:0.4972 validation loss:0.1241
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.1250205747783184 0.12453253237022595
+2023-08-04 00:42:39,453 - epoch:9, training loss:0.4708 validation loss:0.1250
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.1241683213209564 0.12505893180654806
+2023-08-04 00:43:24,782 - epoch:10, training loss:0.4562 validation loss:0.1242
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.1245907253839753 0.12459387147629802
+2023-08-04 00:44:07,900 - epoch:11, training loss:0.4547 validation loss:0.1246
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.12373164558613842 0.12410001549869776
+2023-08-04 00:44:51,295 - epoch:12, training loss:0.4301 validation loss:0.1237
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.12364925494925542 0.12421993420205334
+2023-08-04 00:45:33,870 - epoch:13, training loss:0.4247 validation loss:0.1236
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.12271499659188768 0.12490375585515391
+2023-08-04 00:46:18,313 - epoch:14, training loss:0.4146 validation loss:0.1227
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.12310873987999829 0.12425373858687552
+2023-08-04 00:47:02,074 - epoch:15, training loss:0.4075 validation loss:0.1231
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.1233903392302719 0.12459652134301988
+2023-08-04 00:47:45,653 - epoch:16, training loss:0.4072 validation loss:0.1234
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.12316961713473905 0.12467815227467906
+2023-08-04 00:48:29,014 - epoch:17, training loss:0.4179 validation loss:0.1232
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.12279738020151854 0.12446520121937449
+2023-08-04 00:49:13,597 - epoch:18, training loss:0.4212 validation loss:0.1228
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.1233325016430833 0.12509967818517576
+2023-08-04 00:49:56,941 - epoch:19, training loss:0.4203 validation loss:0.1233
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.12282568190924147 0.12417403642426837
+2023-08-04 00:50:39,791 - epoch:20, training loss:0.4212 validation loss:0.1228
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.12290703700008718 0.12451574358750474
+2023-08-04 00:51:23,324 - epoch:21, training loss:0.4158 validation loss:0.1229
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.1231167067519643 0.12434237501160665
+2023-08-04 00:52:06,740 - epoch:22, training loss:0.4143 validation loss:0.1231
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.12283922545611858 0.12457525281404908
+2023-08-04 00:52:52,004 - epoch:23, training loss:0.4236 validation loss:0.1228
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.12292727768759835 0.12444463101300327
+2023-08-04 00:53:37,179 - epoch:24, training loss:0.4176 validation loss:0.1229
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.12313823622058738 0.12455437391657721
+2023-08-04 00:54:21,595 - epoch:25, training loss:0.4189 validation loss:0.1231
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.12302081159908664 0.12447346094995737
+2023-08-04 00:55:06,185 - epoch:26, training loss:0.4265 validation loss:0.1230
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.12301232445646416 0.12436194921081717
+2023-08-04 00:55:52,140 - epoch:27, training loss:0.4267 validation loss:0.1230
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.12301382896575061 0.1246369681744413
+2023-08-04 00:56:37,033 - epoch:28, training loss:0.4230 validation loss:0.1230
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.12297927097163418 0.12460679560899734
+2023-08-04 00:57:22,787 - epoch:29, training loss:0.4324 validation loss:0.1230
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-04-00:35:22.874211/0/0.1227_epoch_14.pkl  &  0.1229399291121147
+2023-08-04 00:57:29,478 - [*] loss:0.2726
+2023-08-04 00:57:29,482 - [*] phase 0, testing
+2023-08-04 00:57:29,535 - T:96	MAE	0.331602	RMSE	0.272614	MAPE	132.968426
+2023-08-04 00:57:29,537 - 96	mae	0.3316	
+2023-08-04 00:57:29,537 - 96	rmse	0.2726	
+2023-08-04 00:57:29,537 - 96	mape	132.9684	
+2023-08-04 00:57:35,647 - [*] loss:0.2737
+2023-08-04 00:57:35,651 - [*] phase 0, testing
+2023-08-04 00:57:35,692 - T:96	MAE	0.331920	RMSE	0.273696	MAPE	131.906950
+2023-08-04 00:57:35,693 - 96	mae	0.3319	
+2023-08-04 00:57:35,694 - 96	rmse	0.2737	
+2023-08-04 00:57:35,694 - 96	mape	131.9070	
+2023-08-04 00:57:38,344 - logger name:exp/ECL-PatchTST2023-08-04-00:57:38.344261/ECL-PatchTST.log
+2023-08-04 00:57:38,345 - params : {'loss': 'huber', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'refiner_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 128, 'share_head': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-04-00:57:38.344261', 'path': 'exp/ECL-PatchTST2023-08-04-00:57:38.344261', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-04 00:57:38,345 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-04 00:57:38,612 - [*] phase 0 Dataset load!
+2023-08-04 00:57:39,742 - [*] phase 0 Training start
+train 8209
+2023-08-04 00:58:14,552 - epoch:0, training loss:0.2063 validation loss:0.1602
+train 8209
+vs, vt 0.160227874124592 0.16924411684951998
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.13839830238033424 0.15299771616066044
+2023-08-04 00:59:22,362 - epoch:1, training loss:2.8263 validation loss:0.1384
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.12879751876673914 0.13702649081295187
+2023-08-04 01:00:14,920 - epoch:2, training loss:2.1992 validation loss:0.1288
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.12580631461671807 0.13396325902166692
+2023-08-04 01:01:05,061 - epoch:3, training loss:1.4323 validation loss:0.1258
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.1245224882255901 0.13084130006080325
+2023-08-04 01:01:58,237 - epoch:4, training loss:0.9677 validation loss:0.1245
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.12625483381138605 0.12960897411473773
+2023-08-04 01:02:48,754 - epoch:5, training loss:0.8196 validation loss:0.1263
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.12642152404243295 0.1297550013458187
+2023-08-04 01:03:39,644 - epoch:6, training loss:0.7363 validation loss:0.1264
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.12655136768113484 0.12408533091233535
+2023-08-04 01:04:30,121 - epoch:7, training loss:0.6803 validation loss:0.1266
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.12543580714951863 0.12678749249740082
+2023-08-04 01:05:20,402 - epoch:8, training loss:0.6390 validation loss:0.1254
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.12539192670109597 0.1259689996527
+2023-08-04 01:06:11,348 - epoch:9, training loss:0.5859 validation loss:0.1254
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.12470481510866772 0.1258065357634967
+2023-08-04 01:07:01,878 - epoch:10, training loss:0.5588 validation loss:0.1247
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.1251129268414595 0.12624920295043426
+2023-08-04 01:07:52,675 - epoch:11, training loss:0.5389 validation loss:0.1251
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.12483591662550514 0.12611851477148858
+2023-08-04 01:08:44,207 - epoch:12, training loss:0.5233 validation loss:0.1248
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.12405657285655086 0.1260479585352269
+2023-08-04 01:09:35,785 - epoch:13, training loss:0.5165 validation loss:0.1241
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.12482484252276746 0.12532215328379112
+2023-08-04 01:10:27,509 - epoch:14, training loss:0.5120 validation loss:0.1248
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.1238136316056956 0.12709560338407755
+2023-08-04 01:11:18,548 - epoch:15, training loss:0.5007 validation loss:0.1238
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.12375399377197027 0.1262456359849735
+2023-08-04 01:12:10,035 - epoch:16, training loss:0.4999 validation loss:0.1238
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.12481484121897003 0.12615895753895695
+2023-08-04 01:13:00,673 - epoch:17, training loss:0.4853 validation loss:0.1248
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.12431840971112251 0.12753211622211066
+2023-08-04 01:13:53,124 - epoch:18, training loss:0.4840 validation loss:0.1243
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.12395070281557062 0.12654560406438328
+2023-08-04 01:14:43,480 - epoch:19, training loss:0.4835 validation loss:0.1240
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.12357906091280958 0.12618675819513472
+2023-08-04 01:15:34,901 - epoch:20, training loss:0.4793 validation loss:0.1236
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.12374416857280514 0.12607206446541983
+2023-08-04 01:16:25,324 - epoch:21, training loss:0.4794 validation loss:0.1237
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.12386516794901002 0.12638416022739626
+2023-08-04 01:17:14,548 - epoch:22, training loss:0.4775 validation loss:0.1239
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.12400585768575018 0.12670053939589046
+2023-08-04 01:18:04,831 - epoch:23, training loss:0.4776 validation loss:0.1240
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.12437681176445702 0.12681922265751797
+2023-08-04 01:18:54,432 - epoch:24, training loss:0.4760 validation loss:0.1244
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.12419122948565266 0.12659083061258902
+2023-08-04 01:19:46,688 - epoch:25, training loss:0.4712 validation loss:0.1242
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.12418533506041224 0.12681913799182934
+2023-08-04 01:20:38,767 - epoch:26, training loss:0.4707 validation loss:0.1242
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.12408586506816474 0.12667183662680062
+2023-08-04 01:21:33,266 - epoch:27, training loss:0.4721 validation loss:0.1241
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.12407912525602362 0.12632111443037336
+2023-08-04 01:22:30,760 - epoch:28, training loss:0.4746 validation loss:0.1241
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.12411012161861766 0.1262953509999947
+2023-08-04 01:23:34,720 - epoch:29, training loss:0.4717 validation loss:0.1241
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-04-00:57:38.344261/0/0.1236_epoch_20.pkl  &  0.12408533091233535
+2023-08-04 01:23:39,845 - [*] loss:0.2742
+2023-08-04 01:23:39,863 - [*] phase 0, testing
+2023-08-04 01:23:39,947 - T:96	MAE	0.333626	RMSE	0.274434	MAPE	130.893111
+2023-08-04 01:23:39,950 - 96	mae	0.3336	
+2023-08-04 01:23:39,950 - 96	rmse	0.2744	
+2023-08-04 01:23:39,950 - 96	mape	130.8931	
+2023-08-04 01:23:44,715 - [*] loss:0.2772
+2023-08-04 01:23:44,746 - [*] phase 0, testing
+2023-08-04 01:23:44,979 - T:96	MAE	0.335823	RMSE	0.276909	MAPE	129.506123
+2023-08-04 01:23:44,981 - 96	mae	0.3358	
+2023-08-04 01:23:44,981 - 96	rmse	0.2769	
+2023-08-04 01:23:44,981 - 96	mape	129.5061	
+2023-08-04 01:23:48,039 - logger name:exp/ECL-PatchTST2023-08-04-01:23:48.039072/ECL-PatchTST.log
+2023-08-04 01:23:48,039 - params : {'loss': 'mse', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 0, 'refiner_block_num': 1, 'enhance': 0, 'enhance_type': 0, 'seed': 35, 'batch_size': 128, 'share_head': 0, 'add_noise': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-04-01:23:48.039072', 'path': 'exp/ECL-PatchTST2023-08-04-01:23:48.039072', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-04 01:23:48,039 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-04 01:23:48,316 - [*] phase 0 Dataset load!
+2023-08-04 01:23:49,763 - [*] phase 0 Training start
+train 8209
+2023-08-04 01:24:34,299 - epoch:0, training loss:0.6363 validation loss:0.3708
+train 8209
+vs, vt 0.3708224879069762 0.37631172144954855
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.30850987271829083 0.32263230600140314
+2023-08-04 01:25:49,995 - epoch:1, training loss:0.5790 validation loss:0.3085
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.28409205190837383 0.2889960003508763
+2023-08-04 01:26:47,297 - epoch:2, training loss:0.5037 validation loss:0.2841
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.2776461211456494 0.27746587636118586
+2023-08-04 01:27:44,527 - epoch:3, training loss:0.4610 validation loss:0.2776
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.2819635840979489 0.27724514258178795
+2023-08-04 01:28:41,466 - epoch:4, training loss:0.4365 validation loss:0.2820
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.2910831118510528 0.2746424129740758
+2023-08-04 01:29:38,775 - epoch:5, training loss:0.4187 validation loss:0.2911
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.29669646224515006 0.27562822469256143
+2023-08-04 01:30:34,816 - epoch:6, training loss:0.3992 validation loss:0.2967
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.3038580852814696 0.275136740708893
+2023-08-04 01:31:30,919 - epoch:7, training loss:0.3786 validation loss:0.3039
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.3083275173875419 0.2802400423044508
+2023-08-04 01:32:26,428 - epoch:8, training loss:0.3652 validation loss:0.3083
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.311238288202069 0.27967230569232593
+2023-08-04 01:33:22,277 - epoch:9, training loss:0.3561 validation loss:0.3112
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.3236364539374005 0.2820052265782248
+2023-08-04 01:34:15,810 - epoch:10, training loss:0.3492 validation loss:0.3236
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.3163906999609687 0.2886349240487272
+2023-08-04 01:35:07,463 - epoch:11, training loss:0.3401 validation loss:0.3164
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.3200364109467376 0.28364714641462674
+2023-08-04 01:36:01,759 - epoch:12, training loss:0.3364 validation loss:0.3200
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.319478156383742 0.28500294990160246
+2023-08-04 01:36:55,053 - epoch:13, training loss:0.3304 validation loss:0.3195
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.3229998431422494 0.2850302832031792
+2023-08-04 01:37:49,428 - epoch:14, training loss:0.3260 validation loss:0.3230
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.3166848121380264 0.2944674607027661
+2023-08-04 01:38:44,027 - epoch:15, training loss:0.3229 validation loss:0.3167
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.310992530123754 0.2901691286401315
+2023-08-04 01:39:37,372 - epoch:16, training loss:0.3192 validation loss:0.3110
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.3079503246329047 0.2856755861165849
+2023-08-04 01:40:29,769 - epoch:17, training loss:0.3158 validation loss:0.3080
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.3147154108367183 0.28852902589873836
+2023-08-04 01:41:24,325 - epoch:18, training loss:0.3125 validation loss:0.3147
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.3086639383638447 0.2885804677551443
+2023-08-04 01:42:17,780 - epoch:19, training loss:0.3098 validation loss:0.3087
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.31358424574136734 0.2855377844111486
+2023-08-04 01:43:09,619 - epoch:20, training loss:0.3086 validation loss:0.3136
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.3096955049444329 0.2892146354371851
+2023-08-04 01:44:03,060 - epoch:21, training loss:0.3057 validation loss:0.3097
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.3107814851470969 0.2885229025374759
+2023-08-04 01:44:56,372 - epoch:22, training loss:0.3053 validation loss:0.3108
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.31278242712671106 0.29039299352602527
+2023-08-04 01:45:48,185 - epoch:23, training loss:0.3048 validation loss:0.3128
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.3117842301726341 0.28884383561936294
+2023-08-04 01:46:43,037 - epoch:24, training loss:0.3037 validation loss:0.3118
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.3105482076379386 0.28901454535397614
+2023-08-04 01:47:36,411 - epoch:25, training loss:0.3038 validation loss:0.3105
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.3107669417831031 0.28750124776905234
+2023-08-04 01:48:30,063 - epoch:26, training loss:0.3022 validation loss:0.3108
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.3118112436072393 0.2893591204827482
+2023-08-04 01:49:23,888 - epoch:27, training loss:0.3014 validation loss:0.3118
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.31177977624941955 0.2892592705108903
+2023-08-04 01:50:18,607 - epoch:28, training loss:0.3009 validation loss:0.3118
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.311690215529366 0.2889264840632677
+2023-08-04 01:51:06,872 - epoch:29, training loss:0.3009 validation loss:0.3117
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-04-01:23:48.039072/0/0.2776_epoch_3.pkl  &  0.2746424129740758
+2023-08-04 01:51:10,452 - [*] loss:0.2776
+2023-08-04 01:51:10,456 - [*] phase 0, testing
+2023-08-04 01:51:10,496 - T:96	MAE	0.340254	RMSE	0.277680	MAPE	138.412690
+2023-08-04 01:51:10,497 - 96	mae	0.3403	
+2023-08-04 01:51:10,498 - 96	rmse	0.2777	
+2023-08-04 01:51:10,498 - 96	mape	138.4127	
+2023-08-04 01:51:14,984 - [*] loss:0.2746
+2023-08-04 01:51:15,002 - [*] phase 0, testing
+2023-08-04 01:51:15,082 - T:96	MAE	0.333252	RMSE	0.274850	MAPE	133.955371
+2023-08-04 01:51:15,084 - 96	mae	0.3333	
+2023-08-04 01:51:15,084 - 96	rmse	0.2748	
+2023-08-04 01:51:15,084 - 96	mape	133.9554	
+2023-08-04 01:51:17,745 - logger name:exp/ECL-PatchTST2023-08-04-01:51:17.745431/ECL-PatchTST.log
+2023-08-04 01:51:17,745 - params : {'loss': 'mse', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'refiner_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 35, 'batch_size': 128, 'share_head': 0, 'add_noise': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-04-01:51:17.745431', 'path': 'exp/ECL-PatchTST2023-08-04-01:51:17.745431', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-04 01:51:17,746 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-04 01:51:17,947 - [*] phase 0 Dataset load!
+2023-08-04 01:51:18,879 - [*] phase 0 Training start
+train 8209
+2023-08-04 01:52:04,740 - epoch:0, training loss:0.5835 validation loss:0.3655
+train 8209
+vs, vt 0.36550586196509277 0.38364986601200973
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.3151569440960884 0.3446081924167546
+2023-08-04 01:53:26,039 - epoch:1, training loss:7.9217 validation loss:0.3152
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.2843685807152228 0.30434147674929013
+2023-08-04 01:54:28,087 - epoch:2, training loss:5.8218 validation loss:0.2844
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.2761599981988018 0.28280308029868384
+2023-08-04 01:55:30,340 - epoch:3, training loss:3.6978 validation loss:0.2762
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.27759523097087035 0.2823262272233313
+2023-08-04 01:56:31,424 - epoch:4, training loss:2.4797 validation loss:0.2776
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.2816600183194334 0.2843884859572757
+2023-08-04 01:57:30,546 - epoch:5, training loss:2.0857 validation loss:0.2817
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.28069541620259936 0.2765739736231891
+2023-08-04 01:58:32,354 - epoch:6, training loss:1.9760 validation loss:0.2807
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.2825824972242117 0.2842502406036312
+2023-08-04 01:59:32,555 - epoch:7, training loss:1.9524 validation loss:0.2826
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.2807353272695433 0.27679155275902967
+2023-08-04 02:00:33,167 - epoch:8, training loss:1.8438 validation loss:0.2807
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.2818866167217493 0.27778064798225055
+2023-08-04 02:01:33,925 - epoch:9, training loss:1.7860 validation loss:0.2819
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.2822834503921596 0.2802264729345387
+2023-08-04 02:02:26,745 - epoch:10, training loss:1.6874 validation loss:0.2823
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.28033655204556207 0.28484031168574636
+2023-08-04 02:03:20,936 - epoch:11, training loss:1.6637 validation loss:0.2803
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.28041997010057623 0.2802053148096258
+2023-08-04 02:04:12,928 - epoch:12, training loss:1.6263 validation loss:0.2804
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.2798104082996195 0.2793333012272011
+2023-08-04 02:05:00,583 - epoch:13, training loss:1.5872 validation loss:0.2798
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.28248686309565196 0.27720574966885825
+2023-08-04 02:05:48,513 - epoch:14, training loss:1.5916 validation loss:0.2825
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.28227515349333937 0.2777496378191493
+2023-08-04 02:06:34,301 - epoch:15, training loss:1.5689 validation loss:0.2823
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.2820074156942693 0.28269400718537246
+2023-08-04 02:07:22,196 - epoch:16, training loss:1.5780 validation loss:0.2820
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.28209913843734696 0.280215456743132
+2023-08-04 02:08:08,485 - epoch:17, training loss:1.5442 validation loss:0.2821
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.2815620116889477 0.2790670440616933
+2023-08-04 02:08:53,959 - epoch:18, training loss:1.5740 validation loss:0.2816
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.283422186632048 0.27902704003182327
+2023-08-04 02:09:40,201 - epoch:19, training loss:1.5097 validation loss:0.2834
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.2826997404071418 0.27916743149134243
+2023-08-04 02:10:27,446 - epoch:20, training loss:1.5160 validation loss:0.2827
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.2851349062878977 0.28171830624341965
+2023-08-04 02:11:13,015 - epoch:21, training loss:1.5254 validation loss:0.2851
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.28490362587300216 0.2810487196865407
+2023-08-04 02:11:58,115 - epoch:22, training loss:1.5013 validation loss:0.2849
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.28584715097465296 0.2813764527778734
+2023-08-04 02:12:43,394 - epoch:23, training loss:1.4885 validation loss:0.2858
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.28431065346706996 0.2804967464709824
+2023-08-04 02:13:30,791 - epoch:24, training loss:1.4957 validation loss:0.2843
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.28507879037748685 0.28144324164498935
+2023-08-04 02:14:18,542 - epoch:25, training loss:1.4987 validation loss:0.2851
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.28496200692924584 0.2820518756793304
+2023-08-04 02:15:07,647 - epoch:26, training loss:1.4899 validation loss:0.2850
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.2855556727471677 0.2816362242129716
+2023-08-04 02:15:54,592 - epoch:27, training loss:1.4900 validation loss:0.2856
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.28516963886266405 0.28158942474560306
+2023-08-04 02:16:41,129 - epoch:28, training loss:1.5123 validation loss:0.2852
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.28511134619739925 0.28184328211302107
+2023-08-04 02:17:22,221 - epoch:29, training loss:1.4851 validation loss:0.2851
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-04-01:51:17.745431/0/0.2762_epoch_3.pkl  &  0.2765739736231891
+2023-08-04 02:17:23,774 - [*] loss:0.2762
+2023-08-04 02:17:23,780 - [*] phase 0, testing
+2023-08-04 02:17:23,828 - T:96	MAE	0.337908	RMSE	0.276320	MAPE	137.307954
+2023-08-04 02:17:23,830 - 96	mae	0.3379	
+2023-08-04 02:17:23,830 - 96	rmse	0.2763	
+2023-08-04 02:17:23,830 - 96	mape	137.3080	
+2023-08-04 02:17:26,004 - [*] loss:0.2766
+2023-08-04 02:17:26,008 - [*] phase 0, testing
+2023-08-04 02:17:26,052 - T:96	MAE	0.336941	RMSE	0.276237	MAPE	130.752623
+2023-08-04 02:17:26,053 - 96	mae	0.3369	
+2023-08-04 02:17:26,053 - 96	rmse	0.2762	
+2023-08-04 02:17:26,053 - 96	mape	130.7526	
+2023-08-04 02:17:28,730 - logger name:exp/ECL-PatchTST2023-08-04-02:17:28.730088/ECL-PatchTST.log
+2023-08-04 02:17:28,730 - params : {'loss': 'huber', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'refiner_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 35, 'batch_size': 128, 'share_head': 0, 'add_noise': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-04-02:17:28.730088', 'path': 'exp/ECL-PatchTST2023-08-04-02:17:28.730088', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-04 02:17:28,731 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-04 02:17:28,973 - [*] phase 0 Dataset load!
+2023-08-04 02:17:30,665 - [*] phase 0 Training start
+train 8209
+2023-08-04 02:18:06,220 - epoch:0, training loss:0.2083 validation loss:0.1624
+train 8209
+vs, vt 0.16244064322249455 0.1708482253280553
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.13684435645965012 0.15258246219970964
+2023-08-04 02:19:13,232 - epoch:1, training loss:0.5873 validation loss:0.1368
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.1267439898272807 0.13806560195305131
+2023-08-04 02:20:05,197 - epoch:2, training loss:0.5086 validation loss:0.1267
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.12464692807671698 0.13079317718405614
+2023-08-04 02:20:56,339 - epoch:3, training loss:0.4483 validation loss:0.1246
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.1261082486334172 0.1307217567651109
+2023-08-04 02:21:46,676 - epoch:4, training loss:0.3998 validation loss:0.1261
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.12750748798928477 0.1251824637874961
+2023-08-04 02:22:37,227 - epoch:5, training loss:0.3791 validation loss:0.1275
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.12729255880483173 0.12377598458393053
+2023-08-04 02:23:31,232 - epoch:6, training loss:0.3706 validation loss:0.1273
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.12901658099144697 0.12621635444123636
+2023-08-04 02:24:19,996 - epoch:7, training loss:0.3662 validation loss:0.1290
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.12921198872341352 0.12260736330327662
+2023-08-04 02:25:12,979 - epoch:8, training loss:0.3582 validation loss:0.1292
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.12881706358695572 0.1238137890838764
+2023-08-04 02:26:03,316 - epoch:9, training loss:0.3471 validation loss:0.1288
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.13175662920217623 0.12363970609889789
+2023-08-04 02:26:54,186 - epoch:10, training loss:0.3457 validation loss:0.1318
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.13140411768108606 0.12436084415424954
+2023-08-04 02:27:43,039 - epoch:11, training loss:0.3378 validation loss:0.1314
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.1326318686320023 0.12297577521001751
+2023-08-04 02:28:31,818 - epoch:12, training loss:0.3289 validation loss:0.1326
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.13367644460363823 0.12385200192643837
+2023-08-04 02:29:20,298 - epoch:13, training loss:0.3291 validation loss:0.1337
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.13618120906705206 0.12365923373197968
+2023-08-04 02:30:06,045 - epoch:14, training loss:0.3243 validation loss:0.1362
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.13331238298930906 0.12416097327050837
+2023-08-04 02:30:50,159 - epoch:15, training loss:0.3196 validation loss:0.1333
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.13360990211367607 0.12327601896090941
+2023-08-04 02:31:35,484 - epoch:16, training loss:0.3189 validation loss:0.1336
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.1322548124431209 0.12501343932341447
+2023-08-04 02:32:21,311 - epoch:17, training loss:0.3202 validation loss:0.1323
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.134560121900656 0.12402495851909573
+2023-08-04 02:33:06,492 - epoch:18, training loss:0.3113 validation loss:0.1346
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.13336752278899605 0.12432900308208032
+2023-08-04 02:33:52,464 - epoch:19, training loss:0.3116 validation loss:0.1334
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.13413142091171307 0.12484077931466428
+2023-08-04 02:34:38,050 - epoch:20, training loss:0.3110 validation loss:0.1341
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.13430553615431895 0.12432376481592655
+2023-08-04 02:35:24,660 - epoch:21, training loss:0.3152 validation loss:0.1343
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.13438340691341596 0.1249403294006532
+2023-08-04 02:36:11,718 - epoch:22, training loss:0.3102 validation loss:0.1344
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.13446920602159065 0.1253353911028667
+2023-08-04 02:36:58,245 - epoch:23, training loss:0.3114 validation loss:0.1345
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.13456087762659247 0.12474176575514404
+2023-08-04 02:37:45,840 - epoch:24, training loss:0.3099 validation loss:0.1346
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.13441683445125818 0.12473574119874022
+2023-08-04 02:38:33,467 - epoch:25, training loss:0.3072 validation loss:0.1344
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.13450974293730475 0.12502252632244068
+2023-08-04 02:39:19,852 - epoch:26, training loss:0.3103 validation loss:0.1345
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.13494658944281665 0.12496201533146879
+2023-08-04 02:40:08,522 - epoch:27, training loss:0.3071 validation loss:0.1349
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.1351036915386265 0.1249372810125351
+2023-08-04 02:40:55,063 - epoch:28, training loss:0.3095 validation loss:0.1351
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.13503998873586004 0.12500003090297634
+2023-08-04 02:41:43,547 - epoch:29, training loss:0.3091 validation loss:0.1350
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-04-02:17:28.730088/0/0.1246_epoch_3.pkl  &  0.12260736330327662
+2023-08-04 02:41:49,903 - [*] loss:0.2763
+2023-08-04 02:41:49,907 - [*] phase 0, testing
+2023-08-04 02:41:49,948 - T:96	MAE	0.336801	RMSE	0.276403	MAPE	135.127127
+2023-08-04 02:41:49,949 - 96	mae	0.3368	
+2023-08-04 02:41:49,949 - 96	rmse	0.2764	
+2023-08-04 02:41:49,950 - 96	mape	135.1271	
+2023-08-04 02:41:56,716 - [*] loss:0.2719
+2023-08-04 02:41:56,720 - [*] phase 0, testing
+2023-08-04 02:41:56,759 - T:96	MAE	0.333582	RMSE	0.271455	MAPE	132.000923
+2023-08-04 02:41:56,760 - 96	mae	0.3336	
+2023-08-04 02:41:56,761 - 96	rmse	0.2715	
+2023-08-04 02:41:56,761 - 96	mape	132.0009	
+2023-08-04 02:41:59,117 - logger name:exp/ECL-PatchTST2023-08-04-02:41:59.116837/ECL-PatchTST.log
+2023-08-04 02:41:59,117 - params : {'loss': 'huber', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 0, 'refiner_block_num': 1, 'enhance': 0, 'enhance_type': 0, 'seed': 35, 'batch_size': 128, 'share_head': 0, 'add_noise': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-04-02:41:59.116837', 'path': 'exp/ECL-PatchTST2023-08-04-02:41:59.116837', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-04 02:41:59,117 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-04 02:41:59,334 - [*] phase 0 Dataset load!
+2023-08-04 02:42:00,298 - [*] phase 0 Training start
+train 8209
+2023-08-04 02:42:29,497 - epoch:0, training loss:0.2248 validation loss:0.1633
+train 8209
+vs, vt 0.16329169425774703 0.16690797138620506
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.13829870606687936 0.14412536268884485
+2023-08-04 02:43:30,007 - epoch:1, training loss:1.3338 validation loss:0.1383
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.12805240118706768 0.13000474446876484
+2023-08-04 02:44:13,895 - epoch:2, training loss:1.0657 validation loss:0.1281
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.12542236257683148 0.12601143367249856
+2023-08-04 02:44:58,755 - epoch:3, training loss:0.8006 validation loss:0.1254
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.12349783976308325 0.12528886603699488
+2023-08-04 02:45:41,472 - epoch:4, training loss:0.6444 validation loss:0.1235
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.12527725989507002 0.12283001315187324
+2023-08-04 02:46:26,293 - epoch:5, training loss:0.5793 validation loss:0.1253
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.12394355135885152 0.12351454828273166
+2023-08-04 02:47:11,077 - epoch:6, training loss:0.5416 validation loss:0.1239
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.1237907912582159 0.12308852704749866
+2023-08-04 02:47:54,811 - epoch:7, training loss:0.5146 validation loss:0.1238
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.12392099523408846 0.12351990194821899
+2023-08-04 02:48:39,966 - epoch:8, training loss:0.5005 validation loss:0.1239
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.12625963503325527 0.12420846801251173
+2023-08-04 02:49:25,484 - epoch:9, training loss:0.4853 validation loss:0.1263
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.1251188392158259 0.12486513009802862
+2023-08-04 02:50:12,187 - epoch:10, training loss:0.4717 validation loss:0.1251
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.1247007619081573 0.12455813527445901
+2023-08-04 02:50:57,075 - epoch:11, training loss:0.4545 validation loss:0.1247
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.12395420924506405 0.12390815144912763
+2023-08-04 02:51:43,970 - epoch:12, training loss:0.4522 validation loss:0.1240
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.12405561698092656 0.12393509664318779
+2023-08-04 02:52:30,915 - epoch:13, training loss:0.4262 validation loss:0.1241
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.12481657745824619 0.12450783200223338
+2023-08-04 02:53:16,926 - epoch:14, training loss:0.4369 validation loss:0.1248
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.12455380834977735 0.12543207542462784
+2023-08-04 02:54:02,317 - epoch:15, training loss:0.4354 validation loss:0.1246
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.12441923503171314 0.12491971110417084
+2023-08-04 02:54:48,286 - epoch:16, training loss:0.4340 validation loss:0.1244
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.12481936185874722 0.1247168429703875
+2023-08-04 02:55:34,542 - epoch:17, training loss:0.4247 validation loss:0.1248
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.12445346934890206 0.12510340855541555
+2023-08-04 02:56:20,679 - epoch:18, training loss:0.4293 validation loss:0.1245
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.12418556230312044 0.1247938589446924
+2023-08-04 02:57:05,945 - epoch:19, training loss:0.4261 validation loss:0.1242
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.12402942658148029 0.12501236313784664
+2023-08-04 02:57:51,552 - epoch:20, training loss:0.4273 validation loss:0.1240
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.12460267603058707 0.12472214304249395
+2023-08-04 02:58:36,351 - epoch:21, training loss:0.4235 validation loss:0.1246
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.12427529641850428 0.12572888581251557
+2023-08-04 02:59:20,143 - epoch:22, training loss:0.4311 validation loss:0.1243
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.12488398319956931 0.1256151395765218
+2023-08-04 03:00:04,412 - epoch:23, training loss:0.4266 validation loss:0.1249
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.12419055444611744 0.1253504352644086
+2023-08-04 03:00:48,297 - epoch:24, training loss:0.4288 validation loss:0.1242
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.1243034762923013 0.12518092972988432
+2023-08-04 03:01:32,266 - epoch:25, training loss:0.4411 validation loss:0.1243
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.12427246824584225 0.1250312922691757
+2023-08-04 03:02:13,877 - epoch:26, training loss:0.4322 validation loss:0.1243
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.12443889601325447 0.125226643783125
+2023-08-04 03:02:56,741 - epoch:27, training loss:0.4279 validation loss:0.1244
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.12435042240064252 0.12526016953316602
+2023-08-04 03:03:38,688 - epoch:28, training loss:0.4342 validation loss:0.1244
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.12426463810896332 0.1251082087612965
+2023-08-04 03:04:23,098 - epoch:29, training loss:0.4333 validation loss:0.1243
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-04-02:41:59.116837/0/0.1235_epoch_4.pkl  &  0.12283001315187324
+2023-08-04 03:04:29,053 - [*] loss:0.2739
+2023-08-04 03:04:29,057 - [*] phase 0, testing
+2023-08-04 03:04:29,096 - T:96	MAE	0.334669	RMSE	0.274115	MAPE	135.618484
+2023-08-04 03:04:29,099 - 96	mae	0.3347	
+2023-08-04 03:04:29,099 - 96	rmse	0.2741	
+2023-08-04 03:04:29,099 - 96	mape	135.6185	
+2023-08-04 03:04:33,594 - [*] loss:0.2731
+2023-08-04 03:04:33,597 - [*] phase 0, testing
+2023-08-04 03:04:33,635 - T:96	MAE	0.332151	RMSE	0.273248	MAPE	133.689928
+2023-08-04 03:04:33,637 - 96	mae	0.3322	
+2023-08-04 03:04:33,637 - 96	rmse	0.2732	
+2023-08-04 03:04:33,637 - 96	mape	133.6899	
+2023-08-04 03:04:35,966 - logger name:exp/ECL-PatchTST2023-08-04-03:04:35.966422/ECL-PatchTST.log
+2023-08-04 03:04:35,967 - params : {'loss': 'huber', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'refiner_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 35, 'batch_size': 128, 'share_head': 0, 'add_noise': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'train': True, 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-04-03:04:35.966422', 'path': 'exp/ECL-PatchTST2023-08-04-03:04:35.966422', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-04 03:04:35,967 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-04 03:04:36,175 - [*] phase 0 Dataset load!
+2023-08-04 03:04:37,208 - [*] phase 0 Training start
+train 8209
+2023-08-04 03:05:10,148 - epoch:0, training loss:0.2083 validation loss:0.1624
+train 8209
+vs, vt 0.16244064322249455 0.1708482253280553
+Updating learning rate to 1.0463629820836433e-05
+Updating learning rate to 1.0463629820836433e-05
+train 8209
+vs, vt 0.14001180358569731 0.15262016052888197
+2023-08-04 03:06:14,582 - epoch:1, training loss:2.8982 validation loss:0.1400
+Updating learning rate to 2.8113748014145436e-05
+Updating learning rate to 2.8113748014145436e-05
+train 8209
+vs, vt 0.1287075128744949 0.13726301669058474
+2023-08-04 03:07:03,661 - epoch:2, training loss:2.2276 validation loss:0.1287
+Updating learning rate to 5.219686165094539e-05
+Updating learning rate to 5.219686165094539e-05
+train 8209
+vs, vt 0.12419496264986017 0.12693313170563092
+2023-08-04 03:07:53,112 - epoch:3, training loss:1.4751 validation loss:0.1242
+Updating learning rate to 7.622695691951079e-05
+Updating learning rate to 7.622695691951079e-05
+train 8209
+vs, vt 0.12481219194490802 0.12640655040740967
+2023-08-04 03:08:41,481 - epoch:4, training loss:0.9867 validation loss:0.1248
+Updating learning rate to 9.373229880419829e-05
+Updating learning rate to 9.373229880419829e-05
+train 8209
+vs, vt 0.1254443611780351 0.12407389257780531
+2023-08-04 03:09:30,991 - epoch:5, training loss:0.8088 validation loss:0.1254
+Updating learning rate to 9.999989541836333e-05
+Updating learning rate to 9.999989541836333e-05
+train 8209
+vs, vt 0.12503540515899658 0.12290944074365226
+2023-08-04 03:10:19,981 - epoch:6, training loss:0.7300 validation loss:0.1250
+Updating learning rate to 9.955879284407972e-05
+Updating learning rate to 9.955879284407972e-05
+train 8209
+vs, vt 0.12573313611474904 0.12396075051616538
+2023-08-04 03:11:07,440 - epoch:7, training loss:0.6842 validation loss:0.1257
+Updating learning rate to 9.826972900599613e-05
+Updating learning rate to 9.826972900599613e-05
+train 8209
+vs, vt 0.12453874666243792 0.12209282434460791
+2023-08-04 03:11:54,817 - epoch:8, training loss:0.6435 validation loss:0.1245
+Updating learning rate to 9.615476014377818e-05
+Updating learning rate to 9.615476014377818e-05
+train 8209
+vs, vt 0.12470269101587209 0.12299055953256109
+2023-08-04 03:12:40,527 - epoch:9, training loss:0.6014 validation loss:0.1247
+Updating learning rate to 9.325007396103859e-05
+Updating learning rate to 9.325007396103859e-05
+train 8209
+vs, vt 0.12548998912627046 0.12361288189210674
+2023-08-04 03:13:27,038 - epoch:10, training loss:0.5857 validation loss:0.1255
+Updating learning rate to 8.960537044369518e-05
+Updating learning rate to 8.960537044369518e-05
+train 8209
+vs, vt 0.12452439819885926 0.12497100318697366
+2023-08-04 03:14:13,586 - epoch:11, training loss:0.5599 validation loss:0.1245
+Updating learning rate to 8.528301147943237e-05
+Updating learning rate to 8.528301147943237e-05
+train 8209
+vs, vt 0.12456706902858886 0.1239508841694756
+2023-08-04 03:14:58,998 - epoch:12, training loss:0.5454 validation loss:0.1246
+Updating learning rate to 8.035695382851308e-05
+Updating learning rate to 8.035695382851308e-05
+train 8209
+vs, vt 0.12360698975283992 0.12462809267030521
+2023-08-04 03:15:44,707 - epoch:13, training loss:0.5367 validation loss:0.1236
+Updating learning rate to 7.49114837031057e-05
+Updating learning rate to 7.49114837031057e-05
+train 8209
+vs, vt 0.12395766656845808 0.12361874431371689
+2023-08-04 03:16:30,771 - epoch:14, training loss:0.5311 validation loss:0.1240
+Updating learning rate to 6.90397746068255e-05
+Updating learning rate to 6.90397746068255e-05
+train 8209
+vs, vt 0.12372616805474866 0.12396638899702918
+2023-08-04 03:17:17,419 - epoch:15, training loss:0.5276 validation loss:0.1237
+Updating learning rate to 6.284229311025519e-05
+Updating learning rate to 6.284229311025519e-05
+train 8209
+vs, vt 0.1240453188392249 0.12427257238463922
+2023-08-04 03:18:02,071 - epoch:16, training loss:0.5278 validation loss:0.1240
+Updating learning rate to 5.642507984006751e-05
+Updating learning rate to 5.642507984006751e-05
+train 8209
+vs, vt 0.1235445686192675 0.12457652897997336
+2023-08-04 03:18:47,365 - epoch:17, training loss:0.5184 validation loss:0.1235
+Updating learning rate to 4.989793509450307e-05
+Updating learning rate to 4.989793509450307e-05
+train 8209
+vs, vt 0.12329142075031996 0.12366971932351589
+2023-08-04 03:19:33,105 - epoch:18, training loss:0.5334 validation loss:0.1233
+Updating learning rate to 4.337254012982485e-05
+Updating learning rate to 4.337254012982485e-05
+train 8209
+vs, vt 0.12369953121312639 0.12322719115763903
+2023-08-04 03:20:20,737 - epoch:19, training loss:0.5145 validation loss:0.1237
+Updating learning rate to 3.696054626305981e-05
+Updating learning rate to 3.696054626305981e-05
+train 8209
+vs, vt 0.12374438633295623 0.12412945020266554
+2023-08-04 03:21:05,174 - epoch:20, training loss:0.5129 validation loss:0.1237
+Updating learning rate to 3.0771664487008854e-05
+Updating learning rate to 3.0771664487008854e-05
+train 8209
+vs, vt 0.12356927279721606 0.12401969104327938
+2023-08-04 03:21:51,048 - epoch:21, training loss:0.5126 validation loss:0.1236
+Updating learning rate to 2.491178828474237e-05
+Updating learning rate to 2.491178828474237e-05
+train 8209
+vs, vt 0.12364085518162359 0.12390286246822639
+2023-08-04 03:22:36,449 - epoch:22, training loss:0.5090 validation loss:0.1236
+Updating learning rate to 1.9481181762745777e-05
+Updating learning rate to 1.9481181762745777e-05
+train 8209
+vs, vt 0.12421745265072043 0.12449583843011748
+2023-08-04 03:23:23,781 - epoch:23, training loss:0.5093 validation loss:0.1242
+Updating learning rate to 1.4572764104259043e-05
+Updating learning rate to 1.4572764104259043e-05
+train 8209
+vs, vt 0.12358778647401115 0.12373307050967758
+2023-08-04 03:24:09,450 - epoch:24, training loss:0.5018 validation loss:0.1236
+Updating learning rate to 1.0270519696289322e-05
+Updating learning rate to 1.0270519696289322e-05
+train 8209
+vs, vt 0.1236466338688677 0.12382537643001838
+2023-08-04 03:24:56,936 - epoch:25, training loss:0.5114 validation loss:0.1236
+Updating learning rate to 6.648061133464466e-06
+Updating learning rate to 6.648061133464466e-06
+train 8209
+vs, vt 0.12369394742629745 0.12431010222909125
+2023-08-04 03:25:43,126 - epoch:26, training loss:0.5114 validation loss:0.1237
+Updating learning rate to 3.7673696861296922e-06
+Updating learning rate to 3.7673696861296922e-06
+train 8209
+vs, vt 0.12374527633867481 0.12410624663938176
+2023-08-04 03:26:29,334 - epoch:27, training loss:0.5049 validation loss:0.1237
+Updating learning rate to 1.6777347836274343e-06
+Updating learning rate to 1.6777347836274343e-06
+train 8209
+vs, vt 0.12362485108050433 0.124057750640945
+2023-08-04 03:27:00,758 - epoch:28, training loss:0.5065 validation loss:0.1236
+Updating learning rate to 4.1491065849575754e-07
+Updating learning rate to 4.1491065849575754e-07
+train 8209
+vs, vt 0.12360913687470285 0.12422207251868465
+2023-08-04 03:27:24,422 - epoch:29, training loss:0.5061 validation loss:0.1236
+Updating learning rate to 5.045816366600914e-10
+Updating learning rate to 5.045816366600914e-10
+check exp/ECL-PatchTST2023-08-04-03:04:35.966422/0/0.1233_epoch_18.pkl  &  0.12209282434460791
+2023-08-04 03:27:26,328 - [*] loss:0.2736
+2023-08-04 03:27:26,333 - [*] phase 0, testing
+2023-08-04 03:27:26,370 - T:96	MAE	0.333025	RMSE	0.273694	MAPE	130.392790
+2023-08-04 03:27:26,372 - 96	mae	0.3330	
+2023-08-04 03:27:26,372 - 96	rmse	0.2737	
+2023-08-04 03:27:26,372 - 96	mape	130.3928	
+2023-08-04 03:27:28,322 - [*] loss:0.2715
+2023-08-04 03:27:28,325 - [*] phase 0, testing
+2023-08-04 03:27:28,362 - T:96	MAE	0.332345	RMSE	0.271421	MAPE	131.528556
+2023-08-04 03:27:28,364 - 96	mae	0.3323	
+2023-08-04 03:27:28,364 - 96	rmse	0.2714	
+2023-08-04 03:27:28,364 - 96	mape	131.5286	

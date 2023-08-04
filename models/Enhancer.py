@@ -21,7 +21,7 @@ class Enhancer(object):
 
         # plt.plot(x[3].cpu().numpy()) 
         # plt.savefig('before.png')
-        # plt.close()
+        # plt.close() 
 
         x = x + torch.randn(size=x.shape).to(self.args.device) * self.jitter_sigma 
         # plt.plot(x[3].cpu().numpy()) 
@@ -65,7 +65,11 @@ class Enhancer(object):
         for i in range(b): 
             c_idx = torch.randint(low=0, high=x.shape[1] - 1, size=(x.shape[1],), device=x.device) 
             t_idx = torch.randint(low=0, high=x.shape[2] - 48, size=(1,), device=x.device) 
-            x[i, :, t_idx:t_idx+48] = x[i, c_idx, t_idx:t_idx+48] #todo
+            x[i, :, t_idx:t_idx+48] = x[max(i - 1, 0), c_idx, t_idx:t_idx+48] #todo
+            if self.args.add_noise: 
+                x[i, :, t_idx:t_idx+48] +=  torch.randn(size=x[max(i - 1, 0), c_idx, t_idx:t_idx+48].shape).to(self.args.device) * self.jitter_sigma 
+            #* change here， 随机 + 组合 set_zero + substitude 增大扰动 
+            #* 等下再加点扰动和噪声 
         # plt.plot(x[3][1].cpu().numpy()) 
         # plt.savefig('after2.png')
         # plt.close()
@@ -121,6 +125,7 @@ class Enhancer(object):
         elif self.args.enhance_type == 4: 
             x = torch.cat([x[:bs], self.l_slope(x[bs:])], dim=0)
         elif self.args.enhance_type == 5: 
+            x = torch.cat([x[:bs], self.substitude(x[bs:])], dim=0)
             x = torch.cat([x[:bs], self.set_zero(x[bs:])], dim=0)    
         else:
             x = torch.cat([self.set_zero(x[:bs]), self.jitter(x[bs:bs*2]), self.spike(x[bs*2:bs*3]), self.substitude(x[bs*3:])], dim=0)

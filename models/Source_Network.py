@@ -105,10 +105,10 @@ class Refiner_block(nn.Module):
     ):
         
 
-        out, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=None)
+        # out, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=None)
         # out = self.shrinkage(out.permute(0, 2, 1)).permute(0, 2, 1) #* soft threshold before residual
-        out  = self.dropout_attn(out)
-        out = self.to_out(out)
+        # out  = self.dropout_attn(out)
+        out = self.to_out(x)
 
         if self.add_residual:
             out = out + x

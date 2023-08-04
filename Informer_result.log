@@ -101,3 +101,7 @@ Updating learning rate to 2.0589113209464907e-05
 Updating learning rate to 2.0589113209464907e-05
 train 8449
 vs, vt 4.2298737439242275 1.3191076788035305
+2023-08-03 11:44:55,771 - epoch:18, training loss:0.2183 validation loss:4.2299
+Updating learning rate to 1.8530201888518416e-05
+Updating learning rate to 1.8530201888518416e-05
+train 8449

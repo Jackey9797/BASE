@@ -1,0 +1,37 @@
+2023-08-03 11:45:21,740 - logger name:exp/ETT-Informer2023-08-03-11:45:21.739925/ETT-Informer.log
+2023-08-03 11:45:21,740 - params : {'loss': 'mse', 'conf': 'ETT-Informer', 'data_name': 'ETTh2', 'iteration': 1, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_no_residual': False, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 0, 'refiner_block_num': 1, 'enhance': 0, 'enhance_type': 0, 'seed': 33, 'batch_size': 128, 'share_head': 0, 'jitter_sigma': 0.2, 'slope_rate': 0.01, 'slope_range': 0.5, 'beta': 1.0, '/* model related args*/': '//', 'model_name': 'informer', 'seq_len': 96, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 2, 'd_layers': 1, 'factor': 3, 'n_heads': 8, 'd_model': 512, 'd_ff': 2048, 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'type3', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, '/*train related args*/': '//', 'train': True, 'epoch': 100, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 7, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ETT-Informer', 'time': '2023-08-03-11:45:21.739925', 'path': 'exp/ETT-Informer2023-08-03-11:45:21.739925', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-03 11:45:21,740 - [*] phase 0 start training
+train 8449
+val 2785
+test 2785
+2023-08-03 11:45:21,809 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+2023-08-03 11:45:32,245 - [*] phase 0 Training start
+train 8449
+2023-08-03 11:46:16,298 - epoch:0, training loss:0.9278 validation loss:2.1094
+train 8449
+vs, vt 2.1093670183962043 2.5896295634183017
+Updating learning rate to 0.0001
+Updating learning rate to 0.0001
+train 8449
+vs, vt 2.1605929190462287 1.760569003495303
+2023-08-03 11:47:36,118 - epoch:1, training loss:0.5696 validation loss:2.1606
+Updating learning rate to 0.0001
+Updating learning rate to 0.0001
+train 8449
+vs, vt 3.2685090736909346 1.991379288109866
+2023-08-03 11:48:30,578 - epoch:2, training loss:0.4185 validation loss:3.2685
+Updating learning rate to 0.0001
+Updating learning rate to 0.0001
+train 8449
+vs, vt 2.8330745046788994 1.9550198370760137
+2023-08-03 11:49:25,798 - epoch:3, training loss:0.3684 validation loss:2.8331
+Updating learning rate to 9e-05
+Updating learning rate to 9e-05
+train 8449
+vs, vt 3.132152622396296 1.902892221104015
+2023-08-03 11:50:21,545 - epoch:4, training loss:0.3372 validation loss:3.1322
+Updating learning rate to 8.1e-05
+Updating learning rate to 8.1e-05
+train 8449

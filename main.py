@@ -858,6 +858,7 @@ def parse_args():
 
     parser.add_argument("--batch_size", type=int, default=128)
     parser.add_argument("--share_head", type=int, default=0)
+    parser.add_argument("--add_noise", type=int, default=0)
 
     parser.add_argument("--jitter_sigma", type=float, default=0.2)
     parser.add_argument("--slope_rate", type=float, default=0.01)
