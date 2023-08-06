@@ -283,6 +283,7 @@ class base_framework:
             self.args.valid_loss_T = validation_loss 
             import copy
             self.args.best_T =  copy.deepcopy(self.T)
+            self.args.best_Tloss = validation_loss
         return validation_loss
 
     def get_Score(self):
@@ -422,8 +423,11 @@ class base_framework:
                 pred_T = self.T(batch_x, self.args.sub_adj)
             else : 
                 if self.args.linear_output:
+                    self.args.best_T.train()
                     pred_S, F_S = self.S(batch_x, feature=True)
-                    pred_T, F_T = self.T(batch_x, feature=True)
+                    pred_T = self.T(batch_x)
+                    with torch.no_grad():
+                        _, F_T = self.args.best_T(batch_x, feature=True)
                 else: 
                     pred_S = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                     pred_T = self.T(batch_x, batch_x_mark, dec_inp, batch_y_mark)
@@ -440,8 +444,9 @@ class base_framework:
             if self.args.enhance: 
                 enhanced_x = enhancer(batch_x) 
 
-                self.T.eval() #! add eval  
-                _, F_T_wn = self.T(enhanced_x, feature=True)
+                self.args.best_T.eval() #! add eval  
+                with torch.no_grad():
+                    _, F_T_wn = self.args.best_T(enhanced_x, feature=True)
                 # eval_pred_T, eval_F_T = 
                 # F_T = torch.ones_like(F_T) #!
                 # print(F_T.shape, F_T_wn.shape)
@@ -451,7 +456,7 @@ class base_framework:
                 refined_F = self.S.correction_module.Refiner(F_T_wn.detach().permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
                 loss_rec = self.lossfunc(anchor_F.detach() * normal_mask, refined_F * normal_mask, reduction="mean") 
                 # loss_n_pred = self.
-                self.T.train()
+                self.args.best_T.train()
 
                 loss_MSE_R = self.lossfunc(self.T(batch_x, given_feature=refined_F), true)
                 # print("before backward:\n")
@@ -472,26 +477,7 @@ class base_framework:
             # import matplotlib.pyplot as plt
             # for i in range(len(label)): 
             #     if label[i].item() == 1:
-            def vis(idx, channel): 
-                import matplotlib.pyplot as plt 
-                pred_S, F_S = self.S(batch_x, feature=True)
-                pred_T, F_T = self.T(batch_x, feature=True)
-                plt.plot(torch.cat([batch_x[idx,-96:,channel].cpu(), pred_S[idx,:,channel].cpu()]).detach().numpy(), color='g') 
-                plt.plot(torch.cat([batch_x[idx,-96:,channel].cpu(), pred_T[idx,:,channel].cpu()]).detach().numpy(), color='orange') 
-                plt.plot(torch.cat([batch_x[idx,-96:,channel].cpu(), batch_y[idx,:,channel].cpu()]).detach().numpy())
-                plt.legend(['S', 'T', 'GT'])
-                # show loss by text
-                plt.text(0,0, "loss S: {:.5f}; loss T: {:.5f}".format(self.lossfunc(batch_y[idx,:,channel], pred_S[idx,:,channel],reduction='mean').item(), self.lossfunc(batch_y[idx,:,channel], pred_T[idx,:,channel],reduction='mean').item()))
-                plt.savefig('before{}.png'.format(1))
-                plt.close()
-
-                plt.plot(torch.cat([batch_x[idx,:,channel].cpu(), pred_T[idx,:,channel].cpu()]).detach().numpy(), color='orange') 
-                plt.plot(torch.cat([batch_x[idx,:,channel].cpu(), batch_y[idx,:,channel].cpu()]).detach().numpy())
-                plt.savefig('all{}.png'.format(1))
-                plt.close()
-                
-                #todo add loss, see if the sample selection is correct 
-                print(label[idx, channel])
+            
             #         plt.plot(batch_x[i].cpu().numpy()) 
             #         plt.savefig('before{}.png'.format(i))
             #         plt.close()
@@ -518,7 +504,7 @@ class base_framework:
                 loss = loss_T + loss_KD * 10 + loss_anchor 
 
             else: 
-                loss = loss_S + loss_T + loss_KD * 10  + loss_anchor * self.args.beta
+                loss = loss_S + loss_T + loss_KD * self.args.alpha  + loss_anchor * self.args.beta
                 #* here KD decay
             # print(batch_x[1, 1, 1])
             #* label 1 for normal
@@ -644,11 +630,13 @@ class base_framework:
                 validation_loss_T = self.valid_T()
 
                 print("vs, vt", validation_loss, validation_loss_T)
-                if validation_loss > validation_loss_T: 
+                if validation_loss > self.args.best_Tloss: 
                     self.args.need_align = True
                 else :
                     self.args.need_align = False
                 ##
+                print("need align? -> ", self.args.need_align, self.args.best_Tloss)
+
                 self.get_Score()
 
                 self.args.logger.info(f"epoch:{self.epoch}, training loss:{training_loss:.4f} validation loss:{validation_loss:.4f}")
@@ -864,6 +852,7 @@ def parse_args():
     parser.add_argument("--slope_rate", type=float, default=0.01)
     parser.add_argument("--slope_range", type=float, default=0.5)
 
+    parser.add_argument("--alpha", type=float, default=10.0)
     parser.add_argument("--beta", type=float, default=1.0)
     args = parser.parse_args() 
     return args 
