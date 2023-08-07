@@ -131,3 +131,11 @@ class Enhancer(object):
             x = torch.cat([self.set_zero(x[:bs]), self.jitter(x[bs:bs*2]), self.spike(x[bs*2:bs*3]), self.substitude(x[bs*3:])], dim=0)
             # x = torch.cat([x[:bs], self.l_slope(x[bs:bs*2]), self.l_slope(x[bs*2:bs*3]), self.set_zero(x[bs*3:])], dim=0)
         return x
+    
+    def feature_jittering(self, x): 
+        jit_pos = torch.randint(low=1, high=100, size=x.shape[:-1], device=x.device) 
+        k = int(self.args.gamma * 100)
+        jit_pos[jit_pos <= k] = 1 
+        jit_pos[jit_pos != 1] = 0
+        x = x + torch.randn(size=x.shape).to(x.device) * self.jitter_sigma * jit_pos.unsqueeze(-1)  
+        return x

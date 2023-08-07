@@ -55,6 +55,7 @@ class Shrinkage(nn.Module):
 class Refiner_block(nn.Module):
     def __init__(
         self,
+        args,
         dim,
         query_key_dim = 32, ##todo
         expansion_factor = 2.,
@@ -86,16 +87,17 @@ class Refiner_block(nn.Module):
         self.offsetscale = OffsetScale(query_key_dim, heads = 2)
 
         self.to_out = nn.Sequential(
-            nn.Linear(dim, dim)
-            
+            nn.Linear(dim, dim // 2),
+            nn.Linear(dim // 2, dim)
         ) #*
 
         self.shrinkage = Shrinkage(dim, gap_size=(1)) #todo
         self.add_residual = add_residual
-        self.self_attn = _MultiheadAttention(dim, 16, 64, 64, attn_dropout=0, proj_dropout=0, res_attention=False)
+        self.self_attn = _MultiheadAttention(dim, 16, args.mid_dim, args.mid_dim, attn_dropout=0, proj_dropout=0, res_attention=False)
 
         # Add & Norm
         self.dropout_attn = nn.Dropout(dropout)
+        self.args = args
 
     def forward(
         self,
@@ -105,15 +107,44 @@ class Refiner_block(nn.Module):
     ):
         
 
-        # out, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=None)
-        # out = self.shrinkage(out.permute(0, 2, 1)).permute(0, 2, 1) #* soft threshold before residual
-        # out  = self.dropout_attn(out)
-        out = self.to_out(x)
+        out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=torch.eye(x.shape[-2], device=x.device))
+        # print(torch.mean((out_1 - x) ** 2, dim=[2]).shape, torch.mean((out_1 - x) ** 2, dim=[2])[2])  
+        # out_1 = self.shrinkage(out_1.permute(0, 2, 1)).permute(0, 2, 1) #* soft threshold before residual
+        # out_1  = self.dropout_attn(out_1)
+        gamma = self.args.gamma
+        rec_score = torch.mean((out_1 - x) ** 2, dim=[2])
+        # print(torch.argsort(-rec_score, dim=1).shape, torch.argsort(rec_score, dim=1)[2])  
+        rec_idx = torch.argsort(-rec_score, dim=1)[:, :int(gamma * rec_score.shape[1])]
+        # fill rec_idx of x with out_1 in the same position 
+        y = x.clone()
+        for i in range(rec_idx.shape[0]):
+            y[i, rec_idx[i]] = out_1[i, rec_idx[i]]
+        out_1 = y 
+        # print(torch.mean((out_1 - x) ** 2, dim=[2]).shape, torch.mean((out_1 - x) ** 2, dim=[2])[2]) 
+        
+        
+        if self.args.rec_intra_feature: 
+
+            out_2 = self.to_out(out_1)
+            # # out_2 - out_1 
+            rec_score = torch.abs(out_2 - out_1)
+            q = torch.tensor([0.25, 0.5, 0.75], device=out_1.device) 
+            q1, q2, q3 = torch.quantile(rec_score, q) 
+            tmp = out_2 - out_1
+            tmp[tmp < q3 + 1.5 * (q3 - q1)] = 0 
+            out_1 = out_1 + tmp
+            # print(torch.abs((out_2 - out_1) / out_1).shape, torch.abs((out_2 - out_1 / out_1))[2][16])  
+            # rec_idx = torch.argsort(-rec_score, dim=1)[:, :int(gamma * rec_score.shape[1])]
+            # y = out_1.clone()
+            # for i in range(rec_idx.shape[0]):
+                # y[i, :, rec_idx[i]] = out[i, rec_idx[i]]
+            # x = y
+
 
         if self.add_residual:
-            out = out + x
+            out = out_1 + x
 
-        return out
+        return out_1
 
 class Refiner(nn.Module): 
     def __init__(self, args):
@@ -121,7 +152,7 @@ class Refiner(nn.Module):
         self.args = args 
         self.refiner_block_num = args.refiner_block_num
         self.blocks = nn.ModuleList([
-            Refiner_block(args.d_model, add_residual= (not args.refiner_no_residual)) for _ in range(self.refiner_block_num)
+            Refiner_block(args, args.d_model, add_residual= args.refiner_residual) for _ in range(self.refiner_block_num)
         ])
 
     def forward(self, x):
@@ -139,11 +170,12 @@ class Refiner(nn.Module):
 class Correction_Module(nn.Module):
     def __init__(self, args):
         super(Correction_Module, self).__init__()
-        self.Aligner = nn.Linear(args.d_model, args.d_model)
-        self.Refiner = nn.Linear(args.d_model, args.d_model) # simplest implementation of Refiner
+        # self.Aligner = nn.Linear(args.d_model, args.d_model)
+        self.Aligner = nn.Identity()
+        # self.Refiner = nn.Linear(args.d_model, args.d_model) # simplest implementation of Refiner
         # self.Refiner = nn.Linear(args.d_model, args.d_model) # simplest implementation of Refiner
         # self.Refiner = nn.Sequential(*[nn.Linear(args.d_model, args.d_model), nn.ReLU(), nn.Linear(args.d_model, args.d_model)])
-        # self.Refiner = Refiner(args)
+        self.Refiner = Refiner(args)
         
         self.args = args 
 

@@ -445,8 +445,11 @@ class base_framework:
                 enhanced_x = enhancer(batch_x) 
 
                 self.args.best_T.eval() #! add eval  
-                with torch.no_grad():
-                    _, F_T_wn = self.args.best_T(enhanced_x, feature=True)
+                if self.args.feature_jittering: 
+                    F_T_wn = enhancer.feature_jittering(F_T)
+                else : 
+                    with torch.no_grad():
+                        _, F_T_wn = self.args.best_T(enhanced_x, feature=True)
                 # eval_pred_T, eval_F_T = 
                 # F_T = torch.ones_like(F_T) #!
                 # print(F_T.shape, F_T_wn.shape)
@@ -468,6 +471,7 @@ class base_framework:
                 #     print(i.grad)
                 # loss_rec = 0 
                 loss_anchor = loss_rec + loss_MSE_R 
+                if self.args.rec_ori: loss_anchor += 2 * self.lossfunc(refined_F, F_T_wn.detach())
 
             # print("batch_x ", batch_y[1,1,1])
             # print("pred ", outputs, outputs.dtype)
@@ -826,7 +830,7 @@ def parse_args():
     parser.add_argument("--build_graph", action="store_true", default=False)
     parser.add_argument("--same_init", action="store_true", default=False)
     parser.add_argument("--grad_norm", action="store_true", default=False)
-    parser.add_argument("--refiner_no_residual", action="store_true", default=False)
+    parser.add_argument("--refiner_residual", type=int, default=0)
     parser.add_argument("--root_path", type=str, default="")
     parser.add_argument("--exp_path", type=str, default="exp/")
     parser.add_argument("--val_test_mix", action="store_true", default=False)
@@ -854,6 +858,11 @@ def parse_args():
 
     parser.add_argument("--alpha", type=float, default=10.0)
     parser.add_argument("--beta", type=float, default=1.0)
+    parser.add_argument("--gamma", type=float, default=0.15)
+    parser.add_argument("--feature_jittering", type=int, default=0)
+    parser.add_argument("--rec_intra_feature", type=int, default=0)
+    parser.add_argument("--rec_ori", type=int, default=0)
+    parser.add_argument("--mid_dim", type=int, default=64)
     args = parser.parse_args() 
     return args 
 
