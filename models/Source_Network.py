@@ -131,7 +131,7 @@ class Refiner_block(nn.Module):
             q = torch.tensor([0.25, 0.5, 0.75], device=out_1.device) 
             q1, q2, q3 = torch.quantile(rec_score, q) 
             tmp = out_2 - out_1
-            tmp[tmp < q3 + 1.5 * (q3 - q1)] = 0 
+            tmp[rec_score < q3 + 1.5 * (q3 - q1)] = 0 
             out_1 = out_1 + tmp
             # print(torch.abs((out_2 - out_1) / out_1).shape, torch.abs((out_2 - out_1 / out_1))[2][16])  
             # rec_idx = torch.argsort(-rec_score, dim=1)[:, :int(gamma * rec_score.shape[1])]

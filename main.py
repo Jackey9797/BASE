@@ -287,6 +287,8 @@ class base_framework:
         return validation_loss
 
     def get_Score(self):
+        # g = self.S 
+        # self.S = self.T 
         self.S.eval()
         self.args.Score = []
         self.args.use_cm = False
@@ -323,6 +325,7 @@ class base_framework:
                 cn += 1 
 
         self.args.use_cm = True
+        # self.S = g
         
 
     def pretrain_T(self):
@@ -457,7 +460,7 @@ class base_framework:
                 anchor_pred, anchor_F = self.T(batch_x, feature=True)
                 # refined_F = self.S.correction_module.Refiner(F_T_wn.permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
                 refined_F = self.S.correction_module.Refiner(F_T_wn.detach().permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
-                loss_rec = self.lossfunc(anchor_F.detach() * normal_mask, refined_F * normal_mask, reduction="mean") 
+                loss_rec = func.mse_loss(anchor_F.detach() * normal_mask, refined_F * normal_mask, reduction="mean") 
                 # loss_n_pred = self.
                 self.args.best_T.train()
 
@@ -471,7 +474,7 @@ class base_framework:
                 #     print(i.grad)
                 # loss_rec = 0 
                 loss_anchor = loss_rec + loss_MSE_R 
-                if self.args.rec_ori: loss_anchor += 2 * self.lossfunc(refined_F, F_T_wn.detach())
+                if self.args.rec_ori: loss_anchor += 2 * func.mse_loss(refined_F, F_T_wn.detach())
 
             # print("batch_x ", batch_y[1,1,1])
             # print("pred ", outputs, outputs.dtype)
@@ -489,7 +492,7 @@ class base_framework:
             if self.args.aligner and self.args.need_align: 
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
                 # print(F_T.shape, F_S.shape, label.shape, normal_mask.shape)
-                loss_KD = self.lossfunc(F_S * normal_mask, F_T.detach() * normal_mask, reduction="mean")
+                loss_KD = func.mse_loss(F_S * normal_mask, F_T.detach() * normal_mask, reduction="mean")
             # [Batch, C，P, d ]
             #! here to set point 
             loss_S = self.lossfunc(pred_S, true, reduction="mean")
@@ -546,7 +549,7 @@ class base_framework:
         ct.mkdirs(path)
 
         ##* Model Optimizer
-        self.optimizer_S = optim.Adam(self.S.parameters(), lr=self.args.lr)
+        self.optimizer_S = optim.Adam(self.S.parameters(), lr=self.args.lr * 2)
         self.optimizer_T = optim.Adam(self.T.parameters(), lr=self.args.lr)
         # self.optimizer_T = optim.Adam(self.T.base_model.parameters(), lr=self.args.lr)
         # self.S.base_model.model.head = self.T.base_model.model.head
@@ -567,7 +570,7 @@ class base_framework:
                                             steps_per_epoch = train_steps,
                                             pct_start = self.args.pct_start,
                                             epochs = self.args.train_epochs,
-                                            max_lr = self.args.lr)
+                                            max_lr = self.args.lr * 2) #! change here
 
 
         ##* train start
@@ -619,11 +622,11 @@ class base_framework:
                     if counter > patience:
                         break
                 if self.args.lradj != 'TST':
-                    adjust_learning_rate(self.optimizer_T, self.scheduler_T, self.epoch + 1, self.args)
                     adjust_learning_rate(self.optimizer_S, self.scheduler_S, self.epoch + 1, self.args)
+                    adjust_learning_rate(self.optimizer_T, self.scheduler_T, self.epoch + 1, self.args)
                 else:
-                    print('Updating learning rate to {}'.format(self.scheduler_T.get_last_lr()[0]))
                     print('Updating learning rate to {}'.format(self.scheduler_S.get_last_lr()[0]))
+                    print('Updating learning rate to {}'.format(self.scheduler_T.get_last_lr()[0]))
                 
                 #todo post process() 
             elif self.args.train_mode == 'joint': 
@@ -668,7 +671,7 @@ class base_framework:
             
             self.args.train_mode = 'joint' #*
             
-            if self.epoch == 30: break
+            # if self.epoch == 30: break
             
 
 
