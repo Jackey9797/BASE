@@ -10,7 +10,7 @@
     "target":"OT", 
     "graph_input": false,
     "individual": false,
-    "test_model_path": "/Disk/fhyega/code/PatchTST/PatchTST_supervised/checkpoints/electricity_96_96_Informer_custom_ftM_sl96_ll48_pl96_dm512_nh8_el2_dl1_df2048_fc3_ebtimeF_dtTrue_Exp_0/checkpoint.pth",
+    "test_model_path": "/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-08-06:58:19.153234/0/best_model.pkl",
     "e_layers": 3,
     "d_layers": 1,
     "factor" : 1, 

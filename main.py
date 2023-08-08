@@ -680,6 +680,7 @@ class base_framework:
         best_S = Source_Network.Model(self.args).float()
         best_S.load_state_dict(torch.load(best_model_path, self.args.device)["model_state_dict"])
         torch.save({'model_state_dict': best_S.state_dict()}, osp.join(path, "best_model.pkl"))
+        torch.save({'model_state_dict': self.args.best_T.state_dict()}, osp.join(path, "best_T_model.pkl"))
         import os 
         if self.args.phase + 1 == self.args.end_phase and self.args.end_phase > 1:
             os.system('python main.py --conf ECL-DLinear_t --test_model_path {} > test.out'.format(osp.join(path, "best_model.pkl")))
@@ -780,12 +781,20 @@ class base_framework:
                 self.train()
             else: 
                 state_dict = torch.load(self.args.test_model_path, map_location=self.args.device)["model_state_dict"]
+                state_dict_T = torch.load(self.args.test_model_path, map_location=self.args.device)["model_state_dict"]
                 self.S.load_state_dict(state_dict)
+                self.T.load_state_dict(state_dict, strict=False)
+                self.args.best_T = self.T 
 
             self.test_model()
             self.inc_state = True 
 
         self.report_result()
+        self.S.base_model.model.head = self.args.best_T.base_model.model.head
+        self.args.use_cm = False 
+        self.test_model()
+        self.args.use_cm = True 
+        self.test_model()
         self.S = self.args.best_T.to(self.args.device) 
         self.test_model()
         self.report_result()
@@ -838,7 +847,7 @@ def parse_args():
     parser.add_argument("--pred_len", type=int, default=96)
     parser.add_argument("--noise_rate", type=float)
     parser.add_argument("--device", type=str, default="cuda:0")
-    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-07-23-21:59:42.618606/0/0.0379_epoch_25.pkl")
+    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-08-10:33:05.890873/0/0.1629_epoch_11.pkl")
     parser.add_argument("--idx", type=int, default=213)
     parser.add_argument("--aligner", type=int, default=0)
     parser.add_argument("--always_align", type=int, default=1)
