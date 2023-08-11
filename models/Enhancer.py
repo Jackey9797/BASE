@@ -64,10 +64,10 @@ class Enhancer(object):
         b = x.shape[0] 
         for i in range(b): 
             c_idx = torch.randint(low=0, high=x.shape[1] - 1, size=(x.shape[1],), device=x.device) 
-            t_idx = torch.randint(low=0, high=x.shape[2] - 48, size=(1,), device=x.device) 
-            x[i, :, t_idx:t_idx+48] = x[max(i - 1, 0), c_idx, t_idx:t_idx+48] #todo
+            t_idx = torch.randint(low=0, high=x.shape[2] - 72, size=(1,), device=x.device) 
+            x[i, :, t_idx:t_idx+72] = x[max(i - 1, 0), c_idx, t_idx:t_idx+72] #todo
             if self.args.add_noise: 
-                x[i, :, t_idx:t_idx+48] +=  torch.randn(size=x[max(i - 1, 0), c_idx, t_idx:t_idx+48].shape).to(self.args.device) * self.jitter_sigma 
+                x[i, :, t_idx:t_idx+72] +=  torch.randn(size=x[max(i - 1, 0), c_idx, t_idx:t_idx+72].shape).to(self.args.device) * self.jitter_sigma 
             #* change here， 随机 + 组合 set_zero + substitude 增大扰动 
             #* 等下再加点扰动和噪声 
         # plt.plot(x[3][1].cpu().numpy()) 
@@ -106,8 +106,8 @@ class Enhancer(object):
         b = x.shape[0] 
         for i in range(b): 
             c_idx = torch.randint(low=0, high=x.shape[1] - 1, size=(x.shape[1],), device=x.device) 
-            t_idx = torch.randint(low=0, high=x.shape[2] - 48, size=(1,), device=x.device) 
-            x[i, :, t_idx:t_idx+48] = 0 #todo
+            t_idx = torch.randint(low=0, high=x.shape[2] - 72, size=(1,), device=x.device) 
+            x[i, :, t_idx:t_idx+72] = 0 #todo
         # plt.plot(x[3][1].cpu().numpy()) 
         # plt.savefig('after2.png')
         # plt.close()
@@ -133,9 +133,12 @@ class Enhancer(object):
         return x
     
     def feature_jittering(self, x): 
-        jit_pos = torch.randint(low=1, high=100, size=x.shape[:-1], device=x.device) 
+        jit_pos = torch.randint(low=1, high=100, size=(x.shape[0], x.shape[1], x.shape[-1]), device=x.device) 
         k = int(self.args.gamma * 100)
+        # print(k) 
         jit_pos[jit_pos <= k] = 1 
         jit_pos[jit_pos != 1] = 0
-        x = x + torch.randn(size=x.shape).to(x.device) * self.jitter_sigma * jit_pos.unsqueeze(-1)  
+        # print(x)
+        x = x + torch.randn(size=x.shape).to(x.device) * self.jitter_sigma * jit_pos.unsqueeze(-2)  
+        # print(x)
         return x

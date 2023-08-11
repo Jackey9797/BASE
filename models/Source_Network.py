@@ -90,6 +90,7 @@ class Refiner_block(nn.Module):
             nn.Linear(dim, dim // 2),
             nn.Linear(dim // 2, dim)
         ) #*
+        self.FFN = nn.Linear(dim, dim)
 
         self.shrinkage = Shrinkage(dim, gap_size=(1)) #todo
         self.add_residual = add_residual
@@ -106,25 +107,37 @@ class Refiner_block(nn.Module):
         mask = None
     ):
         
-
-        out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=torch.eye(x.shape[-2], device=x.device))
-        # print(torch.mean((out_1 - x) ** 2, dim=[2]).shape, torch.mean((out_1 - x) ** 2, dim=[2])[2])  
-        # out_1 = self.shrinkage(out_1.permute(0, 2, 1)).permute(0, 2, 1) #* soft threshold before residual
-        # out_1  = self.dropout_attn(out_1)
-        gamma = self.args.gamma
+        attn_mask = torch.tril(torch.ones((x.shape[-2],x.shape[-2])), 1) * torch.triu(torch.ones((x.shape[-2],x.shape[-2])), -1)
+        out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=attn_mask.to(x.device))
+        # out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=torch.eye(x.shape[-2], device=x.device))
+        # # print(torch.mean((out_1 - x) ** 2, dim=[2]).shape, torch.mean((out_1 - x) ** 2, dim=[2])[2])  
+        # # out_1 = self.shrinkage(out_1.permute(0, 2, 1)).permute(0, 2, 1) #* soft threshold before residual
+        # # out_1  = self.dropout_attn(out_1)
+        # gamma = self.args.gamma
+        # rec_score = torch.mean((out_1 - x) ** 2, dim=[2])
+        # # print(torch.argsort(-rec_score, dim=1).shape, torch.argsort(rec_score, dim=1)[2])  
+        # rec_idx = torch.argsort(-rec_score, dim=1)[:, :int(gamma * rec_score.shape[1])]
+        # # fill rec_idx of x with out_1 in the same position 
+        # y = x.clone()
+        # for i in range(rec_idx.shape[0]):
+        #     y[i, rec_idx[i]] = out_1[i, rec_idx[i]]
+        # out_1 = y 
+        # # print(torch.mean((out_1 - x) ** 2, dim=[2]).shape, torch.mean((out_1 - x) ** 2, dim=[2])[2]) 
+        #* cahnge here 
         rec_score = torch.mean((out_1 - x) ** 2, dim=[2])
-        # print(torch.argsort(-rec_score, dim=1).shape, torch.argsort(rec_score, dim=1)[2])  
-        rec_idx = torch.argsort(-rec_score, dim=1)[:, :int(gamma * rec_score.shape[1])]
-        # fill rec_idx of x with out_1 in the same position 
-        y = x.clone()
-        for i in range(rec_idx.shape[0]):
-            y[i, rec_idx[i]] = out_1[i, rec_idx[i]]
-        out_1 = y 
-        # print(torch.mean((out_1 - x) ** 2, dim=[2]).shape, torch.mean((out_1 - x) ** 2, dim=[2])[2]) 
+        q = torch.tensor([0.25, 0.5, 0.75], device=out_1.device) 
+        q1, q2, q3 = torch.quantile(rec_score, q, dim=-1) 
+        tmp = out_1 - x 
+        tmp = (rec_score > (q3 + self.args.theta * (q3 - q1)).unsqueeze(-1)).unsqueeze(-1) * tmp
+        # tmp = (rec_score > q3 ).unsqueeze(-1) * tmp
+        out_1 = x + tmp
+        # tmp[rec_score < q3 + 1.5 * (q3 - q1)] = 0 
+        # out_1 = out_1 + tmp
         
         
-        if self.args.rec_intra_feature: 
 
+        if self.args.rec_intra_feature: 
+            #* to be modified
             out_2 = self.to_out(out_1)
             # # out_2 - out_1 
             rec_score = torch.abs(out_2 - out_1)
@@ -139,7 +152,8 @@ class Refiner_block(nn.Module):
             # for i in range(rec_idx.shape[0]):
                 # y[i, :, rec_idx[i]] = out[i, rec_idx[i]]
             # x = y
-
+        else : 
+            out_1 = self.FFN(out_1)
 
         if self.add_residual:
             out = out_1 + x

@@ -473,7 +473,8 @@ class base_framework:
                 # for i in self.S.correction_module.Refiner.parameters(): 
                 #     print(i.grad)
                 # loss_rec = 0 
-                loss_anchor = loss_rec + loss_MSE_R 
+                # loss_anchor = loss_rec + loss_MSE_R 
+                loss_anchor = 2 * loss_MSE_R 
                 if self.args.rec_ori: loss_anchor += 2 * func.mse_loss(refined_F, F_T_wn.detach())
 
             # print("batch_x ", batch_y[1,1,1])
@@ -549,7 +550,7 @@ class base_framework:
         ct.mkdirs(path)
 
         ##* Model Optimizer
-        self.optimizer_S = optim.Adam(self.S.parameters(), lr=self.args.lr * 2)
+        self.optimizer_S = optim.Adam(self.S.parameters(), lr=self.args.lr)
         self.optimizer_T = optim.Adam(self.T.parameters(), lr=self.args.lr)
         # self.optimizer_T = optim.Adam(self.T.base_model.parameters(), lr=self.args.lr)
         # self.S.base_model.model.head = self.T.base_model.model.head
@@ -570,7 +571,7 @@ class base_framework:
                                             steps_per_epoch = train_steps,
                                             pct_start = self.args.pct_start,
                                             epochs = self.args.train_epochs,
-                                            max_lr = self.args.lr * 2) #! change here
+                                            max_lr = self.args.lr) #! change here
 
 
         ##* train start
@@ -617,6 +618,7 @@ class base_framework:
                     if self.inc_state and self.args.ewc:
                         save_model = self.S.model 
                     torch.save({'model_state_dict': save_model.state_dict()}, osp.join(path, str(round(validation_loss,4))+("_epoch_%d.pkl" % self.epoch)))
+                    torch.save({'model_state_dict': self.T.state_dict()}, osp.join(path, ("T_acco.pkl")))
                 else:
                     counter += 1  
                     if counter > patience:
@@ -655,6 +657,7 @@ class base_framework:
                     if self.inc_state and self.args.ewc:
                         save_model = self.S.model 
                     torch.save({'model_state_dict': save_model.state_dict()}, osp.join(path, str(round(validation_loss,4))+("_epoch_%d.pkl" % self.epoch)))
+                    torch.save({'model_state_dict': self.T.state_dict()}, osp.join(path, ("T_acco.pkl")))
                 else:
                     counter += 1  
                     if counter > patience:
@@ -717,6 +720,15 @@ class base_framework:
                 batch_y = batch_y.float()
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
                 batch_y_mark = batch_y_mark.float().to(self.args.device)
+
+                if self.args.test_en: 
+                    E = Enhancer(self.args)
+                    if self.args.test_en == 1: batch_x = E.spike(E.jitter(batch_x)) 
+                    if self.args.test_en == 2: batch_x = E.spike(batch_x)
+                    if self.args.test_en == 3: batch_x = E.l_slope(batch_x)
+                    if self.args.test_en == 4: batch_x = E.substitude(batch_x)
+                    if self.args.test_en == 5: batch_x = E.set_zero(batch_x)
+
 
                 dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
                 dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
@@ -784,20 +796,21 @@ class base_framework:
                 self.train()
             else: 
                 state_dict = torch.load(self.args.test_model_path, map_location=self.args.device)["model_state_dict"]
-                state_dict_T = torch.load(self.args.test_model_path, map_location=self.args.device)["model_state_dict"]
+                state_dict_T = torch.load(self.args.test_model_path[:-14] + "best_T_model.pkl", map_location=self.args.device)["model_state_dict"]
+                #* wrong , need manual debug
                 self.S.load_state_dict(state_dict)
-                self.T.load_state_dict(state_dict, strict=False)
+                self.T.load_state_dict(state_dict_T, strict=False)
                 self.args.best_T = self.T 
 
             self.test_model()
             self.inc_state = True 
 
         self.report_result()
-        self.S.base_model.model.head = self.args.best_T.base_model.model.head
+        # self.S.base_model.model.head = self.args.best_T.base_model.model.head
         self.args.use_cm = False 
         self.test_model()
         self.args.use_cm = True 
-        self.test_model()
+        # self.test_model()
         self.S = self.args.best_T.to(self.args.device) 
         self.test_model()
         self.report_result()
@@ -837,6 +850,7 @@ def parse_args():
     parser.add_argument("--conf", type=str, default="incremental-naive")
     parser.add_argument("--data_name", type=str, default="electricity")
     parser.add_argument("--iteration", type=int, default=1)
+    parser.add_argument("--train", type=int, default=1)
 
     parser.add_argument("--load", action="store_true", default=True)
     parser.add_argument("--build_graph", action="store_true", default=False)
@@ -850,7 +864,7 @@ def parse_args():
     parser.add_argument("--pred_len", type=int, default=96)
     parser.add_argument("--noise_rate", type=float)
     parser.add_argument("--device", type=str, default="cuda:0")
-    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-08-10:33:05.890873/0/0.1629_epoch_11.pkl")
+    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-10-22:33:03.035667/0/best_model.pkl")
     parser.add_argument("--idx", type=int, default=213)
     parser.add_argument("--aligner", type=int, default=0)
     parser.add_argument("--always_align", type=int, default=1)
@@ -871,10 +885,12 @@ def parse_args():
     parser.add_argument("--alpha", type=float, default=10.0)
     parser.add_argument("--beta", type=float, default=1.0)
     parser.add_argument("--gamma", type=float, default=0.15)
+    parser.add_argument("--theta", type=float, default=1.5)
     parser.add_argument("--feature_jittering", type=int, default=0)
     parser.add_argument("--rec_intra_feature", type=int, default=0)
     parser.add_argument("--rec_ori", type=int, default=0)
     parser.add_argument("--mid_dim", type=int, default=64)
+    parser.add_argument("--test_en", type=int, default=0)
     args = parser.parse_args() 
     return args 
 

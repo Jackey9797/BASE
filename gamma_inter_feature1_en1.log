@@ -1,0 +1,69 @@
+2023-08-10 13:15:46,646 - logger name:exp/ECL-PatchTST2023-08-10-13:15:46.646315/ECL-PatchTST.log
+2023-08-10 13:15:46,646 - params : {'loss': 'huber', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'train': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-09-10:08:25.216520/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'refiner_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 128, 'share_head': 0, 'add_noise': 1, 'jitter_sigma': 0.5, 'slope_rate': 0.01, 'slope_range': 0.5, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.0, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 1, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-10-13:15:46.646315', 'path': 'exp/ECL-PatchTST2023-08-10-13:15:46.646315', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-10 13:15:46,647 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-10 13:15:46,836 - [*] phase 0 Dataset load!
+2023-08-10 13:15:50,005 - [*] loss:0.3252
+2023-08-10 13:15:50,008 - [*] phase 0, testing
+2023-08-10 13:15:50,087 - T:96	MAE	0.398974	RMSE	0.325377	MAPE	209.709954
+2023-08-10 13:15:50,088 - 96	mae	0.3990	
+2023-08-10 13:15:50,088 - 96	rmse	0.3254	
+2023-08-10 13:15:50,088 - 96	mape	209.7100	
+2023-08-10 13:15:51,180 - [*] loss:0.3265
+2023-08-10 13:15:51,183 - [*] phase 0, testing
+2023-08-10 13:15:51,223 - T:96	MAE	0.400174	RMSE	0.326558	MAPE	214.147592
+2023-08-10 13:15:52,146 - [*] loss:0.3268
+2023-08-10 13:15:52,149 - [*] phase 0, testing
+2023-08-10 13:15:52,189 - T:96	MAE	0.396230	RMSE	0.326782	MAPE	215.354896
+2023-08-10 13:15:52,190 - 96	mae	0.3962	
+2023-08-10 13:15:52,190 - 96	rmse	0.3268	
+2023-08-10 13:15:52,190 - 96	mape	215.3549	
+2023-08-10 13:15:54,176 - logger name:exp/ECL-PatchTST2023-08-10-13:15:54.176053/ECL-PatchTST.log
+2023-08-10 13:15:54,176 - params : {'loss': 'huber', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'train': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-09-10:08:25.216520/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'refiner_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 128, 'share_head': 0, 'add_noise': 1, 'jitter_sigma': 0.5, 'slope_rate': 0.01, 'slope_range': 0.5, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 1, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-10-13:15:54.176053', 'path': 'exp/ECL-PatchTST2023-08-10-13:15:54.176053', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-10 13:15:54,176 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-10 13:15:54,364 - [*] phase 0 Dataset load!
+2023-08-10 13:15:57,426 - [*] loss:0.3252
+2023-08-10 13:15:57,457 - [*] phase 0, testing
+2023-08-10 13:15:57,541 - T:96	MAE	0.398974	RMSE	0.325377	MAPE	209.709954
+2023-08-10 13:15:57,543 - 96	mae	0.3990	
+2023-08-10 13:15:57,543 - 96	rmse	0.3254	
+2023-08-10 13:15:57,543 - 96	mape	209.7100	
+2023-08-10 13:15:58,426 - [*] loss:0.3265
+2023-08-10 13:15:58,429 - [*] phase 0, testing
+2023-08-10 13:15:58,482 - T:96	MAE	0.400174	RMSE	0.326558	MAPE	214.147592
+2023-08-10 13:15:59,480 - [*] loss:0.3268
+2023-08-10 13:15:59,483 - [*] phase 0, testing
+2023-08-10 13:15:59,533 - T:96	MAE	0.396230	RMSE	0.326782	MAPE	215.354896
+2023-08-10 13:15:59,534 - 96	mae	0.3962	
+2023-08-10 13:15:59,534 - 96	rmse	0.3268	
+2023-08-10 13:15:59,534 - 96	mape	215.3549	
+2023-08-10 13:16:01,472 - logger name:exp/ECL-PatchTST2023-08-10-13:16:01.472639/ECL-PatchTST.log
+2023-08-10 13:16:01,473 - params : {'loss': 'huber', 'conf': 'ECL-PatchTST', 'data_name': 'ETTh2', 'iteration': 1, 'train': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-09-10:08:25.216520/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'refiner_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 128, 'share_head': 0, 'add_noise': 1, 'jitter_sigma': 0.5, 'slope_rate': 0.01, 'slope_range': 0.5, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.1, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 1, '/* model related args*/': '//', 'model_name': 'PatchTST', 'seq_len': 336, 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'e_layers': 3, 'd_layers': 1, 'factor': 1, 'n_heads': 16, 'd_model': 128, 'd_ff': 256, 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'lradj': 'TST', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, '/*train related args*/': '//', 'epoch': 30, 'lr': 0.0001, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-08-10-13:16:01.472639', 'path': 'exp/ECL-PatchTST2023-08-10-13:16:01.472639', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-08-10 13:16:01,473 - [*] phase 0 start training
+0 26304
+train 8209
+val 2785
+test 2785
+2023-08-10 13:16:01,660 - [*] phase 0 Dataset load!
+2023-08-10 13:16:04,703 - [*] loss:0.3252
+2023-08-10 13:16:04,710 - [*] phase 0, testing
+2023-08-10 13:16:04,812 - T:96	MAE	0.398974	RMSE	0.325377	MAPE	209.709954
+2023-08-10 13:16:04,813 - 96	mae	0.3990	
+2023-08-10 13:16:04,813 - 96	rmse	0.3254	
+2023-08-10 13:16:04,814 - 96	mape	209.7100	
+2023-08-10 13:16:06,019 - [*] loss:0.3265
+2023-08-10 13:16:06,027 - [*] phase 0, testing
+2023-08-10 13:16:06,147 - T:96	MAE	0.400174	RMSE	0.326558	MAPE	214.147592
+2023-08-10 13:16:07,104 - [*] loss:0.3268
+2023-08-10 13:16:07,119 - [*] phase 0, testing
+2023-08-10 13:16:07,177 - T:96	MAE	0.396230	RMSE	0.326782	MAPE	215.354896
+2023-08-10 13:16:07,178 - 96	mae	0.3962	
+2023-08-10 13:16:07,178 - 96	rmse	0.3268	
+2023-08-10 13:16:07,178 - 96	mape	215.3549	
