@@ -483,7 +483,7 @@ class base_framework:
                 L2 = torch.mean(torch.var(rec_L2, dim=-1))
                 print(L2) 
                 print("we", self.args.mk.shape)
-                if self.args.rec_ori: loss_anchor += 2 * torch.mean(func.mse_loss(rec, batch_x.permute(0, 2, 1).reshape(rec.shape), reduction="none") * self.args.mk) + L2 * 10
+                if self.args.rec_ori: loss_anchor += 2 * torch.mean(func.mse_loss(rec, batch_x.permute(0, 2, 1).reshape(rec.shape), reduction="none") * self.args.mk) + L2 * 2 #!
                 # batch_x[]
                 # pred_S = 
                 # show loss by text
@@ -732,6 +732,14 @@ class base_framework:
                 batch_y = batch_y.float()
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
                 batch_y_mark = batch_y_mark.float().to(self.args.device)
+                # pred = self.S(batch_x)
+
+                # if self.args.use_cm:
+                # tmp = batch_x - self.args.rec.reshape(-1, batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)
+                # q1, q2 = torch.quantile(torch.abs(tmp), torch.tensor([0.25, 0.75],device=tmp.device), dim=-2, keepdim=True)
+                # print(((q2 - q1) * 2  + q2).shape, (torch.abs(tmp) > ((q2 - q1) * 1.5 + q2)).shape)
+                # batch_x[0, :, 2] -= tmp[0, :, 2] * (torch.abs(tmp) > ((q2 - q1) * 1.5 + q2))[0, :, 2]
+                self.args.show = torch.ones_like(batch_x)
 
                 if self.args.test_en: 
                     E = Enhancer(self.args)
@@ -792,17 +800,19 @@ class base_framework:
                 tmp = batch_x[0,:,2] - self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,:,2]
                 q1, q2 = torch.quantile(torch.abs(tmp), torch.tensor([0.25, 0.75],device=tmp.device))
                 plt.plot(batch_x[0,-336:,2].cpu().detach().numpy(), color='orange') 
-                batch_x[0,:,2][torch.abs(tmp) > (q2 - q1) * 1.5 + q2] = self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,:,2][torch.abs(tmp) > (q2 - q1) * 1.5 + q2]
+                # batch_x[0,:,2][torch.abs(tmp) > (q2 - q1) * 1.5 + q2] = self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,:,2][torch.abs(tmp) > (q2 - q1) * 1.5 + q2]
                 plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,2].cpu().detach().numpy(), color='b') 
-                plt.plot(batch_x[0,-336:,2].cpu().detach().numpy(), color='g') 
+                plt.plot(batch_x[0,-336:,2].cpu().detach().numpy(), color='g')
+                plt.plot(self.args.show.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,2].cpu().detach().numpy(), color='g')
+
                 plt.savefig(str(cn) + ".png")
-                print(cn,"a",func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean"))
-                a_sum += func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean").item()
-                pred = self.S(batch_x)
-                pred = pred.detach().cpu()
-                print(cn,"b",func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean"))
-                b_sum += func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean").item()
-                print("compare", a_sum, b_sum)
+                # print(cn,"a",func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean"))
+                # a_sum += func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean").item()
+                # pred = self.S(batch_x)
+                # pred = pred.detach().cpu()
+                # print(cn,"b",func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean"))
+                # b_sum += func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean").item()
+                # print("compare", a_sum, b_sum)
 
 
                 # print(cn)
@@ -860,11 +870,11 @@ class base_framework:
         self.report_result()
         # self.S.base_model.model.head = self.args.best_T.base_model.model.head
         self.args.use_cm = False 
-        self.test_model()
+        # self.test_model()
         self.args.use_cm = True 
         # self.test_model()
         self.S = self.args.best_T.to(self.args.device) 
-        self.test_model()
+        # self.test_model()
         self.report_result()
 
 
@@ -916,7 +926,7 @@ def parse_args():
     parser.add_argument("--pred_len", type=int, default=96)
     parser.add_argument("--noise_rate", type=float)
     parser.add_argument("--device", type=str, default="cuda:0")
-    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-19-11:01:54.718025/0/best_model.pkl")
+    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-19-16:00:30.039043/0/best_model.pkl")
     parser.add_argument("--idx", type=int, default=213)
     parser.add_argument("--aligner", type=int, default=0)
     parser.add_argument("--always_align", type=int, default=1)

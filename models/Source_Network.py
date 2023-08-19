@@ -123,7 +123,7 @@ class Refiner_block(nn.Module):
         mask = None
     ):
         
-        attn_mask = torch.tril(torch.ones((x.shape[-2],x.shape[-2])), 4) * torch.triu(torch.ones((x.shape[-2],x.shape[-2])), -4)
+        attn_mask = torch.tril(torch.ones((x.shape[-2],x.shape[-2])), 1) * torch.triu(torch.ones((x.shape[-2],x.shape[-2])), -1)
         out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=attn_mask.to(x.device))
         # out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=torch.eye(x.shape[-2], device=x.device))
         # # print(torch.mean((out_1 - x) ** 2, dim=[2]).shape, torch.mean((out_1 - x) ** 2, dim=[2])[2])  
@@ -146,7 +146,10 @@ class Refiner_block(nn.Module):
         tmp = out_1 - x 
         tmp = (rec_score > (q3 + self.args.theta * (q3 - q1)).unsqueeze(-1)).unsqueeze(-1) * tmp
         self.args.mk = (rec_score < q2.unsqueeze(-1)).unsqueeze(-1)
-        if self.args.train == 0 and self.args.debugger == 1: print(rec_score[2].shape, rec_score[2], (q3 + self.args.theta * (q3 - q1))[2])
+        if self.args.train == 0 and self.args.debugger == 1: 
+            print(rec_score[2].shape, rec_score[2], (q3 + self.args.theta * (q3 - q1))[2])
+            self.args.show = self.args.show.reshape(rec_score.shape + (8,))
+            self.args.show = self.args.show * (rec_score < (q3 + self.args.theta * (q3 - q1)).unsqueeze(-1)).unsqueeze(-1)
         # def vis(idx, channel): 
         
         # tmp = (rec_score > q3 ).unsqueeze(-1) * tmp
