@@ -52,6 +52,22 @@ class Shrinkage(nn.Module):
         x = torch.mul(torch.sign(x_raw), n_sub)
         return x
 
+class ReconHead(nn.Module):
+    def __init__(self, d_model, patch_len, dropout):
+        super().__init__()
+        self.dropout = nn.Dropout(dropout)
+        self.linear = nn.Linear(d_model, patch_len)
+
+    def forward(self, x):
+        """
+        x: tensor [bs x nvars x d_model x num_patch]
+        output: tensor [bs x nvars x num_patch x patch_len]
+        """
+
+
+        x = self.linear( self.dropout(x) )      # [bs x nvars x num_patch x patch_len]
+        return x
+
 class Refiner_block(nn.Module):
     def __init__(
         self,
@@ -90,8 +106,8 @@ class Refiner_block(nn.Module):
             nn.Linear(dim, dim // 2),
             nn.Linear(dim // 2, dim)
         ) #*
-        self.FFN = nn.Linear(dim, dim)
-
+        # self.FFN = nn.Linear(dim, dim)
+        
         self.shrinkage = Shrinkage(dim, gap_size=(1)) #todo
         self.add_residual = add_residual
         self.self_attn = _MultiheadAttention(dim, 16, args.mid_dim, args.mid_dim, attn_dropout=0, proj_dropout=0, res_attention=False)
@@ -107,7 +123,7 @@ class Refiner_block(nn.Module):
         mask = None
     ):
         
-        attn_mask = torch.tril(torch.ones((x.shape[-2],x.shape[-2])), 1) * torch.triu(torch.ones((x.shape[-2],x.shape[-2])), -1)
+        attn_mask = torch.tril(torch.ones((x.shape[-2],x.shape[-2])), 4) * torch.triu(torch.ones((x.shape[-2],x.shape[-2])), -4)
         out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=attn_mask.to(x.device))
         # out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=torch.eye(x.shape[-2], device=x.device))
         # # print(torch.mean((out_1 - x) ** 2, dim=[2]).shape, torch.mean((out_1 - x) ** 2, dim=[2])[2])  
@@ -123,12 +139,16 @@ class Refiner_block(nn.Module):
         #     y[i, rec_idx[i]] = out_1[i, rec_idx[i]]
         # out_1 = y 
         # # print(torch.mean((out_1 - x) ** 2, dim=[2]).shape, torch.mean((out_1 - x) ** 2, dim=[2])[2]) 
-        #* cahnge here 
+        #* change here 
         rec_score = torch.mean((out_1 - x) ** 2, dim=[2])
         q = torch.tensor([0.25, 0.5, 0.75], device=out_1.device) 
         q1, q2, q3 = torch.quantile(rec_score, q, dim=-1) 
         tmp = out_1 - x 
         tmp = (rec_score > (q3 + self.args.theta * (q3 - q1)).unsqueeze(-1)).unsqueeze(-1) * tmp
+        self.args.mk = (rec_score < q2.unsqueeze(-1)).unsqueeze(-1)
+        if self.args.train == 0 and self.args.debugger == 1: print(rec_score[2].shape, rec_score[2], (q3 + self.args.theta * (q3 - q1))[2])
+        # def vis(idx, channel): 
+        
         # tmp = (rec_score > q3 ).unsqueeze(-1) * tmp
         out_1 = x + tmp
         # tmp[rec_score < q3 + 1.5 * (q3 - q1)] = 0 
@@ -152,8 +172,7 @@ class Refiner_block(nn.Module):
             # for i in range(rec_idx.shape[0]):
                 # y[i, :, rec_idx[i]] = out[i, rec_idx[i]]
             # x = y
-        else : 
-            out_1 = self.FFN(out_1)
+        
 
         if self.add_residual:
             out = out_1 + x
@@ -168,16 +187,19 @@ class Refiner(nn.Module):
         self.blocks = nn.ModuleList([
             Refiner_block(args, args.d_model, add_residual= args.refiner_residual) for _ in range(self.refiner_block_num)
         ])
+        self.rec = ReconHead(args.d_model, 8, 0.1) 
 
-    def forward(self, x):
+    def forward(self, x, rec=True):
         # x: [Batch, C，P, d ]
         tmp = x.shape[0]
         x = x.reshape(-1, x.shape[-2], x.shape[-1]) 
 
         for i in range(self.refiner_block_num):
             x = self.blocks[i](x)
-        
+        r = self.rec(x)
         x = x.reshape(tmp, -1, x.shape[-2], x.shape[-1]) 
+        if rec == True: 
+            return x, r
         return x   
 
 
@@ -203,7 +225,9 @@ class Correction_Module(nn.Module):
         # print(self.args.refiner)
         if self.args.refiner:
             # print(x_.shape)
-            x_refined = self.Refiner(x_).permute(0, 1, 3, 2)
+            x_refined, rec = self.Refiner(x_)
+            self.args.rec = rec 
+            x_refined = x_refined.permute(0, 1, 3, 2)
         if self.args.share_head:  #* use the T forecastor after aligne
             x_refined = self.Aligner(x_refined.permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
 

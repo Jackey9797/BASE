@@ -459,7 +459,9 @@ class base_framework:
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
                 anchor_pred, anchor_F = self.T(batch_x, feature=True)
                 # refined_F = self.S.correction_module.Refiner(F_T_wn.permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
-                refined_F = self.S.correction_module.Refiner(F_T_wn.detach().permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
+                refined_F, rec = self.S.correction_module.Refiner(F_T_wn.detach().permute(0, 1, 3, 2), rec=True)
+                refined_F = refined_F.permute(0, 1, 3, 2)
+                # print(refined_F.shape, rec.shape)
                 loss_rec = func.mse_loss(anchor_F.detach() * normal_mask, refined_F * normal_mask, reduction="mean") 
                 # loss_n_pred = self.
                 self.args.best_T.train()
@@ -475,8 +477,16 @@ class base_framework:
                 # loss_rec = 0 
                 # loss_anchor = loss_rec + loss_MSE_R 
                 loss_anchor = 2 * loss_MSE_R 
-                if self.args.rec_ori: loss_anchor += 2 * func.mse_loss(refined_F, F_T_wn.detach())
-
+                # if self.args.rec_ori: loss_anchor += 2 * func.mse_loss(refined_F, F_T_wn.detach())
+                rec_L2 = rec.reshape(batch_x.shape[0], batch_x.shape[-1], batch_x.shape[1])
+                print(rec_L2.shape) 
+                L2 = torch.mean(torch.var(rec_L2, dim=-1))
+                print(L2) 
+                print("we", self.args.mk.shape)
+                if self.args.rec_ori: loss_anchor += 2 * torch.mean(func.mse_loss(rec, batch_x.permute(0, 2, 1).reshape(rec.shape), reduction="none") * self.args.mk) + L2 * 10
+                # batch_x[]
+                # pred_S = 
+                # show loss by text
             # print("batch_x ", batch_y[1,1,1])
             # print("pred ", outputs, outputs.dtype)
             # print(F_S[2,0,2:3,23:29], F_T[2,0,2:3,23:29]) 
@@ -713,6 +723,8 @@ class base_framework:
         pred_ = []
         truth_ = []
         loss = 0.0
+        a_sum = 0
+        b_sum = 0
         with torch.no_grad():
             cn = 0
             for batch_x, batch_y,  batch_x_mark, batch_y_mark, label in self.test_loader:
@@ -747,11 +759,51 @@ class base_framework:
 
                 pred = outputs.detach().cpu()
                 true = batch_y.detach().cpu()
-                
+                if self.args.train == 0 and self.args.debugger == 1: 
+                    import matplotlib.pyplot as plt 
+                    idx = 0 
+                    channel = 2 
+                    plt.plot(batch_x[0,-336:,2].cpu().detach().numpy(), color='g') 
+                    # show loss by text
+                    plt.savefig('before{}.png'.format(1))
+                    plt.close()
+                    # show loss by text
+                    plt.plot(torch.cat([batch_x[idx,-336:,channel].cpu(), torch.zeros_like(batch_y[idx,:,channel]).cpu()]).detach().numpy(), color='g') 
+                    plt.plot(torch.cat([batch_x[idx,-336:,channel].cpu(), batch_y[idx,:,channel].cpu()]).detach().numpy())
+                    plt.savefig('all{}.png'.format(1))
+
+                    plt.close()
+
+                    import matplotlib.pyplot as plt 
+                    idx = 0 
+                    channel = 2 
+                    plt.plot(batch_x[0,-336:,2].cpu().detach().numpy(), color='g') 
+                    plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,2].cpu().detach().numpy(), color='b') 
+                    # show loss by text
+                    plt.savefig('rec{}.png'.format(1))
+                    plt.close()
                 loss += func.mse_loss(true, pred, reduction="mean")
                 pred_.append(pred.data.numpy())
                 truth_.append(true.data.numpy())
                 cn += 1
+
+
+                import matplotlib.pyplot as plt 
+                tmp = batch_x[0,:,2] - self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,:,2]
+                q1, q2 = torch.quantile(torch.abs(tmp), torch.tensor([0.25, 0.75],device=tmp.device))
+                plt.plot(batch_x[0,-336:,2].cpu().detach().numpy(), color='orange') 
+                batch_x[0,:,2][torch.abs(tmp) > (q2 - q1) * 1.5 + q2] = self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,:,2][torch.abs(tmp) > (q2 - q1) * 1.5 + q2]
+                plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,2].cpu().detach().numpy(), color='b') 
+                plt.plot(batch_x[0,-336:,2].cpu().detach().numpy(), color='g') 
+                plt.savefig(str(cn) + ".png")
+                print(cn,"a",func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean"))
+                a_sum += func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean").item()
+                pred = self.S(batch_x)
+                pred = pred.detach().cpu()
+                print(cn,"b",func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean"))
+                b_sum += func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean").item()
+                print("compare", a_sum, b_sum)
+
 
                 # print(cn)
                 # if cn % 10 == 1: 
@@ -864,7 +916,7 @@ def parse_args():
     parser.add_argument("--pred_len", type=int, default=96)
     parser.add_argument("--noise_rate", type=float)
     parser.add_argument("--device", type=str, default="cuda:0")
-    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-10-22:33:03.035667/0/best_model.pkl")
+    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-19-11:01:54.718025/0/best_model.pkl")
     parser.add_argument("--idx", type=int, default=213)
     parser.add_argument("--aligner", type=int, default=0)
     parser.add_argument("--always_align", type=int, default=1)
@@ -891,6 +943,7 @@ def parse_args():
     parser.add_argument("--rec_ori", type=int, default=0)
     parser.add_argument("--mid_dim", type=int, default=64)
     parser.add_argument("--test_en", type=int, default=0)
+    parser.add_argument("--debugger", type=int, default=0)
     args = parser.parse_args() 
     return args 
 
