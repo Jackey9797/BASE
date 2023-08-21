@@ -950,7 +950,7 @@ def parse_args():
     parser.add_argument("--beta", type=float, default=1.0)
     parser.add_argument("--gamma", type=float, default=0.15)
     parser.add_argument("--theta", type=float, default=1.5)
-    parser.add_argument("--rec_length_ratio", type=float, default=0.5)
+    parser.add_argument("--rec_length_ratio", type=float, default=0.65)
     parser.add_argument("--feature_jittering", type=int, default=0)
     parser.add_argument("--rec_intra_feature", type=int, default=0)
     parser.add_argument("--rec_ori", type=int, default=0)

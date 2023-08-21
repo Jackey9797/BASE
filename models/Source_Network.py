@@ -141,13 +141,19 @@ class Refiner_block(nn.Module):
         # # print(torch.mean((out_1 - x) ** 2, dim=[2]).shape, torch.mean((out_1 - x) ** 2, dim=[2])[2]) 
         #* change here 
         rec_score = torch.mean((out_1 - x) ** 2, dim=[2])
-        print(out_1[4].median(), x[4].median())
+        # print(out_1[4].median(), x[4].median())
         q = torch.tensor([0.25, 0.5, 0.75], device=out_1.device) 
         q1, q2, q3 = torch.quantile(rec_score, q, dim=-1) 
         tmp = out_1 - x 
-        length_mask = torch.zeros_like(tmp) 
-        length_mask[:, int(tmp.shape[1] * self.args.rec_length_ratio):, :] = 1
-        tmp = (rec_score > 1).unsqueeze(-1) * tmp * length_mask
+        length_mask = torch.ones_like(tmp) 
+        length_mask[:, -int(tmp.shape[1] * (1 - self.args.rec_length_ratio)):, :] = 0
+        # tmp = (rec_score > 1).unsqueeze(-1) * tmp * length_mask
+        min_idx = torch.argmin(rec_score, dim=-1, keepdim=True)
+        result_tensor = x[torch.arange(x.shape[0]), min_idx.view(-1)].unsqueeze(1).repeat(1, x.shape[1], 1)
+        # print("wee", result_tensor.shape)
+        tmp = (result_tensor - x)#.detach()  #? whether need that? 
+        tmp = (rec_score > (q3 + 1.1 * (q3 - q1)).unsqueeze(-1)).unsqueeze(-1) * tmp * length_mask
+        
         self.args.mk = (rec_score < q2.unsqueeze(-1)).unsqueeze(-1)
         if self.args.train == 0 and self.args.debugger == 1: 
             print(rec_score[4].shape, rec_score[4], (q3 + self.args.theta * (q3 - q1))[4])
@@ -157,6 +163,7 @@ class Refiner_block(nn.Module):
         
         # tmp = (rec_score > q3 ).unsqueeze(-1) * tmp
         out_1 = x + tmp
+        # print(torch.sum(out_1 != x))
         # tmp[rec_score < q3 + 1.5 * (q3 - q1)] = 0 
         # out_1 = out_1 + tmp
         
