@@ -444,61 +444,25 @@ class base_framework:
 
             loss_rec = 0
             loss_anchor = 0
-            if self.args.enhance: 
+
+            if self.args.enhance: #* train reconstructor
                 enhanced_x = enhancer(batch_x) 
 
-                self.args.best_T.eval() #! add eval  
-                if self.args.feature_jittering: 
-                    F_T_wn = enhancer.feature_jittering(F_T)
-                else : 
-                    with torch.no_grad():
-                        _, F_T_wn = self.args.best_T(enhanced_x, feature=True)
-                # eval_pred_T, eval_F_T = 
-                # F_T = torch.ones_like(F_T) #!
-                # print(F_T.shape, F_T_wn.shape)
-                normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
-                anchor_pred, anchor_F = self.T(batch_x, feature=True)
-                # refined_F = self.S.correction_module.Refiner(F_T_wn.permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
-                refined_F, rec = self.S.correction_module.Refiner(F_T_wn.detach().permute(0, 1, 3, 2), rec=True)
-                refined_F = refined_F.permute(0, 1, 3, 2)
-                # print(refined_F.shape, rec.shape)
-                loss_rec = func.mse_loss(anchor_F.detach() * normal_mask, refined_F * normal_mask, reduction="mean") 
-                # loss_n_pred = self.
-                self.args.best_T.train()
+                normal_mask = (1 - label).reshape(len(label),label.shape[-1],1).to(self.args.device)
+                with torch.no_grad():
+                    anchor_pred, anchor_F = self.args.best_T(batch_x, feature=True)
+                rec_pred, rec_F  = self.S.correction_module.Refiner(anchor_F.detach().permute(0, 1, 3, 2), rec=True)
+                # print(rec_pred.shape, rec_F.shape, normal_mask.shape, anchor_F.shape) # check shape is right? 
+                loss_rec = func.mse_loss(rec_F.reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, anchor_F.permute(0, 1, 3, 2).reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, reduction="mean") 
+                # loss_rec = func.mse_loss(rec_pred.reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, batch_x.permute(0, 2, 1).reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, reduction="mean") 
+                #* see which way really work as AD scorer
+                rec_pred = rec_pred.reshape(batch_x.shape[0], batch_x.shape[-1], batch_x.shape[1])
+                loss_L2 = torch.mean(torch.var(rec_pred, dim=-1))
+                # loss_anchor += 2 * torch.mean(func.mse_loss(rec, batch_x.permute(0, 2, 1).reshape(rec.shape), reduction="none") * self.args.mk) + L2 * 2 
+                loss_anchor += 2 * loss_rec + loss_L2 
 
-                loss_MSE_R = self.lossfunc(self.T(batch_x, given_feature=refined_F), true)
-                # print("before backward:\n")
-                # for i in self.S.correction_module.Refiner.parameters(): 
-                #     print(i)
-                # loss_rec.backward()
-                # print("after backward:\n")
-                # for i in self.S.correction_module.Refiner.parameters(): 
-                #     print(i.grad)
-                # loss_rec = 0 
-                # loss_anchor = loss_rec + loss_MSE_R 
-                loss_anchor = 2 * loss_MSE_R 
-                # if self.args.rec_ori: loss_anchor += 2 * func.mse_loss(refined_F, F_T_wn.detach())
-                rec_L2 = rec.reshape(batch_x.shape[0], batch_x.shape[-1], batch_x.shape[1])
-                print(rec_L2.shape) 
-                L2 = torch.mean(torch.var(rec_L2, dim=-1))
-                print(L2) 
-                print("we", self.args.mk.shape)
-                if self.args.rec_ori: loss_anchor += 2 * torch.mean(func.mse_loss(rec, batch_x.permute(0, 2, 1).reshape(rec.shape), reduction="none") * self.args.mk) + L2 * 2 #!
-                # batch_x[]
-                # pred_S = 
-                # show loss by text
-            # print("batch_x ", batch_y[1,1,1])
-            # print("pred ", outputs, outputs.dtype)
-            # print(F_S[2,0,2:3,23:29], F_T[2,0,2:3,23:29]) 
-            loss_KD = 0
 
-            # import matplotlib.pyplot as plt
-            # for i in range(len(label)): 
-            #     if label[i].item() == 1:
-            
-            #         plt.plot(batch_x[i].cpu().numpy()) 
-            #         plt.savefig('before{}.png'.format(i))
-            #         plt.close()
+            loss_KD = 0   #* KD part
             if self.args.always_align: self.args.need_align = 1 #! 
             if self.args.aligner and self.args.need_align: 
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
@@ -768,7 +732,7 @@ class base_framework:
                 pred = outputs.detach().cpu()
                 true = batch_y.detach().cpu()
 
-                channel = 4
+                channel = 2
 
                 if self.args.train == 0 and self.args.debugger == 1: 
                     import matplotlib.pyplot as plt 
@@ -786,7 +750,7 @@ class base_framework:
 
                     import matplotlib.pyplot as plt 
                     idx = 0 
-                    channel = 4
+                    channel = 2
                     plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='g') 
                     plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,channel].cpu().detach().numpy(), color='b') 
                     # show loss by text
@@ -928,7 +892,8 @@ def parse_args():
     parser.add_argument("--pred_len", type=int, default=96)
     parser.add_argument("--noise_rate", type=float)
     parser.add_argument("--device", type=str, default="cuda:0")
-    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-19-16:00:30.039043/0/best_model.pkl")
+    # parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-19-16:00:30.039043/0/best_model.pkl")
+    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-21-17:40:00.925903/0/best_model.pkl")
     parser.add_argument("--idx", type=int, default=213)
     parser.add_argument("--aligner", type=int, default=0)
     parser.add_argument("--always_align", type=int, default=1)
