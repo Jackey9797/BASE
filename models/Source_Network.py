@@ -141,13 +141,16 @@ class Refiner_block(nn.Module):
         # # print(torch.mean((out_1 - x) ** 2, dim=[2]).shape, torch.mean((out_1 - x) ** 2, dim=[2])[2]) 
         #* change here 
         rec_score = torch.mean((out_1 - x) ** 2, dim=[2])
+        print(out_1[4].median(), x[4].median())
         q = torch.tensor([0.25, 0.5, 0.75], device=out_1.device) 
         q1, q2, q3 = torch.quantile(rec_score, q, dim=-1) 
         tmp = out_1 - x 
-        tmp = (rec_score > (q3 + self.args.theta * (q3 - q1)).unsqueeze(-1)).unsqueeze(-1) * tmp
+        length_mask = torch.zeros_like(tmp) 
+        length_mask[:, int(tmp.shape[1] * self.args.rec_length_ratio):, :] = 1
+        tmp = (rec_score > 1).unsqueeze(-1) * tmp * length_mask
         self.args.mk = (rec_score < q2.unsqueeze(-1)).unsqueeze(-1)
         if self.args.train == 0 and self.args.debugger == 1: 
-            print(rec_score[2].shape, rec_score[2], (q3 + self.args.theta * (q3 - q1))[2])
+            print(rec_score[4].shape, rec_score[4], (q3 + self.args.theta * (q3 - q1))[4])
             self.args.show = self.args.show.reshape(rec_score.shape + (8,))
             self.args.show = self.args.show * (rec_score < (q3 + self.args.theta * (q3 - q1)).unsqueeze(-1)).unsqueeze(-1)
         # def vis(idx, channel): 

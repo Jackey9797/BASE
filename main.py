@@ -767,11 +767,13 @@ class base_framework:
 
                 pred = outputs.detach().cpu()
                 true = batch_y.detach().cpu()
+
+                channel = 4
+
                 if self.args.train == 0 and self.args.debugger == 1: 
                     import matplotlib.pyplot as plt 
                     idx = 0 
-                    channel = 2 
-                    plt.plot(batch_x[0,-336:,2].cpu().detach().numpy(), color='g') 
+                    plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='g') 
                     # show loss by text
                     plt.savefig('before{}.png'.format(1))
                     plt.close()
@@ -784,9 +786,9 @@ class base_framework:
 
                     import matplotlib.pyplot as plt 
                     idx = 0 
-                    channel = 2 
-                    plt.plot(batch_x[0,-336:,2].cpu().detach().numpy(), color='g') 
-                    plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,2].cpu().detach().numpy(), color='b') 
+                    channel = 4
+                    plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='g') 
+                    plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,channel].cpu().detach().numpy(), color='b') 
                     # show loss by text
                     plt.savefig('rec{}.png'.format(1))
                     plt.close()
@@ -797,13 +799,13 @@ class base_framework:
 
 
                 import matplotlib.pyplot as plt 
-                tmp = batch_x[0,:,2] - self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,:,2]
+                tmp = batch_x[0,:,channel] - self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,:,channel]
                 q1, q2 = torch.quantile(torch.abs(tmp), torch.tensor([0.25, 0.75],device=tmp.device))
-                plt.plot(batch_x[0,-336:,2].cpu().detach().numpy(), color='orange') 
+                plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='orange') 
                 # batch_x[0,:,2][torch.abs(tmp) > (q2 - q1) * 1.5 + q2] = self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,:,2][torch.abs(tmp) > (q2 - q1) * 1.5 + q2]
-                plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,2].cpu().detach().numpy(), color='b') 
-                plt.plot(batch_x[0,-336:,2].cpu().detach().numpy(), color='g')
-                plt.plot(self.args.show.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,2].cpu().detach().numpy(), color='g')
+                plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,channel].cpu().detach().numpy(), color='b') 
+                plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='g')
+                plt.plot(self.args.show.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,channel].cpu().detach().numpy(), color='g')
 
                 plt.savefig(str(cn) + ".png")
                 # print(cn,"a",func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean"))
@@ -948,6 +950,7 @@ def parse_args():
     parser.add_argument("--beta", type=float, default=1.0)
     parser.add_argument("--gamma", type=float, default=0.15)
     parser.add_argument("--theta", type=float, default=1.5)
+    parser.add_argument("--rec_length_ratio", type=float, default=0.5)
     parser.add_argument("--feature_jittering", type=int, default=0)
     parser.add_argument("--rec_intra_feature", type=int, default=0)
     parser.add_argument("--rec_ori", type=int, default=0)
