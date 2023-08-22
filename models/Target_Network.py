@@ -12,6 +12,7 @@ class Model(nn.Module):
             self.base_model = eval(args.model_name).Model(args)
         else : 
             self.base_model = args.Base_T
+        self.base_model.model.cm = None
         self.args = args 
         #todo 
 

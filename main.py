@@ -127,10 +127,6 @@ class base_framework:
         if self.args.load: 
             self.load_best_model() 
         load_path = osp.join(self.args.exp_path, self.args.logname+self.args.time, str(self.args.phase-1)) 
-        # delete all the file end with .pkl
-        # for file in os.listdir(load_path):
-        #     if file.endswith(".pkl"):
-        #         os.remove(os.path.join(load_path, file))
     
     def static_strategy(self):     
         self.S = Source_Network.Model(self.args).float().to(self.args.device)
@@ -139,8 +135,6 @@ class base_framework:
             self.args.Base_T = copy.deepcopy(self.S.base_model)
             self.args.Base_T.configs = self.S.args
         self.T = Target_Network.Model(self.args).float().to(self.args.device)
-        if self.args.share_head:
-            self.S.base_model.model.head = self.T.base_model.model.head
         self.args.S = self.S 
         self.args.T = self.T 
         global result
@@ -148,7 +142,6 @@ class base_framework:
 
     def pretrain_S(self): 
         _, self.train_loader = data_provider(args, 'train')     
-        # self.args.use_cm = False
         training_loss = 0.0 
         self.S.train() 
         cn = 0 
@@ -157,7 +150,6 @@ class base_framework:
             batch_y = batch_y.float().to(self.args.device)
             batch_x_mark = batch_x_mark.float().to(self.args.device)
             batch_y_mark = batch_y_mark.float().to(self.args.device)
-            # print(np.sum(label.cpu().numpy()), np.sum(1-label.cpu().numpy()))
 
             self.optimizer_S.zero_grad()
             dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
@@ -171,36 +163,27 @@ class base_framework:
                 else: 
                     pred = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
         
-
             f_dim = -1 if self.args.features == 'MS' else 0
             outputs = pred[:, -self.args.pred_len:, f_dim:]
             batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
 
             pred = outputs
             true = batch_y
-            # print("batch_x ", batch_y[1,1,1])
-            # print("pred ", outputs, outputs.dtype)
 
             loss = self.lossfunc(pred, true, reduction="mean")
             # print(batch_x[1, 1, 1])
 
-            # print("loss {:.7f}".format(loss.item()))
-            # if self.args.ewc and self.inc_state:
-            #     loss += self.model.compute_consolidation_loss()
             training_loss += float(loss)
             loss.backward()
             self.optimizer_S.step()
             
             cn += 1
-            # if cn % 10 == 1: 
-            #     visualize(data.cpu(), data.y.cpu(), pred.cpu())
 
             if self.args.lradj == 'TST':
                 adjust_learning_rate(self.optimizer_S, self.scheduler_S, self.epoch + 1, self.args, printout=False)
                 self.scheduler_S.step()
                 
         training_loss = training_loss/cn 
-        # self.args.use_cm = True
         return training_loss
 
     def valid_S(self):
@@ -281,7 +264,12 @@ class base_framework:
         # self.validation_loss_list.append(validation_loss)
         if validation_loss < self.args.valid_loss_T : 
             self.args.valid_loss_T = validation_loss 
-            import copy
+            import copy #todo
+            # def get_weights_copy(model):
+            #     weights_path = 'weights_temp.pt'
+            #     torch.save(model.state_dict(), weights_path)
+            #     return torch.load(weights_path)
+            # self.T = get_weights_copy(self.T)
             self.args.best_T =  copy.deepcopy(self.T)
             self.args.best_Tloss = validation_loss
         return validation_loss
@@ -408,14 +396,7 @@ class base_framework:
             batch_y = batch_y.float().to(self.args.device)
             batch_x_mark = batch_x_mark.float().to(self.args.device)
             batch_y_mark = batch_y_mark.float().to(self.args.device)
-            # print(batch_x.shape)
-            # print("batch_x ", batch_x[1,1,1])
-            # print(batch_x[1,1,1])
-            # print(self.model.state_dict()["enc_embedding.value_embedding.tokenConv.weight"])
-
-            # count how many 1 and 0 in the label , print the number of 1 and 0
-            # print(np.sum(label.cpu().numpy()), np.sum(1-label.cpu().numpy()))
-
+            
             self.optimizer_S.zero_grad()
             self.optimizer_T.zero_grad()
             dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
@@ -428,6 +409,7 @@ class base_framework:
                 if self.args.linear_output:
                     self.args.best_T.train()
                     pred_S, F_S = self.S(batch_x, feature=True)
+                    _pred_S = self.S(batch_x, given_feature=F_S)
                     pred_T = self.T(batch_x)
                     with torch.no_grad():
                         _, F_T = self.args.best_T(batch_x, feature=True)
@@ -437,6 +419,7 @@ class base_framework:
 
             f_dim = -1 if self.args.features == 'MS' else 0
             pred_S = pred_S[:, -self.args.pred_len:, f_dim:]
+            _pred_S = _pred_S[:, -self.args.pred_len:, f_dim:]
             pred_T = pred_T[:, -self.args.pred_len:, f_dim:]
             batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
 
@@ -446,62 +429,40 @@ class base_framework:
             loss_anchor = 0
 
             if self.args.enhance: #* train reconstructor
-                enhanced_x = enhancer(batch_x) 
-
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1).to(self.args.device)
-                with torch.no_grad():
-                    anchor_pred, anchor_F = self.args.best_T(batch_x, feature=True)
-                rec_pred, rec_F  = self.S.correction_module.Refiner(anchor_F.detach().permute(0, 1, 3, 2), rec=True)
+                anchor_F = F_T.detach()
+                anchor_F = anchor_F.reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).permute(0, 2, 1)
+                # print("lst", anchor_F.permute(0, 1, 3, 2).reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).shape)
+                rec_F  = self.S.correction_module.Refiner.rec(anchor_F)
+                __pred_S = self.S(batch_x, given_feature=rec_F.permute(0, 2, 1).reshape(F_T.shape))
+                __pred_S = __pred_S[:, -self.args.pred_len:, f_dim:]
+
                 # print(rec_pred.shape, rec_F.shape, normal_mask.shape, anchor_F.shape) # check shape is right? 
-                loss_rec = func.mse_loss(rec_F.reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, anchor_F.permute(0, 1, 3, 2).reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, reduction="mean") 
-                # loss_rec = func.mse_loss(rec_pred.reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, batch_x.permute(0, 2, 1).reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, reduction="mean") 
-                #* see which way really work as AD scorer
-                rec_pred = rec_pred.reshape(batch_x.shape[0], batch_x.shape[-1], batch_x.shape[1])
-                loss_L2 = torch.mean(torch.var(rec_pred, dim=-1))
-                # loss_anchor += 2 * torch.mean(func.mse_loss(rec, batch_x.permute(0, 2, 1).reshape(rec.shape), reduction="none") * self.args.mk) + L2 * 2 
-                loss_anchor += 2 * loss_rec + loss_L2 
+                # print("w",anchor_F.shape, rec_F.shape)
+                loss_rec = func.mse_loss(rec_F.reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, anchor_F.reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, reduction="mean") 
+                #* see which way really work as AD scorer -> reconstruct F is OK
+                loss_anchor += 2 * loss_rec
 
 
             loss_KD = 0   #* KD part
-            if self.args.always_align: self.args.need_align = 1 #! 
+            if self.args.always_align: self.args.need_align = 1 
             if self.args.aligner and self.args.need_align: 
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
                 # print(F_T.shape, F_S.shape, label.shape, normal_mask.shape)
                 loss_KD = func.mse_loss(F_S * normal_mask, F_T.detach() * normal_mask, reduction="mean")
             # [Batch, C，P, d ]
-            #! here to set point 
-            loss_S = self.lossfunc(pred_S, true, reduction="mean")
+             
+            print(self.args.rs_before, self.args.rs_after)
+            loss_S = self.lossfunc(pred_S, true, reduction="mean") + self.lossfunc(_pred_S, true, reduction="mean") + self.lossfunc(__pred_S, true, reduction="mean") + self.args.rs_after * self.args.sup_weight # only influence ref 
             loss_T = self.lossfunc(pred_T, true, reduction="none").mean(dim=1)
             loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
             if self.args.grad_norm: loss_T = loss_T * (len(label.flatten()) / label.sum()) 
             
-            if self.args.share_head: 
-                loss_S.backward(retain_graph=True) 
-                # eliminate the grad of the self.S.base_model.model.head 
-                for param in self.S.base_model.model.head.parameters():
-                    # print("before", param.grad)
-                    param.grad = torch.zeros_like(param.grad)
-                    # print("after", param.grad)
-
-                loss = loss_T + loss_KD * 10 + loss_anchor 
-
-            else: 
-                loss = loss_S + loss_T + loss_KD * self.args.alpha  + loss_anchor * self.args.beta
-                #* here KD decay
-            # print(batch_x[1, 1, 1])
-            #* label 1 for normal
-            # print("loss {:.7f}".format(loss.item()))
-            # if self.args.ewc and self.inc_state:
-            #     loss += self.model.compute_consolidation_loss()
+            
+            loss = loss_S + loss_T + loss_KD * self.args.alpha + loss_anchor * self.args.beta
             training_loss += float(loss)
             loss.backward()
             self.optimizer_S.step()
-            # for param in self.S.base_model.model.head.parameters():
-            #         print("before", param.grad)
-            if self.args.share_head: 
-                self.optimizer_S.zero_grad()
-            # for param in self.S.base_model.model.head.parameters():
-            #         print("after", param.grad)
             self.optimizer_T.step()
             
             cn += 1
@@ -526,11 +487,6 @@ class base_framework:
         ##* Model Optimizer
         self.optimizer_S = optim.Adam(self.S.parameters(), lr=self.args.lr)
         self.optimizer_T = optim.Adam(self.T.parameters(), lr=self.args.lr)
-        # self.optimizer_T = optim.Adam(self.T.base_model.parameters(), lr=self.args.lr)
-        # self.S.base_model.model.head = self.T.base_model.model.head
-        # for i in self.S.named_parameters(): print(i) 
-        # print("T:\n")
-        # for i in self.T.named_parameters(): print(i) 
 
         if self.args.loss == "mse": self.lossfunc = func.mse_loss
         elif self.args.loss == "huber": self.lossfunc = func.smooth_l1_loss
@@ -564,6 +520,8 @@ class base_framework:
 
         for self.epoch in range(self.args.epoch): #* train body 
             if self.args.train_mode == 'pretrain': 
+                self.args.use_cm = False
+
                 training_loss = self.pretrain_S()
                 #todo train S()
                 validation_loss = self.valid_S()
@@ -575,22 +533,19 @@ class base_framework:
                 self.pretrain_T()
                 ##
                 validation_loss_T = self.valid_T()
+                self.args.use_cm = True
 
                 print("vs, vt", validation_loss, validation_loss_T)
-                ##
-                if validation_loss > validation_loss_T: 
+                if validation_loss > self.args.best_Tloss: 
                     self.args.need_align = True
-                else : 
+                else :
                     self.args.need_align = False
-                #todo train T()
 
                 # Early Stop
                 if validation_loss <= lowest_validation_loss:
                     counter = 0
                     lowest_validation_loss = validation_loss
                     save_model = self.S
-                    if self.inc_state and self.args.ewc:
-                        save_model = self.S.model 
                     torch.save({'model_state_dict': save_model.state_dict()}, osp.join(path, str(round(validation_loss,4))+("_epoch_%d.pkl" % self.epoch)))
                     torch.save({'model_state_dict': self.T.state_dict()}, osp.join(path, ("T_acco.pkl")))
                 else:
@@ -624,12 +579,11 @@ class base_framework:
 
                 self.args.logger.info(f"epoch:{self.epoch}, training loss:{training_loss:.4f} validation loss:{validation_loss:.4f}")
 
+                # Early Stop
                 if validation_loss <= lowest_validation_loss:
                     counter = 0
                     lowest_validation_loss = validation_loss
                     save_model = self.S
-                    if self.inc_state and self.args.ewc:
-                        save_model = self.S.model 
                     torch.save({'model_state_dict': save_model.state_dict()}, osp.join(path, str(round(validation_loss,4))+("_epoch_%d.pkl" % self.epoch)))
                     torch.save({'model_state_dict': self.T.state_dict()}, osp.join(path, ("T_acco.pkl")))
                 else:
@@ -734,7 +688,8 @@ class base_framework:
 
                 channel = 2
 
-                if self.args.train == 0 and self.args.debugger == 1: 
+                if self.args.train == 0 and self.args.debugger == 1 and self.args.train_mode != 'test': 
+                    print(cn + 2)
                     import matplotlib.pyplot as plt 
                     idx = 0 
                     plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='g') 
@@ -752,7 +707,7 @@ class base_framework:
                     idx = 0 
                     channel = 2
                     plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='g') 
-                    plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,channel].cpu().detach().numpy(), color='b') 
+                    # plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,channel].cpu().detach().numpy(), color='b') 
                     # show loss by text
                     plt.savefig('rec{}.png'.format(1))
                     plt.close()
@@ -762,30 +717,33 @@ class base_framework:
                 cn += 1
 
 
-                import matplotlib.pyplot as plt 
-                tmp = batch_x[0,:,channel] - self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,:,channel]
-                q1, q2 = torch.quantile(torch.abs(tmp), torch.tensor([0.25, 0.75],device=tmp.device))
-                plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='orange') 
-                # batch_x[0,:,2][torch.abs(tmp) > (q2 - q1) * 1.5 + q2] = self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,:,2][torch.abs(tmp) > (q2 - q1) * 1.5 + q2]
-                plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,channel].cpu().detach().numpy(), color='b') 
-                plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='g')
-                plt.plot(self.args.show.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,channel].cpu().detach().numpy(), color='g')
+                if self.args.train == 0 and self.args.debugger == 1 and self.args.train_mode != 'test': 
 
-                plt.savefig(str(cn) + ".png")
-                # print(cn,"a",func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean"))
-                # a_sum += func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean").item()
-                # pred = self.S(batch_x)
-                # pred = pred.detach().cpu()
-                # print(cn,"b",func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean"))
-                # b_sum += func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean").item()
-                # print("compare", a_sum, b_sum)
+                    import matplotlib.pyplot as plt 
+                    # tmp = batch_x[0,:,channel] - self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,:,channel]
+                    # q1, q2 = torch.quantile(torch.abs(tmp), torch.tensor([0.25, 0.75],device=tmp.device))
+                    plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='orange') 
+                    # batch_x[0,:,2][torch.abs(tmp) > (q2 - q1) * 1.5 + q2] = self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,:,2][torch.abs(tmp) > (q2 - q1) * 1.5 + q2]
+                    # plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,channel].cpu().detach().numpy(), color='b') 
+                    plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='g')
+                    plt.plot(self.args.show.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,channel].cpu().detach().numpy(), color='g')
 
-
-                # print(cn)
-                # if cn % 10 == 1: 
-                #     visualize(data.cpu(), data.y.cpu(), pred.cpu())
+                    plt.savefig(str(cn) + ".png")
+                    plt.close()
+                    # print(cn,"a",func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean"))
+                    # a_sum += func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean").item()
+                    # pred = self.S(batch_x)
+                    # pred = pred.detach().cpu()
+                    # print(cn,"b",func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean"))
+                    # b_sum += func.mse_loss(true[0,:,2], pred[0,:,2], reduction="mean").item()
+                    # print("compare", a_sum, b_sum)
 
 
+                    # print(cn)
+                    # if cn % 10 == 1: 
+                    #     visualize(data.cpu(), data.y.cpu(), pred.cpu())
+
+            self.args.train_mode = 'test'
             loss = loss/cn
             self.args.logger.info("[*] loss:{:.4f}".format(loss))
             pred_ = np.concatenate(pred_, 0)
@@ -836,11 +794,11 @@ class base_framework:
         self.report_result()
         # self.S.base_model.model.head = self.args.best_T.base_model.model.head
         self.args.use_cm = False 
-        # self.test_model()
+        self.test_model()
         self.args.use_cm = True 
         # self.test_model()
         self.S = self.args.best_T.to(self.args.device) 
-        # self.test_model()
+        self.test_model()
         self.report_result()
 
 
@@ -893,12 +851,12 @@ def parse_args():
     parser.add_argument("--noise_rate", type=float)
     parser.add_argument("--device", type=str, default="cuda:0")
     # parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-19-16:00:30.039043/0/best_model.pkl")
-    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-21-17:40:00.925903/0/best_model.pkl")
+    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-22-20:19:56.785959/0/best_model.pkl")
     parser.add_argument("--idx", type=int, default=213)
     parser.add_argument("--aligner", type=int, default=0)
     parser.add_argument("--always_align", type=int, default=1)
     parser.add_argument("--refiner", type=int, default=0)
-    parser.add_argument("--refiner_block_num", type=int, default=1)
+    parser.add_argument("--rec_block_num", type=int, default=1)
     parser.add_argument("--enhance", type=int, default=0)
     parser.add_argument("--enhance_type", type=int, default=0)
     parser.add_argument("--seed", type=int, default=2021)
@@ -914,14 +872,22 @@ def parse_args():
     parser.add_argument("--alpha", type=float, default=10.0)
     parser.add_argument("--beta", type=float, default=1.0)
     parser.add_argument("--gamma", type=float, default=0.15)
-    parser.add_argument("--theta", type=float, default=1.5)
-    parser.add_argument("--rec_length_ratio", type=float, default=0.65)
     parser.add_argument("--feature_jittering", type=int, default=0)
     parser.add_argument("--rec_intra_feature", type=int, default=0)
     parser.add_argument("--rec_ori", type=int, default=0)
     parser.add_argument("--mid_dim", type=int, default=64)
     parser.add_argument("--test_en", type=int, default=0)
     parser.add_argument("--debugger", type=int, default=0)
+
+    parser.add_argument("--theta", type=float, default=1.1)
+    parser.add_argument("--mask_border", type=int, default=1)
+    parser.add_argument("--sup_weight", type=float, default=20.0)
+    parser.add_argument("--rec_length_ratio", type=float, default=0.95)
+    parser.add_argument("--ref_block_num", type=int, default=2)
+    parser.add_argument("--add_FFN", type=int, default=0)
+    parser.add_argument("--add_residual", type=int, default=0)
+    
+
     args = parser.parse_args() 
     return args 
 
