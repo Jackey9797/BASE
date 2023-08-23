@@ -114,7 +114,7 @@ class Ref_block(nn.Module):
         self.self_attn = _MultiheadAttention(dim, 16, args.mid_dim, args.mid_dim, attn_dropout=0, proj_dropout=0, res_attention=False)
 
         # Add & Norm
-        self.dropout_attn = nn.Dropout(dropout)
+        self.dropout_attn = nn.Dropout(self.args.ref_dropout)
         self.args = args
         if self.args.add_FFN: 
             self.FFN = nn.Sequential(*[nn.Linear(dim, dim), nn.ReLU(), nn.Linear(dim, dim)])
@@ -128,7 +128,9 @@ class Ref_block(nn.Module):
         
         key_mask = mask
         out_1, _ = self.self_attn(x, x, x, key_padding_mask=key_mask, attn_mask=None) 
-
+        
+        if self.args.ref_dropout > 0:
+            out_1  = self.dropout_attn(out_1)
 
         #* todo FFN
         if self.args.add_FFN: 
@@ -184,7 +186,7 @@ class Rec_block(nn.Module):
         self.self_attn = _MultiheadAttention(dim, 16, args.mid_dim, args.mid_dim, attn_dropout=0, proj_dropout=0, res_attention=False)
 
         # Add & Norm
-        self.dropout_attn = nn.Dropout(dropout)
+        self.dropout_attn = nn.Dropout(self.args.rec_dropout)
         self.args = args
 
     def forward(
@@ -262,12 +264,15 @@ class Refiner(nn.Module):
         
         # set all idx of rec_sc of x to x_'s value todo  #* 两种实现 #todo 
         #* 中间加正则限制 
-        x_[rec_score == 0] = x[rec_score == 0]  #* keep normal patch still
+
+        if not self.args.rec_all:
+            x_[rec_score == 0] = x[rec_score == 0]  #* keep normal patch still
         x_ = torch.cat([x_[:, :-int(x.shape[1] * (1 - self.args.rec_length_ratio)), :], x[:, -int(x.shape[1] * (1 - self.args.rec_length_ratio)):, :]], dim=1)   #* keep last half
         
         r = self.rec(x_)   #? whehter use rec score as parameters
 
-        self.args.rs_after = torch.mean(torch.mean((r - x_) ** 2, dim=[2])  * (rec_score).float()) 
+        if not self.args.rec_all:
+            self.args.rs_after = torch.mean(torch.mean((r - x_) ** 2, dim=[2])  * (rec_score).float()) 
 
         for i in self.rec.parameters():
             i.requires_grad = True

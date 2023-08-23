@@ -453,7 +453,7 @@ class base_framework:
             # [Batch, C，P, d ]
              
             print(self.args.rs_before, self.args.rs_after)
-            loss_S = self.lossfunc(pred_S, true, reduction="mean") + self.lossfunc(_pred_S, true, reduction="mean") + self.lossfunc(__pred_S, true, reduction="mean") + self.args.rs_after * self.args.sup_weight # only influence ref 
+            loss_S = self.lossfunc(pred_S, true, reduction="mean") * self.args.omega + self.lossfunc(_pred_S, true, reduction="mean") + self.lossfunc(__pred_S, true, reduction="mean") + self.args.rs_after * self.args.sup_weight # only influence ref 
             loss_T = self.lossfunc(pred_T, true, reduction="none").mean(dim=1)
             loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
             if self.args.grad_norm: loss_T = loss_T * (len(label.flatten()) / label.sum()) 
@@ -879,13 +879,16 @@ def parse_args():
     parser.add_argument("--test_en", type=int, default=0)
     parser.add_argument("--debugger", type=int, default=0)
 
+    parser.add_argument("--omega", type=float, default=1.0)
     parser.add_argument("--theta", type=float, default=1.1)
     parser.add_argument("--mask_border", type=int, default=1)
     parser.add_argument("--sup_weight", type=float, default=20.0)
     parser.add_argument("--rec_length_ratio", type=float, default=0.95)
+    parser.add_argument("--ref_dropout", type=float, default=0.0)
     parser.add_argument("--ref_block_num", type=int, default=2)
     parser.add_argument("--add_FFN", type=int, default=0)
     parser.add_argument("--add_residual", type=int, default=0)
+    parser.add_argument("--rec_all", type=int, default=0)
     
 
     args = parser.parse_args() 
