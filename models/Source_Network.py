@@ -84,6 +84,7 @@ class Ref_block(nn.Module):
     ):
         super().__init__()
         hidden_dim = int(expansion_factor * dim) 
+        self.args = args
 
         self.norm = norm_klass(dim)
         self.dropout = nn.Dropout(dropout) 
@@ -115,7 +116,6 @@ class Ref_block(nn.Module):
 
         # Add & Norm
         self.dropout_attn = nn.Dropout(self.args.ref_dropout)
-        self.args = args
         if self.args.add_FFN: 
             self.FFN = nn.Sequential(*[nn.Linear(dim, dim), nn.ReLU(), nn.Linear(dim, dim)])
 
@@ -157,6 +157,7 @@ class Rec_block(nn.Module):
     ):
         super().__init__()
         hidden_dim = int(expansion_factor * dim) 
+        self.args = args
 
         self.norm = norm_klass(dim)
         self.dropout = nn.Dropout(dropout) 
@@ -186,8 +187,6 @@ class Rec_block(nn.Module):
         self.self_attn = _MultiheadAttention(dim, 16, args.mid_dim, args.mid_dim, attn_dropout=0, proj_dropout=0, res_attention=False)
 
         # Add & Norm
-        self.dropout_attn = nn.Dropout(self.args.rec_dropout)
-        self.args = args
 
     def forward(
         self,
@@ -271,8 +270,8 @@ class Refiner(nn.Module):
         
         r = self.rec(x_)   #? whehter use rec score as parameters
 
-        if not self.args.rec_all:
-            self.args.rs_after = torch.mean(torch.mean((r - x_) ** 2, dim=[2])  * (rec_score).float()) 
+        # if not self.args.rec_all:
+        self.args.rs_after = torch.mean(torch.mean((r - x_) ** 2, dim=[2])  * (rec_score).float()) 
 
         for i in self.rec.parameters():
             i.requires_grad = True

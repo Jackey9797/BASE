@@ -452,7 +452,7 @@ class base_framework:
                 loss_KD = func.mse_loss(F_S * normal_mask, F_T.detach() * normal_mask, reduction="mean")
             # [Batch, C，P, d ]
              
-            print(self.args.rs_before, self.args.rs_after)
+            # print(self.args.rs_before, self.args.rs_after)
             loss_S = self.lossfunc(pred_S, true, reduction="mean") * self.args.omega + self.lossfunc(_pred_S, true, reduction="mean") + self.lossfunc(__pred_S, true, reduction="mean") + self.args.rs_after * self.args.sup_weight # only influence ref 
             loss_T = self.lossfunc(pred_T, true, reduction="none").mean(dim=1)
             loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
