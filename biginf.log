@@ -2043,7 +2043,7 @@ need align? ->  True 0.12304055741564794
 2023-08-22 20:50:41,684 - epoch:29, training loss:1.2765 validation loss:0.1233
 Updating learning rate to 5.045816366600914e-10
 Updating learning rate to 5.045816366600914e-10
-check exp/ECL-PatchTST2023-08-22-20:19:56.785959/0/0.1222_epoch_7.pkl  &  0.12304055741564794
+check a0.1222_epoch_7.pkl  &  0.12304055741564794
 2023-08-22 20:50:45,692 - [*] loss:0.2703
 2023-08-22 20:50:45,695 - [*] phase 0, testing
 2023-08-22 20:50:45,733 - T:96	MAE	0.331266	RMSE	0.270366	MAPE	134.013581

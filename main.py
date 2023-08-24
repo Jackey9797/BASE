@@ -686,31 +686,39 @@ class base_framework:
                 pred = outputs.detach().cpu()
                 true = batch_y.detach().cpu()
 
+                # self.args.use_cm = False 
+                # _pred = self.S(batch_x)
+                # outputs = _pred[:, -self.args.pred_len:, f_dim:]
+                # _pred = outputs.detach().cpu()
+                # self.args.use_cm = True 
+
                 channel = 2
 
-                if self.args.train == 0 and self.args.debugger == 1 and self.args.train_mode != 'test': 
-                    print(cn + 2)
-                    import matplotlib.pyplot as plt 
-                    idx = 0 
-                    plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='g') 
-                    # show loss by text
-                    plt.savefig('before{}.png'.format(1))
-                    plt.close()
-                    # show loss by text
-                    plt.plot(torch.cat([batch_x[idx,-336:,channel].cpu(), torch.zeros_like(batch_y[idx,:,channel]).cpu()]).detach().numpy(), color='g') 
-                    plt.plot(torch.cat([batch_x[idx,-336:,channel].cpu(), batch_y[idx,:,channel].cpu()]).detach().numpy())
-                    plt.savefig('all{}.png'.format(1))
+                # if self.args.train == 0 and self.args.debugger == 1 and self.args.train_mode != 'test': 
+                #     print(cn + 2)
+                #     import matplotlib.pyplot as plt 
+                #     idx = 0 
+                #     # plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='g') 
+                #     # show loss by text
+                #     # plt.savefig('before{}.png'.format(cn))
+                #     # plt.close()
+                #     # show loss by text
+                #     plt.plot(torch.cat([batch_x[idx,-336:,channel].cpu(), torch.zeros_like(batch_y[idx,:,channel]).cpu()]).detach().numpy(), color='g') 
+                #     plt.plot(torch.cat([batch_x[idx,-336:,channel].cpu(), batch_y[idx,:,channel].cpu()]).detach().numpy(), color = 'orange')
+                #     plt.plot(torch.cat([batch_x[idx,-336:,channel].cpu(), pred[idx,:,channel].cpu()]).detach().numpy(), color = "blue")
+                #     plt.plot(torch.cat([batch_x[idx,-336:,channel].cpu(), _pred[idx,:,channel].cpu()]).detach().numpy(), color='grey', linestyle=':')
+                #     plt.savefig('all{}.png'.format(cn))
 
-                    plt.close()
+                #     plt.close()
 
-                    import matplotlib.pyplot as plt 
-                    idx = 0 
-                    channel = 2
-                    plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='g') 
-                    # plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,channel].cpu().detach().numpy(), color='b') 
-                    # show loss by text
-                    plt.savefig('rec{}.png'.format(1))
-                    plt.close()
+                #     import matplotlib.pyplot as plt 
+                #     idx = 0 
+                #     channel = 2
+                #     plt.plot(batch_x[0,-336:,channel].cpu().detach().numpy(), color='g') 
+                #     # plt.plot(self.args.rec.reshape(batch_x.shape[0], batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)[0,-336:,channel].cpu().detach().numpy(), color='b') 
+                #     # show loss by text
+                #     plt.savefig('rec{}.png'.format(29))
+                #     plt.close()
                 loss += func.mse_loss(true, pred, reduction="mean")
                 pred_.append(pred.data.numpy())
                 truth_.append(true.data.numpy())
@@ -792,11 +800,11 @@ class base_framework:
             self.inc_state = True 
 
         self.report_result()
-        # self.S.base_model.model.head = self.args.best_T.base_model.model.head
         self.args.use_cm = False 
         self.test_model()
+        self.S.base_model.model.head = self.args.best_T.base_model.model.head
         self.args.use_cm = True 
-        # self.test_model()
+        self.test_model()
         self.S = self.args.best_T.to(self.args.device) 
         self.test_model()
         self.report_result()
