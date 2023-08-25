@@ -251,7 +251,7 @@ class Refiner(nn.Module):
         q = torch.tensor([0.25, 0.5, 0.75], device=r.device) 
         q1, q2, q3 = torch.quantile(rec_score, q, dim=-1) 
         rec_score = (rec_score > (q3 + self.args.theta * (q3 - q1)).unsqueeze(-1)) # [890 42]
-        self.args.rs_before = torch.mean(torch.mean((r - x) ** 2, dim=[2])  * (rec_score).float()) 
+        self.args.rs_before = torch.mean(torch.mean((r - x) ** 2, dim=[2]) ) 
 
         #* --- reconstruct ---
         x_ = x * (~rec_score).unsqueeze(-1)
@@ -271,7 +271,7 @@ class Refiner(nn.Module):
         r = self.rec(x_)   #? whehter use rec score as parameters
 
         # if not self.args.rec_all:
-        self.args.rs_after = torch.mean(torch.mean((r - x_) ** 2, dim=[2])  * (rec_score).float()) 
+        self.args.rs_after = torch.mean(torch.mean((r - x_) ** 2, dim=[2])) 
 
         for i in self.rec.parameters():
             i.requires_grad = True
@@ -305,6 +305,7 @@ class Correction_Module(nn.Module):
         if self.args.refiner:
             # print(x_.shape)
             x_refined = self.Refiner(x_)
+            # x_refined = self.Refiner(x_refined)
             x_refined = x_refined.permute(0, 1, 3, 2)
         if self.args.share_head:  #* use the T forecastor after aligne
             x_refined = self.Aligner(x_refined.permute(0, 1, 3, 2)).permute(0, 1, 3, 2)

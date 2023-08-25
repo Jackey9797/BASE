@@ -792,7 +792,7 @@ class base_framework:
                 state_dict = torch.load(self.args.test_model_path, map_location=self.args.device)["model_state_dict"]
                 state_dict_T = torch.load(self.args.test_model_path[:-14] + "best_T_model.pkl", map_location=self.args.device)["model_state_dict"]
                 #* wrong , need manual debug
-                self.S.load_state_dict(state_dict)
+                self.S.load_state_dict(state_dict, strict=False)
                 self.T.load_state_dict(state_dict_T, strict=False)
                 self.args.best_T = self.T 
 
@@ -859,7 +859,7 @@ def parse_args():
     parser.add_argument("--noise_rate", type=float)
     parser.add_argument("--device", type=str, default="cuda:0")
     # parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-19-16:00:30.039043/0/best_model.pkl")
-    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-22-20:19:56.785959/0/best_model.pkl")
+    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-24-17:18:59.037459/0/best_model.pkl")
     parser.add_argument("--idx", type=int, default=213)
     parser.add_argument("--aligner", type=int, default=0)
     parser.add_argument("--always_align", type=int, default=1)
@@ -897,6 +897,7 @@ def parse_args():
     parser.add_argument("--add_FFN", type=int, default=0)
     parser.add_argument("--add_residual", type=int, default=0)
     parser.add_argument("--rec_all", type=int, default=0)
+    parser.add_argument("--e_layers", type=int, default=3)
     
 
     args = parser.parse_args() 
