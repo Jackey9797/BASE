@@ -422,6 +422,7 @@ def process_data_stream(args):
     # df_raw = pd.DataFrame(df_raw)
 
     t = 0; tmp_phase = 0
+    if args.phase_len == -1: args.phase_len = len(df_raw)
     while tmp_phase < args.end_phase:
         df_phase = df_raw[t:t+args.phase_len]
         print(t, t+args.phase_len)

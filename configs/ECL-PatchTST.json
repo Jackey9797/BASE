@@ -53,7 +53,7 @@
     "freq": "h",
     "begin_phase": 0,
     "end_phase": 1,
-    "phase_len": 26304,
+    "phase_len": -1,
     "val_ratio": 0.33,
     "graph_size":321, 
 

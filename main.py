@@ -192,7 +192,7 @@ class base_framework:
         validation_loss = 0.0
         cn = 0
         with torch.no_grad():
-            for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.test_loader):
+            for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.val_loader):
                 batch_x = batch_x.float().to(self.args.device)
                 batch_y = batch_y.float()
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
@@ -231,7 +231,7 @@ class base_framework:
         validation_loss = 0.0
         cn = 0
         with torch.no_grad():
-            for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.test_loader):
+            for batch_idx, (batch_x, batch_y, batch_x_mark, batch_y_mark, label) in enumerate(self.val_loader):
                 batch_x = batch_x.float().to(self.args.device)
                 batch_y = batch_y.float()
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
@@ -453,7 +453,8 @@ class base_framework:
             # [Batch, C，P, d ]
              
             # print(self.args.rs_before, self.args.rs_after)
-            loss_S = self.lossfunc(pred_S, true, reduction="mean") * self.args.omega + self.lossfunc(_pred_S, true, reduction="mean") + self.lossfunc(__pred_S, true, reduction="mean") + self.args.rs_after * self.args.sup_weight # only influence ref 
+            loss_S = self.lossfunc(pred_S, true, reduction="mean") * self.args.omega 
+            if self.args.refiner: loss_S  += self.lossfunc(_pred_S, true, reduction="mean") + self.lossfunc(__pred_S, true, reduction="mean") + self.args.rs_after * self.args.sup_weight # only influence ref 
             loss_T = self.lossfunc(pred_T, true, reduction="none").mean(dim=1)
             loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
             if self.args.grad_norm: loss_T = loss_T * (len(label.flatten()) / label.sum()) 
@@ -661,7 +662,7 @@ class base_framework:
 
                 if self.args.test_en: 
                     E = Enhancer(self.args)
-                    if self.args.test_en == 1: batch_x = E.spike(E.jitter(batch_x)) 
+                    if self.args.test_en == 1: batch_x = E.jitter(batch_x) 
                     if self.args.test_en == 2: batch_x = E.spike(batch_x)
                     if self.args.test_en == 3: batch_x = E.l_slope(batch_x)
                     if self.args.test_en == 4: batch_x = E.substitude(batch_x)
@@ -859,7 +860,7 @@ def parse_args():
     parser.add_argument("--noise_rate", type=float)
     parser.add_argument("--device", type=str, default="cuda:0")
     # parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-19-16:00:30.039043/0/best_model.pkl")
-    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-24-17:18:59.037459/0/best_model.pkl")
+    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-23-11:43:26.865832/0/best_model.pkl")
     parser.add_argument("--idx", type=int, default=213)
     parser.add_argument("--aligner", type=int, default=0)
     parser.add_argument("--always_align", type=int, default=1)
@@ -875,7 +876,7 @@ def parse_args():
 
     parser.add_argument("--jitter_sigma", type=float, default=0.2)
     parser.add_argument("--slope_rate", type=float, default=0.01)
-    parser.add_argument("--slope_range", type=float, default=0.5)
+    parser.add_argument("--slope_range", type=float, default=0.2)
 
     parser.add_argument("--alpha", type=float, default=10.0)
     parser.add_argument("--beta", type=float, default=1.0)
