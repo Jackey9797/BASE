@@ -693,7 +693,7 @@ class base_framework:
                 # _pred = outputs.detach().cpu()
                 # self.args.use_cm = True 
 
-                channel = 2
+                channel = 4
 
                 # if self.args.train == 0 and self.args.debugger == 1 and self.args.train_mode != 'test': 
                 #     print(cn + 2)
@@ -860,7 +860,7 @@ def parse_args():
     parser.add_argument("--noise_rate", type=float)
     parser.add_argument("--device", type=str, default="cuda:0")
     # parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-19-16:00:30.039043/0/best_model.pkl")
-    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-23-11:43:26.865832/0/best_model.pkl")
+    parser.add_argument("--test_model_path", type=str, default="/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl")
     parser.add_argument("--idx", type=int, default=213)
     parser.add_argument("--aligner", type=int, default=0)
     parser.add_argument("--always_align", type=int, default=1)

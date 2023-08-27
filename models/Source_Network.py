@@ -251,6 +251,7 @@ class Refiner(nn.Module):
         q = torch.tensor([0.25, 0.5, 0.75], device=r.device) 
         q1, q2, q3 = torch.quantile(rec_score, q, dim=-1) 
         rec_score = (rec_score > (q3 + self.args.theta * (q3 - q1)).unsqueeze(-1)) # [890 42]
+        # rec_score = (rec_score > 0.1) # [890 42]
         self.args.rs_before = torch.mean(torch.mean((r - x) ** 2, dim=[2]) ) 
 
         #* --- reconstruct ---
@@ -272,10 +273,10 @@ class Refiner(nn.Module):
 
         # if not self.args.rec_all:
         self.args.rs_after = torch.mean(torch.mean((r - x_) ** 2, dim=[2])) 
-
+        # print( torch.mean((r - x_) ** 2, dim=[2]))
         for i in self.rec.parameters():
             i.requires_grad = True
-        if self.args.train == 0: print("aha")
+        # if self.args.train == 0: print("aha")
         x_ = x_.reshape(tmp, -1, x_.shape[-2], x_.shape[-1]) 
         return x_
         
