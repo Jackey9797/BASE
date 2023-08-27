@@ -316,8 +316,7 @@ class Correction_Module(nn.Module):
 class Model(nn.Module):
     def __init__(self, args):
         super(Model, self).__init__()
-        self.correction_module = None 
-        if args.refiner: self.correction_module = Correction_Module(args)
+        self.correction_module = Correction_Module(args)
         args.cm = self.correction_module
         self.base_model = eval(args.model_name).Model(args) # cm 通过args嵌入到模型内部
         self.args = args

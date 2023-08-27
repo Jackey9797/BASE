@@ -89,6 +89,7 @@ class Model(nn.Module):
             x = x.permute(0,2,1)    # x: [Batch, Input length, Channel]
         else:
             x = x.permute(0,2,1)    # x: [Batch, Channel, Input length]
+            #! there's bug when aligner is not identity
             x, F = self.model(x, cm_forward = (self.configs.use_cm & self.configs.refiner), given_feature = given_feature)
             x = x.permute(0,2,1)    # x: [Batch, Input length, Channel]
         return x, F

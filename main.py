@@ -790,27 +790,34 @@ class base_framework:
             if self.args.train:
                 self.train()
 
-                torch.save(self.S.state_dict(), osp.join('./mainresult/', str(self.args.data_name) + str(self.args.refiner) + str(self.args.pred_len) + "S.pkl"))
-                torch.save(self.args.best_T.state_dict(), osp.join('./mainresult/', str(self.args.data_name) + str(self.args.refiner) + str(self.args.pred_len) + "T.pkl"))
+                torch.save(self.S.state_dict(), osp.join('./mainresult/', str(self.args.model_name), str(self.args.data_name) + str(self.args.refiner) + str(self.args.pred_len) + "S.pkl"))
+                torch.save(self.args.best_T.state_dict(), osp.join('./mainresult/', str(self.args.model_name), str(self.args.data_name) + str(self.args.refiner) + str(self.args.pred_len) + "T.pkl"))
             elif self.args.summary: 
                 #* ds + model for all len and all noise type and have and not  
                 df = [pd.DataFrame(columns=['len', 're', 'mae', 'mse']) for i in range(6)]
                 
                 for len_ in [96, 192, 336, 720]: 
-                    o_path = osp.join('./mainresult/', str(self.args.data_name) + str(0) + str(len_)) 
+                    o_path = osp.join('./mainresult/', str(self.args.model_name), str(self.args.data_name) + str(0) + str(len_)) 
                     self.S.load_state_dict(torch.load(o_path + "S.pkl", map_location=self.args.device)) 
+                    self.args.refiner = 0 
                     for i in range(6): 
                         self.args.test_en = i 
                         mae, mse = self.test_model()
                         df[i] = df[i].append({'len': len_, 're': 0, 'mae': mae, 'mse': mse}, ignore_index=True)
 
-                    re_path = osp.join('./mainresult/', str(self.args.data_name) + str(1) + str(len_)) 
+                    re_path = osp.join('./mainresult/', str(self.args.model_name), str(self.args.data_name) + str(1) + str(len_)) 
                     self.S.load_state_dict(torch.load(re_path + "S.pkl", map_location=self.args.device)) 
+                    self.args.refiner = 1
                     for i in range(6): 
                         self.args.test_en = i 
                         mae, mse = self.test_model()
                         df[i] = df[i].append({'len': len_, 're': 1, 'mae': mae, 'mse': mse}, ignore_index=True)
                     # self.T.load_state_dict(torch.load(o_path, map_location=self.args.device)) 
+                
+                # save df to './mainresult/'
+                for i in range(6):
+                    df[i].to_csv(osp.join('./mainresult/', str(self.args.model_name), str(self.args.data_name) + str(i) + "df.csv"))
+
             else: 
                 state_dict = torch.load(self.args.test_model_path, map_location=self.args.device)["model_state_dict"]
                 state_dict_T = torch.load(self.args.test_model_path[:-14] + "best_T_model.pkl", map_location=self.args.device)["model_state_dict"]
