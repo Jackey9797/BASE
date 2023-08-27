@@ -757,8 +757,8 @@ class base_framework:
             self.args.logger.info("[*] loss:{:.4f}".format(loss))
             pred_ = np.concatenate(pred_, 0)
             truth_ = np.concatenate(truth_, 0)
-            mae = base_framework.metric(truth_, pred_, self.args)
-            return loss
+            mae, mse = base_framework.metric(truth_, pred_, self.args)
+            return mae, mse
         
     @staticmethod
     def metric(ground_truth, prediction, args):
@@ -773,7 +773,7 @@ class base_framework:
             result[i]["mae"][args.phase] = mae
             result[i]["mape"][args.phase] = mape
             result[i]["rmse"][args.phase] = rmse
-        return mae
+        return mae, rmse
 
     def run(self): 
         ##* init logger
@@ -789,6 +789,28 @@ class base_framework:
             self.prepare()
             if self.args.train:
                 self.train()
+
+                torch.save(self.S.state_dict(), osp.join('./mainresult/', str(self.args.data_name) + str(self.args.refiner) + str(self.args.pred_len) + "S.pkl"))
+                torch.save(self.args.best_T.state_dict(), osp.join('./mainresult/', str(self.args.data_name) + str(self.args.refiner) + str(self.args.pred_len) + "T.pkl"))
+            elif self.args.summary: 
+                #* ds + model for all len and all noise type and have and not  
+                df = [pd.DataFrame(columns=['len', 're', 'mae', 'mse']) for i in range(6)]
+                
+                for len_ in [96, 192, 336, 720]: 
+                    o_path = osp.join('./mainresult/', str(self.args.data_name) + str(0) + str(len_)) 
+                    self.S.load_state_dict(torch.load(o_path + "S.pkl", map_location=self.args.device)) 
+                    for i in range(6): 
+                        self.args.test_en = i 
+                        mae, mse = self.test_model()
+                        df[i] = df[i].append({'len': len_, 're': 0, 'mae': mae, 'mse': mse}, ignore_index=True)
+
+                    re_path = osp.join('./mainresult/', str(self.args.data_name) + str(1) + str(len_)) 
+                    self.S.load_state_dict(torch.load(re_path + "S.pkl", map_location=self.args.device)) 
+                    for i in range(6): 
+                        self.args.test_en = i 
+                        mae, mse = self.test_model()
+                        df[i] = df[i].append({'len': len_, 're': 1, 'mae': mae, 'mse': mse}, ignore_index=True)
+                    # self.T.load_state_dict(torch.load(o_path, map_location=self.args.device)) 
             else: 
                 state_dict = torch.load(self.args.test_model_path, map_location=self.args.device)["model_state_dict"]
                 state_dict_T = torch.load(self.args.test_model_path[:-14] + "best_T_model.pkl", map_location=self.args.device)["model_state_dict"]
@@ -797,18 +819,22 @@ class base_framework:
                 self.T.load_state_dict(state_dict_T, strict=False)
                 self.args.best_T = self.T 
 
+                
+                        
+
             self.test_model()
             self.inc_state = True 
 
-        self.report_result()
-        self.args.use_cm = False 
-        self.test_model()
-        self.S.base_model.model.head = self.args.best_T.base_model.model.head
-        self.args.use_cm = True 
-        self.test_model()
-        self.S = self.args.best_T.to(self.args.device) 
-        self.test_model()
-        self.report_result()
+        if self.args.train:
+            self.report_result()
+            self.args.use_cm = False 
+            self.test_model()
+            self.S.base_model.model.head = self.args.best_T.base_model.model.head
+            self.args.use_cm = True 
+            self.test_model()
+            self.S = self.args.best_T.to(self.args.device) 
+            self.test_model()
+            self.report_result()
 
 
 def init_args(args): 
@@ -849,13 +875,24 @@ def parse_args():
 
     parser.add_argument("--load", action="store_true", default=True)
     parser.add_argument("--build_graph", action="store_true", default=False)
-    parser.add_argument("--same_init", action="store_true", default=False)
+    parser.add_argument("--same_init", action="store_true", default=True)
     parser.add_argument("--grad_norm", action="store_true", default=False)
     parser.add_argument("--refiner_residual", type=int, default=0)
     parser.add_argument("--root_path", type=str, default="")
     parser.add_argument("--exp_path", type=str, default="exp/")
     parser.add_argument("--val_test_mix", action="store_true", default=False)
     # parser.add_argument("--end_phase", type=int, default=1)
+    parser.add_argument("--lr", type=float, default=0.0001)
+    parser.add_argument("--lradj", type=str, default="TST")
+    parser.add_argument("--dropout", type=float, default=0.2)
+    parser.add_argument("--fc_dropout", type=float, default=0.2)
+    parser.add_argument("--head_dropout", type=float, default=0.0)
+    parser.add_argument("--patch_len", type=int, default=16)
+    parser.add_argument("--stride", type=int, default=8)
+    parser.add_argument("--d_ff", type=int, default=256)
+    parser.add_argument("--d_model", type=int, default=128)
+    parser.add_argument("--n_heads", type=int, default=16)
+    parser.add_argument("--seq_len", type=int, default=336)
     parser.add_argument("--pred_len", type=int, default=96)
     parser.add_argument("--noise_rate", type=float)
     parser.add_argument("--device", type=str, default="cuda:0")
@@ -867,32 +904,33 @@ def parse_args():
     parser.add_argument("--refiner", type=int, default=0)
     parser.add_argument("--rec_block_num", type=int, default=1)
     parser.add_argument("--enhance", type=int, default=0)
-    parser.add_argument("--enhance_type", type=int, default=0)
-    parser.add_argument("--seed", type=int, default=2021)
+    parser.add_argument("--enhance_type", type=int, default=5)
+    parser.add_argument("--seed", type=int, default=34)
 
     parser.add_argument("--batch_size", type=int, default=128)
     parser.add_argument("--share_head", type=int, default=0)
-    parser.add_argument("--add_noise", type=int, default=0)
+    parser.add_argument("--add_noise", type=int, default=1)
 
-    parser.add_argument("--jitter_sigma", type=float, default=0.2)
+    parser.add_argument("--jitter_sigma", type=float, default=2)
     parser.add_argument("--slope_rate", type=float, default=0.01)
     parser.add_argument("--slope_range", type=float, default=0.2)
 
     parser.add_argument("--alpha", type=float, default=10.0)
     parser.add_argument("--beta", type=float, default=1.0)
     parser.add_argument("--gamma", type=float, default=0.15)
-    parser.add_argument("--feature_jittering", type=int, default=0)
+    parser.add_argument("--feature_jittering", type=int, default=1)
     parser.add_argument("--rec_intra_feature", type=int, default=0)
-    parser.add_argument("--rec_ori", type=int, default=0)
-    parser.add_argument("--mid_dim", type=int, default=64)
+    parser.add_argument("--rec_ori", type=int, default=1)
+    parser.add_argument("--mid_dim", type=int, default=128)
     parser.add_argument("--test_en", type=int, default=0)
     parser.add_argument("--debugger", type=int, default=0)
+    parser.add_argument("--summary", type=int, default=0)
 
     parser.add_argument("--omega", type=float, default=1.0)
     parser.add_argument("--theta", type=float, default=1.1)
     parser.add_argument("--mask_border", type=int, default=1)
-    parser.add_argument("--sup_weight", type=float, default=20.0)
-    parser.add_argument("--rec_length_ratio", type=float, default=0.95)
+    parser.add_argument("--sup_weight", type=float, default=10.0)
+    parser.add_argument("--rec_length_ratio", type=float, default=0.8)
     parser.add_argument("--ref_dropout", type=float, default=0.0)
     parser.add_argument("--ref_block_num", type=int, default=2)
     parser.add_argument("--add_FFN", type=int, default=0)
