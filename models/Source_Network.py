@@ -311,7 +311,7 @@ class Correction_Module(nn.Module):
         if self.args.share_head:  #* use the T forecastor after aligne
             x_refined = self.Aligner(x_refined.permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
 
-        return x_refined.squeeze(), self.Aligner(x_).permute(0, 1, 3, 2).squeeze()
+        return x_refined, self.Aligner(x_).permute(0, 1, 3, 2)
 
 class Model(nn.Module):
     def __init__(self, args):

@@ -138,7 +138,8 @@ class base_framework:
         self.args.S = self.S 
         self.args.T = self.T 
         global result
-        result[self.args.pred_len] = {"mae":{}, "mape":{}, "rmse":{}}
+        for i in [24, 36, 48, 60, 96, 192, 336, 720]:
+            result[i] = {"mae":{}, "mape":{}, "rmse":{}}
 
     def pretrain_S(self): 
         _, self.train_loader = data_provider(args, 'train')     
@@ -652,7 +653,7 @@ class base_framework:
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
                 batch_y_mark = batch_y_mark.float().to(self.args.device)
                 # pred = self.S(batch_x)
-
+                # print(batch_x.shape, batch_y.shape)
                 # if self.args.use_cm:
                 # tmp = batch_x - self.args.rec.reshape(-1, batch_x.shape[2],batch_x.shape[1]).permute(0, 2, 1)
                 # q1, q2 = torch.quantile(torch.abs(tmp), torch.tensor([0.25, 0.75],device=tmp.device), dim=-2, keepdim=True)
@@ -797,13 +798,16 @@ class base_framework:
                 df = [pd.DataFrame(columns=['len', 're', 'mae', 'mse']) for i in range(6)]
                 
                 for len_ in [96, 192, 336, 720]: 
+                    self.args.pred_len = len_
+                    self.test_loader = get_dataset(self.args)["test_loader"]
+                    self.S = Source_Network.Model(self.args).float().to(self.args.device) 
                     o_path = osp.join('./mainresult/', str(self.args.model_name), str(self.args.data_name) + str(0) + str(len_)) 
                     self.S.load_state_dict(torch.load(o_path + "S.pkl", map_location=self.args.device)) 
                     self.args.refiner = 0 
                     for i in range(6): 
                         self.args.test_en = i 
                         mae, mse = self.test_model()
-                        df[i] = df[i].append({'len': len_, 're': 0, 'mae': mae, 'mse': mse}, ignore_index=True)
+                        df[i] = df[i].append({'len': len_, 're': 0, 'mse': mse, 'mae': mae}, ignore_index=True)
 
                     re_path = osp.join('./mainresult/', str(self.args.model_name), str(self.args.data_name) + str(1) + str(len_)) 
                     self.S.load_state_dict(torch.load(re_path + "S.pkl", map_location=self.args.device)) 
@@ -811,7 +815,7 @@ class base_framework:
                     for i in range(6): 
                         self.args.test_en = i 
                         mae, mse = self.test_model()
-                        df[i] = df[i].append({'len': len_, 're': 1, 'mae': mae, 'mse': mse}, ignore_index=True)
+                        df[i] = df[i].append({'len': len_, 're': 1, 'mse': mse, 'mae': mae}, ignore_index=True)
                     # self.T.load_state_dict(torch.load(o_path, map_location=self.args.device)) 
                 
                 # save df to './mainresult/'
@@ -918,7 +922,7 @@ def parse_args():
     parser.add_argument("--share_head", type=int, default=0)
     parser.add_argument("--add_noise", type=int, default=1)
 
-    parser.add_argument("--jitter_sigma", type=float, default=2)
+    parser.add_argument("--jitter_sigma", type=float, default=0.4)
     parser.add_argument("--slope_rate", type=float, default=0.01)
     parser.add_argument("--slope_range", type=float, default=0.2)
 
