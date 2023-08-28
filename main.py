@@ -795,7 +795,7 @@ class base_framework:
                 torch.save(self.args.best_T.state_dict(), osp.join('./mainresult/', str(self.args.model_name), str(self.args.data_name) + str(self.args.refiner) + str(self.args.pred_len) + "T.pkl"))
             elif self.args.summary: 
                 #* ds + model for all len and all noise type and have and not  
-                df = [pd.DataFrame(columns=['len', 're', 'mae', 'mse']) for i in range(6)]
+                df = [pd.DataFrame(columns=['len', 're', 'mse', 'mae']) for i in range(6)]
                 
                 for len_ in [96, 192, 336, 720]: 
                     self.args.pred_len = len_
