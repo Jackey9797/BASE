@@ -11,6 +11,7 @@ class Enhancer(object):
         self.jitter_sigma = args.jitter_sigma 
         self.slope_rate = args.slope_rate
         self.slope_range = args.slope_range
+        self.yita = 0.3
 
     def identity(self, x): 
         return x 
@@ -24,6 +25,32 @@ class Enhancer(object):
         # plt.close() 
 
         x = x + torch.randn(size=x.shape).to(self.args.device) * self.jitter_sigma 
+        # plt.plot(x[3].cpu().numpy()) 
+        # plt.savefig('after.png')
+        return x
+    
+    def point_jitter(self, x):
+        # use the plot to visualize x[3]
+        # import matplotlib.pyplot as plt
+
+        # plt.plot(x[3].cpu().numpy()) 
+        # plt.savefig('before.png')
+        # plt.close() 
+        k = int(100 * self.yita)
+        x = x + torch.randn(size=x.shape).to(self.args.device) * self.jitter_sigma * (torch.randint(1, 100, size=x.shape).to(self.args.device) <= k) 
+        # plt.plot(x[3].cpu().numpy()) 
+        # plt.savefig('after.png')
+        return x
+    
+    def point_missing(self, x):
+        # use the plot to visualize x[3]
+        # import matplotlib.pyplot as plt
+
+        # plt.plot(x[3].cpu().numpy()) 
+        # plt.savefig('before.png')
+        # plt.close() 
+        k = int(100 * self.yita)
+        x = x * (torch.randint(1, 100, size=x.shape).to(self.args.device) > k) 
         # plt.plot(x[3].cpu().numpy()) 
         # plt.savefig('after.png')
         return x
