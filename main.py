@@ -94,17 +94,8 @@ def init_log(args):
     return logger
 
 class base_framework: 
-    def __init__(self, args) -> None:
+    def __init__(self, args):
         self.args = args 
-
-    def load_best_model(self):
-        load_path = osp.join(self.args.exp_path, self.args.logname+self.args.time, str(self.args.phase-1), "best_model.pkl")
-        state_dict = torch.load(load_path, map_location=self.args.device)["model_state_dict"]
-        model = eval(self.args.model_name).Model(self.args).float()
-        self.args.logger.info("[*] load from {}".format(load_path))
-        model.load_state_dict(state_dict)
-        model = model.to(self.args.device)
-        self.model = model 
 
     def prepare(self): 
 
@@ -113,7 +104,7 @@ class base_framework:
         
         #* apply strategy 
         if self.inc_state:
-            self.incremental_strategy()
+            pass
         else:
             self.static_strategy()
 
@@ -123,20 +114,16 @@ class base_framework:
             self.val_loader = self.inputs["val_loader"]
         self.test_loader = self.inputs["test_loader"]
 
-    def incremental_strategy(self):  
-        if self.args.load: 
-            self.load_best_model() 
-        load_path = osp.join(self.args.exp_path, self.args.logname+self.args.time, str(self.args.phase-1)) 
-    
-    def static_strategy(self):     
+    def static_strategy(self):  #* init P and A    
         self.S = Source_Network.Model(self.args).float().to(self.args.device)
-        if self.args.same_init: 
+        if self.args.same_init:  
             import copy
             self.args.Base_T = copy.deepcopy(self.S.base_model)
             self.args.Base_T.configs = self.S.args
         self.T = Target_Network.Model(self.args).float().to(self.args.device)
         self.args.S = self.S 
         self.args.T = self.T 
+
         global result
         for i in [24, 36, 48, 60, 96, 192, 336, 720]:
             result[i] = {"mae":{}, "mape":{}, "rmse":{}}
@@ -153,8 +140,9 @@ class base_framework:
             batch_y_mark = batch_y_mark.float().to(self.args.device)
 
             self.optimizer_S.zero_grad()
-            dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
-            dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
+            if not self.args.linear_output:
+                dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
+                dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
 
             if self.args.graph_input: 
                 pred = self.S(batch_x, self.args.sub_adj)
@@ -165,13 +153,10 @@ class base_framework:
                     pred = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
         
             f_dim = -1 if self.args.features == 'MS' else 0
-            outputs = pred[:, -self.args.pred_len:, f_dim:]
+            pred = pred[:, -self.args.pred_len:, f_dim:]
             batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
 
-            pred = outputs
-            true = batch_y
-
-            loss = self.lossfunc(pred, true, reduction="mean")
+            loss = self.lossfunc(pred, batch_y, reduction="mean")
             # print(batch_x[1, 1, 1])
 
             training_loss += float(loss)
@@ -198,9 +183,9 @@ class base_framework:
                 batch_y = batch_y.float()
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
                 batch_y_mark = batch_y_mark.float().to(self.args.device)
-
-                dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
-                dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
+                if not self.args.linear_output:
+                    dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
+                    dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
 
                 if self.args.graph_input: 
                     pred = self.S(batch_x, self.args.sub_adj)
@@ -211,13 +196,13 @@ class base_framework:
                         pred = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
             
                 f_dim = -1 if self.args.features == 'MS' else 0
-                outputs = pred[:, -self.args.pred_len:, f_dim:]
+                pred = pred[:, -self.args.pred_len:, f_dim:]
                 batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
 
-                pred = outputs.detach().cpu()
-                true = batch_y.detach().cpu()
+                pred = pred.detach().cpu()
+                batch_y = batch_y.detach().cpu()
                 
-                loss = self.lossfunc(pred, true, reduction="mean")
+                loss = self.lossfunc(pred, batch_y, reduction="mean")
                 validation_loss += float(loss)
                 # print(len(list(self.lossfunc(pred, true, reduction="none").mean(dim=0).detach().cpu().numpy())))
                 # self.args.Score += self.lossfunc(pred, true, reduction="none").mean(dim=1).flatten().detach().cpu().tolist()
@@ -237,10 +222,10 @@ class base_framework:
                 batch_y = batch_y.float()
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
                 batch_y_mark = batch_y_mark.float().to(self.args.device)
-
-                dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
-                dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
-
+                if not self.args.linear_output:
+                    dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
+                    dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
+    
                 if self.args.graph_input: 
                     pred = self.T(batch_x, self.args.sub_adj)
                 else : 
@@ -250,13 +235,12 @@ class base_framework:
                         pred = self.T(batch_x, batch_x_mark, dec_inp, batch_y_mark)
             
                 f_dim = -1 if self.args.features == 'MS' else 0
-                outputs = pred[:, -self.args.pred_len:, f_dim:]
-                batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
+                pred = pred[:, -self.args.pred_len:, f_dim:].detach().cpu()
+                batch_y = batch_y[:, -self.args.pred_len:, f_dim:]
 
-                pred = outputs.detach().cpu()
-                true = batch_y.detach().cpu()
-                
-                loss = self.lossfunc(pred, true, reduction="mean")
+                batch_y = batch_y.detach().cpu()
+
+                loss = self.lossfunc(pred, batch_y, reduction="mean")
                 validation_loss += float(loss)
                 # print(len(list(self.lossfunc(pred, true, reduction="none").mean(dim=0).detach().cpu().numpy())))
                 # self.args.Score += self.lossfunc(pred, true, reduction="none").mean(dim=1).flatten().detach().cpu().tolist()
@@ -289,9 +273,9 @@ class base_framework:
                 batch_y = batch_y.float()
                 batch_x_mark = batch_x_mark.float().to(self.args.device)
                 batch_y_mark = batch_y_mark.float().to(self.args.device)
-
-                dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
-                dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
+                if not self.args.linear_output:
+                    dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
+                    dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
 
                 if self.args.graph_input: 
                     pred = self.S(batch_x, self.args.sub_adj)
@@ -302,15 +286,12 @@ class base_framework:
                         pred = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
             
                 f_dim = -1 if self.args.features == 'MS' else 0
-                outputs = pred[:, -self.args.pred_len:, f_dim:]
-                batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
+                pred = pred[:, -self.args.pred_len:, f_dim:].detach().cpu()
+                batch_y = batch_y[:, -self.args.pred_len:, f_dim:].detach().cpu()
 
-                pred = outputs.detach().cpu()
-                true = batch_y.detach().cpu()
-                
                 # print(len(list(self.lossfunc(pred, true, reduction="none").mean(dim=0).detach().cpu().numpy())))
-                if self.args.Score == []: self.args.Score = self.lossfunc(pred, true, reduction="none").mean(dim=1).detach().cpu().numpy()
-                else : self.args.Score = np.concatenate([self.args.Score, self.lossfunc(pred, true, reduction="none").mean(dim=1).detach().cpu().numpy()])
+                if self.args.Score == []: self.args.Score = self.lossfunc(pred, batch_y, reduction="none").mean(dim=1).detach().cpu().numpy()
+                else : self.args.Score = np.concatenate([self.args.Score, self.lossfunc(pred, batch_y, reduction="none").mean(dim=1).detach().cpu().numpy()])
                 cn += 1 
 
         self.args.use_cm = True
@@ -321,7 +302,6 @@ class base_framework:
         _, self.train_loader = data_provider(args, 'train')     
             
         training_loss = 0.0 
-        start_time = datetime.now() 
 
         self.T.train() 
         cn = 0 
@@ -339,8 +319,9 @@ class base_framework:
             # print(np.sum(label.cpu().numpy()), np.sum(1-label.cpu().numpy()))
 
             self.optimizer_T.zero_grad()
-            dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
-            dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
+            if not self.args.linear_output:
+                dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
+                dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
 
             if self.args.graph_input: 
                 pred = self.T(batch_x, self.args.sub_adj)
@@ -352,10 +333,9 @@ class base_framework:
         
 
             f_dim = -1 if self.args.features == 'MS' else 0
-            outputs = pred[:, -self.args.pred_len:, f_dim:]
+            pred = pred[:, -self.args.pred_len:, f_dim:]
             batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
 
-            pred = outputs
             true = batch_y
             # print("batch_x ", batch_y[1,1,1])
             # print("pred ", outputs, outputs.dtype)
@@ -400,8 +380,9 @@ class base_framework:
             
             self.optimizer_S.zero_grad()
             self.optimizer_T.zero_grad()
-            dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
-            dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
+            if not self.args.linear_output:
+                dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
+                dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
 
             if self.args.graph_input: 
                 pred_S = self.S(batch_x, self.args.sub_adj)
@@ -410,7 +391,8 @@ class base_framework:
                 if self.args.linear_output:
                     self.args.best_T.train()
                     pred_S, F_S = self.S(batch_x, feature=True)
-                    _pred_S = self.S(batch_x, given_feature=F_S)
+                    if self.args.refiner: 
+                        _pred_S = self.S(batch_x, given_feature=F_S)
                     pred_T = self.T(batch_x)
                     with torch.no_grad():
                         _, F_T = self.args.best_T(batch_x, feature=True)
@@ -420,7 +402,8 @@ class base_framework:
 
             f_dim = -1 if self.args.features == 'MS' else 0
             pred_S = pred_S[:, -self.args.pred_len:, f_dim:]
-            _pred_S = _pred_S[:, -self.args.pred_len:, f_dim:]
+            if self.args.refiner: 
+                _pred_S = _pred_S[:, -self.args.pred_len:, f_dim:]
             pred_T = pred_T[:, -self.args.pred_len:, f_dim:]
             batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.args.device)
 
@@ -431,7 +414,7 @@ class base_framework:
 
             if self.args.enhance: #* train reconstructor
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1).to(self.args.device)
-                anchor_F = F_T.detach()
+                anchor_F = F_T
                 anchor_F = anchor_F.reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).permute(0, 2, 1)
                 # print("lst", anchor_F.permute(0, 1, 3, 2).reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).shape)
                 rec_F  = self.S.correction_module.Refiner.rec(anchor_F)
@@ -607,6 +590,7 @@ class base_framework:
             # if self.epoch == 30: break
             if self.args.early_break: 
                 if self.epoch == self.args.early_break: break
+            #todo add early stop
             
 
 
