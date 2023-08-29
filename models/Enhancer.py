@@ -49,7 +49,7 @@ class Enhancer(object):
         # plt.plot(x[3].cpu().numpy()) 
         # plt.savefig('before.png')
         # plt.close() 
-        k = int(100 * self.yita)
+        k = int(100 * self.yita / 3)
         x = x * (torch.randint(1, 100, size=x.shape).to(self.args.device) > k) 
         # plt.plot(x[3].cpu().numpy()) 
         # plt.savefig('after.png')

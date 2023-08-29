@@ -605,6 +605,8 @@ class base_framework:
             self.args.train_mode = 'joint' #*
             
             # if self.epoch == 30: break
+            if self.args.early_break: 
+                if self.epoch == self.args.early_break: break
             
 
 
@@ -950,6 +952,7 @@ def parse_args():
     parser.add_argument("--add_residual", type=int, default=0)
     parser.add_argument("--rec_all", type=int, default=0)
     parser.add_argument("--e_layers", type=int, default=3)
+    parser.add_argument("--early_break", type=int, default=0)
     
 
     args = parser.parse_args() 
