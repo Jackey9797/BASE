@@ -779,8 +779,12 @@ class base_framework:
             if self.args.train:
                 self.train()
 
-                torch.save(self.S.state_dict(), osp.join('./mainresult/', str(self.args.model_name), str(self.args.data_name) + str(self.args.refiner) + str(self.args.pred_len) + "S.pkl"))
-                torch.save(self.args.best_T.state_dict(), osp.join('./mainresult/', str(self.args.model_name), str(self.args.data_name) + str(self.args.refiner) + str(self.args.pred_len) + "T.pkl"))
+                if self.args.mainrs: 
+                    torch.save(self.S.state_dict(), osp.join('./mainresult/', str(self.args.model_name), str(self.args.data_name) + str(self.args.refiner) + str(self.args.pred_len) + "S.pkl"))
+                    torch.save(self.args.best_T.state_dict(), osp.join('./mainresult/', str(self.args.model_name), str(self.args.data_name) + str(self.args.refiner) + str(self.args.pred_len) + "T.pkl"))
+                if self.args.abl: 
+                    torch.save(self.S.state_dict(), osp.join('./ablation/', str(self.args.model_name), str(self.args.data_name) + str(self.args.refiner) + str(self.args.aligner) + str(self.args.loss) + "S.pkl"))
+                    torch.save(self.args.best_T.state_dict(), osp.join('./ablation/', str(self.args.model_name), str(self.args.data_name) + str(self.args.refiner) + str(self.args.aligner) + str(self.args.loss) + "T.pkl"))
             elif self.args.summary: 
                 #* ds + model for all len and all noise type and have and not  
                 df = [pd.DataFrame(columns=['len', 're', 'mse', 'mae']) for i in range(8)]
@@ -826,6 +830,13 @@ class base_framework:
 
         if self.args.train:
             self.report_result()
+            if self.args.abl: 
+                print("----*-----")               
+                for i in range(8): 
+                    self.args.test_en = i 
+                    self.test_model()
+                print("----*-----")
+
             self.args.use_cm = False 
             self.test_model()
             self.S.base_model.model.head = self.args.best_T.base_model.model.head
@@ -834,6 +845,9 @@ class base_framework:
             self.S = self.args.best_T.to(self.args.device) 
             self.test_model()
             self.report_result()
+
+            
+                
 
 
 def init_args(args): 
@@ -871,6 +885,8 @@ def parse_args():
     parser.add_argument("--data_name", type=str, default="electricity")
     parser.add_argument("--iteration", type=int, default=1)
     parser.add_argument("--train", type=int, default=1)
+    parser.add_argument("--mainrs", type=int, default=0)
+    parser.add_argument("--abl", type=int, default=0)
 
     parser.add_argument("--load", action="store_true", default=True)
     parser.add_argument("--build_graph", action="store_true", default=False)
