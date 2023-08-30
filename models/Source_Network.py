@@ -224,7 +224,7 @@ class Refiner(nn.Module):
         self.ref_block_num = args.ref_block_num
         # self.ref_block_num = 2  #todo 
         self.rec_block_num = 1
-        self.refiner_residual = False
+        self.refiner_residual = self.args.refiner_residual
         self.rec_residual = False
         # self.ref = nn.Sequential(*[
         #     Refiner_block(args, args.d_model, add_residual= self.refiner_residual) for _ in range(self.refiner_block_num)

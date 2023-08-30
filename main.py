@@ -495,7 +495,7 @@ class base_framework:
         lowest_validation_loss = 1e7
         self.args.valid_loss_T = 1e7
         counter = 0
-        patience = 100
+        patience = self.args.early_stop
         use_time = []
         self.validation_loss_list = []
 
@@ -953,6 +953,7 @@ def parse_args():
     parser.add_argument("--rec_all", type=int, default=0)
     parser.add_argument("--e_layers", type=int, default=3)
     parser.add_argument("--early_break", type=int, default=0)
+    parser.add_argument("--early_stop", type=int, default=100)
     
 
     args = parser.parse_args() 
