@@ -418,8 +418,6 @@ class base_framework:
                 anchor_F = anchor_F.reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).permute(0, 2, 1)
                 # print("lst", anchor_F.permute(0, 1, 3, 2).reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).shape)
                 rec_F  = self.S.correction_module.Refiner.rec(anchor_F)
-                __pred_S = self.S(batch_x, given_feature=rec_F.permute(0, 2, 1).reshape(F_T.shape))
-                __pred_S = __pred_S[:, -self.args.pred_len:, f_dim:]
 
                 # print(rec_pred.shape, rec_F.shape, normal_mask.shape, anchor_F.shape) # check shape is right? 
                 # print("w",anchor_F.shape, rec_F.shape)
@@ -438,7 +436,7 @@ class base_framework:
              
             # print(self.args.rs_before, self.args.rs_after)
             loss_S = self.lossfunc(pred_S, true, reduction="mean") * self.args.omega 
-            if self.args.refiner: loss_S  += self.lossfunc(_pred_S, true, reduction="mean") + self.lossfunc(__pred_S, true, reduction="mean") + self.args.rs_after * self.args.sup_weight # only influence ref 
+            if self.args.refiner: loss_S  += self.lossfunc(_pred_S, true, reduction="mean") + self.args.rs_after * self.args.sup_weight # only influence ref 
             loss_T = self.lossfunc(pred_T, true, reduction="none").mean(dim=1)
             loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
             if self.args.grad_norm: loss_T = loss_T * (len(label.flatten()) / label.sum()) 
@@ -925,6 +923,7 @@ def parse_args():
     parser.add_argument("--batch_size", type=int, default=128)
     parser.add_argument("--share_head", type=int, default=0)
     parser.add_argument("--add_noise", type=int, default=1)
+    parser.add_argument("--add_norm", type=int, default=0)
 
     parser.add_argument("--jitter_sigma", type=float, default=0.4)
     parser.add_argument("--slope_rate", type=float, default=0.01)
@@ -953,7 +952,7 @@ def parse_args():
     parser.add_argument("--rec_all", type=int, default=0)
     parser.add_argument("--e_layers", type=int, default=3)
     parser.add_argument("--early_break", type=int, default=0)
-    parser.add_argument("--early_stop", type=int, default=100)
+    parser.add_argument("--early_stop", type=int, default=10)
     
 
     args = parser.parse_args() 

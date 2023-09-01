@@ -67,7 +67,15 @@ class ReconHead(nn.Module):
 
         x = self.linear( self.dropout(x) )      # [bs x nvars x num_patch x patch_len]
         return x
+    
+class Transpose(nn.Module):
+    def __init__(self, *dims, contiguous=False): 
+        super().__init__()
+        self.dims, self.contiguous = dims, contiguous
+    def forward(self, x):
+        if self.contiguous: return x.transpose(*self.dims).contiguous()
 
+        else: return x.transpose(*self.dims)
 class Ref_block(nn.Module):
     def __init__(
         self,
@@ -110,14 +118,15 @@ class Ref_block(nn.Module):
         # self.FFN = nn.Linear(dim, dim)
         
         self.shrinkage = Shrinkage(dim, gap_size=(1)) #todo
-        self.add_residual = args.add_residual
-
-        self.self_attn = _MultiheadAttention(dim, 16, args.mid_dim, args.mid_dim, attn_dropout=0, proj_dropout=0, res_attention=False)
+        self.add_residual = args.refiner_residual
+        self.norm_attn = nn.Sequential(Transpose(1,2), nn.BatchNorm1d(dim), Transpose(1,2))
+        self.norm_ffn = nn.Sequential(Transpose(1,2), nn.BatchNorm1d(dim), Transpose(1,2))
+        self.self_attn = _MultiheadAttention(dim, 16, None, None, attn_dropout=0, proj_dropout=0.2, res_attention=False)
 
         # Add & Norm
         self.dropout_attn = nn.Dropout(self.args.ref_dropout)
         if self.args.add_FFN: 
-            self.FFN = nn.Sequential(*[nn.Linear(dim, dim), nn.ReLU(), nn.Linear(dim, dim)])
+            self.FFN = nn.Sequential(*[nn.Linear(dim, dim * 2), nn.GELU(), nn.Dropout(self.args.dropout), nn.Linear(dim * 2, dim)])
 
     def forward(
         self,
@@ -128,16 +137,23 @@ class Ref_block(nn.Module):
         
         key_mask = mask
         out_1, _ = self.self_attn(x, x, x, key_padding_mask=key_mask, attn_mask=None) 
-        
+
         if self.args.ref_dropout > 0:
             out_1  = self.dropout_attn(out_1)
 
-        #* todo FFN
-        if self.args.add_FFN: 
-            out_1 = self.FFN(out_1)
-
         if self.add_residual:
             out_1 = out_1 + x
+
+        if self.args.add_norm: 
+            self.out_1 = self.norm_attn(out_1)
+        
+
+        #* todo FFN
+        if self.args.add_FFN: 
+            out_1 = out_1 + self.FFN(out_1)
+
+            if self.args.add_norm: 
+                self.out_1 = self.norm_ffn(out_1)
 
         return out_1
 
@@ -148,7 +164,7 @@ class Rec_block(nn.Module):
         dim,
         query_key_dim = 32, ##todo
         expansion_factor = 2.,
-        add_residual = True, ##todo
+        add_residual = False, ##todo
         causal = False,
         dropout = 0.2,
         laplace_attn_fn = False,
@@ -178,13 +194,15 @@ class Rec_block(nn.Module):
 
         self.to_out = nn.Sequential(
             nn.Linear(dim, dim // 2),
+            # nn.Linear(dim//2, dim // 4),
+            # nn.Linear(dim//4, dim // 2),
             nn.Linear(dim // 2, dim)
         ) #*
         # self.FFN = nn.Linear(dim, dim)
         
         self.shrinkage = Shrinkage(dim, gap_size=(1)) #todo
         self.add_residual = add_residual
-        self.self_attn = _MultiheadAttention(dim, 16, args.mid_dim, args.mid_dim, attn_dropout=0, proj_dropout=0, res_attention=False)
+        self.self_attn = _MultiheadAttention(dim, 16, None, None, attn_dropout=0, proj_dropout=0, res_attention=False)
 
         # Add & Norm
 
@@ -202,7 +220,6 @@ class Rec_block(nn.Module):
         # print(out_1[4].median(), x[4].median())
         q = torch.tensor([0.25, 0.5, 0.75], device=out_1.device) 
         q1, q2, q3 = torch.quantile(rec_score, q, dim=-1) 
-        tmp = out_1 - x 
 
         if self.args.train == 0 and self.args.debugger == 1: 
             print(rec_score[2].shape, rec_score[2], (q3 + self.args.theta * (q3 - q1))[2])
@@ -210,11 +227,6 @@ class Rec_block(nn.Module):
             self.args.show = self.args.show * (rec_score < (q3 + self.args.theta * (q3 - q1)).unsqueeze(-1)).unsqueeze(-1)
         # def vis(idx, channel): 
         
-        out_1 = x + tmp
-
-        if self.add_residual:
-            out = out_1 + x
-
         return out_1
 
 class Refiner(nn.Module): 
