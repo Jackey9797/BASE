@@ -115,6 +115,15 @@ class Ref_block(nn.Module):
             nn.Linear(dim, dim // 2),
             nn.Linear(dim // 2, dim)
         ) #*
+        # self.to_out = nn.Sequential(
+        #     nn.Linear(dim, dim // 2),
+        #     nn.ReLU(),
+        #     nn.Linear(dim//2, dim // 4),
+        #     nn.ReLU(),
+        #     nn.Linear(dim//4, dim // 2),
+        #     nn.ReLU(),
+        #     nn.Linear(dim // 2, dim)
+        # ) #*
         # self.FFN = nn.Linear(dim, dim)
         
         self.shrinkage = Shrinkage(dim, gap_size=(1)) #todo
@@ -137,6 +146,7 @@ class Ref_block(nn.Module):
         
         key_mask = mask
         out_1, _ = self.self_attn(x, x, x, key_padding_mask=key_mask, attn_mask=None) 
+        # out_1 = self.to_out(x) 
 
         if self.args.ref_dropout > 0:
             out_1  = self.dropout_attn(out_1)
