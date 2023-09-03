@@ -117,11 +117,6 @@ class Ref_block(nn.Module):
         # ) #*
         self.to_out = nn.Sequential(
             nn.Linear(dim, dim // 2),
-            nn.ReLU(),
-            nn.Linear(dim//2, dim // 4),
-            nn.ReLU(),
-            nn.Linear(dim//4, dim // 2),
-            nn.ReLU(),
             nn.Linear(dim // 2, dim)
         ) #*
         # self.FFN = nn.Linear(dim, dim)
@@ -145,8 +140,8 @@ class Ref_block(nn.Module):
     ):
         
         key_mask = mask
-        # out_1, _ = self.self_attn(x, x, x, key_padding_mask=key_mask, attn_mask=None) 
-        out_1 = self.to_out(x) 
+        out_1, _ = self.self_attn(x, x, x, key_padding_mask=key_mask, attn_mask=None) 
+        # out_1 = self.to_out(x) 
 
         if self.args.ref_dropout > 0:
             out_1  = self.dropout_attn(out_1)
@@ -204,8 +199,11 @@ class Rec_block(nn.Module):
 
         self.to_out = nn.Sequential(
             nn.Linear(dim, dim // 2),
-            # nn.Linear(dim//2, dim // 4),
-            # nn.Linear(dim//4, dim // 2),
+            nn.ReLU(),
+            nn.Linear(dim//2, dim // 4),
+            nn.ReLU(),
+            nn.Linear(dim//4, dim // 2),
+            nn.ReLU(),
             nn.Linear(dim // 2, dim)
         ) #*
         # self.FFN = nn.Linear(dim, dim)
@@ -225,6 +223,7 @@ class Rec_block(nn.Module):
         attn_mask = torch.tril(torch.ones((x.shape[-2],x.shape[-2])), self.args.mask_border) * torch.triu(torch.ones((x.shape[-2],x.shape[-2])), -self.args.mask_border)
         # print(x.shape, attn_mask.shape)
         out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=attn_mask.to(x.device))
+        # out_1 = self.to_out(x) 
         
         rec_score = torch.mean((out_1 - x) ** 2, dim=[2])
         # print(out_1[4].median(), x[4].median())
@@ -333,6 +332,7 @@ class Correction_Module(nn.Module):
         if self.args.share_head:  #* use the T forecastor after aligne
             x_refined = self.Aligner(x_refined.permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
 
+
         return x_refined, self.Aligner(x_).permute(0, 1, 3, 2)
 
 class Model(nn.Module):
@@ -356,4 +356,5 @@ class Model(nn.Module):
         # x = self.correction_module(x)
         if not feature:
             return x
+        if len(F.shape) == 3: F = F.unsqueeze(1)
         return x, F # to [Batch, Output length, Channel]

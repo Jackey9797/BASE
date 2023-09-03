@@ -384,21 +384,21 @@ class base_framework:
                 dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
                 dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.args.device)
 
-            if self.args.graph_input: 
-                pred_S = self.S(batch_x, self.args.sub_adj)
-                pred_T = self.T(batch_x, self.args.sub_adj)
-            else : 
-                if self.args.linear_output:
-                    self.args.best_T.train()
-                    pred_S, F_S = self.S(batch_x, feature=True)
-                    if self.args.refiner: 
-                        _pred_S = self.S(batch_x, given_feature=F_S)
-                    pred_T = self.T(batch_x)
-                    with torch.no_grad():
-                        _, F_T = self.args.best_T(batch_x, feature=True)
-                else: 
-                    pred_S = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark)
-                    pred_T = self.T(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+            self.args.best_T.train()
+            if self.args.linear_output:
+                pred_S, F_S = self.S(batch_x, feature=True)
+                if self.args.refiner: 
+                    _pred_S = self.S(batch_x, given_feature=F_S)
+                pred_T = self.T(batch_x)
+                with torch.no_grad():
+                    _, F_T = self.args.best_T(batch_x, feature=True)
+            else: 
+                pred_S, F_S = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark, feature=True)
+                if self.args.refiner: 
+                    _pred_S = self.S(batch_x, batch_x_mark, dec_inp, batch_y_mark, given_feature=F_S)
+                pred_T = self.T(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                with torch.no_grad():
+                    _, F_T = self.args.best_T(batch_x, batch_x_mark, dec_inp, batch_y_mark, feature=True)
 
             f_dim = -1 if self.args.features == 'MS' else 0
             pred_S = pred_S[:, -self.args.pred_len:, f_dim:]
@@ -414,10 +414,12 @@ class base_framework:
 
             if self.args.enhance: #* train reconstructor
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1).to(self.args.device)
-                anchor_F = F_T
+                anchor_F = F_T # B * C * D * P_num 
                 anchor_F = anchor_F.reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).permute(0, 2, 1)
                 # print("lst", anchor_F.permute(0, 1, 3, 2).reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).shape)
+                print(anchor_F.shape) # (B * C) * P_num * D 
                 rec_F  = self.S.correction_module.Refiner.rec(anchor_F)
+                print(anchor_F.shape) # (B * C) * P_num * D 
 
                 # print(rec_pred.shape, rec_F.shape, normal_mask.shape, anchor_F.shape) # check shape is right? 
                 # print("w",anchor_F.shape, rec_F.shape)
@@ -504,18 +506,24 @@ class base_framework:
         for self.epoch in range(self.args.epoch): #* train body 
             if self.args.train_mode == 'pretrain': 
                 self.args.use_cm = False
+                if not self.args.debugger == 2: 
+                    training_loss = self.pretrain_S()
+                    #todo train S()
+                    validation_loss = self.valid_S()
+                    self.get_Score()
+                    #todo val + score 
+                    self.args.logger.info(f"epoch:{self.epoch}, training loss:{training_loss:.4f} validation loss:{validation_loss:.4f}")
+                    
 
-                training_loss = self.pretrain_S()
-                #todo train S()
-                validation_loss = self.valid_S()
-                self.get_Score()
-                #todo val + score 
-                self.args.logger.info(f"epoch:{self.epoch}, training loss:{training_loss:.4f} validation loss:{validation_loss:.4f}")
-                
+                    self.pretrain_T()
+                    ##
+                    validation_loss_T = self.valid_T()
+                else : 
+                    self.args.best_Tloss = 0
+                    validation_loss, validation_loss_T = 1, 1
+                    self.get_Score()
+                    self.args.best_T = self.T
 
-                self.pretrain_T()
-                ##
-                validation_loss_T = self.valid_T()
                 self.args.use_cm = True
 
                 print("vs, vt", validation_loss, validation_loss_T)
