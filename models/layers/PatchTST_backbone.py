@@ -80,7 +80,7 @@ class PatchTST_backbone(nn.Module):
             F = z_
             if cm_forward == True and self.cm != None: 
                 z_, F = self.cm(z_)   
-        else: z_, F = given_feature, None   
+        else: z_, F = given_feature, given_feature   
                                                         # z: [bs x nvars x d_model x patch_num]
         z = self.head(z_)                                                                    # z: [bs x nvars x target_window] 
         

@@ -289,8 +289,9 @@ class base_framework:
                 batch_y = batch_y[:, -self.args.pred_len:, f_dim:].detach().cpu()
 
                 # print(len(list(self.lossfunc(pred, true, reduction="none").mean(dim=0).detach().cpu().numpy())))
-                if self.args.Score == []: self.args.Score = self.lossfunc(pred, batch_y, reduction="none").mean(dim=1).detach().cpu().numpy()
-                else : self.args.Score = np.concatenate([self.args.Score, self.lossfunc(pred, batch_y, reduction="none").mean(dim=1).detach().cpu().numpy()])
+                if len(self.args.Score) == 0 : self.args.Score = self.lossfunc(pred, batch_y, reduction="none").mean(dim=1).detach().cpu().numpy() if self.args.indie else self.lossfunc(pred, batch_y, reduction="none").mean(dim=1).mean(dim=1).detach().cpu().numpy()
+                else : self.args.Score = np.concatenate([self.args.Score, self.lossfunc(pred, batch_y, reduction="none").mean(dim=1).detach().cpu().numpy() if self.args.indie else self.lossfunc(pred, batch_y, reduction="none").mean(dim=1).mean(dim=1).detach().cpu().numpy()])
+                
                 cn += 1 
 
         self.args.use_cm = True
@@ -947,6 +948,7 @@ def parse_args():
     parser.add_argument("--mid_dim", type=int, default=128)
     parser.add_argument("--test_en", type=int, default=0)
     parser.add_argument("--debugger", type=int, default=0)
+    parser.add_argument("--indie", type=int, default=1)
     parser.add_argument("--summary", type=int, default=0)
 
     parser.add_argument("--omega", type=float, default=1.0)

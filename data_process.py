@@ -447,7 +447,7 @@ data_dict = {
 def get_noise_label(Score, noise_rate, enc_in): 
     # sort Score from small to large, label the biggest noise_rate as 1, return a list of labels
     noise_label = np.zeros((len(Score), enc_in))
-    # print(noise_label.shape)
+    print(noise_label.shape)
     # Score = np.arange(len(Score))
     # print(Score, noise_label.shape)
     idx = np.argsort(-Score, axis=0)
@@ -456,6 +456,7 @@ def get_noise_label(Score, noise_rate, enc_in):
     tmp = np.tile(tmp, int(len(Score)*noise_rate)).reshape(int(len(Score)*noise_rate), -1)
     # print(idx[:int(len(Score)*noise_rate)].shape, tmp.shape, "wew")
     noise_label[idx[:int(len(Score)*noise_rate)], tmp] = 1
+    print(noise_label.shape, (noise_label[12] == noise_label[23]).all()) 
     # print(int(len(Score)*noise_rate), "noise rate: ", np.sum(noise_label)/len(noise_label))
     # print(noise_label[:100])
     # print(noise_label.shape)
@@ -476,7 +477,7 @@ class new_DS(Dataset):
         # args.Score = np.random.uniform(0,1,len(self.data))
         self.noise_label = np.zeros((len(self.data), args.enc_in))
         if args.get_score == True and args.flag == 'train': #todo
-            self.noise_label = get_noise_label(args.Score, args.noise_rate, args.enc_in)
+            self.noise_label = get_noise_label(args.Score, args.noise_rate, args.enc_in) if self.args.indie else get_noise_label(args.Score, args.noise_rate, 1)
         self.index = np.arange(len(self.data))
 
     def __len__(self):

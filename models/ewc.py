@@ -8,7 +8,6 @@ import numpy as np
 import logging
 import pdb
 
-from torch_geometric.data import Data
 
 
 class EWC(nn.Module):

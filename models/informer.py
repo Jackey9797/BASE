@@ -95,12 +95,12 @@ class Model(nn.Module):
             enc_out, attns = self.encoder(enc_out, attn_mask=enc_self_mask)
             F = enc_out 
             if self.configs.refiner and self.configs.use_cm and self.configs.cm != None: 
-                print(enc_out.shape, "we")
+                # print(enc_out.shape, "we")
                 tmp = self.configs.cm(enc_out.permute(0,2,1))
-                print(tmp[0], "we")
+                # print(tmp[0], "we")
                 
                 enc_out, F = tmp[0].permute(0,2,1), tmp[1].permute(0,2,1)
-        else : enc_out, F = given_feature.squeeze().permute(0,2,1), None
+        else : enc_out, F = given_feature.squeeze().permute(0,2,1), given_feature.squeeze().permute(0,2,1)
 
 
         # print("enc_out.shape:", enc_out.shape)   

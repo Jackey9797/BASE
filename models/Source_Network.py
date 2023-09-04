@@ -5,6 +5,9 @@ import torch.nn.functional as F
 import numpy as np
 from models import DLinear
 from models import PatchTST 
+from models import TimesNet 
+from models import FEDformer 
+from models import Autoformer
 from models import informer
 from models.layers.PatchTST_backbone import _MultiheadAttention
 
@@ -354,11 +357,12 @@ class Model(nn.Module):
             x, F = self.base_model(x, *args, given_feature=given_feature)
         else: 
             x, F = self.base_model(x, *args, given_feature=given_feature)
-            x, _ = self.base_model(x, *args, given_feature=F)
+            x, _ = self.base_model(x, *args, given_feature=F) 
         # print(x_.shape) #* 16 * 1 * 128 * 42
         # print(x.shape) #* 16 * 96 * 1
         # x = self.correction_module(x)
+        # print("F",F.shape)
         if not feature:
             return x
-        if len(F.shape) == 3: F = F.unsqueeze(1)
+        if len(F.shape) == 3: F = F.unsqueeze(1) 
         return x, F # to [Batch, Output length, Channel]

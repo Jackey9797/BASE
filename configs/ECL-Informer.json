@@ -36,6 +36,7 @@
     "distil":1,
     "linear_output":0,
     "pct_start":0.3,
+    "indie": 0,
 
 
     "/*train related args*/": "//",
