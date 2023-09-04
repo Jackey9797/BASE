@@ -138,9 +138,12 @@ class Ref_block(nn.Module):
         rel_pos_bias = None,
         mask = None
     ):
+        attn_mask = torch.tril(torch.ones((x.shape[-2],x.shape[-2])), self.args.mask_border) * torch.triu(torch.ones((x.shape[-2],x.shape[-2])), -self.args.mask_border)
         
         key_mask = mask
-        out_1, _ = self.self_attn(x, x, x, key_padding_mask=key_mask, attn_mask=None) 
+        if  self.args.abl_tmp_context==0: out_1, _ = self.self_attn(x, x, x, key_padding_mask=key_mask, attn_mask=None) 
+        elif  self.args.abl_tmp_context==2: out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=attn_mask.to(x.device)) 
+        else : out_1 = x
         # out_1 = self.to_out(x) 
 
         if self.args.ref_dropout > 0:
@@ -222,8 +225,8 @@ class Rec_block(nn.Module):
     ):
         attn_mask = torch.tril(torch.ones((x.shape[-2],x.shape[-2])), self.args.mask_border) * torch.triu(torch.ones((x.shape[-2],x.shape[-2])), -self.args.mask_border)
         # print(x.shape, attn_mask.shape)
-        out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=attn_mask.to(x.device))
-        # out_1 = self.to_out(x) 
+        if self.args.abl_ae: out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=attn_mask.to(x.device))
+        else : out_1 = self.to_out(x) 
         
         rec_score = torch.mean((out_1 - x) ** 2, dim=[2])
         # print(out_1[4].median(), x[4].median())
@@ -276,7 +279,8 @@ class Refiner(nn.Module):
         self.args.rs_before = torch.mean(torch.mean((r - x) ** 2, dim=[2]) ) 
 
         #* --- reconstruct ---
-        x_ = x * (~rec_score).unsqueeze(-1)
+        if self.args.abl_tmp_context !=2:x_ = x * (~rec_score).unsqueeze(-1)
+        else : x_ = x
         for i in range(self.ref_block_num): 
             x_ = self.ref[i](x_, mask=rec_score) #? Do we need mask? 
         #* --- reconstruct ---

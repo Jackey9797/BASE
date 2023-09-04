@@ -25,7 +25,6 @@ from models.TrafficStream import graph_constructor
 from utils import common_tools as ct
 from utils.tools import visualize
 from utils.my_math import masked_mae_np, masked_mape_np, masked_mse_np
-from models import detect
 from models import replay
 from models.ewc import EWC
 
@@ -417,9 +416,9 @@ class base_framework:
                 anchor_F = F_T # B * C * D * P_num 
                 anchor_F = anchor_F.reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).permute(0, 2, 1)
                 # print("lst", anchor_F.permute(0, 1, 3, 2).reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).shape)
-                print(anchor_F.shape) # (B * C) * P_num * D 
+                # print(anchor_F.shape) # (B * C) * P_num * D 
                 rec_F  = self.S.correction_module.Refiner.rec(anchor_F)
-                print(anchor_F.shape) # (B * C) * P_num * D 
+                # print(anchor_F.shape) # (B * C) * P_num * D 
 
                 # print(rec_pred.shape, rec_F.shape, normal_mask.shape, anchor_F.shape) # check shape is right? 
                 # print("w",anchor_F.shape, rec_F.shape)
@@ -893,6 +892,8 @@ def parse_args():
     parser.add_argument("--train", type=int, default=1)
     parser.add_argument("--mainrs", type=int, default=0)
     parser.add_argument("--abl", type=int, default=0)
+    parser.add_argument("--abl_tmp_context", type=int, default=0)
+    parser.add_argument("--abl_ae", type=int, default=0)
 
     parser.add_argument("--load", action="store_true", default=True)
     parser.add_argument("--build_graph", action="store_true", default=False)

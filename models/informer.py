@@ -100,7 +100,7 @@ class Model(nn.Module):
                 print(tmp[0], "we")
                 
                 enc_out, F = tmp[0].permute(0,2,1), tmp[1].permute(0,2,1)
-        else : enc_out, F = given_feature.squeeze().permute(0, 2, 1), None
+        else : enc_out, F = given_feature.squeeze().permute(0,2,1), None
 
 
         # print("enc_out.shape:", enc_out.shape)   
@@ -113,4 +113,4 @@ class Model(nn.Module):
         if self.output_attention:
             return dec_out[:, -self.pred_len:, :], attns
         else:
-            return dec_out[:, -self.pred_len:, :], F  # [B, L, D]
+            return dec_out[:, -self.pred_len:, :], F.permute(0,2,1) if F != None else None  # [B, L, D]
