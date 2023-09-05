@@ -321,17 +321,17 @@ class Model(nn.Module):
 
     def forecast(self, x_enc, x_mark_enc, x_dec, x_mark_dec, given_feature = None ):
         # decomp init
-        if given_feature == None: 
-            mean = torch.mean(x_enc, dim=1).unsqueeze(
-                1).repeat(1, self.pred_len, 1)
-            zeros = torch.zeros([x_dec.shape[0], self.pred_len,
-                                x_dec.shape[2]], device=x_enc.device)
-            seasonal_init, trend_init = self.decomp(x_enc)
+        mean = torch.mean(x_enc, dim=1).unsqueeze(
+            1).repeat(1, self.pred_len, 1)
+        zeros = torch.zeros([x_dec.shape[0], self.pred_len,
+                            x_dec.shape[2]], device=x_enc.device)
+        seasonal_init, trend_init = self.decomp(x_enc)
             # decoder input
-            trend_init = torch.cat(
-                [trend_init[:, -self.label_len:, :], mean], dim=1)
-            seasonal_init = torch.cat(
-                [seasonal_init[:, -self.label_len:, :], zeros], dim=1)
+        trend_init = torch.cat(
+            [trend_init[:, -self.label_len:, :], mean], dim=1)
+        seasonal_init = torch.cat(
+            [seasonal_init[:, -self.label_len:, :], zeros], dim=1)
+        if given_feature == None: 
             # enc
             enc_out = self.enc_embedding(x_enc, x_mark_enc)
             enc_out, attns = self.encoder(enc_out, attn_mask=None)

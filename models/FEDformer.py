@@ -116,16 +116,16 @@ class Model(nn.Module):
 
     def forecast(self, x_enc, x_mark_enc, x_dec, x_mark_dec, given_feature = None):
         # decomp init
-        if given_feature == None: 
-            mean = torch.mean(x_enc, dim=1).unsqueeze(1).repeat(1, self.pred_len, 1)
-            seasonal_init, trend_init = self.decomp(x_enc)  # x - moving_avg, moving_avg
-            # decoder input
-            trend_init = torch.cat([trend_init[:, -self.label_len:, :], mean], dim=1)
-            seasonal_init = torch.nn.functional.pad(seasonal_init[:, -self.label_len:, :], (0, 0, 0, self.pred_len))
+        mean = torch.mean(x_enc, dim=1).unsqueeze(1).repeat(1, self.pred_len, 1)
+        seasonal_init, trend_init = self.decomp(x_enc)  # x - moving_avg, moving_avg
+        # decoder input
+        trend_init = torch.cat([trend_init[:, -self.label_len:, :], mean], dim=1)
+        seasonal_init = torch.nn.functional.pad(seasonal_init[:, -self.label_len:, :], (0, 0, 0, self.pred_len))
+        dec_out = self.dec_embedding(seasonal_init, x_mark_dec)
             # enc
+        if given_feature == None: 
             enc_out = self.enc_embedding(x_enc, x_mark_enc)
             
-            dec_out = self.dec_embedding(seasonal_init, x_mark_dec)
             enc_out, attns = self.encoder(enc_out, attn_mask=None)
             F = enc_out
             if self.configs.refiner and self.configs.use_cm: 
