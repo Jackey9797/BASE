@@ -1,1 +1,0 @@
-python main.py --conf ECL-LSTNet --lr 0.001 --noise_rate 0.5 --idx -1 --device "cuda:0" --aligner 1 --loss huber --refiner 1 --enhance 1 --pred_len 720 --train 1 --theta 1.5 --data_name ETTm1  --batch_size 128 
