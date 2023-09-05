@@ -20,3 +20,4 @@ fi
 
 if [ ! -d "./ablation/Autoformer" ]; then
     mkdir ./ablation/Autoformer
+fi
