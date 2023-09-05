@@ -433,7 +433,7 @@ class base_framework:
             if self.args.aligner and self.args.need_align: 
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1,1).to(self.args.device)
                 # print(F_T.shape, F_S.shape, label.shape, normal_mask.shape)
-                loss_KD = func.mse_loss(F_S * normal_mask, F_T.detach() * normal_mask, reduction="mean")
+                loss_KD = func.mse_loss(self.S.correction_module.Aligner(F_S.transpose(-2, -1)).transpose(-2, -1) * normal_mask, F_T.detach() * normal_mask, reduction="mean")
             # [Batch, C，P, d ]
              
             # print(self.args.rs_before, self.args.rs_after)

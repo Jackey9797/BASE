@@ -28,6 +28,8 @@ class Model(nn.Module):
         self.version = version
         self.mode_select = mode_select
         self.modes = modes
+        self.configs = configs
+        self.cm = configs.cm
 
         # Decomp
         self.decomp = series_decomp(configs.moving_avg)
@@ -126,8 +128,11 @@ class Model(nn.Module):
             dec_out = self.dec_embedding(seasonal_init, x_mark_dec)
             enc_out, attns = self.encoder(enc_out, attn_mask=None)
             F = enc_out
+            if self.configs.refiner and self.configs.use_cm: 
+                enc_out = self.cm(enc_out.permute(0,2,1)).squeeze().permute(0,2,1)
         else : 
-            enc_out = given_feature.squeeze().permute(0,2,1); F = enc_out
+            enc_out = given_feature.squeeze().permute(0,2,1); 
+            F = enc_out
         # dec
         seasonal_part, trend_part = self.decoder(dec_out, enc_out, x_mask=None, cross_mask=None, trend=trend_init)
         # final

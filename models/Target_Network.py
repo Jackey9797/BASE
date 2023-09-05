@@ -8,12 +8,13 @@ from models import informer
 class Model(nn.Module):
     def __init__(self, args):
         super(Model, self).__init__()
+        args.cm = None
         if not args.same_init:
             self.base_model = eval(args.model_name).Model(args)
         else : 
             self.base_model = args.Base_T
-        if hasattr(self.base_model, "model"): self.base_model.model.cm = None
-        if hasattr(self.base_model, "configs"): self.base_model.configs.cm = None 
+        # if hasattr(self.base_model, "model"): self.base_model.model.cm = None
+        # if hasattr(self.base_model, "configs"): self.base_model.configs.cm = None 
         self.args = args 
         print(self.args.refiner, self.args.use_cm,self.args.cm)
 

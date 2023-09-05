@@ -321,17 +321,12 @@ class Correction_Module(nn.Module):
         # x = self.Refiner(x)
         if len(x.shape) == 3: x = x.unsqueeze(1)
         x_ = x.permute(0, 1, 3, 2)
-        #todo x also be refined
         x_refined = x 
         if self.args.refiner:
             # print(x_.shape) 
             x_refined = self.Refiner(x_)
             # x_refined = self.Refiner(x_refined)
             x_refined = x_refined.permute(0, 1, 3, 2)
-        if self.args.share_head:  #* use the T forecastor after align
-            x_refined = self.Aligner(x_refined.permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
-
-
         return x_refined#, self.Aligner(x_).permute(0, 1, 3, 2)
 
 class Model(nn.Module):
