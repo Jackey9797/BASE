@@ -276,7 +276,7 @@ class Refiner(nn.Module):
         self.args.rs_before = torch.mean(torch.mean((r - x) ** 2, dim=[2]) ) 
 
         #* --- reconstruct ---
-        if not self.no_tmp :x_ = x * (~rec_score).unsqueeze(-1)
+        if not self.args.no_tmp :x_ = x * (~rec_score).unsqueeze(-1)
         else : x_ = x
         for i in range(self.ref_block_num): 
             x_ = self.ref[i](x_, mask=rec_score) #? Do we need mask? 
@@ -337,7 +337,6 @@ class Model(nn.Module):
         args.cm = self.correction_module
         # print(args.cm)
         self.base_model = eval(args.model_name).Model(args) # cm 通过args嵌入到模型内部
-        print(args == self.base_model.configs)
 
         self.args = args
         #todo 

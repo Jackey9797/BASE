@@ -18,7 +18,6 @@ class Model(nn.Module):
         self.output_attention = configs.output_attention
         self.configs = configs
         
-        print(self.configs.cm)
         
         # Embedding
         # print(configs.enc_in)
