@@ -99,7 +99,7 @@ class Model(nn.Module):
 
             enc_out, attns = self.encoder(enc_out, attn_mask=enc_self_mask)
             F = enc_out 
-            print(self.configs.refiner, self.configs.use_cm)
+            # print(self.configs.refiner, self.configs.use_cm)
             if self.configs.refiner and self.configs.use_cm: 
                 # print("rec")
                 enc_out = self.cm(enc_out.permute(0,2,1)).squeeze().permute(0,2,1)

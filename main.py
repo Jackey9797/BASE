@@ -845,9 +845,9 @@ class base_framework:
 
             self.args.use_cm = False 
             self.test_model()
-            self.S.base_model.model.head = self.args.best_T.base_model.model.head
-            self.args.use_cm = True 
-            self.test_model()
+            # self.S.base_model.model.head = self.args.best_T.base_model.model.head
+            # self.args.use_cm = True 
+            # self.test_model()
             self.S = self.args.best_T.to(self.args.device) 
             self.test_model()
             self.report_result()
