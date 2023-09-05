@@ -307,8 +307,8 @@ class Refiner(nn.Module):
 class Correction_Module(nn.Module):
     def __init__(self, args):
         super(Correction_Module, self).__init__()
-        self.Aligner = nn.Linear(args.d_model, args.d_model)
-        # self.Aligner = nn.Identity()
+        # self.Aligner = nn.Linear(args.d_model, args.d_model)
+        self.Aligner = nn.Identity()
         # self.Refiner = nn.Linear(args.d_model, args.d_model) # simplest implementation of Refiner
         # self.Refiner = nn.Linear(args.d_model, args.d_model) # simplest implementation of Refiner
         # self.Refiner = nn.Sequential(*[nn.Linear(args.d_model, args.d_model), nn.ReLU(), nn.Linear(args.d_model, args.d_model)])
