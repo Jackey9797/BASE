@@ -837,17 +837,32 @@ class base_framework:
         if self.args.train:
             self.report_result()
             if self.args.abl: 
+                mae_, mse_ = 0, 0
                 print("----*-----")               
                 for i in [1, 2, 4, 7]: 
                     self.args.test_en = i 
-                    self.test_model()
-                print("----*-----")
+                    mae, mse = self.test_model()
+                    mae_ += mae 
+                    mse_ += mse 
 
+                print("----*-----")
+                print('avg under noise:', mae_ / 4, mse_ / 4)
             self.args.use_cm = False 
+            if self.args.abl: 
+                mae_, mse_ = 0, 0
+                print("----*-----")               
+                for i in [1, 2, 4, 7]: 
+                    self.args.test_en = i 
+                    mae, mse = self.test_model()
+                    mae_ += mae 
+                    mse_ += mse 
+
+                print("----*-----")
+                print('avg under noise:', mae_ / 4, mse_ / 4)
             self.test_model()
             # self.S.base_model.model.head = self.args.best_T.base_model.model.head
-            # self.args.use_cm = True 
-            # self.test_model()
+            self.args.use_cm = True 
+            self.test_model()
             self.S = self.args.best_T.to(self.args.device) 
             self.test_model()
             self.report_result()
@@ -895,6 +910,7 @@ def parse_args():
     parser.add_argument("--abl", type=int, default=0)
     parser.add_argument("--abl_tmp_context", type=int, default=0)
     parser.add_argument("--abl_ae", type=int, default=0)
+    parser.add_argument("--no_tmp", type=int, default=0)
 
     parser.add_argument("--load", action="store_true", default=True)
     parser.add_argument("--build_graph", action="store_true", default=False)
@@ -951,7 +967,7 @@ def parse_args():
     parser.add_argument("--summary", type=int, default=0)
 
     parser.add_argument("--omega", type=float, default=1.0)
-    parser.add_argument("--theta", type=float, default=1.1)
+    parser.add_argument("--theta", type=float, default=1.5)
     parser.add_argument("--mask_border", type=int, default=1)
     parser.add_argument("--sup_weight", type=float, default=10.0)
     parser.add_argument("--rec_length_ratio", type=float, default=0.8)

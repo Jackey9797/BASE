@@ -141,6 +141,7 @@ class Ref_block(nn.Module):
         rel_pos_bias = None,
         mask = None
     ):
+        if self.args.no_tmp: return x + self.FFN(x)
         key_mask = mask
         out_1, _ = self.self_attn(x, x, x, key_padding_mask=key_mask, attn_mask=None) 
         # out_1 = self.to_out(x) 
@@ -275,7 +276,7 @@ class Refiner(nn.Module):
         self.args.rs_before = torch.mean(torch.mean((r - x) ** 2, dim=[2]) ) 
 
         #* --- reconstruct ---
-        if self.args.abl_tmp_context !=2:x_ = x * (~rec_score).unsqueeze(-1)
+        if not self.no_tmp :x_ = x * (~rec_score).unsqueeze(-1)
         else : x_ = x
         for i in range(self.ref_block_num): 
             x_ = self.ref[i](x_, mask=rec_score) #? Do we need mask? 
