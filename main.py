@@ -838,7 +838,7 @@ class base_framework:
             self.report_result()
             if self.args.abl: 
                 print("----*-----")               
-                for i in range(8): 
+                for i in [1, 2, 4, 7]: 
                     self.args.test_en = i 
                     self.test_model()
                 print("----*-----")

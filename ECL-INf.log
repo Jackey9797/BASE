@@ -1,0 +1,463 @@
+2023-09-05 15:05:52,592 - logger name:exp/ECL-Informer2023-09-05-15:05:52.590851/ECL-Informer.log
+2023-09-05 15:05:52,592 - params : {'loss': 'huber', 'conf': 'ECL-Informer', 'data_name': 'ETTh2', 'iteration': 1, 'train': 1, 'mainrs': 0, 'abl': 0, 'abl_tmp_context': 0, 'abl_ae': 0, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 2, 'add_FFN': 0, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, '/* model related args*/': '//', 'model_name': 'informer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Informer', 'time': '2023-09-05-15:05:52.590851', 'path': 'exp/ECL-Informer2023-09-05-15:05:52.590851', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-05 15:05:52,592 - [*] phase 0 start training
+train 8449
+val 2785
+test 2785
+2023-09-05 15:05:52,662 - [*] phase 0 Dataset load!
+Correction_Module(
+  (Aligner): Identity()
+  (Refiner): Refiner(
+    (ref): ModuleList(
+      (0): Ref_block(
+        (norm): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.2, inplace=False)
+        (attn_fn): ReLUSquared()
+        (to_hidden): Sequential(
+          (0): Linear(in_features=128, out_features=512, bias=True)
+          (1): SiLU()
+        )
+        (to_qk): Sequential(
+          (0): Linear(in_features=128, out_features=32, bias=True)
+          (1): SiLU()
+        )
+        (offsetscale): OffsetScale()
+        (to_out): Sequential(
+          (0): Linear(in_features=128, out_features=64, bias=True)
+          (1): Linear(in_features=64, out_features=128, bias=True)
+        )
+        (shrinkage): Shrinkage(
+          (gap): AdaptiveAvgPool1d(output_size=1)
+          (fc): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): ReLU(inplace=True)
+            (2): Linear(in_features=128, out_features=128, bias=True)
+            (3): Sigmoid()
+          )
+        )
+        (norm_attn): Sequential(
+          (0): Transpose()
+          (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Transpose()
+        )
+        (norm_ffn): Sequential(
+          (0): Transpose()
+          (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Transpose()
+        )
+        (self_attn): _MultiheadAttention(
+          (W_Q): Linear(in_features=128, out_features=128, bias=True)
+          (W_K): Linear(in_features=128, out_features=128, bias=True)
+          (W_V): Linear(in_features=128, out_features=128, bias=True)
+          (sdp_attn): _ScaledDotProductAttention(
+            (attn_dropout): Dropout(p=0, inplace=False)
+          )
+          (to_out): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): Dropout(p=0.2, inplace=False)
+          )
+        )
+        (dropout_attn): Dropout(p=0.0, inplace=False)
+      )
+      (1): Ref_block(
+        (norm): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.2, inplace=False)
+        (attn_fn): ReLUSquared()
+        (to_hidden): Sequential(
+          (0): Linear(in_features=128, out_features=512, bias=True)
+          (1): SiLU()
+        )
+        (to_qk): Sequential(
+          (0): Linear(in_features=128, out_features=32, bias=True)
+          (1): SiLU()
+        )
+        (offsetscale): OffsetScale()
+        (to_out): Sequential(
+          (0): Linear(in_features=128, out_features=64, bias=True)
+          (1): Linear(in_features=64, out_features=128, bias=True)
+        )
+        (shrinkage): Shrinkage(
+          (gap): AdaptiveAvgPool1d(output_size=1)
+          (fc): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): ReLU(inplace=True)
+            (2): Linear(in_features=128, out_features=128, bias=True)
+            (3): Sigmoid()
+          )
+        )
+        (norm_attn): Sequential(
+          (0): Transpose()
+          (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Transpose()
+        )
+        (norm_ffn): Sequential(
+          (0): Transpose()
+          (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Transpose()
+        )
+        (self_attn): _MultiheadAttention(
+          (W_Q): Linear(in_features=128, out_features=128, bias=True)
+          (W_K): Linear(in_features=128, out_features=128, bias=True)
+          (W_V): Linear(in_features=128, out_features=128, bias=True)
+          (sdp_attn): _ScaledDotProductAttention(
+            (attn_dropout): Dropout(p=0, inplace=False)
+          )
+          (to_out): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): Dropout(p=0.2, inplace=False)
+          )
+        )
+        (dropout_attn): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (rec): Sequential(
+      (0): Rec_block(
+        (norm): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.2, inplace=False)
+        (attn_fn): ReLUSquared()
+        (to_hidden): Sequential(
+          (0): Linear(in_features=128, out_features=512, bias=True)
+          (1): SiLU()
+        )
+        (to_qk): Sequential(
+          (0): Linear(in_features=128, out_features=32, bias=True)
+          (1): SiLU()
+        )
+        (offsetscale): OffsetScale()
+        (to_out): Sequential(
+          (0): Linear(in_features=128, out_features=64, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=64, out_features=32, bias=True)
+          (3): ReLU()
+          (4): Linear(in_features=32, out_features=64, bias=True)
+          (5): ReLU()
+          (6): Linear(in_features=64, out_features=128, bias=True)
+        )
+        (shrinkage): Shrinkage(
+          (gap): AdaptiveAvgPool1d(output_size=1)
+          (fc): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): ReLU(inplace=True)
+            (2): Linear(in_features=128, out_features=128, bias=True)
+            (3): Sigmoid()
+          )
+        )
+        (self_attn): _MultiheadAttention(
+          (W_Q): Linear(in_features=128, out_features=128, bias=True)
+          (W_K): Linear(in_features=128, out_features=128, bias=True)
+          (W_V): Linear(in_features=128, out_features=128, bias=True)
+          (sdp_attn): _ScaledDotProductAttention(
+            (attn_dropout): Dropout(p=0, inplace=False)
+          )
+          (to_out): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): Dropout(p=0, inplace=False)
+          )
+        )
+      )
+    )
+    (rec_head): ReconHead(
+      (dropout): Dropout(p=0.1, inplace=False)
+      (linear): Linear(in_features=128, out_features=8, bias=True)
+    )
+  )
+)
+dropout 0.05
+dropout 0.05
+True
+1 True None
+2023-09-05 15:05:53,830 - [*] phase 0 Training start
+train 8449
+2023-09-05 15:06:35,249 - epoch:0, training loss:0.4131 validation loss:0.4834
+(8449, 1)
+(8449, 1) False
+train 8449
+vs, vt 0.4834171858700839 0.5323959680443461
+Updating learning rate to 6.899583955836529e-06
+Updating learning rate to 6.899583955836529e-06
+(8449, 1)
+(8449, 1) False
+train 8449
+vs, vt 0.38417852229692717 0.4510637159374627
+need align? ->  False 0.4510637159374627
+2023-09-05 15:07:55,140 - epoch:1, training loss:18.1688 validation loss:0.3842
+Updating learning rate to 1.5248019693473428e-05
+Updating learning rate to 1.5248019693473428e-05
+(8449, 1)
+(8449, 1) True
+train 8449
+vs, vt 0.3124528933655132 0.3994876647537405
+need align? ->  False 0.3994876647537405
+2023-09-05 15:08:49,032 - epoch:2, training loss:17.3931 validation loss:0.3125
+Updating learning rate to 2.8036682616194676e-05
+Updating learning rate to 2.8036682616194676e-05
+(8449, 1)
+(8449, 1) True
+train 8449
+vs, vt 0.27614179643040354 0.3649542805823413
+need align? ->  False 0.3649542805823413
+2023-09-05 15:09:51,710 - epoch:3, training loss:16.7458 validation loss:0.2761
+Updating learning rate to 4.3720497647861784e-05
+Updating learning rate to 4.3720497647861784e-05
+(8449, 1)
+(8449, 1) True
+train 8449
+vs, vt 0.3008450735360384 0.2944515733556314
+need align? ->  True 0.2944515733556314
+2023-09-05 15:10:54,108 - epoch:4, training loss:15.2366 validation loss:0.3008
+Updating learning rate to 6.040460902046933e-05
+Updating learning rate to 6.040460902046933e-05
+(8449, 1)
+(8449, 1) True
+train 8449
+vs, vt 0.30832207727838645 0.32956360483711417
+need align? ->  True 0.2944515733556314
+2023-09-05 15:11:47,988 - epoch:5, training loss:13.3498 validation loss:0.3083
+Updating learning rate to 7.607330916512556e-05
+Updating learning rate to 7.607330916512556e-05
+(8449, 1)
+(8449, 1) True
+train 8449
+vs, vt 0.3347248876975341 0.31069118715822697
+need align? ->  True 0.2944515733556314
+2023-09-05 15:12:53,078 - epoch:6, training loss:12.3332 validation loss:0.3347
+Updating learning rate to 8.883356843398634e-05
+Updating learning rate to 8.883356843398634e-05
+(8449, 1)
+(8449, 1) True
+train 8449
+vs, vt 0.3478352710266005 0.32640650580552494
+need align? ->  True 0.2944515733556314
+2023-09-05 15:13:57,755 - epoch:7, training loss:11.3471 validation loss:0.3478
+Updating learning rate to 9.714374336670574e-05
+Updating learning rate to 9.714374336670574e-05
+(8449, 1)
+(8449, 1) True
+train 8449
+vs, vt 0.35736335695467214 0.34143772755156865
+need align? ->  True 0.2944515733556314
+2023-09-05 15:14:56,840 - epoch:8, training loss:10.3794 validation loss:0.3574
+Updating learning rate to 9.999996788917095e-05
+Updating learning rate to 9.999996788917095e-05
+(8449, 1)
+(8449, 1) True
+train 8449
+vs, vt 0.37956038185141305 0.34081735665147955
+need align? ->  True 0.2944515733556314
+2023-09-05 15:15:49,383 - epoch:9, training loss:9.5255 validation loss:0.3796
+Updating learning rate to 9.943306611983748e-05
+Updating learning rate to 9.943306611983748e-05
+(8449, 1)
+(8449, 1) True
+train 8449
+vs, vt 0.3756349191746928 0.30546321178024466
+need align? ->  True 0.2944515733556314
+2023-09-05 15:16:50,008 - epoch:10, training loss:8.8165 validation loss:0.3756
+Updating learning rate to 9.776191580673917e-05
+Updating learning rate to 9.776191580673917e-05
+(8449, 1)
+(8449, 1) True
+train 8449
+vs, vt 0.3678643622181632 0.2977831829339266
+need align? ->  True 0.2944515733556314
+2023-09-05 15:17:53,288 - epoch:11, training loss:8.3030 validation loss:0.3679
+Updating learning rate to 9.502384768637787e-05
+Updating learning rate to 9.502384768637787e-05
+(8449, 1)
+(8449, 1) True
+train 8449
+vs, vt 0.3842117869379846 0.3151458269831809
+need align? ->  True 0.2944515733556314
+2023-09-05 15:18:48,604 - epoch:12, training loss:7.9251 validation loss:0.3842
+Updating learning rate to 9.128002567604108e-05
+Updating learning rate to 9.128002567604108e-05
+(8449, 1)
+(8449, 1) True
+train 8449
+vs, vt 0.3994197483089837 0.32791617241772736
+need align? ->  True 0.2944515733556314
+2023-09-05 15:19:43,290 - epoch:13, training loss:7.6196 validation loss:0.3994
+Updating learning rate to 8.661408057296008e-05
+Updating learning rate to 8.661408057296008e-05
+(8449, 1)
+(8449, 1) True
+train 8449
+vs, vt 0.38458196666430344 0.3315072369507768
+need align? ->  True 0.2944515733556314
+2023-09-05 15:20:47,720 - epoch:14, training loss:7.3136 validation loss:0.3846
+Correction_Module(
+  (Aligner): Identity()
+  (Refiner): Refiner(
+    (ref): ModuleList(
+      (0): Ref_block(
+        (norm): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.2, inplace=False)
+        (attn_fn): ReLUSquared()
+        (to_hidden): Sequential(
+          (0): Linear(in_features=128, out_features=512, bias=True)
+          (1): SiLU()
+        )
+        (to_qk): Sequential(
+          (0): Linear(in_features=128, out_features=32, bias=True)
+          (1): SiLU()
+        )
+        (offsetscale): OffsetScale()
+        (to_out): Sequential(
+          (0): Linear(in_features=128, out_features=64, bias=True)
+          (1): Linear(in_features=64, out_features=128, bias=True)
+        )
+        (shrinkage): Shrinkage(
+          (gap): AdaptiveAvgPool1d(output_size=1)
+          (fc): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): ReLU(inplace=True)
+            (2): Linear(in_features=128, out_features=128, bias=True)
+            (3): Sigmoid()
+          )
+        )
+        (norm_attn): Sequential(
+          (0): Transpose()
+          (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Transpose()
+        )
+        (norm_ffn): Sequential(
+          (0): Transpose()
+          (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Transpose()
+        )
+        (self_attn): _MultiheadAttention(
+          (W_Q): Linear(in_features=128, out_features=128, bias=True)
+          (W_K): Linear(in_features=128, out_features=128, bias=True)
+          (W_V): Linear(in_features=128, out_features=128, bias=True)
+          (sdp_attn): _ScaledDotProductAttention(
+            (attn_dropout): Dropout(p=0, inplace=False)
+          )
+          (to_out): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): Dropout(p=0.2, inplace=False)
+          )
+        )
+        (dropout_attn): Dropout(p=0.0, inplace=False)
+      )
+      (1): Ref_block(
+        (norm): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.2, inplace=False)
+        (attn_fn): ReLUSquared()
+        (to_hidden): Sequential(
+          (0): Linear(in_features=128, out_features=512, bias=True)
+          (1): SiLU()
+        )
+        (to_qk): Sequential(
+          (0): Linear(in_features=128, out_features=32, bias=True)
+          (1): SiLU()
+        )
+        (offsetscale): OffsetScale()
+        (to_out): Sequential(
+          (0): Linear(in_features=128, out_features=64, bias=True)
+          (1): Linear(in_features=64, out_features=128, bias=True)
+        )
+        (shrinkage): Shrinkage(
+          (gap): AdaptiveAvgPool1d(output_size=1)
+          (fc): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): ReLU(inplace=True)
+            (2): Linear(in_features=128, out_features=128, bias=True)
+            (3): Sigmoid()
+          )
+        )
+        (norm_attn): Sequential(
+          (0): Transpose()
+          (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Transpose()
+        )
+        (norm_ffn): Sequential(
+          (0): Transpose()
+          (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Transpose()
+        )
+        (self_attn): _MultiheadAttention(
+          (W_Q): Linear(in_features=128, out_features=128, bias=True)
+          (W_K): Linear(in_features=128, out_features=128, bias=True)
+          (W_V): Linear(in_features=128, out_features=128, bias=True)
+          (sdp_attn): _ScaledDotProductAttention(
+            (attn_dropout): Dropout(p=0, inplace=False)
+          )
+          (to_out): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): Dropout(p=0.2, inplace=False)
+          )
+        )
+        (dropout_attn): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (rec): Sequential(
+      (0): Rec_block(
+        (norm): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.2, inplace=False)
+        (attn_fn): ReLUSquared()
+        (to_hidden): Sequential(
+          (0): Linear(in_features=128, out_features=512, bias=True)
+          (1): SiLU()
+        )
+        (to_qk): Sequential(
+          (0): Linear(in_features=128, out_features=32, bias=True)
+          (1): SiLU()
+        )
+        (offsetscale): OffsetScale()
+        (to_out): Sequential(
+          (0): Linear(in_features=128, out_features=64, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=64, out_features=32, bias=True)
+          (3): ReLU()
+          (4): Linear(in_features=32, out_features=64, bias=True)
+          (5): ReLU()
+          (6): Linear(in_features=64, out_features=128, bias=True)
+        )
+        (shrinkage): Shrinkage(
+          (gap): AdaptiveAvgPool1d(output_size=1)
+          (fc): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): ReLU(inplace=True)
+            (2): Linear(in_features=128, out_features=128, bias=True)
+            (3): Sigmoid()
+          )
+        )
+        (self_attn): _MultiheadAttention(
+          (W_Q): Linear(in_features=128, out_features=128, bias=True)
+          (W_K): Linear(in_features=128, out_features=128, bias=True)
+          (W_V): Linear(in_features=128, out_features=128, bias=True)
+          (sdp_attn): _ScaledDotProductAttention(
+            (attn_dropout): Dropout(p=0, inplace=False)
+          )
+          (to_out): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): Dropout(p=0, inplace=False)
+          )
+        )
+      )
+    )
+    (rec_head): ReconHead(
+      (dropout): Dropout(p=0.1, inplace=False)
+      (linear): Linear(in_features=128, out_features=8, bias=True)
+    )
+  )
+)
+dropout 0.05
+dropout 0.05
+True
+check exp/ECL-Informer2023-09-05-15:05:52.590851/0/0.2761_epoch_3.pkl  &  0.2944515733556314
+2023-09-05 15:20:54,025 - [*] loss:1.7336
+2023-09-05 15:20:54,029 - [*] phase 0, testing
+2023-09-05 15:20:54,067 - T:96	MAE	1.004599	RMSE	1.743182	MAPE	321.938419
+2023-09-05 15:20:54,069 - 96	mae	1.0046	
+2023-09-05 15:20:54,069 - 96	rmse	1.7432	
+2023-09-05 15:20:54,069 - 96	mape	321.9384	
+2023-09-05 15:20:59,826 - [*] loss:1.7310
+2023-09-05 15:20:59,829 - [*] phase 0, testing
+2023-09-05 15:20:59,864 - T:96	MAE	1.003811	RMSE	1.740745	MAPE	323.074007
+2023-09-05 15:21:05,952 - [*] loss:1.9906
+2023-09-05 15:21:05,955 - [*] phase 0, testing
+2023-09-05 15:21:05,993 - T:96	MAE	1.029429	RMSE	2.001589	MAPE	231.135702
+2023-09-05 15:21:05,994 - 96	mae	1.0294	
+2023-09-05 15:21:05,994 - 96	rmse	2.0016	
+2023-09-05 15:21:05,994 - 96	mape	231.1357	
