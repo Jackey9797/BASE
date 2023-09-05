@@ -15,6 +15,8 @@ class Model(nn.Module):
         if hasattr(self.base_model, "model"): self.base_model.model.cm = None
         if hasattr(self.base_model, "configs"): self.base_model.configs.cm = None 
         self.args = args 
+        print(self.args.refiner, self.args.use_cm,self.args.cm)
+
         #todo 
 
     def forward(self, x, *args, feature=False, given_feature = None):

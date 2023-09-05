@@ -418,7 +418,7 @@ class base_framework:
                 anchor_F = anchor_F.reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).permute(0, 2, 1)
                 # print("lst", anchor_F.permute(0, 1, 3, 2).reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).shape)
                 # print(anchor_F.shape) # (B * C) * P_num * D 
-                rec_F  = self.S.correction_module.Refiner.rec(anchor_F)
+                rec_F = self.S.correction_module.Refiner.rec(anchor_F) 
                 # print(anchor_F.shape) # (B * C) * P_num * D 
 
                 # print(rec_pred.shape, rec_F.shape, normal_mask.shape, anchor_F.shape) # check shape is right? 
@@ -948,7 +948,6 @@ def parse_args():
     parser.add_argument("--mid_dim", type=int, default=128)
     parser.add_argument("--test_en", type=int, default=0)
     parser.add_argument("--debugger", type=int, default=0)
-    parser.add_argument("--indie", type=int, default=1)
     parser.add_argument("--summary", type=int, default=0)
 
     parser.add_argument("--omega", type=float, default=1.0)

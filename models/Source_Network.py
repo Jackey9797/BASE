@@ -141,12 +141,8 @@ class Ref_block(nn.Module):
         rel_pos_bias = None,
         mask = None
     ):
-        attn_mask = torch.tril(torch.ones((x.shape[-2],x.shape[-2])), self.args.mask_border) * torch.triu(torch.ones((x.shape[-2],x.shape[-2])), -self.args.mask_border)
-        
         key_mask = mask
-        if  self.args.abl_tmp_context==0: out_1, _ = self.self_attn(x, x, x, key_padding_mask=key_mask, attn_mask=None) 
-        elif  self.args.abl_tmp_context==2: out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=attn_mask.to(x.device)) 
-        else : out_1 = x
+        out_1, _ = self.self_attn(x, x, x, key_padding_mask=key_mask, attn_mask=None) 
         # out_1 = self.to_out(x) 
 
         if self.args.ref_dropout > 0:
@@ -226,10 +222,7 @@ class Rec_block(nn.Module):
         rel_pos_bias = None,
         mask = None
     ):
-        attn_mask = torch.tril(torch.ones((x.shape[-2],x.shape[-2])), self.args.mask_border) * torch.triu(torch.ones((x.shape[-2],x.shape[-2])), -self.args.mask_border)
-        # print(x.shape, attn_mask.shape)
-        if self.args.abl_ae: out_1, _ = self.self_attn(x, x, x, key_padding_mask=None, attn_mask=attn_mask.to(x.device))
-        else : out_1 = self.to_out(x) 
+        out_1 = self.to_out(x) 
         
         rec_score = torch.mean((out_1 - x) ** 2, dim=[2])
         # print(out_1[4].median(), x[4].median())
@@ -330,29 +323,32 @@ class Correction_Module(nn.Module):
         x_ = x.permute(0, 1, 3, 2)
         #todo x also be refined
         x_refined = x 
-        # print(self.args.refiner)
         if self.args.refiner:
-            # print(x_.shape)
+            # print(x_.shape) 
             x_refined = self.Refiner(x_)
             # x_refined = self.Refiner(x_refined)
             x_refined = x_refined.permute(0, 1, 3, 2)
-        if self.args.share_head:  #* use the T forecastor after aligne
+        if self.args.share_head:  #* use the T forecastor after align
             x_refined = self.Aligner(x_refined.permute(0, 1, 3, 2)).permute(0, 1, 3, 2)
 
 
-        return x_refined, self.Aligner(x_).permute(0, 1, 3, 2)
+        return x_refined#, self.Aligner(x_).permute(0, 1, 3, 2)
 
 class Model(nn.Module):
     def __init__(self, args):
         super(Model, self).__init__()
         self.correction_module = Correction_Module(args)
         args.cm = self.correction_module
+        # print(args.cm)
         self.base_model = eval(args.model_name).Model(args) # cm 通过args嵌入到模型内部
+        print(args == self.base_model.configs)
+
         self.args = args
         #todo 
 
     def forward(self, x, *args, feature=False, given_feature=None):
         # x: [Batch, Input length, Channel]
+        # self.args.use_cm = True
         if not self.args.share_head: #* controling use the F from Aligner 
             x, F = self.base_model(x, *args, given_feature=given_feature)
         else: 

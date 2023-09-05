@@ -475,7 +475,7 @@ class new_DS(Dataset):
         # print(len(args.Score), len(self.data))
         
         # args.Score = np.random.uniform(0,1,len(self.data))
-        self.noise_label = np.zeros((len(self.data), args.enc_in))
+        self.noise_label = np.zeros((len(self.data), args.enc_in)) if self.args.indie else np.zeros((len(self.data), 1))
         if args.get_score == True and args.flag == 'train': #todo
             self.noise_label = get_noise_label(args.Score, args.noise_rate, args.enc_in) if self.args.indie else get_noise_label(args.Score, args.noise_rate, 1)
         self.index = np.arange(len(self.data))

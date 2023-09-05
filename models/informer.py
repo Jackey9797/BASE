@@ -17,6 +17,9 @@ class Model(nn.Module):
         self.pred_len = configs.pred_len
         self.output_attention = configs.output_attention
         self.configs = configs
+        
+        print(self.configs.cm)
+        
         # Embedding
         # print(configs.enc_in)
         if configs.embed_type == 0:
@@ -87,6 +90,8 @@ class Model(nn.Module):
             projection=nn.Linear(configs.d_model, configs.c_out, bias=True)
         )
 
+        self.cm = self.configs.cm
+
     def forward(self, x_enc, x_mark_enc, x_dec, x_mark_dec,
                 enc_self_mask=None, dec_self_mask=None, dec_enc_mask=None, given_feature=None):
         if given_feature == None: 
@@ -94,12 +99,14 @@ class Model(nn.Module):
 
             enc_out, attns = self.encoder(enc_out, attn_mask=enc_self_mask)
             F = enc_out 
-            if self.configs.refiner and self.configs.use_cm and self.configs.cm != None: 
-                # print(enc_out.shape, "we")
-                tmp = self.configs.cm(enc_out.permute(0,2,1))
+            print(self.configs.refiner, self.configs.use_cm)
+            if self.configs.refiner and self.configs.use_cm: 
+                # print("rec")
+                tmp = self.cm(enc_out.permute(0,2,1))
+                # print("rec", self.configs.rs_after)
                 # print(tmp[0], "we")
                 
-                enc_out, F = tmp[0].permute(0,2,1), tmp[1].permute(0,2,1)
+                enc_out, F = tmp[0].squeeze().permute(0,2,1), tmp[1].squeeze().permute(0,2,1)
         else : enc_out, F = given_feature.squeeze().permute(0,2,1), given_feature.squeeze().permute(0,2,1)
 
 
