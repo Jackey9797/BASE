@@ -101,10 +101,10 @@ class Model(nn.Module):
             # print(self.configs.refiner, self.configs.use_cm)
             if self.configs.refiner and self.configs.use_cm: 
                 # print("rec")
-                enc_out = self.cm(enc_out.permute(0,2,1)).squeeze().permute(0,2,1)
+                enc_out = self.cm(enc_out.permute(0,2,1)).squeeze(dim=1).permute(0,2,1)
                 # print("rec", self.configs.rs_after)
                 # print(tmp[0], "we")
-        else : enc_out, F = given_feature.squeeze().permute(0,2,1), given_feature.squeeze().permute(0,2,1)
+        else : enc_out, F = given_feature.squeeze(dim=1).permute(0,2,1), given_feature.squeeze(dim=1).permute(0,2,1)
 
 
         # print("enc_out.shape:", enc_out.shape)   

@@ -24,6 +24,7 @@ do
           --train 1 \
           --data_name "$data_name" \
           --batch_size 32 \
+          --mainrs 1 \
           > mainresult/"$model"'_OURS_'"$pred_len"'_'"$data_name"'.log'
 
       python -u main.py \
@@ -39,6 +40,7 @@ do
           --train 1 \
           --data_name "$data_name" \
           --batch_size 32 \
+          --mainrs 1 \
           > mainresult/"$model"'_ori_'"$pred_len"'_'"$data_name"'.log'
     done
   done
@@ -65,6 +67,7 @@ do
           --data_name "$data_name" \
           --batch_size 8 \
           --early_break 10 \
+          --mainrs 1 \
           > mainresult/"$model"'_OURS_'"$pred_len"'_'"$data_name"'.log'
 
       python -u main.py \
@@ -81,6 +84,7 @@ do
           --data_name "$data_name" \
           --batch_size 8 \
           --early_break 10 \
+          --mainrs 1 \
           > mainresult/"$model"'_ori_'"$pred_len"'_'"$data_name"'.log'
     done
   done

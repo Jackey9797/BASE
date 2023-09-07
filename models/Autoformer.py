@@ -337,9 +337,9 @@ class Model(nn.Module):
             enc_out, attns = self.encoder(enc_out, attn_mask=None)
             F = enc_out 
             if self.configs.refiner and self.configs.use_cm: 
-                enc_out = self.cm(enc_out.permute(0,2,1)).squeeze().permute(0,2,1)
+                enc_out = self.cm(enc_out.permute(0,2,1)).squeeze(dim=1).permute(0,2,1)
         else : 
-            enc_out = given_feature.squeeze().permute(0, 2, 1)
+            enc_out = given_feature.squeeze(dim=1).permute(0, 2, 1)
             F = enc_out
         # dec
         dec_out = self.dec_embedding(seasonal_init, x_mark_dec)

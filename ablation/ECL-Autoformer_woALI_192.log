@@ -1,0 +1,46 @@
+2023-09-07 18:43:49,111 - logger name:exp/ECL-Autoformer2023-09-07-18:43:49.107478/ECL-Autoformer.log
+2023-09-07 18:43:49,112 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 1, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 192, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-07-18:43:49.107478', 'path': 'exp/ECL-Autoformer2023-09-07-18:43:49.107478', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-07 18:43:49,112 - [*] phase 0 start training
+train 34273
+val 11329
+test 11329
+2023-09-07 18:43:49,367 - [*] phase 0 Dataset load!
+1 True None
+2023-09-07 18:43:50,353 - [*] phase 0 Training start
+train 34273
+2023-09-07 18:45:09,032 - epoch:0, training loss:0.2840 validation loss:0.3482
+(34273, 1)
+(34273, 1) True
+train 34273
+vs, vt 0.34819697002681455 0.35004951080746866
+Updating learning rate to 6.895944724363715e-06
+Updating learning rate to 6.895944724363715e-06
+(34273, 1)
+(34273, 1) True
+train 34273
+vs, vt 0.3150255968480298 0.3312335681128368
+need align? ->  False 0.3312335681128368
+2023-09-07 18:48:51,326 - epoch:1, training loss:11.5160 validation loss:0.3150
+Updating learning rate to 1.523434157051445e-05
+Updating learning rate to 1.523434157051445e-05
+(34273, 1)
+(34273, 1) True
+train 34273
+vs, vt 0.30404297676816416 0.31731967594516414
+need align? ->  False 0.31731967594516414
+2023-09-07 18:51:45,216 - epoch:2, training loss:9.7150 validation loss:0.3040
+Updating learning rate to 2.800904319027465e-05
+Updating learning rate to 2.800904319027465e-05
+(34273, 1)
+(34273, 1) True
+train 34273
+vs, vt 0.30324453328934947 0.3164895646525233
+need align? ->  False 0.3164895646525233
+2023-09-07 18:54:39,497 - epoch:3, training loss:6.9143 validation loss:0.3032
+Updating learning rate to 4.367859834359992e-05
+Updating learning rate to 4.367859834359992e-05
+(34273, 1)
+(34273, 1) True
+train 34273
+vs, vt 0.29672564289877923 0.3151201852335689
+need align? ->  False 0.3151201852335689
