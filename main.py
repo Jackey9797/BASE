@@ -782,7 +782,7 @@ class base_framework:
             self.args.logger.info("[*] phase {} start training".format(self.args.phase)) 
             
             self.prepare()
-            if self.args.train:
+            if self.args.train: ##! wrongly
                 self.train()
 
                 if self.args.mainrs: 
@@ -791,6 +791,19 @@ class base_framework:
                 if self.args.abl: 
                     torch.save(self.S.state_dict(), osp.join('./ablation/', str(self.args.model_name), str(self.args.data_name) + str(self.args.refiner) + str(self.args.aligner) + str(self.args.loss) + "S.pkl"))
                     torch.save(self.args.best_T.state_dict(), osp.join('./ablation/', str(self.args.model_name), str(self.args.data_name) + str(self.args.refiner) + str(self.args.aligner) + str(self.args.loss) + "T.pkl"))
+
+                self.test_model()
+                self.report_result()
+                mae_, mse_ = 0, 0
+                print("----*-----")               
+                for i in [1, 2, 4, 7]: 
+                    self.args.test_en = i 
+                    mae, mse = self.test_model()
+                    mae_ += mae 
+                    mse_ += mse 
+
+                print("----*-----")
+                print('avg under noise:', mae_ / 4, mse_ / 4)
             elif self.args.summary: 
                 #* ds + model for all len and all noise type and have and not  
                 df = [pd.DataFrame(columns=['len', 're', 'mse', 'mae']) for i in range(8)]
@@ -821,40 +834,61 @@ class base_framework:
                     df[i].to_csv(osp.join('./mainresult/', str(self.args.model_name), str(self.args.data_name) + str(i) + "df.csv"))
 
             else: 
+                import re
+                pattern = r"check\s+(.*?)\s"
+                
+                file_name = self.args.lo
+                with open(file_name, 'r') as file:
+                    # 逐行读取文件内容
+                    for line in file:
+                        matches = re.findall(pattern, line)
+                        if matches:
+                            x = matches[0] # x is the test model path
+                            # last_slash_index = x.rfind("/")
+                            # if last_slash_index != -1:
+                            # self.args.test_model_path = x[:last_slash_index+1] + "best_model.pkl"
+                            self.args.test_model_path = x
+
+                print("weawew", self.args.test_model_path)
                 state_dict = torch.load(self.args.test_model_path, map_location=self.args.device)["model_state_dict"]
-                state_dict_T = torch.load(self.args.test_model_path[:-14] + "best_T_model.pkl", map_location=self.args.device)["model_state_dict"]
-                #* wrong , need manual debug
+                # state_dict_T = torch.load(self.args.test_model_path[:-14] + "best_T_model.pkl", map_location=self.args.device)["model_state_dict"]
+                # #* wrong , need manual debug
                 self.S.load_state_dict(state_dict, strict=False)
-                self.T.load_state_dict(state_dict_T, strict=False)
+                # self.T.load_state_dict(state_dict_T, strict=False)
                 self.args.best_T = self.T 
 
                 
                         
-            self.inc_state = True 
 
-        if self.args.train: #! ori: train
-            self.report_result()
-            mae_, mse_ = 0, 0
-            print("----*-----")               
-            for i in [0, 1, 2, 4, 7]: 
-                self.args.test_en = i 
-                mae, mse = self.test_model()
-                mae_ += mae 
-                mse_ += mse 
+                self.test_model()
+                self.report_result()
+                mae_, mse_ = 0, 0
+                print("----*-----")               
+                for i in [1, 2, 4, 7]: 
+                    self.args.test_en = i 
+                    mae, mse = self.test_model()
+                    mae_ += mae 
+                    mse_ += mse 
 
-            print("----*-----")
-            print('avg under noise:', mae_ / 4, mse_ / 4)
-            self.args.use_cm = False 
-            mae_, mse_ = 0, 0
-            print("----*-----")               
-            for i in [0, 1, 2, 4, 7]: 
-                self.args.test_en = i 
-                mae, mse = self.test_model()
-                mae_ += mae 
-                mse_ += mse 
+                print("----*-----")
+                print('avg under noise:', mae_ / 4, mse_ / 4)
+                self.args.use_cm = False 
+                if self.args.refiner and self.args.no_tmp==0 and self.args.sup_weight > 0 : 
+                    self.args.test_en = 0
+                    self.test_model()
+                    self.report_result()
+                    mae_, mse_ = 0, 0
+                    print("----*-----")               
+                    for i in [1, 2, 4, 7]: 
+                        self.args.test_en = i 
+                        mae, mse = self.test_model()
+                        mae_ += mae 
+                        mse_ += mse 
 
-            print("----*-----")
-            print('avg under noise:', mae_ / 4, mse_ / 4)
+                    print("----*-----")
+                    print('avg under noise:', mae_ / 4, mse_ / 4)
+            
+            # self.S.base_model.model.head = self.args.best_T.base_model.model.head
 
             
                 
@@ -968,6 +1002,8 @@ def parse_args():
     parser.add_argument("--e_layers", type=int, default=3)
     parser.add_argument("--early_break", type=int, default=0)
     parser.add_argument("--early_stop", type=int, default=10)
+
+    parser.add_argument("--lo", type=str)
     
 
     args = parser.parse_args() 
