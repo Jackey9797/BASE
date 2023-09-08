@@ -2,8 +2,8 @@
 #!/bin/bash
 
 
-models=("ECL-Informer" "ECL-FEDformer" "ECL-Autoformer")
-data_names=("ETTh2" "weather" "exchange_rate")
+models=("ECL-FEDformer" "ECL-Autoformer")
+data_names=("weather")
 
 for model in "${models[@]}"
 do
@@ -30,7 +30,7 @@ do
           --pred_len "$pred_len" \
           --train 1 \
           --data_name "$data_name" \
-          --batch_size 64 \
+          --batch_size 32 \
           --mainrs 1 \
           > mainresult/"$model"'_OURS_'"$pred_len"'_'"$data_name"'.log'
 
@@ -53,7 +53,7 @@ do
           --pred_len "$pred_len" \
           --train 1 \
           --data_name "$data_name" \
-          --batch_size 64 \
+          --batch_size 32 \
           --mainrs 1 \
           > mainresult/"$model"'_ori_'"$pred_len"'_'"$data_name"'.log'
     done
@@ -87,7 +87,7 @@ do
           --pred_len "$pred_len" \
           --train 1 \
           --data_name "$data_name" \
-          --batch_size 16 \
+          --batch_size 8 \
           --mainrs 1 \
           > mainresult/"$model"'_OURS_'"$pred_len"'_'"$data_name"'.log'
 
@@ -110,7 +110,7 @@ do
           --pred_len "$pred_len" \
           --train 1 \
           --data_name "$data_name" \
-          --batch_size 16 \
+          --batch_size 8 \
           --mainrs 1 \
           > mainresult/"$model"'_ori_'"$pred_len"'_'"$data_name"'.log'
     done

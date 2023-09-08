@@ -2,7 +2,7 @@
 
 data_name=ETTm1
 
-for pred_len in 96 192
+for pred_len in 192
 do 
   python -u main.py \
       --conf ECL-Informer \
@@ -24,8 +24,7 @@ do
       --train 1 \
       --data_name $data_name \
       --batch_size 64 \
-      --abl 1 \
-      --lo ablation/'ECL-Informer_woREFandALL_'$pred_len.log \
+      > ablation/'ECL-Informer_woREFandALL_'$pred_len.log
 #   python main.py --conf ECL-Informer --seq_len 96 --e_layers 2 --n_heads 8 --d_model 128 --d_ff 512 --dropout 0.05 --fc_dropout 0.05 --lradj "TST" --noise_rate 0.5 --idx -1 --device "cuda:1" --aligner 1 --loss huber --refiner 1 --enhance 1 --pred_len 96 --train 1 --theta 1.5 --data_name ETTh2  --batch_size 64
   
   python -u main.py \
@@ -48,8 +47,7 @@ do
       --train 1 \
       --data_name $data_name \
       --batch_size 64 \
-      --abl 1 \
-      --lo ablation/'ECL-Informer_woALI_'$pred_len.log \
+      > ablation/'ECL-Informer_woALI_'$pred_len.log
 
   python -u main.py \
       --conf ECL-Informer \
@@ -72,8 +70,7 @@ do
       --data_name $data_name \
       --batch_size 64 \
       --sup_weight 0 \
-      --abl 1 \
-      --lo ablation/'ECL-Informer_woSUP_'$pred_len.log \
+      > ablation/'ECL-Informer_woSUP_'$pred_len.log
 
   python -u main.py \
       --conf ECL-Informer \
@@ -96,8 +93,7 @@ do
       --data_name $data_name \
       --batch_size 64 \
       --no_tmp 1 \
-      --abl 1 \
-      --lo ablation/'ECL-Informer_woTMP_'$pred_len.log \
+      > ablation/'ECL-Informer_woTMP_'$pred_len.log
 
   python -u main.py \
       --conf ECL-Informer \
@@ -119,9 +115,28 @@ do
       --train 1 \
       --data_name $data_name \
       --batch_size 64 \
-      --abl 1 \
-      --lo ablation/'ECL-Informer_ori_'$pred_len.log
+      > ablation/'ECL-Informer_ori_'$pred_len.log
 done
 
-  
+python -u main.py \
+    --conf ECL-Informer \
+    --noise_rate 0.5 \
+    --n_heads 8 \
+    --d_model 128 \
+    --d_ff 512 \
+    --dropout 0.05 \
+    --fc_dropout 0.05 \
+    --e_layers 2 \
+    --seq_len 96 \
+    --idx -1 \
+    --device "cuda:1" \
+    --aligner 0 \
+    --loss mse \
+    --refiner 0 \
+    --enhance 0 \
+    --pred_len 720 \
+    --train 1 \
+    --data_name $data_name \
+    --batch_size 64 \
+    > ablation/ECL-Informer_ori_720.log
 #   python main.py --conf ECL-Informer --seq_len 96 --e_layers 2 --n_heads 8 --d_model 128 --d_ff 512 --dropout 0.05 --fc_dropout 0.05 --lradj "TST" --noise_rate 0.5 --idx -1 --device "cuda:1" --aligner 1 --loss huber --refiner 1 --enhance 1 --pred_len 96 --train 1 --theta 1.5 --data_name ETTh2  --batch_size 64
