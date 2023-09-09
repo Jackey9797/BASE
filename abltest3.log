@@ -1,81 +1,768 @@
-2023-09-08 15:14:54,718 - logger name:exp/ECL-Autoformer2023-09-08-15:14:54.717660/ECL-Autoformer.log
-2023-09-08 15:14:54,718 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woREFandALL_96.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-15:14:54.717660', 'path': 'exp/ECL-Autoformer2023-09-08-15:14:54.717660', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
-2023-09-08 15:14:54,718 - [*] phase 0 start training
+2023-09-08 18:34:46,078 - logger name:exp/ECL-Autoformer2023-09-08-18:34:46.078139/ECL-Autoformer.log
+2023-09-08 18:34:46,078 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woREFandALL_96.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-18:34:46.078139', 'path': 'exp/ECL-Autoformer2023-09-08-18:34:46.078139', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 18:34:46,078 - [*] phase 0 start training
 train 34369
 val 11425
 test 11425
-2023-09-08 15:14:55,213 - [*] phase 0 Dataset load!
+2023-09-08 18:34:46,381 - [*] phase 0 Dataset load!
 1 True None
 weawew exp/ECL-Autoformer2023-09-05-09:31:37.178066/0/0.2505_epoch_9.pkl
-2023-09-08 15:16:45,720 - [*] loss:0.5655
-2023-09-08 15:16:45,730 - [*] phase 0, testing
-2023-09-08 15:16:46,022 - T:96	MAE	0.489835	RMSE	0.565363	MAPE	280.657125
-2023-09-08 15:16:46,023 - 96	mae	0.4898	
-2023-09-08 15:16:46,023 - 96	rmse	0.5654	
-2023-09-08 15:16:46,023 - 96	mape	280.6571	
+2023-09-08 18:35:33,644 - [*] loss:0.5655
+2023-09-08 18:35:33,748 - [*] phase 0, testing
+2023-09-08 18:35:34,384 - T:96	MAE	0.489835	RMSE	0.565363	MAPE	280.657125
+2023-09-08 18:35:34,386 - 96	mae	0.4898	
+2023-09-08 18:35:34,386 - 96	rmse	0.5654	
+2023-09-08 18:35:34,386 - 96	mape	280.6571	
 ----*-----
-2023-09-08 15:18:36,885 - [*] loss:0.5751
-2023-09-08 15:18:36,895 - [*] phase 0, testing
-2023-09-08 15:18:37,124 - T:96	MAE	0.498242	RMSE	0.575640	MAPE	283.580375
-2023-09-08 15:20:25,707 - [*] loss:0.9194
-2023-09-08 15:20:25,717 - [*] phase 0, testing
-2023-09-08 15:20:26,004 - T:96	MAE	0.594071	RMSE	0.919914	MAPE	335.515881
-2023-09-08 15:22:23,286 - [*] loss:1.4236
-2023-09-08 15:22:23,297 - [*] phase 0, testing
-2023-09-08 15:22:23,531 - T:96	MAE	0.849246	RMSE	1.424806	MAPE	403.566265
-2023-09-08 15:24:15,918 - [*] loss:0.5640
-2023-09-08 15:24:15,927 - [*] phase 0, testing
-2023-09-08 15:24:16,326 - T:96	MAE	0.491590	RMSE	0.564420	MAPE	260.176229
+2023-09-08 18:36:19,545 - [*] loss:0.5751
+2023-09-08 18:36:19,555 - [*] phase 0, testing
+2023-09-08 18:36:20,291 - T:96	MAE	0.498242	RMSE	0.575640	MAPE	283.580375
+2023-09-08 18:37:08,815 - [*] loss:0.9194
+2023-09-08 18:37:08,825 - [*] phase 0, testing
+2023-09-08 18:37:09,239 - T:96	MAE	0.594071	RMSE	0.919914	MAPE	335.515881
+2023-09-08 18:37:59,568 - [*] loss:0.6469
+2023-09-08 18:37:59,616 - [*] phase 0, testing
+2023-09-08 18:38:00,457 - T:96	MAE	0.543307	RMSE	0.647356	MAPE	290.002441
+2023-09-08 18:38:46,462 - [*] loss:0.5630
+2023-09-08 18:38:46,473 - [*] phase 0, testing
+2023-09-08 18:38:46,939 - T:96	MAE	0.491003	RMSE	0.563432	MAPE	259.374285
 ----*-----
-avg under noise: 0.608286939561367 0.8711950778961182
-2023-09-08 15:26:02,897 - [*] loss:0.5694
-2023-09-08 15:26:02,907 - [*] phase 0, testing
-2023-09-08 15:26:03,393 - T:96	MAE	0.491824	RMSE	0.569220	MAPE	279.843211
-2023-09-08 15:26:03,407 - 96	mae	0.4918	
-2023-09-08 15:26:03,426 - 96	rmse	0.5692	
-2023-09-08 15:26:03,426 - 96	mape	279.8432	
+avg under noise: 0.5316555425524712 0.6765855997800827
+2023-09-08 18:39:35,814 - [*] loss:0.5694
+2023-09-08 18:39:35,824 - [*] phase 0, testing
+2023-09-08 18:39:36,092 - T:96	MAE	0.491824	RMSE	0.569220	MAPE	279.843211
+2023-09-08 18:39:36,093 - 96	mae	0.4918	
+2023-09-08 18:39:36,093 - 96	rmse	0.5692	
+2023-09-08 18:39:36,094 - 96	mape	279.8432	
 ----*-----
-2023-09-08 15:27:48,135 - [*] loss:0.5750
-2023-09-08 15:27:48,150 - [*] phase 0, testing
-2023-09-08 15:27:48,541 - T:96	MAE	0.497790	RMSE	0.575458	MAPE	278.094745
-2023-09-08 15:29:33,853 - [*] loss:0.9295
-2023-09-08 15:29:33,861 - [*] phase 0, testing
-2023-09-08 15:29:34,309 - T:96	MAE	0.595407	RMSE	0.930159	MAPE	335.249758
-2023-09-08 15:31:28,779 - [*] loss:1.3787
-2023-09-08 15:31:28,806 - [*] phase 0, testing
-2023-09-08 15:31:29,074 - T:96	MAE	0.836389	RMSE	1.380137	MAPE	381.870437
-2023-09-08 15:33:16,589 - [*] loss:0.5650
-2023-09-08 15:33:16,598 - [*] phase 0, testing
-2023-09-08 15:33:17,055 - T:96	MAE	0.493167	RMSE	0.565383	MAPE	256.096816
+2023-09-08 18:40:23,804 - [*] loss:0.5745
+2023-09-08 18:40:23,814 - [*] phase 0, testing
+2023-09-08 18:40:24,022 - T:96	MAE	0.497903	RMSE	0.574925	MAPE	277.380538
+2023-09-08 18:41:11,937 - [*] loss:0.9295
+2023-09-08 18:41:11,947 - [*] phase 0, testing
+2023-09-08 18:41:12,103 - T:96	MAE	0.595407	RMSE	0.930159	MAPE	335.249758
+2023-09-08 18:41:59,717 - [*] loss:0.6499
+2023-09-08 18:41:59,727 - [*] phase 0, testing
+2023-09-08 18:41:59,889 - T:96	MAE	0.545054	RMSE	0.650474	MAPE	287.667036
+2023-09-08 18:42:45,053 - [*] loss:0.5643
+2023-09-08 18:42:45,062 - [*] phase 0, testing
+2023-09-08 18:42:45,883 - T:96	MAE	0.492923	RMSE	0.564711	MAPE	256.094933
 ----*-----
-avg under noise: 0.6056881546974182 0.8627841770648956
-2023-09-08 15:33:21,684 - logger name:exp/ECL-Autoformer2023-09-08-15:33:21.684399/ECL-Autoformer.log
-2023-09-08 15:33:21,684 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woALI_96.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-15:33:21.684399', 'path': 'exp/ECL-Autoformer2023-09-08-15:33:21.684399', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
-2023-09-08 15:33:21,685 - [*] phase 0 start training
+avg under noise: 0.5328216701745987 0.6800669282674789
+2023-09-08 18:42:48,214 - logger name:exp/ECL-Autoformer2023-09-08-18:42:48.214143/ECL-Autoformer.log
+2023-09-08 18:42:48,214 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woALI_96.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-18:42:48.214143', 'path': 'exp/ECL-Autoformer2023-09-08-18:42:48.214143', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 18:42:48,214 - [*] phase 0 start training
 train 34369
 val 11425
 test 11425
-2023-09-08 15:33:21,986 - [*] phase 0 Dataset load!
+2023-09-08 18:42:48,522 - [*] phase 0 Dataset load!
 1 True None
 weawew exp/ECL-Autoformer2023-09-05-11:15:07.796687/0/0.2404_epoch_12.pkl
-2023-09-08 15:35:16,025 - [*] loss:0.4707
-2023-09-08 15:35:16,036 - [*] phase 0, testing
-2023-09-08 15:35:16,575 - T:96	MAE	0.454714	RMSE	0.471119	MAPE	270.007992
-2023-09-08 15:35:16,576 - 96	mae	0.4547	
-2023-09-08 15:35:16,576 - 96	rmse	0.4711	
-2023-09-08 15:35:16,576 - 96	mape	270.0080	
+2023-09-08 18:43:42,107 - [*] loss:0.4707
+2023-09-08 18:43:42,117 - [*] phase 0, testing
+2023-09-08 18:43:42,394 - T:96	MAE	0.454714	RMSE	0.471119	MAPE	270.007992
+2023-09-08 18:43:42,394 - 96	mae	0.4547	
+2023-09-08 18:43:42,395 - 96	rmse	0.4711	
+2023-09-08 18:43:42,395 - 96	mape	270.0080	
 ----*-----
-2023-09-08 15:37:06,454 - [*] loss:0.5366
-2023-09-08 15:37:06,463 - [*] phase 0, testing
-2023-09-08 15:37:06,769 - T:96	MAE	0.493357	RMSE	0.537346	MAPE	268.387151
-2023-09-08 15:38:56,410 - [*] loss:0.8576
-2023-09-08 15:38:56,420 - [*] phase 0, testing
-2023-09-08 15:38:56,825 - T:96	MAE	0.636873	RMSE	0.858236	MAPE	336.826324
-2023-09-08 15:40:54,746 - [*] loss:1.3574
-2023-09-08 15:40:54,756 - [*] phase 0, testing
-2023-09-08 15:40:55,265 - T:96	MAE	0.883825	RMSE	1.358974	MAPE	395.792651
-2023-09-08 15:42:48,631 - [*] loss:0.5189
-2023-09-08 15:42:48,642 - [*] phase 0, testing
-2023-09-08 15:42:49,168 - T:96	MAE	0.480389	RMSE	0.519472	MAPE	244.935751
+2023-09-08 18:44:32,513 - [*] loss:0.5366
+2023-09-08 18:44:32,523 - [*] phase 0, testing
+2023-09-08 18:44:33,013 - T:96	MAE	0.493357	RMSE	0.537346	MAPE	268.387151
+2023-09-08 18:45:28,754 - [*] loss:0.8576
+2023-09-08 18:45:28,764 - [*] phase 0, testing
+2023-09-08 18:45:29,597 - T:96	MAE	0.636873	RMSE	0.858236	MAPE	336.826324
+2023-09-08 18:46:21,542 - [*] loss:0.6257
+2023-09-08 18:46:21,608 - [*] phase 0, testing
+2023-09-08 18:46:22,024 - T:96	MAE	0.545462	RMSE	0.626507	MAPE	279.766345
+2023-09-08 18:47:16,999 - [*] loss:0.5176
+2023-09-08 18:47:17,009 - [*] phase 0, testing
+2023-09-08 18:47:17,376 - T:96	MAE	0.479921	RMSE	0.518182	MAPE	244.586492
 ----*-----
-avg under noise: 0.6236109435558319 0.8185069710016251
+avg under noise: 0.5389031246304512 0.6350675374269485
+2023-09-08 18:48:06,484 - [*] loss:0.4717
+2023-09-08 18:48:06,495 - [*] phase 0, testing
+2023-09-08 18:48:06,987 - T:96	MAE	0.455404	RMSE	0.472126	MAPE	270.994234
+2023-09-08 18:48:06,988 - 96	mae	0.4554	
+2023-09-08 18:48:06,988 - 96	rmse	0.4721	
+2023-09-08 18:48:06,988 - 96	mape	270.9942	
+----*-----
+2023-09-08 18:48:54,826 - [*] loss:0.5344
+2023-09-08 18:48:54,835 - [*] phase 0, testing
+2023-09-08 18:48:54,995 - T:96	MAE	0.492306	RMSE	0.535133	MAPE	268.229771
+2023-09-08 18:49:39,650 - [*] loss:0.8593
+2023-09-08 18:49:39,659 - [*] phase 0, testing
+2023-09-08 18:49:39,825 - T:96	MAE	0.637302	RMSE	0.859846	MAPE	337.639761
+2023-09-08 18:50:31,708 - [*] loss:0.6261
+2023-09-08 18:50:31,716 - [*] phase 0, testing
+2023-09-08 18:50:31,878 - T:96	MAE	0.545636	RMSE	0.626862	MAPE	282.429671
+2023-09-08 18:51:21,182 - [*] loss:0.5178
+2023-09-08 18:51:21,191 - [*] phase 0, testing
+2023-09-08 18:51:21,355 - T:96	MAE	0.480058	RMSE	0.518457	MAPE	245.702338
+----*-----
+avg under noise: 0.5388253629207611 0.6350746899843216
+2023-09-08 18:51:23,534 - logger name:exp/ECL-Autoformer2023-09-08-18:51:23.533721/ECL-Autoformer.log
+2023-09-08 18:51:23,534 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 0.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woSUP_96.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-18:51:23.533721', 'path': 'exp/ECL-Autoformer2023-09-08-18:51:23.533721', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 18:51:23,535 - [*] phase 0 start training
+train 34369
+val 11425
+test 11425
+2023-09-08 18:51:23,806 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-05-13:10:39.774556/0/0.2486_epoch_10.pkl
+2023-09-08 18:52:14,259 - [*] loss:0.5534
+2023-09-08 18:52:14,269 - [*] phase 0, testing
+2023-09-08 18:52:14,427 - T:96	MAE	0.483873	RMSE	0.553777	MAPE	271.030235
+2023-09-08 18:52:14,427 - 96	mae	0.4839	
+2023-09-08 18:52:14,428 - 96	rmse	0.5538	
+2023-09-08 18:52:14,428 - 96	mape	271.0302	
+----*-----
+2023-09-08 18:53:02,886 - [*] loss:0.5734
+2023-09-08 18:53:02,896 - [*] phase 0, testing
+2023-09-08 18:53:03,070 - T:96	MAE	0.496933	RMSE	0.573911	MAPE	277.453375
+2023-09-08 18:53:51,719 - [*] loss:1.0010
+2023-09-08 18:53:51,728 - [*] phase 0, testing
+2023-09-08 18:53:51,900 - T:96	MAE	0.609034	RMSE	1.001509	MAPE	336.428905
+2023-09-08 18:54:44,958 - [*] loss:0.6498
+2023-09-08 18:54:44,968 - [*] phase 0, testing
+2023-09-08 18:54:45,124 - T:96	MAE	0.543012	RMSE	0.650370	MAPE	282.390022
+2023-09-08 18:55:34,026 - [*] loss:0.5621
+2023-09-08 18:55:34,035 - [*] phase 0, testing
+2023-09-08 18:55:34,203 - T:96	MAE	0.490144	RMSE	0.562577	MAPE	252.387810
+----*-----
+avg under noise: 0.5347807109355927 0.6970914751291275
+2023-09-08 18:55:36,356 - logger name:exp/ECL-Autoformer2023-09-08-18:55:36.356287/ECL-Autoformer.log
+2023-09-08 18:55:36,357 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 1, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woTMP_96.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-18:55:36.356287', 'path': 'exp/ECL-Autoformer2023-09-08-18:55:36.356287', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 18:55:36,357 - [*] phase 0 start training
+train 34369
+val 11425
+test 11425
+2023-09-08 18:55:36,631 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-05-14:59:20.333928/0/0.2492_epoch_11.pkl
+2023-09-08 18:56:26,573 - [*] loss:0.5597
+2023-09-08 18:56:26,583 - [*] phase 0, testing
+2023-09-08 18:56:26,761 - T:96	MAE	0.487243	RMSE	0.559951	MAPE	271.991324
+2023-09-08 18:56:26,762 - 96	mae	0.4872	
+2023-09-08 18:56:26,762 - 96	rmse	0.5600	
+2023-09-08 18:56:26,762 - 96	mape	271.9913	
+----*-----
+2023-09-08 18:57:15,664 - [*] loss:0.5771
+2023-09-08 18:57:15,672 - [*] phase 0, testing
+2023-09-08 18:57:15,832 - T:96	MAE	0.497748	RMSE	0.577557	MAPE	276.177216
+2023-09-08 18:58:05,298 - [*] loss:1.0811
+2023-09-08 18:58:05,310 - [*] phase 0, testing
+2023-09-08 18:58:05,474 - T:96	MAE	0.624617	RMSE	1.081381	MAPE	349.139214
+2023-09-08 18:58:58,206 - [*] loss:0.6586
+2023-09-08 18:58:58,217 - [*] phase 0, testing
+2023-09-08 18:58:58,379 - T:96	MAE	0.546597	RMSE	0.659113	MAPE	285.766220
+2023-09-08 18:59:45,907 - [*] loss:0.5648
+2023-09-08 18:59:45,917 - [*] phase 0, testing
+2023-09-08 18:59:46,082 - T:96	MAE	0.491371	RMSE	0.565240	MAPE	253.875709
+----*-----
+avg under noise: 0.5400832742452621 0.7208227664232254
+2023-09-08 18:59:48,223 - logger name:exp/ECL-Autoformer2023-09-08-18:59:48.222722/ECL-Autoformer.log
+2023-09-08 18:59:48,223 - params : {'loss': 'mse', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 0, 'rec_block_num': 1, 'enhance': 0, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_ori_96.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-18:59:48.222722', 'path': 'exp/ECL-Autoformer2023-09-08-18:59:48.222722', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 18:59:48,223 - [*] phase 0 start training
+train 34369
+val 11425
+test 11425
+2023-09-08 18:59:48,515 - [*] phase 0 Dataset load!
+0 True None
+weawew exp/ECL-Autoformer2023-09-05-16:52:30.240560/0/0.6518_epoch_4.pkl
+2023-09-08 19:00:37,831 - [*] loss:0.6086
+2023-09-08 19:00:37,840 - [*] phase 0, testing
+2023-09-08 19:00:38,011 - T:96	MAE	0.516230	RMSE	0.609354	MAPE	277.281356
+2023-09-08 19:00:38,012 - 96	mae	0.5162	
+2023-09-08 19:00:38,012 - 96	rmse	0.6094	
+2023-09-08 19:00:38,012 - 96	mape	277.2814	
+----*-----
+2023-09-08 19:01:26,286 - [*] loss:0.6196
+2023-09-08 19:01:26,297 - [*] phase 0, testing
+2023-09-08 19:01:26,470 - T:96	MAE	0.526031	RMSE	0.620445	MAPE	286.322474
+2023-09-08 19:02:13,700 - [*] loss:0.7362
+2023-09-08 19:02:13,710 - [*] phase 0, testing
+2023-09-08 19:02:13,892 - T:96	MAE	0.574431	RMSE	0.737328	MAPE	298.259592
+2023-09-08 19:03:05,832 - [*] loss:0.6953
+2023-09-08 19:03:05,841 - [*] phase 0, testing
+2023-09-08 19:03:06,003 - T:96	MAE	0.575928	RMSE	0.696212	MAPE	291.604686
+2023-09-08 19:03:54,035 - [*] loss:0.6048
+2023-09-08 19:03:54,045 - [*] phase 0, testing
+2023-09-08 19:03:54,209 - T:96	MAE	0.521782	RMSE	0.605517	MAPE	264.711714
+----*-----
+avg under noise: 0.5495428889989853 0.6648756116628647
+2023-09-08 19:03:56,465 - logger name:exp/ECL-Autoformer2023-09-08-19:03:56.464949/ECL-Autoformer.log
+2023-09-08 19:03:56,465 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 192, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woREFandALL_192.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-19:03:56.464949', 'path': 'exp/ECL-Autoformer2023-09-08-19:03:56.464949', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:03:56,466 - [*] phase 0 start training
+train 34273
+val 11329
+test 11329
+2023-09-08 19:03:56,742 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-07-09:08:39.901281/0/0.2822_epoch_7.pkl
+2023-09-08 19:04:48,585 - [*] loss:0.5771
+2023-09-08 19:04:48,608 - [*] phase 0, testing
+2023-09-08 19:04:49,026 - T:192	MAE	0.497914	RMSE	0.578216	MAPE	265.087199
+2023-09-08 19:04:49,027 - 192	mae	0.4979	
+2023-09-08 19:04:49,027 - 192	rmse	0.5782	
+2023-09-08 19:04:49,028 - 192	mape	265.0872	
+----*-----
+2023-09-08 19:05:38,904 - [*] loss:0.6028
+2023-09-08 19:05:38,935 - [*] phase 0, testing
+2023-09-08 19:05:39,259 - T:192	MAE	0.506920	RMSE	0.604278	MAPE	266.769409
+2023-09-08 19:06:27,487 - [*] loss:0.7483
+2023-09-08 19:06:27,506 - [*] phase 0, testing
+2023-09-08 19:06:27,834 - T:192	MAE	0.567389	RMSE	0.750384	MAPE	288.041115
+2023-09-08 19:07:19,786 - [*] loss:0.6814
+2023-09-08 19:07:19,804 - [*] phase 0, testing
+2023-09-08 19:07:20,124 - T:192	MAE	0.556046	RMSE	0.682962	MAPE	271.785808
+2023-09-08 19:08:09,564 - [*] loss:0.5810
+2023-09-08 19:08:09,582 - [*] phase 0, testing
+2023-09-08 19:08:09,898 - T:192	MAE	0.498544	RMSE	0.581931	MAPE	245.848608
+----*-----
+avg under noise: 0.5322247818112373 0.6548886299133301
+2023-09-08 19:08:58,968 - [*] loss:0.5780
+2023-09-08 19:08:58,986 - [*] phase 0, testing
+2023-09-08 19:08:59,304 - T:192	MAE	0.497807	RMSE	0.579214	MAPE	264.242530
+2023-09-08 19:08:59,305 - 192	mae	0.4978	
+2023-09-08 19:08:59,305 - 192	rmse	0.5792	
+2023-09-08 19:08:59,305 - 192	mape	264.2425	
+----*-----
+2023-09-08 19:09:47,679 - [*] loss:0.6021
+2023-09-08 19:09:47,700 - [*] phase 0, testing
+2023-09-08 19:09:48,160 - T:192	MAE	0.506356	RMSE	0.603399	MAPE	264.869857
+2023-09-08 19:10:37,306 - [*] loss:0.7493
+2023-09-08 19:10:37,324 - [*] phase 0, testing
+2023-09-08 19:10:37,677 - T:192	MAE	0.567349	RMSE	0.752010	MAPE	288.304305
+2023-09-08 19:11:29,733 - [*] loss:0.6802
+2023-09-08 19:11:29,752 - [*] phase 0, testing
+2023-09-08 19:11:30,089 - T:192	MAE	0.554383	RMSE	0.681864	MAPE	269.375491
+2023-09-08 19:12:18,563 - [*] loss:0.5819
+2023-09-08 19:12:18,581 - [*] phase 0, testing
+2023-09-08 19:12:18,901 - T:192	MAE	0.498206	RMSE	0.583146	MAPE	244.241619
+----*-----
+avg under noise: 0.5315734446048737 0.6551044285297394
+2023-09-08 19:12:21,190 - logger name:exp/ECL-Autoformer2023-09-08-19:12:21.189564/ECL-Autoformer.log
+2023-09-08 19:12:21,190 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 192, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woALI_192.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-19:12:21.189564', 'path': 'exp/ECL-Autoformer2023-09-08-19:12:21.189564', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:12:21,190 - [*] phase 0 start training
+train 34273
+val 11329
+test 11329
+2023-09-08 19:12:21,463 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-07-11:23:01.336452/0/0.2799_epoch_6.pkl
+2023-09-08 19:13:13,690 - [*] loss:0.5677
+2023-09-08 19:13:13,708 - [*] phase 0, testing
+2023-09-08 19:13:14,036 - T:192	MAE	0.491518	RMSE	0.568942	MAPE	259.157062
+2023-09-08 19:13:14,037 - 192	mae	0.4915	
+2023-09-08 19:13:14,037 - 192	rmse	0.5689	
+2023-09-08 19:13:14,038 - 192	mape	259.1571	
+----*-----
+2023-09-08 19:14:03,163 - [*] loss:0.5867
+2023-09-08 19:14:03,182 - [*] phase 0, testing
+2023-09-08 19:14:03,519 - T:192	MAE	0.501077	RMSE	0.588134	MAPE	262.408638
+2023-09-08 19:14:52,987 - [*] loss:0.7279
+2023-09-08 19:14:53,006 - [*] phase 0, testing
+2023-09-08 19:14:53,323 - T:192	MAE	0.561136	RMSE	0.729694	MAPE	284.941888
+2023-09-08 19:15:46,877 - [*] loss:0.6743
+2023-09-08 19:15:46,895 - [*] phase 0, testing
+2023-09-08 19:15:47,211 - T:192	MAE	0.553435	RMSE	0.675792	MAPE	268.315864
+2023-09-08 19:16:36,662 - [*] loss:0.5720
+2023-09-08 19:16:36,680 - [*] phase 0, testing
+2023-09-08 19:16:36,997 - T:192	MAE	0.494639	RMSE	0.572996	MAPE	242.456651
+----*-----
+avg under noise: 0.5275716185569763 0.6416538208723068
+2023-09-08 19:17:25,581 - [*] loss:0.5679
+2023-09-08 19:17:25,600 - [*] phase 0, testing
+2023-09-08 19:17:25,931 - T:192	MAE	0.491474	RMSE	0.569184	MAPE	259.108973
+2023-09-08 19:17:25,932 - 192	mae	0.4915	
+2023-09-08 19:17:25,932 - 192	rmse	0.5692	
+2023-09-08 19:17:25,933 - 192	mape	259.1090	
+----*-----
+2023-09-08 19:18:13,404 - [*] loss:0.5860
+2023-09-08 19:18:13,424 - [*] phase 0, testing
+2023-09-08 19:18:13,790 - T:192	MAE	0.500694	RMSE	0.587315	MAPE	262.443471
+2023-09-08 19:19:02,544 - [*] loss:0.7277
+2023-09-08 19:19:02,562 - [*] phase 0, testing
+2023-09-08 19:19:02,903 - T:192	MAE	0.561000	RMSE	0.729815	MAPE	285.258079
+2023-09-08 19:19:55,460 - [*] loss:0.6718
+2023-09-08 19:19:55,478 - [*] phase 0, testing
+2023-09-08 19:19:55,800 - T:192	MAE	0.551818	RMSE	0.673543	MAPE	266.873622
+2023-09-08 19:20:44,536 - [*] loss:0.5725
+2023-09-08 19:20:44,554 - [*] phase 0, testing
+2023-09-08 19:20:44,877 - T:192	MAE	0.494843	RMSE	0.573732	MAPE	242.618537
+----*-----
+avg under noise: 0.5270888209342957 0.6411013007164001
+2023-09-08 19:20:47,119 - logger name:exp/ECL-Autoformer2023-09-08-19:20:47.119448/ECL-Autoformer.log
+2023-09-08 19:20:47,119 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 192, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 0.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woSUP_192.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-19:20:47.119448', 'path': 'exp/ECL-Autoformer2023-09-08-19:20:47.119448', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:20:47,120 - [*] phase 0 start training
+train 34273
+val 11329
+test 11329
+2023-09-08 19:20:47,390 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-07-13:08:08.522490/0/0.2816_epoch_6.pkl
+2023-09-08 19:21:37,713 - [*] loss:0.5770
+2023-09-08 19:21:37,731 - [*] phase 0, testing
+2023-09-08 19:21:38,046 - T:192	MAE	0.497604	RMSE	0.577978	MAPE	264.268827
+2023-09-08 19:21:38,047 - 192	mae	0.4976	
+2023-09-08 19:21:38,047 - 192	rmse	0.5780	
+2023-09-08 19:21:38,047 - 192	mape	264.2688	
+----*-----
+2023-09-08 19:22:28,117 - [*] loss:0.5981
+2023-09-08 19:22:28,135 - [*] phase 0, testing
+2023-09-08 19:22:28,461 - T:192	MAE	0.505833	RMSE	0.599500	MAPE	266.326523
+2023-09-08 19:23:18,965 - [*] loss:0.7274
+2023-09-08 19:23:18,983 - [*] phase 0, testing
+2023-09-08 19:23:19,299 - T:192	MAE	0.557432	RMSE	0.729121	MAPE	282.729745
+2023-09-08 19:24:13,317 - [*] loss:0.6745
+2023-09-08 19:24:13,337 - [*] phase 0, testing
+2023-09-08 19:24:13,685 - T:192	MAE	0.553068	RMSE	0.675955	MAPE	269.141078
+2023-09-08 19:25:01,869 - [*] loss:0.5791
+2023-09-08 19:25:01,887 - [*] phase 0, testing
+2023-09-08 19:25:02,202 - T:192	MAE	0.497832	RMSE	0.579950	MAPE	245.071793
+----*-----
+avg under noise: 0.5285411328077316 0.6461314707994461
+2023-09-08 19:25:04,489 - logger name:exp/ECL-Autoformer2023-09-08-19:25:04.489256/ECL-Autoformer.log
+2023-09-08 19:25:04,489 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 1, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 192, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woTMP_192.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-19:25:04.489256', 'path': 'exp/ECL-Autoformer2023-09-08-19:25:04.489256', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:25:04,490 - [*] phase 0 start training
+train 34273
+val 11329
+test 11329
+2023-09-08 19:25:04,760 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-07-14:49:17.322212/0/0.2815_epoch_7.pkl
+2023-09-08 19:25:55,497 - [*] loss:0.5767
+2023-09-08 19:25:55,520 - [*] phase 0, testing
+2023-09-08 19:25:56,061 - T:192	MAE	0.497340	RMSE	0.577736	MAPE	265.259385
+2023-09-08 19:25:56,061 - 192	mae	0.4973	
+2023-09-08 19:25:56,061 - 192	rmse	0.5777	
+2023-09-08 19:25:56,061 - 192	mape	265.2594	
+----*-----
+2023-09-08 19:26:46,089 - [*] loss:0.6007
+2023-09-08 19:26:46,107 - [*] phase 0, testing
+2023-09-08 19:26:46,435 - T:192	MAE	0.506279	RMSE	0.602123	MAPE	266.258216
+2023-09-08 19:27:35,261 - [*] loss:0.7474
+2023-09-08 19:27:35,280 - [*] phase 0, testing
+2023-09-08 19:27:35,600 - T:192	MAE	0.566383	RMSE	0.749508	MAPE	289.096761
+2023-09-08 19:28:28,239 - [*] loss:0.6806
+2023-09-08 19:28:28,257 - [*] phase 0, testing
+2023-09-08 19:28:28,603 - T:192	MAE	0.555453	RMSE	0.682185	MAPE	271.737981
+2023-09-08 19:29:18,647 - [*] loss:0.5797
+2023-09-08 19:29:18,666 - [*] phase 0, testing
+2023-09-08 19:29:18,993 - T:192	MAE	0.497865	RMSE	0.580619	MAPE	245.556784
+----*-----
+avg under noise: 0.5314952880144119 0.6536087095737457
+2023-09-08 19:29:21,273 - logger name:exp/ECL-Autoformer2023-09-08-19:29:21.273132/ECL-Autoformer.log
+2023-09-08 19:29:21,274 - params : {'loss': 'mse', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 192, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 0, 'rec_block_num': 1, 'enhance': 0, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_ori_192.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-19:29:21.273132', 'path': 'exp/ECL-Autoformer2023-09-08-19:29:21.273132', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:29:21,274 - [*] phase 0 start training
+train 34273
+val 11329
+test 11329
+2023-09-08 19:29:21,548 - [*] phase 0 Dataset load!
+0 True None
+weawew exp/ECL-Autoformer2023-09-07-16:34:30.370961/0/0.7211_epoch_5.pkl
+2023-09-08 19:30:12,949 - [*] loss:0.5874
+2023-09-08 19:30:12,966 - [*] phase 0, testing
+2023-09-08 19:30:13,284 - T:192	MAE	0.512205	RMSE	0.588300	MAPE	274.957943
+2023-09-08 19:30:13,285 - 192	mae	0.5122	
+2023-09-08 19:30:13,285 - 192	rmse	0.5883	
+2023-09-08 19:30:13,285 - 192	mape	274.9579	
+----*-----
+2023-09-08 19:31:01,802 - [*] loss:0.6065
+2023-09-08 19:31:01,820 - [*] phase 0, testing
+2023-09-08 19:31:02,143 - T:192	MAE	0.520336	RMSE	0.607684	MAPE	278.999400
+2023-09-08 19:31:48,170 - [*] loss:0.7289
+2023-09-08 19:31:48,188 - [*] phase 0, testing
+2023-09-08 19:31:48,517 - T:192	MAE	0.567638	RMSE	0.730023	MAPE	288.854980
+2023-09-08 19:32:40,303 - [*] loss:0.6848
+2023-09-08 19:32:40,322 - [*] phase 0, testing
+2023-09-08 19:32:40,653 - T:192	MAE	0.567807	RMSE	0.685905	MAPE	280.881906
+2023-09-08 19:33:29,707 - [*] loss:0.5869
+2023-09-08 19:33:29,725 - [*] phase 0, testing
+2023-09-08 19:33:30,049 - T:192	MAE	0.513438	RMSE	0.587663	MAPE	257.916522
+----*-----
+avg under noise: 0.5423048734664917 0.6528186351060867
+2023-09-08 19:33:32,285 - logger name:exp/ECL-Autoformer2023-09-08-19:33:32.284301/ECL-Autoformer.log
+2023-09-08 19:33:32,285 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 336, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woREFandALL_336.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-19:33:32.284301', 'path': 'exp/ECL-Autoformer2023-09-08-19:33:32.284301', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:33:32,285 - [*] phase 0 start training
+train 34129
+val 11185
+test 11185
+2023-09-08 19:33:32,555 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-05-19:58:34.000349/0/0.3108_epoch_15.pkl
+2023-09-08 19:34:24,648 - [*] loss:0.5780
+2023-09-08 19:34:24,679 - [*] phase 0, testing
+2023-09-08 19:34:25,396 - T:336	MAE	0.494034	RMSE	0.577909	MAPE	261.388159
+2023-09-08 19:34:25,397 - 336	mae	0.4940	
+2023-09-08 19:34:25,397 - 336	rmse	0.5779	
+2023-09-08 19:34:25,397 - 336	mape	261.3882	
+----*-----
+2023-09-08 19:35:15,697 - [*] loss:0.5930
+2023-09-08 19:35:15,730 - [*] phase 0, testing
+2023-09-08 19:35:16,664 - T:336	MAE	0.501519	RMSE	0.592949	MAPE	262.260103
+2023-09-08 19:36:06,865 - [*] loss:0.9548
+2023-09-08 19:36:06,900 - [*] phase 0, testing
+2023-09-08 19:36:07,792 - T:336	MAE	0.595878	RMSE	0.954964	MAPE	304.654789
+2023-09-08 19:37:01,882 - [*] loss:0.6743
+2023-09-08 19:37:01,926 - [*] phase 0, testing
+2023-09-08 19:37:02,658 - T:336	MAE	0.551604	RMSE	0.674299	MAPE	271.418238
+2023-09-08 19:37:53,345 - [*] loss:0.5816
+2023-09-08 19:37:53,377 - [*] phase 0, testing
+2023-09-08 19:37:54,129 - T:336	MAE	0.494562	RMSE	0.581589	MAPE	243.442035
+----*-----
+avg under noise: 0.5358906090259552 0.7009502500295639
+2023-09-08 19:38:43,075 - [*] loss:0.5788
+2023-09-08 19:38:43,110 - [*] phase 0, testing
+2023-09-08 19:38:43,913 - T:336	MAE	0.494008	RMSE	0.578722	MAPE	261.557817
+2023-09-08 19:38:43,914 - 336	mae	0.4940	
+2023-09-08 19:38:43,914 - 336	rmse	0.5787	
+2023-09-08 19:38:43,914 - 336	mape	261.5578	
+----*-----
+2023-09-08 19:39:34,548 - [*] loss:0.5931
+2023-09-08 19:39:34,579 - [*] phase 0, testing
+2023-09-08 19:39:35,243 - T:336	MAE	0.501331	RMSE	0.593029	MAPE	260.314322
+2023-09-08 19:40:25,646 - [*] loss:0.9339
+2023-09-08 19:40:25,679 - [*] phase 0, testing
+2023-09-08 19:40:26,368 - T:336	MAE	0.592515	RMSE	0.934072	MAPE	303.555846
+2023-09-08 19:41:19,106 - [*] loss:0.6788
+2023-09-08 19:41:19,137 - [*] phase 0, testing
+2023-09-08 19:41:19,882 - T:336	MAE	0.553229	RMSE	0.678802	MAPE	271.315241
+2023-09-08 19:42:09,209 - [*] loss:0.5807
+2023-09-08 19:42:09,240 - [*] phase 0, testing
+2023-09-08 19:42:09,881 - T:336	MAE	0.494101	RMSE	0.580624	MAPE	243.206739
+----*-----
+avg under noise: 0.5352938398718834 0.6966318190097809
+2023-09-08 19:42:12,137 - logger name:exp/ECL-Autoformer2023-09-08-19:42:12.137548/ECL-Autoformer.log
+2023-09-08 19:42:12,138 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 336, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woALI_336.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-19:42:12.137548', 'path': 'exp/ECL-Autoformer2023-09-08-19:42:12.137548', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:42:12,138 - [*] phase 0 start training
+train 34129
+val 11185
+test 11185
+2023-09-08 19:42:12,415 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-05-22:57:24.955567/0/0.3413_epoch_2.pkl
+2023-09-08 19:43:05,912 - [*] loss:0.6675
+2023-09-08 19:43:05,945 - [*] phase 0, testing
+2023-09-08 19:43:06,649 - T:336	MAE	0.539586	RMSE	0.667550	MAPE	280.527043
+2023-09-08 19:43:06,650 - 336	mae	0.5396	
+2023-09-08 19:43:06,650 - 336	rmse	0.6676	
+2023-09-08 19:43:06,650 - 336	mape	280.5270	
+----*-----
+2023-09-08 19:43:57,545 - [*] loss:0.6671
+2023-09-08 19:43:57,574 - [*] phase 0, testing
+2023-09-08 19:43:58,300 - T:336	MAE	0.540430	RMSE	0.667160	MAPE	280.589509
+2023-09-08 19:44:48,155 - [*] loss:0.7103
+2023-09-08 19:44:48,185 - [*] phase 0, testing
+2023-09-08 19:44:48,727 - T:336	MAE	0.560440	RMSE	0.710359	MAPE	284.988332
+2023-09-08 19:45:41,702 - [*] loss:0.7156
+2023-09-08 19:45:41,740 - [*] phase 0, testing
+2023-09-08 19:45:42,544 - T:336	MAE	0.573514	RMSE	0.715694	MAPE	276.939821
+2023-09-08 19:46:33,990 - [*] loss:0.6607
+2023-09-08 19:46:34,021 - [*] phase 0, testing
+2023-09-08 19:46:34,763 - T:336	MAE	0.536245	RMSE	0.660737	MAPE	259.620142
+----*-----
+avg under noise: 0.5526571869850159 0.6884874105453491
+2023-09-08 19:47:25,059 - [*] loss:0.6675
+2023-09-08 19:47:25,093 - [*] phase 0, testing
+2023-09-08 19:47:25,784 - T:336	MAE	0.539584	RMSE	0.667551	MAPE	280.519366
+2023-09-08 19:47:25,785 - 336	mae	0.5396	
+2023-09-08 19:47:25,785 - 336	rmse	0.6676	
+2023-09-08 19:47:25,785 - 336	mape	280.5194	
+----*-----
+2023-09-08 19:48:15,662 - [*] loss:0.6677
+2023-09-08 19:48:15,692 - [*] phase 0, testing
+2023-09-08 19:48:16,270 - T:336	MAE	0.540712	RMSE	0.667776	MAPE	280.829525
+2023-09-08 19:49:05,921 - [*] loss:0.7111
+2023-09-08 19:49:05,954 - [*] phase 0, testing
+2023-09-08 19:49:06,713 - T:336	MAE	0.561073	RMSE	0.711228	MAPE	285.440779
+2023-09-08 19:49:57,088 - [*] loss:0.7155
+2023-09-08 19:49:57,126 - [*] phase 0, testing
+2023-09-08 19:49:57,683 - T:336	MAE	0.573206	RMSE	0.715508	MAPE	275.915408
+2023-09-08 19:50:40,631 - [*] loss:0.6596
+2023-09-08 19:50:40,664 - [*] phase 0, testing
+2023-09-08 19:50:41,241 - T:336	MAE	0.535799	RMSE	0.659612	MAPE	259.483337
+----*-----
+avg under noise: 0.5526975095272064 0.6885308921337128
+2023-09-08 19:50:43,631 - logger name:exp/ECL-Autoformer2023-09-08-19:50:43.631013/ECL-Autoformer.log
+2023-09-08 19:50:43,631 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 336, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 0.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woSUP_336.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-19:50:43.631013', 'path': 'exp/ECL-Autoformer2023-09-08-19:50:43.631013', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:50:43,631 - [*] phase 0 start training
+train 34129
+val 11185
+test 11185
+2023-09-08 19:50:43,910 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-06-00:28:28.813821/0/0.3176_epoch_16.pkl
+2023-09-08 19:51:30,424 - [*] loss:0.6074
+2023-09-08 19:51:30,456 - [*] phase 0, testing
+2023-09-08 19:51:31,024 - T:336	MAE	0.504350	RMSE	0.607347	MAPE	270.421600
+2023-09-08 19:51:31,024 - 336	mae	0.5043	
+2023-09-08 19:51:31,025 - 336	rmse	0.6073	
+2023-09-08 19:51:31,025 - 336	mape	270.4216	
+----*-----
+2023-09-08 19:52:16,333 - [*] loss:0.6150
+2023-09-08 19:52:16,366 - [*] phase 0, testing
+2023-09-08 19:52:16,922 - T:336	MAE	0.509474	RMSE	0.614953	MAPE	270.134354
+2023-09-08 19:53:01,040 - [*] loss:1.1559
+2023-09-08 19:53:01,072 - [*] phase 0, testing
+2023-09-08 19:53:01,645 - T:336	MAE	0.612575	RMSE	1.156079	MAPE	317.137146
+2023-09-08 19:53:51,881 - [*] loss:0.7029
+2023-09-08 19:53:51,914 - [*] phase 0, testing
+2023-09-08 19:53:52,470 - T:336	MAE	0.560646	RMSE	0.702969	MAPE	282.749057
+2023-09-08 19:54:37,780 - [*] loss:0.6065
+2023-09-08 19:54:37,812 - [*] phase 0, testing
+2023-09-08 19:54:38,372 - T:336	MAE	0.502514	RMSE	0.606483	MAPE	251.912189
+----*-----
+avg under noise: 0.546302318572998 0.7701208740472794
+2023-09-08 19:54:40,720 - logger name:exp/ECL-Autoformer2023-09-08-19:54:40.720304/ECL-Autoformer.log
+2023-09-08 19:54:40,721 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 1, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 336, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woTMP_336.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-19:54:40.720304', 'path': 'exp/ECL-Autoformer2023-09-08-19:54:40.720304', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:54:40,721 - [*] phase 0 start training
+train 34129
+val 11185
+test 11185
+2023-09-08 19:54:41,009 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-06-03:30:12.823096/0/0.3106_epoch_17.pkl
+2023-09-08 19:55:26,650 - [*] loss:0.5881
+2023-09-08 19:55:26,682 - [*] phase 0, testing
+2023-09-08 19:55:27,233 - T:336	MAE	0.496899	RMSE	0.588004	MAPE	263.627481
+2023-09-08 19:55:27,234 - 336	mae	0.4969	
+2023-09-08 19:55:27,234 - 336	rmse	0.5880	
+2023-09-08 19:55:27,235 - 336	mape	263.6275	
+----*-----
+2023-09-08 19:56:13,555 - [*] loss:0.5989
+2023-09-08 19:56:13,589 - [*] phase 0, testing
+2023-09-08 19:56:14,154 - T:336	MAE	0.503644	RMSE	0.598855	MAPE	263.590503
+2023-09-08 19:56:57,478 - [*] loss:1.0614
+2023-09-08 19:56:57,509 - [*] phase 0, testing
+2023-09-08 19:56:58,053 - T:336	MAE	0.605769	RMSE	1.061482	MAPE	312.432289
+2023-09-08 19:57:49,065 - [*] loss:0.6885
+2023-09-08 19:57:49,096 - [*] phase 0, testing
+2023-09-08 19:57:49,641 - T:336	MAE	0.556291	RMSE	0.688508	MAPE	275.758624
+2023-09-08 19:58:35,252 - [*] loss:0.5898
+2023-09-08 19:58:35,284 - [*] phase 0, testing
+2023-09-08 19:58:35,830 - T:336	MAE	0.496633	RMSE	0.589776	MAPE	246.094251
+----*-----
+avg under noise: 0.5405844002962112 0.7346550524234772
+2023-09-08 19:58:38,195 - logger name:exp/ECL-Autoformer2023-09-08-19:58:38.195451/ECL-Autoformer.log
+2023-09-08 19:58:38,195 - params : {'loss': 'mse', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 336, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 0, 'rec_block_num': 1, 'enhance': 0, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_ori_336.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-19:58:38.195451', 'path': 'exp/ECL-Autoformer2023-09-08-19:58:38.195451', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:58:38,196 - [*] phase 0 start training
+train 34129
+val 11185
+test 11185
+2023-09-08 19:58:38,479 - [*] phase 0 Dataset load!
+0 True None
+weawew exp/ECL-Autoformer2023-09-06-06:39:00.711941/0/0.8777_epoch_3.pkl
+2023-09-08 19:59:24,611 - [*] loss:0.6422
+2023-09-08 19:59:24,641 - [*] phase 0, testing
+2023-09-08 19:59:25,194 - T:336	MAE	0.533868	RMSE	0.642237	MAPE	281.334853
+2023-09-08 19:59:25,195 - 336	mae	0.5339	
+2023-09-08 19:59:25,195 - 336	rmse	0.6422	
+2023-09-08 19:59:25,195 - 336	mape	281.3349	
+----*-----
+2023-09-08 20:00:11,363 - [*] loss:0.6474
+2023-09-08 20:00:11,395 - [*] phase 0, testing
+2023-09-08 20:00:11,936 - T:336	MAE	0.535239	RMSE	0.647480	MAPE	282.152057
+2023-09-08 20:00:58,510 - [*] loss:0.7350
+2023-09-08 20:00:58,541 - [*] phase 0, testing
+2023-09-08 20:00:59,132 - T:336	MAE	0.573271	RMSE	0.735176	MAPE	292.732835
+2023-09-08 20:01:50,215 - [*] loss:0.7081
+2023-09-08 20:01:50,634 - [*] phase 0, testing
+2023-09-08 20:01:53,687 - T:336	MAE	0.574164	RMSE	0.708142	MAPE	282.227659
+2023-09-08 20:02:39,000 - [*] loss:0.6358
+2023-09-08 20:02:39,188 - [*] phase 0, testing
+2023-09-08 20:02:39,739 - T:336	MAE	0.529059	RMSE	0.635774	MAPE	260.462403
+----*-----
+avg under noise: 0.5529330670833588 0.6816429942846298
+2023-09-08 20:02:41,998 - logger name:exp/ECL-Autoformer2023-09-08-20:02:41.998083/ECL-Autoformer.log
+2023-09-08 20:02:41,999 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 720, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woREFandALL_720.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-20:02:41.998083', 'path': 'exp/ECL-Autoformer2023-09-08-20:02:41.998083', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 20:02:41,999 - [*] phase 0 start training
+train 33745
+val 10801
+test 10801
+2023-09-08 20:02:42,275 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-06-08:03:37.524003/0/0.3954_epoch_5.pkl
+2023-09-08 20:03:39,909 - [*] loss:0.5994
+2023-09-08 20:03:39,981 - [*] phase 0, testing
+2023-09-08 20:03:44,483 - T:720	MAE	0.519282	RMSE	0.599181	MAPE	274.352670
+2023-09-08 20:03:44,484 - 720	mae	0.5193	
+2023-09-08 20:03:44,484 - 720	rmse	0.5992	
+2023-09-08 20:03:44,485 - 720	mape	274.3527	
+----*-----
+2023-09-08 20:04:38,164 - [*] loss:0.6180
+2023-09-08 20:04:38,236 - [*] phase 0, testing
+2023-09-08 20:04:43,172 - T:720	MAE	0.526727	RMSE	0.617773	MAPE	278.351331
+2023-09-08 20:05:39,576 - [*] loss:0.7032
+2023-09-08 20:05:39,655 - [*] phase 0, testing
+2023-09-08 20:05:41,155 - T:720	MAE	0.558307	RMSE	0.703079	MAPE	284.693885
+2023-09-08 20:06:42,064 - [*] loss:0.6773
+2023-09-08 20:06:42,136 - [*] phase 0, testing
+2023-09-08 20:06:43,948 - T:720	MAE	0.560178	RMSE	0.677052	MAPE	272.339177
+2023-09-08 20:07:40,219 - [*] loss:0.5999
+2023-09-08 20:07:40,297 - [*] phase 0, testing
+2023-09-08 20:07:41,461 - T:720	MAE	0.517291	RMSE	0.599702	MAPE	256.057763
+----*-----
+avg under noise: 0.540625810623169 0.6494016647338867
+2023-09-08 20:08:38,002 - [*] loss:0.5960
+2023-09-08 20:08:38,075 - [*] phase 0, testing
+2023-09-08 20:08:39,341 - T:720	MAE	0.517750	RMSE	0.595708	MAPE	273.673725
+2023-09-08 20:08:39,342 - 720	mae	0.5177	
+2023-09-08 20:08:39,342 - 720	rmse	0.5957	
+2023-09-08 20:08:39,342 - 720	mape	273.6737	
+----*-----
+2023-09-08 20:09:36,258 - [*] loss:0.6179
+2023-09-08 20:09:36,337 - [*] phase 0, testing
+2023-09-08 20:09:37,544 - T:720	MAE	0.526946	RMSE	0.617653	MAPE	278.955984
+2023-09-08 20:10:36,226 - [*] loss:0.7029
+2023-09-08 20:10:36,304 - [*] phase 0, testing
+2023-09-08 20:10:37,524 - T:720	MAE	0.558630	RMSE	0.702719	MAPE	285.955381
+2023-09-08 20:11:35,787 - [*] loss:0.6738
+2023-09-08 20:11:35,883 - [*] phase 0, testing
+2023-09-08 20:11:37,022 - T:720	MAE	0.558500	RMSE	0.673633	MAPE	272.023273
+2023-09-08 20:12:34,001 - [*] loss:0.5984
+2023-09-08 20:12:34,077 - [*] phase 0, testing
+2023-09-08 20:12:35,228 - T:720	MAE	0.516396	RMSE	0.598136	MAPE	255.735469
+----*-----
+avg under noise: 0.5401182025671005 0.6480354517698288
+2023-09-08 20:12:37,487 - logger name:exp/ECL-Autoformer2023-09-08-20:12:37.487443/ECL-Autoformer.log
+2023-09-08 20:12:37,488 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 720, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woALI_720.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-20:12:37.487443', 'path': 'exp/ECL-Autoformer2023-09-08-20:12:37.487443', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 20:12:37,488 - [*] phase 0 start training
+train 33745
+val 10801
+test 10801
+2023-09-08 20:12:37,765 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-06-10:43:06.676604/0/0.4082_epoch_4.pkl
+2023-09-08 20:13:38,732 - [*] loss:0.6433
+2023-09-08 20:13:38,815 - [*] phase 0, testing
+2023-09-08 20:13:40,009 - T:720	MAE	0.528433	RMSE	0.643216	MAPE	276.685810
+2023-09-08 20:13:40,010 - 720	mae	0.5284	
+2023-09-08 20:13:40,010 - 720	rmse	0.6432	
+2023-09-08 20:13:40,011 - 720	mape	276.6858	
+----*-----
+2023-09-08 20:14:19,368 - [*] loss:0.6739
+2023-09-08 20:14:19,444 - [*] phase 0, testing
+2023-09-08 20:14:20,752 - T:720	MAE	0.541973	RMSE	0.673663	MAPE	284.287047
+2023-09-08 20:14:45,238 - [*] loss:0.8073
+2023-09-08 20:14:45,306 - [*] phase 0, testing
+2023-09-08 20:14:46,410 - T:720	MAE	0.598666	RMSE	0.807127	MAPE	311.750174
+2023-09-08 20:15:14,521 - [*] loss:0.7665
+2023-09-08 20:15:14,588 - [*] phase 0, testing
+2023-09-08 20:15:15,690 - T:720	MAE	0.589789	RMSE	0.766297	MAPE	291.816854
+2023-09-08 20:15:40,817 - [*] loss:0.6488
+2023-09-08 20:15:40,884 - [*] phase 0, testing
+2023-09-08 20:15:41,984 - T:720	MAE	0.529026	RMSE	0.648674	MAPE	260.469174
+----*-----
+avg under noise: 0.5648632496595383 0.7239403575658798
+2023-09-08 20:16:06,072 - [*] loss:0.6433
+2023-09-08 20:16:06,140 - [*] phase 0, testing
+2023-09-08 20:16:07,265 - T:720	MAE	0.528374	RMSE	0.643192	MAPE	276.732111
+2023-09-08 20:16:07,266 - 720	mae	0.5284	
+2023-09-08 20:16:07,266 - 720	rmse	0.6432	
+2023-09-08 20:16:07,266 - 720	mape	276.7321	
+----*-----
+2023-09-08 20:16:30,975 - [*] loss:0.6736
+2023-09-08 20:16:31,042 - [*] phase 0, testing
+2023-09-08 20:16:32,138 - T:720	MAE	0.541929	RMSE	0.673423	MAPE	283.935809
+2023-09-08 20:16:55,931 - [*] loss:0.8070
+2023-09-08 20:16:55,998 - [*] phase 0, testing
+2023-09-08 20:16:57,098 - T:720	MAE	0.598477	RMSE	0.806817	MAPE	312.073684
+2023-09-08 20:17:24,291 - [*] loss:0.7661
+2023-09-08 20:17:24,361 - [*] phase 0, testing
+2023-09-08 20:17:25,475 - T:720	MAE	0.589653	RMSE	0.765888	MAPE	292.558765
+2023-09-08 20:17:49,630 - [*] loss:0.6483
+2023-09-08 20:17:49,699 - [*] phase 0, testing
+2023-09-08 20:17:50,795 - T:720	MAE	0.528642	RMSE	0.648090	MAPE	260.445786
+----*-----
+avg under noise: 0.5646752268075943 0.7235544919967651
+2023-09-08 20:17:52,798 - logger name:exp/ECL-Autoformer2023-09-08-20:17:52.797794/ECL-Autoformer.log
+2023-09-08 20:17:52,798 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 720, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 0.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woSUP_720.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-20:17:52.797794', 'path': 'exp/ECL-Autoformer2023-09-08-20:17:52.797794', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 20:17:52,798 - [*] phase 0 start training
+train 33745
+val 10801
+test 10801
+2023-09-08 20:17:53,055 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-06-13:11:57.689809/0/0.3937_epoch_6.pkl
+2023-09-08 20:18:19,197 - [*] loss:0.5850
+2023-09-08 20:18:19,265 - [*] phase 0, testing
+2023-09-08 20:18:20,366 - T:720	MAE	0.509554	RMSE	0.584727	MAPE	265.703392
+2023-09-08 20:18:20,367 - 720	mae	0.5096	
+2023-09-08 20:18:20,367 - 720	rmse	0.5847	
+2023-09-08 20:18:20,367 - 720	mape	265.7034	
+----*-----
+2023-09-08 20:18:44,461 - [*] loss:0.6028
+2023-09-08 20:18:44,529 - [*] phase 0, testing
+2023-09-08 20:18:45,636 - T:720	MAE	0.516985	RMSE	0.602511	MAPE	270.365500
+2023-09-08 20:19:09,765 - [*] loss:0.6992
+2023-09-08 20:19:09,832 - [*] phase 0, testing
+2023-09-08 20:19:10,928 - T:720	MAE	0.554098	RMSE	0.699058	MAPE	281.143951
+2023-09-08 20:19:39,779 - [*] loss:0.6618
+2023-09-08 20:19:39,848 - [*] phase 0, testing
+2023-09-08 20:19:40,966 - T:720	MAE	0.551078	RMSE	0.661608	MAPE	264.611721
+2023-09-08 20:20:06,061 - [*] loss:0.5853
+2023-09-08 20:20:06,131 - [*] phase 0, testing
+2023-09-08 20:20:07,238 - T:720	MAE	0.507374	RMSE	0.585110	MAPE	246.920443
+----*-----
+avg under noise: 0.5323834121227264 0.6370714604854584
+2023-09-08 20:20:09,298 - logger name:exp/ECL-Autoformer2023-09-08-20:20:09.293464/ECL-Autoformer.log
+2023-09-08 20:20:09,299 - params : {'loss': 'huber', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 1, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 720, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_woTMP_720.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-20:20:09.293464', 'path': 'exp/ECL-Autoformer2023-09-08-20:20:09.293464', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 20:20:09,299 - [*] phase 0 start training
+train 33745
+val 10801
+test 10801
+2023-09-08 20:20:09,560 - [*] phase 0 Dataset load!
+1 True None
+weawew exp/ECL-Autoformer2023-09-06-16:00:16.108986/0/0.3943_epoch_6.pkl
+2023-09-08 20:20:35,791 - [*] loss:0.5861
+2023-09-08 20:20:35,858 - [*] phase 0, testing
+2023-09-08 20:20:36,951 - T:720	MAE	0.510415	RMSE	0.585809	MAPE	266.724825
+2023-09-08 20:20:36,952 - 720	mae	0.5104	
+2023-09-08 20:20:36,952 - 720	rmse	0.5858	
+2023-09-08 20:20:36,952 - 720	mape	266.7248	
+----*-----
+2023-09-08 20:21:00,620 - [*] loss:0.6026
+2023-09-08 20:21:00,690 - [*] phase 0, testing
+2023-09-08 20:21:01,799 - T:720	MAE	0.517334	RMSE	0.602319	MAPE	271.016359
+2023-09-08 20:21:25,853 - [*] loss:0.6962
+2023-09-08 20:21:25,920 - [*] phase 0, testing
+2023-09-08 20:21:27,022 - T:720	MAE	0.552941	RMSE	0.696047	MAPE	280.597210
+2023-09-08 20:21:54,012 - [*] loss:0.6614
+2023-09-08 20:21:54,080 - [*] phase 0, testing
+2023-09-08 20:21:55,196 - T:720	MAE	0.551244	RMSE	0.661161	MAPE	265.045619
+2023-09-08 20:22:18,858 - [*] loss:0.5861
+2023-09-08 20:22:18,925 - [*] phase 0, testing
+2023-09-08 20:22:20,038 - T:720	MAE	0.508145	RMSE	0.585884	MAPE	247.735381
+----*-----
+avg under noise: 0.5324160009622574 0.6363527923822403
+2023-09-08 20:22:22,106 - logger name:exp/ECL-Autoformer2023-09-08-20:22:22.105921/ECL-Autoformer.log
+2023-09-08 20:22:22,106 - params : {'loss': 'mse', 'conf': 'ECL-Autoformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 720, 'noise_rate': 0.5, 'device': device(type='cuda', index=1), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 0, 'rec_block_num': 1, 'enhance': 0, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-Autoformer_ori_720.log', '/* model related args*/': '//', 'model_name': 'Autoformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 3, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.3, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': False, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': 26304, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-Autoformer', 'time': '2023-09-08-20:22:22.105921', 'path': 'exp/ECL-Autoformer2023-09-08-20:22:22.105921', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 20:22:22,106 - [*] phase 0 start training
+train 33745
+val 10801
+test 10801
+2023-09-08 20:22:22,377 - [*] phase 0 Dataset load!
+0 True None
+weawew exp/ECL-Autoformer2023-09-06-18:44:34.225413/0/1.1347_epoch_3.pkl
+2023-09-08 20:22:48,740 - [*] loss:0.6720
+2023-09-08 20:22:48,808 - [*] phase 0, testing
+2023-09-08 20:22:49,913 - T:720	MAE	0.553196	RMSE	0.671741	MAPE	286.429501
+2023-09-08 20:22:49,915 - 720	mae	0.5532	
+2023-09-08 20:22:49,915 - 720	rmse	0.6717	
+2023-09-08 20:22:49,915 - 720	mape	286.4295	
+----*-----
+2023-09-08 20:23:13,600 - [*] loss:0.6901
+2023-09-08 20:23:13,677 - [*] phase 0, testing
+2023-09-08 20:23:14,813 - T:720	MAE	0.560191	RMSE	0.689865	MAPE	288.457322
+2023-09-08 20:23:38,185 - [*] loss:0.7818
+2023-09-08 20:23:38,256 - [*] phase 0, testing
+2023-09-08 20:23:39,384 - T:720	MAE	0.598139	RMSE	0.781676	MAPE	302.502060
+2023-09-08 20:24:05,764 - [*] loss:0.7476
+2023-09-08 20:24:05,833 - [*] phase 0, testing
+2023-09-08 20:24:06,950 - T:720	MAE	0.594085	RMSE	0.747393	MAPE	287.134171
+2023-09-08 20:24:30,740 - [*] loss:0.6643
+2023-09-08 20:24:30,807 - [*] phase 0, testing
+2023-09-08 20:24:31,907 - T:720	MAE	0.547899	RMSE	0.664110	MAPE	265.228677
+----*-----
+avg under noise: 0.5750784873962402 0.7207607924938202

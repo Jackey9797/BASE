@@ -1,11 +1,11 @@
-2023-09-08 15:14:57,996 - logger name:exp/ECL-FEDformer2023-09-08-15:14:57.995784/ECL-FEDformer.log
-2023-09-08 15:14:57,996 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woREFandALL_96.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-15:14:57.995784', 'path': 'exp/ECL-FEDformer2023-09-08-15:14:57.995784', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
-2023-09-08 15:14:57,996 - [*] phase 0 start training
+2023-09-08 18:34:48,120 - logger name:exp/ECL-FEDformer2023-09-08-18:34:48.119906/ECL-FEDformer.log
+2023-09-08 18:34:48,120 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woREFandALL_96.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-18:34:48.119906', 'path': 'exp/ECL-FEDformer2023-09-08-18:34:48.119906', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 18:34:48,120 - [*] phase 0 start training
 0 69680
 train 34369
 val 11425
 test 11425
-2023-09-08 15:15:00,308 - [*] phase 0 Dataset load!
+2023-09-08 18:34:48,934 - [*] phase 0 Dataset load!
 dropout 0.05
 dropout 0.05
 fourier enhanced block used!
@@ -17,56 +17,56 @@ modes_q=32, index_q=[1, 2, 5, 7, 10, 11, 13, 14, 18, 19, 20, 24, 26, 28, 29, 30,
 modes_kv=32, index_kv=[0, 2, 3, 5, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 20, 21, 22, 25, 27, 30, 31, 33, 35, 36, 37, 38, 39, 41, 43, 44, 45, 47]
 1 True None
 weawew exp/ECL-FEDformer2023-09-05-09:30:12.486012/0/0.1804_epoch_25.pkl
-2023-09-08 15:16:34,862 - [*] loss:0.3613
-2023-09-08 15:16:34,890 - [*] phase 0, testing
-2023-09-08 15:16:35,241 - T:96	MAE	0.404890	RMSE	0.361489	MAPE	252.035904
-2023-09-08 15:16:35,263 - 96	mae	0.4049	
-2023-09-08 15:16:35,263 - 96	rmse	0.3615	
-2023-09-08 15:16:35,263 - 96	mape	252.0359	
+2023-09-08 18:35:32,857 - [*] loss:0.3613
+2023-09-08 18:35:33,147 - [*] phase 0, testing
+2023-09-08 18:35:34,167 - T:96	MAE	0.404890	RMSE	0.361489	MAPE	252.035904
+2023-09-08 18:35:34,171 - 96	mae	0.4049	
+2023-09-08 18:35:34,171 - 96	rmse	0.3615	
+2023-09-08 18:35:34,171 - 96	mape	252.0359	
 ----*-----
-2023-09-08 15:18:05,334 - [*] loss:0.3789
-2023-09-08 15:18:05,344 - [*] phase 0, testing
-2023-09-08 15:18:06,001 - T:96	MAE	0.417294	RMSE	0.379132	MAPE	251.286721
-2023-09-08 15:19:34,663 - [*] loss:0.5321
-2023-09-08 15:19:34,674 - [*] phase 0, testing
-2023-09-08 15:19:35,050 - T:96	MAE	0.493196	RMSE	0.532282	MAPE	291.501117
-2023-09-08 15:21:10,056 - [*] loss:1.2183
-2023-09-08 15:21:10,067 - [*] phase 0, testing
-2023-09-08 15:21:10,548 - T:96	MAE	0.822603	RMSE	1.218534	MAPE	390.329790
-2023-09-08 15:22:40,260 - [*] loss:0.3699
-2023-09-08 15:22:40,271 - [*] phase 0, testing
-2023-09-08 15:22:40,916 - T:96	MAE	0.411719	RMSE	0.370092	MAPE	232.040668
+2023-09-08 18:36:15,769 - [*] loss:0.3789
+2023-09-08 18:36:15,779 - [*] phase 0, testing
+2023-09-08 18:36:17,318 - T:96	MAE	0.417294	RMSE	0.379132	MAPE	251.286721
+2023-09-08 18:36:56,681 - [*] loss:0.5321
+2023-09-08 18:36:56,692 - [*] phase 0, testing
+2023-09-08 18:36:56,966 - T:96	MAE	0.493196	RMSE	0.532282	MAPE	291.501117
+2023-09-08 18:37:41,420 - [*] loss:0.4650
+2023-09-08 18:37:41,537 - [*] phase 0, testing
+2023-09-08 18:37:42,641 - T:96	MAE	0.475841	RMSE	0.465361	MAPE	263.345122
+2023-09-08 18:38:21,920 - [*] loss:0.3704
+2023-09-08 18:38:21,955 - [*] phase 0, testing
+2023-09-08 18:38:23,194 - T:96	MAE	0.411907	RMSE	0.370521	MAPE	232.487917
 ----*-----
-avg under noise: 0.536202922463417 0.6250097155570984
-2023-09-08 15:24:13,123 - [*] loss:0.3612
-2023-09-08 15:24:13,134 - [*] phase 0, testing
-2023-09-08 15:24:13,661 - T:96	MAE	0.404872	RMSE	0.361358	MAPE	252.051735
-2023-09-08 15:24:13,662 - 96	mae	0.4049	
-2023-09-08 15:24:13,676 - 96	rmse	0.3614	
-2023-09-08 15:24:13,676 - 96	mape	252.0517	
+avg under noise: 0.4495594799518585 0.43682393431663513
+2023-09-08 18:39:04,625 - [*] loss:0.3612
+2023-09-08 18:39:04,635 - [*] phase 0, testing
+2023-09-08 18:39:04,949 - T:96	MAE	0.404872	RMSE	0.361358	MAPE	252.051735
+2023-09-08 18:39:04,950 - 96	mae	0.4049	
+2023-09-08 18:39:04,951 - 96	rmse	0.3614	
+2023-09-08 18:39:04,951 - 96	mape	252.0517	
 ----*-----
-2023-09-08 15:25:40,109 - [*] loss:0.3788
-2023-09-08 15:25:40,119 - [*] phase 0, testing
-2023-09-08 15:25:40,391 - T:96	MAE	0.417269	RMSE	0.378991	MAPE	252.113271
-2023-09-08 15:27:07,427 - [*] loss:0.5345
-2023-09-08 15:27:07,437 - [*] phase 0, testing
-2023-09-08 15:27:07,887 - T:96	MAE	0.494249	RMSE	0.534618	MAPE	294.500208
-2023-09-08 15:28:38,125 - [*] loss:1.2055
-2023-09-08 15:28:38,135 - [*] phase 0, testing
-2023-09-08 15:28:38,684 - T:96	MAE	0.821715	RMSE	1.206498	MAPE	386.095262
-2023-09-08 15:30:03,976 - [*] loss:0.3701
-2023-09-08 15:30:03,986 - [*] phase 0, testing
-2023-09-08 15:30:04,525 - T:96	MAE	0.411802	RMSE	0.370319	MAPE	232.708502
+2023-09-08 18:39:46,262 - [*] loss:0.3794
+2023-09-08 18:39:46,273 - [*] phase 0, testing
+2023-09-08 18:39:46,617 - T:96	MAE	0.417502	RMSE	0.379572	MAPE	251.609015
+2023-09-08 18:40:27,769 - [*] loss:0.5345
+2023-09-08 18:40:27,781 - [*] phase 0, testing
+2023-09-08 18:40:28,117 - T:96	MAE	0.494249	RMSE	0.534618	MAPE	294.500208
+2023-09-08 18:41:12,783 - [*] loss:0.4640
+2023-09-08 18:41:12,794 - [*] phase 0, testing
+2023-09-08 18:41:13,074 - T:96	MAE	0.476078	RMSE	0.464298	MAPE	263.633347
+2023-09-08 18:41:52,718 - [*] loss:0.3702
+2023-09-08 18:41:52,730 - [*] phase 0, testing
+2023-09-08 18:41:52,993 - T:96	MAE	0.412087	RMSE	0.370357	MAPE	232.701206
 ----*-----
-avg under noise: 0.5362586304545403 0.6226064413785934
-2023-09-08 15:30:08,834 - logger name:exp/ECL-FEDformer2023-09-08-15:30:08.833942/ECL-FEDformer.log
-2023-09-08 15:30:08,834 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woALI_96.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-15:30:08.833942', 'path': 'exp/ECL-FEDformer2023-09-08-15:30:08.833942', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
-2023-09-08 15:30:08,834 - [*] phase 0 start training
+avg under noise: 0.44997888058423996 0.43721112608909607
+2023-09-08 18:41:55,645 - logger name:exp/ECL-FEDformer2023-09-08-18:41:55.644681/ECL-FEDformer.log
+2023-09-08 18:41:55,645 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woALI_96.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-18:41:55.644681', 'path': 'exp/ECL-FEDformer2023-09-08-18:41:55.644681', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 18:41:55,645 - [*] phase 0 start training
 0 69680
 train 34369
 val 11425
 test 11425
-2023-09-08 15:30:11,128 - [*] phase 0 Dataset load!
+2023-09-08 18:41:56,592 - [*] phase 0 Dataset load!
 dropout 0.05
 dropout 0.05
 fourier enhanced block used!
@@ -78,37 +78,891 @@ modes_q=32, index_q=[1, 2, 5, 7, 10, 11, 13, 14, 18, 19, 20, 24, 26, 28, 29, 30,
 modes_kv=32, index_kv=[0, 2, 3, 5, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 20, 21, 22, 25, 27, 30, 31, 33, 35, 36, 37, 38, 39, 41, 43, 44, 45, 47]
 1 True None
 weawew exp/ECL-FEDformer2023-09-05-12:47:36.651462/0/0.197_epoch_7.pkl
-2023-09-08 15:31:44,769 - [*] loss:0.4227
-2023-09-08 15:31:44,780 - [*] phase 0, testing
-2023-09-08 15:31:44,948 - T:96	MAE	0.439780	RMSE	0.422695	MAPE	219.493175
-2023-09-08 15:31:44,949 - 96	mae	0.4398	
-2023-09-08 15:31:44,949 - 96	rmse	0.4227	
-2023-09-08 15:31:44,949 - 96	mape	219.4932	
+2023-09-08 18:42:40,630 - [*] loss:0.4227
+2023-09-08 18:42:40,640 - [*] phase 0, testing
+2023-09-08 18:42:41,937 - T:96	MAE	0.439780	RMSE	0.422695	MAPE	219.493175
+2023-09-08 18:42:41,938 - 96	mae	0.4398	
+2023-09-08 18:42:41,938 - 96	rmse	0.4227	
+2023-09-08 18:42:41,938 - 96	mape	219.4932	
 ----*-----
-2023-09-08 15:33:13,951 - [*] loss:0.4283
-2023-09-08 15:33:13,962 - [*] phase 0, testing
-2023-09-08 15:33:14,399 - T:96	MAE	0.444668	RMSE	0.428343	MAPE	225.141668
-2023-09-08 15:34:42,447 - [*] loss:0.4768
-2023-09-08 15:34:42,457 - [*] phase 0, testing
-2023-09-08 15:34:42,939 - T:96	MAE	0.471994	RMSE	0.477021	MAPE	250.634289
-2023-09-08 15:36:20,002 - [*] loss:1.0403
-2023-09-08 15:36:20,012 - [*] phase 0, testing
-2023-09-08 15:36:20,381 - T:96	MAE	0.752175	RMSE	1.040694	MAPE	325.342417
-2023-09-08 15:37:49,990 - [*] loss:0.4395
-2023-09-08 15:37:50,000 - [*] phase 0, testing
-2023-09-08 15:37:50,575 - T:96	MAE	0.449151	RMSE	0.439530	MAPE	211.376381
+2023-09-08 18:43:23,536 - [*] loss:0.4283
+2023-09-08 18:43:23,602 - [*] phase 0, testing
+2023-09-08 18:43:24,687 - T:96	MAE	0.444668	RMSE	0.428343	MAPE	225.141668
+2023-09-08 18:44:06,352 - [*] loss:0.4768
+2023-09-08 18:44:06,362 - [*] phase 0, testing
+2023-09-08 18:44:06,837 - T:96	MAE	0.471994	RMSE	0.477021	MAPE	250.634289
+2023-09-08 18:44:58,586 - [*] loss:0.5058
+2023-09-08 18:44:58,864 - [*] phase 0, testing
+2023-09-08 18:45:00,218 - T:96	MAE	0.494083	RMSE	0.505913	MAPE	229.877639
+2023-09-08 18:45:40,444 - [*] loss:0.4392
+2023-09-08 18:45:40,455 - [*] phase 0, testing
+2023-09-08 18:45:41,497 - T:96	MAE	0.449018	RMSE	0.439185	MAPE	211.459041
 ----*-----
-avg under noise: 0.5294969975948334 0.5963967815041542
-2023-09-08 15:39:18,562 - [*] loss:0.4224
-2023-09-08 15:39:18,573 - [*] phase 0, testing
-2023-09-08 15:39:19,110 - T:96	MAE	0.439601	RMSE	0.422401	MAPE	219.481635
-2023-09-08 15:39:19,111 - 96	mae	0.4396	
-2023-09-08 15:39:19,111 - 96	rmse	0.4224	
-2023-09-08 15:39:19,111 - 96	mape	219.4816	
+avg under noise: 0.4649408608675003 0.46261533349752426
+2023-09-08 18:46:21,301 - [*] loss:0.4224
+2023-09-08 18:46:21,312 - [*] phase 0, testing
+2023-09-08 18:46:21,982 - T:96	MAE	0.439601	RMSE	0.422401	MAPE	219.481635
+2023-09-08 18:46:21,982 - 96	mae	0.4396	
+2023-09-08 18:46:21,983 - 96	rmse	0.4224	
+2023-09-08 18:46:21,983 - 96	mape	219.4816	
 ----*-----
-2023-09-08 15:40:46,049 - [*] loss:0.4286
-2023-09-08 15:40:46,059 - [*] phase 0, testing
-2023-09-08 15:40:46,530 - T:96	MAE	0.444802	RMSE	0.428711	MAPE	225.520134
-2023-09-08 15:42:17,069 - [*] loss:0.4757
-2023-09-08 15:42:17,080 - [*] phase 0, testing
-2023-09-08 15:42:17,539 - T:96	MAE	0.471695	RMSE	0.475880	MAPE	251.835489
+2023-09-08 18:47:08,714 - [*] loss:0.4286
+2023-09-08 18:47:08,726 - [*] phase 0, testing
+2023-09-08 18:47:09,564 - T:96	MAE	0.444590	RMSE	0.428716	MAPE	225.266600
+2023-09-08 18:47:50,587 - [*] loss:0.4757
+2023-09-08 18:47:50,598 - [*] phase 0, testing
+2023-09-08 18:47:51,220 - T:96	MAE	0.471695	RMSE	0.475880	MAPE	251.835489
+2023-09-08 18:48:35,403 - [*] loss:0.5054
+2023-09-08 18:48:35,426 - [*] phase 0, testing
+2023-09-08 18:48:35,835 - T:96	MAE	0.494519	RMSE	0.505503	MAPE	230.578947
+2023-09-08 18:49:16,743 - [*] loss:0.4387
+2023-09-08 18:49:16,753 - [*] phase 0, testing
+2023-09-08 18:49:17,090 - T:96	MAE	0.448834	RMSE	0.438773	MAPE	211.232662
+----*-----
+avg under noise: 0.46490953117609024 0.4622178301215172
+2023-09-08 18:49:19,592 - logger name:exp/ECL-FEDformer2023-09-08-18:49:19.592556/ECL-FEDformer.log
+2023-09-08 18:49:19,593 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 0.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woSUP_96.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-18:49:19.592556', 'path': 'exp/ECL-FEDformer2023-09-08-18:49:19.592556', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 18:49:19,593 - [*] phase 0 start training
+0 69680
+train 34369
+val 11425
+test 11425
+2023-09-08 18:49:20,576 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[2, 3, 4, 7, 10, 12, 14, 15, 16, 18, 22, 24, 25, 28, 32, 33, 40, 43, 45, 47, 50, 51, 53, 54, 55, 59, 60, 61, 65, 67, 68, 71]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[1, 2, 5, 7, 10, 11, 13, 14, 18, 19, 20, 24, 26, 28, 29, 30, 31, 34, 35, 42, 44, 47, 50, 58, 59, 61, 62, 63, 64, 66, 69, 70]
+modes_kv=32, index_kv=[0, 2, 3, 5, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 20, 21, 22, 25, 27, 30, 31, 33, 35, 36, 37, 38, 39, 41, 43, 44, 45, 47]
+1 True None
+weawew exp/ECL-FEDformer2023-09-05-14:51:51.801049/0/0.1802_epoch_25.pkl
+2023-09-08 18:50:04,074 - [*] loss:0.3604
+2023-09-08 18:50:04,084 - [*] phase 0, testing
+2023-09-08 18:50:04,251 - T:96	MAE	0.404694	RMSE	0.360567	MAPE	251.942301
+2023-09-08 18:50:04,251 - 96	mae	0.4047	
+2023-09-08 18:50:04,252 - 96	rmse	0.3606	
+2023-09-08 18:50:04,252 - 96	mape	251.9423	
+----*-----
+2023-09-08 18:50:44,966 - [*] loss:0.3789
+2023-09-08 18:50:44,976 - [*] phase 0, testing
+2023-09-08 18:50:45,138 - T:96	MAE	0.417240	RMSE	0.379129	MAPE	250.974798
+2023-09-08 18:51:25,329 - [*] loss:0.5338
+2023-09-08 18:51:25,340 - [*] phase 0, testing
+2023-09-08 18:51:25,534 - T:96	MAE	0.493815	RMSE	0.533972	MAPE	291.468716
+2023-09-08 18:52:09,591 - [*] loss:0.4658
+2023-09-08 18:52:09,601 - [*] phase 0, testing
+2023-09-08 18:52:09,795 - T:96	MAE	0.476203	RMSE	0.466182	MAPE	263.277006
+2023-09-08 18:52:50,986 - [*] loss:0.3698
+2023-09-08 18:52:50,996 - [*] phase 0, testing
+2023-09-08 18:52:51,161 - T:96	MAE	0.411718	RMSE	0.369992	MAPE	232.325196
+----*-----
+avg under noise: 0.4497440755367279 0.4373187720775604
+2023-09-08 18:52:53,332 - logger name:exp/ECL-FEDformer2023-09-08-18:52:53.331823/ECL-FEDformer.log
+2023-09-08 18:52:53,332 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 1, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woTMP_96.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-18:52:53.331823', 'path': 'exp/ECL-FEDformer2023-09-08-18:52:53.331823', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 18:52:53,333 - [*] phase 0 start training
+0 69680
+train 34369
+val 11425
+test 11425
+2023-09-08 18:52:54,264 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[2, 3, 4, 7, 10, 12, 14, 15, 16, 18, 22, 24, 25, 28, 32, 33, 40, 43, 45, 47, 50, 51, 53, 54, 55, 59, 60, 61, 65, 67, 68, 71]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[1, 2, 5, 7, 10, 11, 13, 14, 18, 19, 20, 24, 26, 28, 29, 30, 31, 34, 35, 42, 44, 47, 50, 58, 59, 61, 62, 63, 64, 66, 69, 70]
+modes_kv=32, index_kv=[0, 2, 3, 5, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 20, 21, 22, 25, 27, 30, 31, 33, 35, 36, 37, 38, 39, 41, 43, 44, 45, 47]
+1 True None
+weawew exp/ECL-FEDformer2023-09-05-18:12:08.033982/0/0.1804_epoch_25.pkl
+2023-09-08 18:53:38,020 - [*] loss:0.3609
+2023-09-08 18:53:38,031 - [*] phase 0, testing
+2023-09-08 18:53:38,196 - T:96	MAE	0.404920	RMSE	0.361115	MAPE	251.869631
+2023-09-08 18:53:38,197 - 96	mae	0.4049	
+2023-09-08 18:53:38,197 - 96	rmse	0.3611	
+2023-09-08 18:53:38,197 - 96	mape	251.8696	
+----*-----
+2023-09-08 18:54:18,234 - [*] loss:0.3793
+2023-09-08 18:54:18,244 - [*] phase 0, testing
+2023-09-08 18:54:18,416 - T:96	MAE	0.417574	RMSE	0.379533	MAPE	251.496220
+2023-09-08 18:54:58,674 - [*] loss:0.5338
+2023-09-08 18:54:58,684 - [*] phase 0, testing
+2023-09-08 18:54:58,895 - T:96	MAE	0.493384	RMSE	0.533916	MAPE	291.411257
+2023-09-08 18:55:40,498 - [*] loss:0.4661
+2023-09-08 18:55:40,508 - [*] phase 0, testing
+2023-09-08 18:55:40,675 - T:96	MAE	0.476407	RMSE	0.466489	MAPE	263.385940
+2023-09-08 18:56:22,140 - [*] loss:0.3705
+2023-09-08 18:56:22,151 - [*] phase 0, testing
+2023-09-08 18:56:22,320 - T:96	MAE	0.412105	RMSE	0.370623	MAPE	232.711267
+----*-----
+avg under noise: 0.44986752420663834 0.437640056014061
+2023-09-08 18:56:24,634 - logger name:exp/ECL-FEDformer2023-09-08-18:56:24.634101/ECL-FEDformer.log
+2023-09-08 18:56:24,635 - params : {'loss': 'mse', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 96, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 0, 'rec_block_num': 1, 'enhance': 0, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_ori_96.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-18:56:24.634101', 'path': 'exp/ECL-FEDformer2023-09-08-18:56:24.634101', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 18:56:24,635 - [*] phase 0 start training
+0 69680
+train 34369
+val 11425
+test 11425
+2023-09-08 18:56:25,561 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[2, 3, 4, 7, 10, 12, 14, 15, 16, 18, 22, 24, 25, 28, 32, 33, 40, 43, 45, 47, 50, 51, 53, 54, 55, 59, 60, 61, 65, 67, 68, 71]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[1, 2, 5, 7, 10, 11, 13, 14, 18, 19, 20, 24, 26, 28, 29, 30, 31, 34, 35, 42, 44, 47, 50, 58, 59, 61, 62, 63, 64, 66, 69, 70]
+modes_kv=32, index_kv=[0, 2, 3, 5, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 20, 21, 22, 25, 27, 30, 31, 33, 35, 36, 37, 38, 39, 41, 43, 44, 45, 47]
+0 True None
+weawew exp/ECL-FEDformer2023-09-05-21:29:37.805858/0/0.4623_epoch_16.pkl
+2023-09-08 18:57:07,979 - [*] loss:0.4177
+2023-09-08 18:57:07,989 - [*] phase 0, testing
+2023-09-08 18:57:08,158 - T:96	MAE	0.442748	RMSE	0.418062	MAPE	231.679082
+2023-09-08 18:57:08,159 - 96	mae	0.4427	
+2023-09-08 18:57:08,159 - 96	rmse	0.4181	
+2023-09-08 18:57:08,159 - 96	mape	231.6791	
+----*-----
+2023-09-08 18:57:48,825 - [*] loss:0.4218
+2023-09-08 18:57:48,835 - [*] phase 0, testing
+2023-09-08 18:57:49,005 - T:96	MAE	0.446008	RMSE	0.422111	MAPE	236.104870
+2023-09-08 18:58:28,837 - [*] loss:0.4745
+2023-09-08 18:58:28,847 - [*] phase 0, testing
+2023-09-08 18:58:29,024 - T:96	MAE	0.474435	RMSE	0.474899	MAPE	263.533640
+2023-09-08 18:59:10,872 - [*] loss:0.4988
+2023-09-08 18:59:10,883 - [*] phase 0, testing
+2023-09-08 18:59:11,062 - T:96	MAE	0.499017	RMSE	0.499205	MAPE	244.105101
+2023-09-08 18:59:50,011 - [*] loss:0.4341
+2023-09-08 18:59:50,030 - [*] phase 0, testing
+2023-09-08 18:59:50,208 - T:96	MAE	0.453082	RMSE	0.434382	MAPE	222.530723
+----*-----
+avg under noise: 0.4681355059146881 0.45764926820993423
+2023-09-08 18:59:52,480 - logger name:exp/ECL-FEDformer2023-09-08-18:59:52.479731/ECL-FEDformer.log
+2023-09-08 18:59:52,480 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 192, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woREFandALL_192.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-18:59:52.479731', 'path': 'exp/ECL-FEDformer2023-09-08-18:59:52.479731', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 18:59:52,481 - [*] phase 0 start training
+0 69680
+train 34273
+val 11329
+test 11329
+2023-09-08 18:59:53,416 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[2, 7, 10, 12, 26, 30, 32, 33, 34, 41, 46, 47, 50, 51, 52, 55, 56, 68, 69, 71, 74, 75, 78, 82, 83, 85, 92, 97, 108, 110, 111, 114]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[0, 2, 6, 14, 16, 17, 20, 27, 30, 36, 49, 50, 51, 59, 60, 61, 67, 73, 75, 76, 77, 79, 82, 84, 85, 92, 96, 103, 105, 107, 112, 114]
+modes_kv=32, index_kv=[1, 3, 7, 8, 9, 11, 13, 15, 17, 21, 23, 24, 25, 26, 27, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47]
+1 True None
+weawew exp/ECL-FEDformer2023-09-07-09:08:38.216102/0/0.2238_epoch_26.pkl
+2023-09-08 19:00:37,969 - [*] loss:0.4074
+2023-09-08 19:00:37,992 - [*] phase 0, testing
+2023-09-08 19:00:38,331 - T:192	MAE	0.429746	RMSE	0.408033	MAPE	254.931140
+2023-09-08 19:00:38,332 - 192	mae	0.4297	
+2023-09-08 19:00:38,332 - 192	rmse	0.4080	
+2023-09-08 19:00:38,332 - 192	mape	254.9311	
+----*-----
+2023-09-08 19:01:20,558 - [*] loss:0.4281
+2023-09-08 19:01:20,576 - [*] phase 0, testing
+2023-09-08 19:01:20,905 - T:192	MAE	0.443782	RMSE	0.428719	MAPE	258.389139
+2023-09-08 19:02:02,600 - [*] loss:0.6917
+2023-09-08 19:02:02,621 - [*] phase 0, testing
+2023-09-08 19:02:02,975 - T:192	MAE	0.557302	RMSE	0.693429	MAPE	312.030530
+2023-09-08 19:02:47,448 - [*] loss:0.5254
+2023-09-08 19:02:47,467 - [*] phase 0, testing
+2023-09-08 19:02:47,792 - T:192	MAE	0.504748	RMSE	0.526568	MAPE	274.105978
+2023-09-08 19:03:28,762 - [*] loss:0.4162
+2023-09-08 19:03:28,781 - [*] phase 0, testing
+2023-09-08 19:03:29,117 - T:192	MAE	0.435417	RMSE	0.416707	MAPE	238.573861
+----*-----
+avg under noise: 0.48531196266412735 0.5163556486368179
+2023-09-08 19:04:07,463 - [*] loss:0.4074
+2023-09-08 19:04:07,489 - [*] phase 0, testing
+2023-09-08 19:04:07,816 - T:192	MAE	0.429511	RMSE	0.408051	MAPE	254.529953
+2023-09-08 19:04:07,816 - 192	mae	0.4295	
+2023-09-08 19:04:07,816 - 192	rmse	0.4081	
+2023-09-08 19:04:07,817 - 192	mape	254.5300	
+----*-----
+2023-09-08 19:04:48,506 - [*] loss:0.4273
+2023-09-08 19:04:48,525 - [*] phase 0, testing
+2023-09-08 19:04:48,968 - T:192	MAE	0.443357	RMSE	0.428234	MAPE	257.917261
+2023-09-08 19:05:29,607 - [*] loss:0.6854
+2023-09-08 19:05:29,626 - [*] phase 0, testing
+2023-09-08 19:05:29,961 - T:192	MAE	0.556261	RMSE	0.686556	MAPE	310.632873
+2023-09-08 19:06:13,482 - [*] loss:0.5233
+2023-09-08 19:06:13,500 - [*] phase 0, testing
+2023-09-08 19:06:13,833 - T:192	MAE	0.503684	RMSE	0.524519	MAPE	273.052573
+2023-09-08 19:06:52,521 - [*] loss:0.4149
+2023-09-08 19:06:52,540 - [*] phase 0, testing
+2023-09-08 19:06:52,920 - T:192	MAE	0.435022	RMSE	0.415701	MAPE	238.315749
+----*-----
+avg under noise: 0.48458128422498703 0.5137524530291557
+2023-09-08 19:06:55,174 - logger name:exp/ECL-FEDformer2023-09-08-19:06:55.173391/ECL-FEDformer.log
+2023-09-08 19:06:55,174 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 192, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woALI_192.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-19:06:55.173391', 'path': 'exp/ECL-FEDformer2023-09-08-19:06:55.173391', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:06:55,174 - [*] phase 0 start training
+0 69680
+train 34273
+val 11329
+test 11329
+2023-09-08 19:06:56,179 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[2, 7, 10, 12, 26, 30, 32, 33, 34, 41, 46, 47, 50, 51, 52, 55, 56, 68, 69, 71, 74, 75, 78, 82, 83, 85, 92, 97, 108, 110, 111, 114]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[0, 2, 6, 14, 16, 17, 20, 27, 30, 36, 49, 50, 51, 59, 60, 61, 67, 73, 75, 76, 77, 79, 82, 84, 85, 92, 96, 103, 105, 107, 112, 114]
+modes_kv=32, index_kv=[1, 3, 7, 8, 9, 11, 13, 15, 17, 21, 23, 24, 25, 26, 27, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47]
+1 True None
+weawew exp/ECL-FEDformer2023-09-07-13:25:51.018316/0/0.2334_epoch_7.pkl
+2023-09-08 19:07:39,654 - [*] loss:0.4755
+2023-09-08 19:07:39,671 - [*] phase 0, testing
+2023-09-08 19:07:39,998 - T:192	MAE	0.464792	RMSE	0.476153	MAPE	236.594343
+2023-09-08 19:07:39,998 - 192	mae	0.4648	
+2023-09-08 19:07:39,999 - 192	rmse	0.4762	
+2023-09-08 19:07:39,999 - 192	mape	236.5943	
+----*-----
+2023-09-08 19:08:21,504 - [*] loss:0.4894
+2023-09-08 19:08:21,522 - [*] phase 0, testing
+2023-09-08 19:08:21,860 - T:192	MAE	0.473924	RMSE	0.490014	MAPE	243.947124
+2023-09-08 19:09:02,937 - [*] loss:0.5986
+2023-09-08 19:09:02,955 - [*] phase 0, testing
+2023-09-08 19:09:03,280 - T:192	MAE	0.527908	RMSE	0.599816	MAPE	278.159785
+2023-09-08 19:09:47,553 - [*] loss:0.5759
+2023-09-08 19:09:47,573 - [*] phase 0, testing
+2023-09-08 19:09:48,045 - T:192	MAE	0.528519	RMSE	0.576934	MAPE	250.867558
+2023-09-08 19:10:29,452 - [*] loss:0.4931
+2023-09-08 19:10:29,473 - [*] phase 0, testing
+2023-09-08 19:10:29,823 - T:192	MAE	0.476049	RMSE	0.493703	MAPE	226.245427
+----*-----
+avg under noise: 0.5015999600291252 0.5401163026690483
+2023-09-08 19:11:09,165 - [*] loss:0.4755
+2023-09-08 19:11:09,184 - [*] phase 0, testing
+2023-09-08 19:11:09,533 - T:192	MAE	0.464792	RMSE	0.476153	MAPE	236.594343
+2023-09-08 19:11:09,534 - 192	mae	0.4648	
+2023-09-08 19:11:09,534 - 192	rmse	0.4762	
+2023-09-08 19:11:09,534 - 192	mape	236.5943	
+----*-----
+2023-09-08 19:11:49,590 - [*] loss:0.4898
+2023-09-08 19:11:49,608 - [*] phase 0, testing
+2023-09-08 19:11:49,942 - T:192	MAE	0.474043	RMSE	0.490285	MAPE	243.884158
+2023-09-08 19:12:28,568 - [*] loss:0.5977
+2023-09-08 19:12:28,586 - [*] phase 0, testing
+2023-09-08 19:12:28,922 - T:192	MAE	0.528347	RMSE	0.598308	MAPE	279.068017
+2023-09-08 19:13:12,321 - [*] loss:0.5740
+2023-09-08 19:13:12,347 - [*] phase 0, testing
+2023-09-08 19:13:12,689 - T:192	MAE	0.527532	RMSE	0.575128	MAPE	250.192857
+2023-09-08 19:13:52,007 - [*] loss:0.4918
+2023-09-08 19:13:52,026 - [*] phase 0, testing
+2023-09-08 19:13:52,369 - T:192	MAE	0.475773	RMSE	0.492507	MAPE	226.365685
+----*-----
+avg under noise: 0.5014236867427826 0.539056807756424
+2023-09-08 19:13:54,685 - logger name:exp/ECL-FEDformer2023-09-08-19:13:54.685031/ECL-FEDformer.log
+2023-09-08 19:13:54,686 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 192, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 0.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woSUP_192.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-19:13:54.685031', 'path': 'exp/ECL-FEDformer2023-09-08-19:13:54.685031', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:13:54,686 - [*] phase 0 start training
+0 69680
+train 34273
+val 11329
+test 11329
+2023-09-08 19:13:55,603 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[2, 7, 10, 12, 26, 30, 32, 33, 34, 41, 46, 47, 50, 51, 52, 55, 56, 68, 69, 71, 74, 75, 78, 82, 83, 85, 92, 97, 108, 110, 111, 114]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[0, 2, 6, 14, 16, 17, 20, 27, 30, 36, 49, 50, 51, 59, 60, 61, 67, 73, 75, 76, 77, 79, 82, 84, 85, 92, 96, 103, 105, 107, 112, 114]
+modes_kv=32, index_kv=[1, 3, 7, 8, 9, 11, 13, 15, 17, 21, 23, 24, 25, 26, 27, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47]
+1 True None
+weawew exp/ECL-FEDformer2023-09-07-15:34:46.357613/0/0.2243_epoch_26.pkl
+2023-09-08 19:14:39,047 - [*] loss:0.4082
+2023-09-08 19:14:39,067 - [*] phase 0, testing
+2023-09-08 19:14:39,393 - T:192	MAE	0.430138	RMSE	0.408872	MAPE	254.932427
+2023-09-08 19:14:39,393 - 192	mae	0.4301	
+2023-09-08 19:14:39,393 - 192	rmse	0.4089	
+2023-09-08 19:14:39,393 - 192	mape	254.9324	
+----*-----
+2023-09-08 19:15:19,984 - [*] loss:0.4286
+2023-09-08 19:15:20,002 - [*] phase 0, testing
+2023-09-08 19:15:20,338 - T:192	MAE	0.443926	RMSE	0.429313	MAPE	258.251023
+2023-09-08 19:16:01,116 - [*] loss:0.6906
+2023-09-08 19:16:01,135 - [*] phase 0, testing
+2023-09-08 19:16:01,467 - T:192	MAE	0.557045	RMSE	0.692304	MAPE	311.159229
+2023-09-08 19:16:46,205 - [*] loss:0.5262
+2023-09-08 19:16:46,224 - [*] phase 0, testing
+2023-09-08 19:16:46,556 - T:192	MAE	0.504998	RMSE	0.527315	MAPE	274.015951
+2023-09-08 19:17:27,717 - [*] loss:0.4172
+2023-09-08 19:17:27,735 - [*] phase 0, testing
+2023-09-08 19:17:28,066 - T:192	MAE	0.435773	RMSE	0.417631	MAPE	238.583970
+----*-----
+avg under noise: 0.48543550819158554 0.5166406482458115
+2023-09-08 19:17:30,375 - logger name:exp/ECL-FEDformer2023-09-08-19:17:30.375282/ECL-FEDformer.log
+2023-09-08 19:17:30,376 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 1, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 192, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woTMP_192.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-19:17:30.375282', 'path': 'exp/ECL-FEDformer2023-09-08-19:17:30.375282', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:17:30,376 - [*] phase 0 start training
+0 69680
+train 34273
+val 11329
+test 11329
+2023-09-08 19:17:31,340 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[2, 7, 10, 12, 26, 30, 32, 33, 34, 41, 46, 47, 50, 51, 52, 55, 56, 68, 69, 71, 74, 75, 78, 82, 83, 85, 92, 97, 108, 110, 111, 114]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[0, 2, 6, 14, 16, 17, 20, 27, 30, 36, 49, 50, 51, 59, 60, 61, 67, 73, 75, 76, 77, 79, 82, 84, 85, 92, 96, 103, 105, 107, 112, 114]
+modes_kv=32, index_kv=[1, 3, 7, 8, 9, 11, 13, 15, 17, 21, 23, 24, 25, 26, 27, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47]
+1 True None
+weawew exp/ECL-FEDformer2023-09-07-18:39:34.308280/0/0.2234_epoch_26.pkl
+2023-09-08 19:18:14,270 - [*] loss:0.4062
+2023-09-08 19:18:14,288 - [*] phase 0, testing
+2023-09-08 19:18:14,617 - T:192	MAE	0.428970	RMSE	0.406780	MAPE	254.786992
+2023-09-08 19:18:14,617 - 192	mae	0.4290	
+2023-09-08 19:18:14,617 - 192	rmse	0.4068	
+2023-09-08 19:18:14,618 - 192	mape	254.7870	
+----*-----
+2023-09-08 19:18:56,112 - [*] loss:0.4267
+2023-09-08 19:18:56,131 - [*] phase 0, testing
+2023-09-08 19:18:56,476 - T:192	MAE	0.443371	RMSE	0.427437	MAPE	258.750725
+2023-09-08 19:19:36,184 - [*] loss:0.6867
+2023-09-08 19:19:36,202 - [*] phase 0, testing
+2023-09-08 19:19:36,525 - T:192	MAE	0.555710	RMSE	0.688474	MAPE	311.781168
+2023-09-08 19:20:19,832 - [*] loss:0.5235
+2023-09-08 19:20:19,851 - [*] phase 0, testing
+2023-09-08 19:20:20,195 - T:192	MAE	0.504156	RMSE	0.524723	MAPE	274.302149
+2023-09-08 19:20:59,433 - [*] loss:0.4152
+2023-09-08 19:20:59,482 - [*] phase 0, testing
+2023-09-08 19:20:59,845 - T:192	MAE	0.434802	RMSE	0.415610	MAPE	238.528466
+----*-----
+avg under noise: 0.4845099374651909 0.5140608921647072
+2023-09-08 19:21:02,218 - logger name:exp/ECL-FEDformer2023-09-08-19:21:02.218515/ECL-FEDformer.log
+2023-09-08 19:21:02,219 - params : {'loss': 'mse', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 192, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 0, 'rec_block_num': 1, 'enhance': 0, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_ori_192.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-19:21:02.218515', 'path': 'exp/ECL-FEDformer2023-09-08-19:21:02.218515', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:21:02,219 - [*] phase 0 start training
+0 69680
+train 34273
+val 11329
+test 11329
+2023-09-08 19:21:03,178 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[2, 7, 10, 12, 26, 30, 32, 33, 34, 41, 46, 47, 50, 51, 52, 55, 56, 68, 69, 71, 74, 75, 78, 82, 83, 85, 92, 97, 108, 110, 111, 114]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[0, 2, 6, 14, 16, 17, 20, 27, 30, 36, 49, 50, 51, 59, 60, 61, 67, 73, 75, 76, 77, 79, 82, 84, 85, 92, 96, 103, 105, 107, 112, 114]
+modes_kv=32, index_kv=[1, 3, 7, 8, 9, 11, 13, 15, 17, 21, 23, 24, 25, 26, 27, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47]
+0 True None
+weawew exp/ECL-FEDformer2023-09-07-20:59:37.411948/0/0.5975_epoch_4.pkl
+2023-09-08 19:21:45,689 - [*] loss:0.4510
+2023-09-08 19:21:45,707 - [*] phase 0, testing
+2023-09-08 19:21:46,034 - T:192	MAE	0.456675	RMSE	0.451705	MAPE	262.279224
+2023-09-08 19:21:46,034 - 192	mae	0.4567	
+2023-09-08 19:21:46,035 - 192	rmse	0.4517	
+2023-09-08 19:21:46,035 - 192	mape	262.2792	
+----*-----
+2023-09-08 19:22:26,425 - [*] loss:0.4574
+2023-09-08 19:22:26,445 - [*] phase 0, testing
+2023-09-08 19:22:26,785 - T:192	MAE	0.461582	RMSE	0.458205	MAPE	266.172099
+2023-09-08 19:23:07,091 - [*] loss:0.4951
+2023-09-08 19:23:07,113 - [*] phase 0, testing
+2023-09-08 19:23:07,446 - T:192	MAE	0.482927	RMSE	0.495979	MAPE	276.812625
+2023-09-08 19:23:49,761 - [*] loss:0.5158
+2023-09-08 19:23:49,784 - [*] phase 0, testing
+2023-09-08 19:23:50,159 - T:192	MAE	0.502020	RMSE	0.516600	MAPE	266.883278
+2023-09-08 19:24:29,383 - [*] loss:0.4523
+2023-09-08 19:24:29,402 - [*] phase 0, testing
+2023-09-08 19:24:29,742 - T:192	MAE	0.457005	RMSE	0.452903	MAPE	243.851352
+----*-----
+avg under noise: 0.4758835583925247 0.4809217303991318
+2023-09-08 19:24:32,028 - logger name:exp/ECL-FEDformer2023-09-08-19:24:32.027996/ECL-FEDformer.log
+2023-09-08 19:24:32,028 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 336, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woREFandALL_336.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-19:24:32.027996', 'path': 'exp/ECL-FEDformer2023-09-08-19:24:32.027996', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:24:32,028 - [*] phase 0 start training
+0 69680
+train 34129
+val 11185
+test 11185
+2023-09-08 19:24:32,988 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[2, 3, 10, 14, 20, 26, 30, 34, 40, 47, 50, 52, 53, 69, 74, 75, 79, 91, 97, 105, 110, 113, 115, 118, 127, 130, 135, 171, 178, 181, 187, 189]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[0, 11, 14, 23, 35, 36, 47, 50, 52, 54, 56, 59, 61, 63, 72, 84, 94, 96, 101, 110, 115, 121, 124, 131, 134, 136, 142, 168, 172, 173, 175, 180]
+modes_kv=32, index_kv=[0, 1, 2, 3, 5, 6, 7, 9, 12, 13, 15, 16, 17, 19, 25, 26, 27, 30, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46]
+1 True None
+weawew exp/ECL-FEDformer2023-09-06-03:01:31.695721/0/0.274_epoch_19.pkl
+2023-09-08 19:25:13,495 - [*] loss:0.4435
+2023-09-08 19:25:13,526 - [*] phase 0, testing
+2023-09-08 19:25:14,089 - T:336	MAE	0.445829	RMSE	0.443435	MAPE	255.996776
+2023-09-08 19:25:14,089 - 336	mae	0.4458	
+2023-09-08 19:25:14,090 - 336	rmse	0.4434	
+2023-09-08 19:25:14,090 - 336	mape	255.9968	
+----*-----
+2023-09-08 19:25:54,997 - [*] loss:0.4645
+2023-09-08 19:25:55,027 - [*] phase 0, testing
+2023-09-08 19:25:55,784 - T:336	MAE	0.457858	RMSE	0.464347	MAPE	256.711578
+2023-09-08 19:26:36,758 - [*] loss:0.8343
+2023-09-08 19:26:36,789 - [*] phase 0, testing
+2023-09-08 19:26:37,404 - T:336	MAE	0.596534	RMSE	0.834157	MAPE	327.332187
+2023-09-08 19:27:21,527 - [*] loss:0.5573
+2023-09-08 19:27:21,557 - [*] phase 0, testing
+2023-09-08 19:27:22,110 - T:336	MAE	0.511574	RMSE	0.557230	MAPE	268.858862
+2023-09-08 19:28:02,553 - [*] loss:0.4541
+2023-09-08 19:28:02,584 - [*] phase 0, testing
+2023-09-08 19:28:03,171 - T:336	MAE	0.450376	RMSE	0.453972	MAPE	238.540268
+----*-----
+avg under noise: 0.5040855258703232 0.5774267390370369
+2023-09-08 19:28:42,865 - [*] loss:0.4436
+2023-09-08 19:28:42,899 - [*] phase 0, testing
+2023-09-08 19:28:43,475 - T:336	MAE	0.445847	RMSE	0.443442	MAPE	256.100655
+2023-09-08 19:28:43,476 - 336	mae	0.4458	
+2023-09-08 19:28:43,476 - 336	rmse	0.4434	
+2023-09-08 19:28:43,476 - 336	mape	256.1007	
+----*-----
+2023-09-08 19:29:22,263 - [*] loss:0.4639
+2023-09-08 19:29:22,294 - [*] phase 0, testing
+2023-09-08 19:29:22,878 - T:336	MAE	0.457535	RMSE	0.463773	MAPE	256.752157
+2023-09-08 19:30:02,832 - [*] loss:0.8380
+2023-09-08 19:30:02,862 - [*] phase 0, testing
+2023-09-08 19:30:03,443 - T:336	MAE	0.597018	RMSE	0.837852	MAPE	327.276468
+2023-09-08 19:30:46,815 - [*] loss:0.5603
+2023-09-08 19:30:46,846 - [*] phase 0, testing
+2023-09-08 19:30:47,411 - T:336	MAE	0.513262	RMSE	0.560237	MAPE	270.276093
+2023-09-08 19:31:27,341 - [*] loss:0.4540
+2023-09-08 19:31:27,392 - [*] phase 0, testing
+2023-09-08 19:31:28,322 - T:336	MAE	0.450233	RMSE	0.453834	MAPE	238.378072
+----*-----
+avg under noise: 0.504511684179306 0.5789240300655365
+2023-09-08 19:31:30,666 - logger name:exp/ECL-FEDformer2023-09-08-19:31:30.666431/ECL-FEDformer.log
+2023-09-08 19:31:30,667 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 336, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woALI_336.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-19:31:30.666431', 'path': 'exp/ECL-FEDformer2023-09-08-19:31:30.666431', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:31:30,667 - [*] phase 0 start training
+0 69680
+train 34129
+val 11185
+test 11185
+2023-09-08 19:31:31,627 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[2, 3, 10, 14, 20, 26, 30, 34, 40, 47, 50, 52, 53, 69, 74, 75, 79, 91, 97, 105, 110, 113, 115, 118, 127, 130, 135, 171, 178, 181, 187, 189]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[0, 11, 14, 23, 35, 36, 47, 50, 52, 54, 56, 59, 61, 63, 72, 84, 94, 96, 101, 110, 115, 121, 124, 131, 134, 136, 142, 168, 172, 173, 175, 180]
+modes_kv=32, index_kv=[0, 1, 2, 3, 5, 6, 7, 9, 12, 13, 15, 16, 17, 19, 25, 26, 27, 30, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46]
+1 True None
+weawew exp/ECL-FEDformer2023-09-06-06:38:40.410491/0/0.2761_epoch_8.pkl
+2023-09-08 19:32:13,732 - [*] loss:0.4561
+2023-09-08 19:32:13,763 - [*] phase 0, testing
+2023-09-08 19:32:14,750 - T:336	MAE	0.452505	RMSE	0.456019	MAPE	253.643847
+2023-09-08 19:32:14,751 - 336	mae	0.4525	
+2023-09-08 19:32:14,751 - 336	rmse	0.4560	
+2023-09-08 19:32:14,751 - 336	mape	253.6438	
+----*-----
+2023-09-08 19:32:54,789 - [*] loss:0.4731
+2023-09-08 19:32:54,833 - [*] phase 0, testing
+2023-09-08 19:32:55,651 - T:336	MAE	0.463109	RMSE	0.472974	MAPE	260.349107
+2023-09-08 19:33:34,648 - [*] loss:0.5601
+2023-09-08 19:33:34,679 - [*] phase 0, testing
+2023-09-08 19:33:35,356 - T:336	MAE	0.504225	RMSE	0.560012	MAPE	279.398084
+2023-09-08 19:34:19,774 - [*] loss:0.5542
+2023-09-08 19:34:19,809 - [*] phase 0, testing
+2023-09-08 19:34:20,524 - T:336	MAE	0.512234	RMSE	0.554136	MAPE	267.398810
+2023-09-08 19:35:00,836 - [*] loss:0.4676
+2023-09-08 19:35:00,867 - [*] phase 0, testing
+2023-09-08 19:35:01,861 - T:336	MAE	0.458459	RMSE	0.467520	MAPE	238.257480
+----*-----
+avg under noise: 0.4845069646835327 0.5136606693267822
+2023-09-08 19:35:41,120 - [*] loss:0.4561
+2023-09-08 19:35:41,152 - [*] phase 0, testing
+2023-09-08 19:35:42,302 - T:336	MAE	0.452506	RMSE	0.456021	MAPE	253.643227
+2023-09-08 19:35:42,303 - 336	mae	0.4525	
+2023-09-08 19:35:42,303 - 336	rmse	0.4560	
+2023-09-08 19:35:42,303 - 336	mape	253.6432	
+----*-----
+2023-09-08 19:36:20,934 - [*] loss:0.4729
+2023-09-08 19:36:20,969 - [*] phase 0, testing
+2023-09-08 19:36:21,927 - T:336	MAE	0.462990	RMSE	0.472764	MAPE	260.446835
+2023-09-08 19:37:00,248 - [*] loss:0.5587
+2023-09-08 19:37:00,279 - [*] phase 0, testing
+2023-09-08 19:37:01,088 - T:336	MAE	0.503711	RMSE	0.558609	MAPE	279.225206
+2023-09-08 19:37:43,508 - [*] loss:0.5569
+2023-09-08 19:37:43,539 - [*] phase 0, testing
+2023-09-08 19:37:44,438 - T:336	MAE	0.513197	RMSE	0.556859	MAPE	268.127990
+2023-09-08 19:38:23,291 - [*] loss:0.4681
+2023-09-08 19:38:23,324 - [*] phase 0, testing
+2023-09-08 19:38:23,974 - T:336	MAE	0.458633	RMSE	0.468000	MAPE	238.399363
+----*-----
+avg under noise: 0.4846329465508461 0.514057919383049
+2023-09-08 19:38:26,347 - logger name:exp/ECL-FEDformer2023-09-08-19:38:26.346398/ECL-FEDformer.log
+2023-09-08 19:38:26,347 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 336, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 0.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woSUP_336.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-19:38:26.346398', 'path': 'exp/ECL-FEDformer2023-09-08-19:38:26.346398', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:38:26,347 - [*] phase 0 start training
+0 69680
+train 34129
+val 11185
+test 11185
+2023-09-08 19:38:27,292 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[2, 3, 10, 14, 20, 26, 30, 34, 40, 47, 50, 52, 53, 69, 74, 75, 79, 91, 97, 105, 110, 113, 115, 118, 127, 130, 135, 171, 178, 181, 187, 189]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[0, 11, 14, 23, 35, 36, 47, 50, 52, 54, 56, 59, 61, 63, 72, 84, 94, 96, 101, 110, 115, 121, 124, 131, 134, 136, 142, 168, 172, 173, 175, 180]
+modes_kv=32, index_kv=[0, 1, 2, 3, 5, 6, 7, 9, 12, 13, 15, 16, 17, 19, 25, 26, 27, 30, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46]
+1 True None
+weawew exp/ECL-FEDformer2023-09-06-09:03:28.170793/0/0.274_epoch_19.pkl
+2023-09-08 19:39:10,073 - [*] loss:0.4436
+2023-09-08 19:39:10,105 - [*] phase 0, testing
+2023-09-08 19:39:10,937 - T:336	MAE	0.445833	RMSE	0.443444	MAPE	256.042552
+2023-09-08 19:39:10,937 - 336	mae	0.4458	
+2023-09-08 19:39:10,938 - 336	rmse	0.4434	
+2023-09-08 19:39:10,938 - 336	mape	256.0426	
+----*-----
+2023-09-08 19:39:50,677 - [*] loss:0.4645
+2023-09-08 19:39:50,712 - [*] phase 0, testing
+2023-09-08 19:39:51,650 - T:336	MAE	0.457857	RMSE	0.464343	MAPE	256.713867
+2023-09-08 19:40:31,436 - [*] loss:0.8338
+2023-09-08 19:40:31,472 - [*] phase 0, testing
+2023-09-08 19:40:32,244 - T:336	MAE	0.596452	RMSE	0.833721	MAPE	327.258730
+2023-09-08 19:41:13,956 - [*] loss:0.5573
+2023-09-08 19:41:13,986 - [*] phase 0, testing
+2023-09-08 19:41:14,654 - T:336	MAE	0.511567	RMSE	0.557215	MAPE	268.881464
+2023-09-08 19:41:54,537 - [*] loss:0.4541
+2023-09-08 19:41:54,568 - [*] phase 0, testing
+2023-09-08 19:41:55,246 - T:336	MAE	0.450375	RMSE	0.453965	MAPE	238.555717
+----*-----
+avg under noise: 0.5040625855326653 0.5773111283779144
+2023-09-08 19:41:57,611 - logger name:exp/ECL-FEDformer2023-09-08-19:41:57.610762/ECL-FEDformer.log
+2023-09-08 19:41:57,611 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 1, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 336, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woTMP_336.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-19:41:57.610762', 'path': 'exp/ECL-FEDformer2023-09-08-19:41:57.610762', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:41:57,612 - [*] phase 0 start training
+0 69680
+train 34129
+val 11185
+test 11185
+2023-09-08 19:41:58,575 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[2, 3, 10, 14, 20, 26, 30, 34, 40, 47, 50, 52, 53, 69, 74, 75, 79, 91, 97, 105, 110, 113, 115, 118, 127, 130, 135, 171, 178, 181, 187, 189]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[0, 11, 14, 23, 35, 36, 47, 50, 52, 54, 56, 59, 61, 63, 72, 84, 94, 96, 101, 110, 115, 121, 124, 131, 134, 136, 142, 168, 172, 173, 175, 180]
+modes_kv=32, index_kv=[0, 1, 2, 3, 5, 6, 7, 9, 12, 13, 15, 16, 17, 19, 25, 26, 27, 30, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46]
+1 True None
+weawew exp/ECL-FEDformer2023-09-06-12:47:04.714388/0/0.2739_epoch_19.pkl
+2023-09-08 19:42:38,703 - [*] loss:0.4437
+2023-09-08 19:42:38,734 - [*] phase 0, testing
+2023-09-08 19:42:39,338 - T:336	MAE	0.445896	RMSE	0.443575	MAPE	255.783892
+2023-09-08 19:42:39,339 - 336	mae	0.4459	
+2023-09-08 19:42:39,340 - 336	rmse	0.4436	
+2023-09-08 19:42:39,340 - 336	mape	255.7839	
+----*-----
+2023-09-08 19:43:19,063 - [*] loss:0.4645
+2023-09-08 19:43:19,101 - [*] phase 0, testing
+2023-09-08 19:43:19,788 - T:336	MAE	0.457811	RMSE	0.464349	MAPE	256.399322
+2023-09-08 19:43:59,587 - [*] loss:0.8191
+2023-09-08 19:43:59,621 - [*] phase 0, testing
+2023-09-08 19:44:00,181 - T:336	MAE	0.592819	RMSE	0.818940	MAPE	324.331641
+2023-09-08 19:44:43,539 - [*] loss:0.5577
+2023-09-08 19:44:43,593 - [*] phase 0, testing
+2023-09-08 19:44:44,191 - T:336	MAE	0.511784	RMSE	0.557666	MAPE	268.523097
+2023-09-08 19:45:23,302 - [*] loss:0.4541
+2023-09-08 19:45:23,334 - [*] phase 0, testing
+2023-09-08 19:45:24,176 - T:336	MAE	0.450398	RMSE	0.453955	MAPE	238.315177
+----*-----
+avg under noise: 0.5032030567526817 0.573727436363697
+2023-09-08 19:45:26,496 - logger name:exp/ECL-FEDformer2023-09-08-19:45:26.496423/ECL-FEDformer.log
+2023-09-08 19:45:26,497 - params : {'loss': 'mse', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 336, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 0, 'rec_block_num': 1, 'enhance': 0, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_ori_336.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-19:45:26.496423', 'path': 'exp/ECL-FEDformer2023-09-08-19:45:26.496423', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:45:26,497 - [*] phase 0 start training
+0 69680
+train 34129
+val 11185
+test 11185
+2023-09-08 19:45:27,449 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[2, 3, 10, 14, 20, 26, 30, 34, 40, 47, 50, 52, 53, 69, 74, 75, 79, 91, 97, 105, 110, 113, 115, 118, 127, 130, 135, 171, 178, 181, 187, 189]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[0, 11, 14, 23, 35, 36, 47, 50, 52, 54, 56, 59, 61, 63, 72, 84, 94, 96, 101, 110, 115, 121, 124, 131, 134, 136, 142, 168, 172, 173, 175, 180]
+modes_kv=32, index_kv=[0, 1, 2, 3, 5, 6, 7, 9, 12, 13, 15, 16, 17, 19, 25, 26, 27, 30, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46]
+0 True None
+weawew exp/ECL-FEDformer2023-09-06-16:26:50.407485/0/0.7185_epoch_12.pkl
+2023-09-08 19:46:08,773 - [*] loss:0.5311
+2023-09-08 19:46:08,808 - [*] phase 0, testing
+2023-09-08 19:46:09,658 - T:336	MAE	0.505835	RMSE	0.530997	MAPE	246.161842
+2023-09-08 19:46:09,658 - 336	mae	0.5058	
+2023-09-08 19:46:09,659 - 336	rmse	0.5310	
+2023-09-08 19:46:09,659 - 336	mape	246.1618	
+----*-----
+2023-09-08 19:46:48,899 - [*] loss:0.5446
+2023-09-08 19:46:48,936 - [*] phase 0, testing
+2023-09-08 19:46:49,773 - T:336	MAE	0.512716	RMSE	0.544515	MAPE	250.989723
+2023-09-08 19:47:28,811 - [*] loss:0.6188
+2023-09-08 19:47:28,844 - [*] phase 0, testing
+2023-09-08 19:47:29,419 - T:336	MAE	0.543420	RMSE	0.618784	MAPE	273.051739
+2023-09-08 19:48:12,555 - [*] loss:0.6211
+2023-09-08 19:48:12,588 - [*] phase 0, testing
+2023-09-08 19:48:13,193 - T:336	MAE	0.554207	RMSE	0.621025	MAPE	250.419164
+2023-09-08 19:48:52,642 - [*] loss:0.5494
+2023-09-08 19:48:52,673 - [*] phase 0, testing
+2023-09-08 19:48:53,333 - T:336	MAE	0.516233	RMSE	0.549300	MAPE	236.532569
+----*-----
+avg under noise: 0.5316439419984818 0.5834058970212936
+2023-09-08 19:48:55,639 - logger name:exp/ECL-FEDformer2023-09-08-19:48:55.638661/ECL-FEDformer.log
+2023-09-08 19:48:55,639 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 720, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woREFandALL_720.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-19:48:55.638661', 'path': 'exp/ECL-FEDformer2023-09-08-19:48:55.638661', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:48:55,639 - [*] phase 0 start training
+0 69680
+train 33745
+val 10801
+test 10801
+2023-09-08 19:48:56,618 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[19, 50, 63, 81, 83, 95, 104, 110, 124, 134, 144, 156, 162, 191, 204, 218, 244, 249, 250, 252, 259, 277, 278, 306, 312, 321, 322, 323, 336, 357, 367, 377]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[5, 6, 18, 37, 47, 68, 80, 112, 129, 153, 167, 195, 201, 220, 225, 229, 232, 239, 249, 250, 294, 296, 299, 315, 328, 344, 347, 350, 353, 358, 362, 376]
+modes_kv=32, index_kv=[0, 2, 3, 5, 6, 8, 10, 11, 12, 14, 16, 17, 18, 20, 21, 22, 23, 24, 26, 28, 29, 32, 33, 34, 37, 38, 40, 42, 44, 45, 46, 47]
+1 True None
+weawew exp/ECL-FEDformer2023-09-06-19:00:35.034293/0/0.3752_epoch_27.pkl
+2023-09-08 19:49:38,038 - [*] loss:0.5288
+2023-09-08 19:49:38,112 - [*] phase 0, testing
+2023-09-08 19:49:43,813 - T:720	MAE	0.484000	RMSE	0.528600	MAPE	259.231901
+2023-09-08 19:49:43,814 - 720	mae	0.4840	
+2023-09-08 19:49:43,814 - 720	rmse	0.5286	
+2023-09-08 19:49:43,814 - 720	mape	259.2319	
+----*-----
+2023-09-08 19:50:23,369 - [*] loss:0.5530
+2023-09-08 19:50:23,444 - [*] phase 0, testing
+2023-09-08 19:50:31,038 - T:720	MAE	0.496292	RMSE	0.552874	MAPE	265.537500
+2023-09-08 19:51:07,706 - [*] loss:0.6893
+2023-09-08 19:51:07,792 - [*] phase 0, testing
+2023-09-08 19:51:14,717 - T:720	MAE	0.556590	RMSE	0.689067	MAPE	306.077766
+2023-09-08 19:51:57,422 - [*] loss:0.6294
+2023-09-08 19:51:57,493 - [*] phase 0, testing
+2023-09-08 19:52:04,419 - T:720	MAE	0.538813	RMSE	0.629197	MAPE	272.212076
+2023-09-08 19:52:43,638 - [*] loss:0.5375
+2023-09-08 19:52:43,714 - [*] phase 0, testing
+2023-09-08 19:52:49,907 - T:720	MAE	0.487053	RMSE	0.537317	MAPE	243.764138
+----*-----
+avg under noise: 0.519686833024025 0.6021137535572052
+2023-09-08 19:53:28,586 - [*] loss:0.5287
+2023-09-08 19:53:28,657 - [*] phase 0, testing
+2023-09-08 19:53:35,859 - T:720	MAE	0.483995	RMSE	0.528582	MAPE	259.230971
+2023-09-08 19:53:35,860 - 720	mae	0.4840	
+2023-09-08 19:53:35,861 - 720	rmse	0.5286	
+2023-09-08 19:53:35,861 - 720	mape	259.2310	
+----*-----
+2023-09-08 19:54:14,402 - [*] loss:0.5532
+2023-09-08 19:54:14,474 - [*] phase 0, testing
+2023-09-08 19:54:20,482 - T:720	MAE	0.496187	RMSE	0.553080	MAPE	265.589547
+2023-09-08 19:54:57,326 - [*] loss:0.6899
+2023-09-08 19:54:57,401 - [*] phase 0, testing
+2023-09-08 19:55:04,297 - T:720	MAE	0.556989	RMSE	0.689662	MAPE	306.250548
+2023-09-08 19:55:45,724 - [*] loss:0.6292
+2023-09-08 19:55:45,797 - [*] phase 0, testing
+2023-09-08 19:55:52,183 - T:720	MAE	0.538384	RMSE	0.629095	MAPE	271.886897
+2023-09-08 19:56:30,983 - [*] loss:0.5374
+2023-09-08 19:56:31,053 - [*] phase 0, testing
+2023-09-08 19:56:37,212 - T:720	MAE	0.486988	RMSE	0.537230	MAPE	243.522286
+----*-----
+avg under noise: 0.5196371227502823 0.6022663116455078
+2023-09-08 19:56:39,586 - logger name:exp/ECL-FEDformer2023-09-08-19:56:39.585732/ECL-FEDformer.log
+2023-09-08 19:56:39,586 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 720, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woALI_720.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-19:56:39.585732', 'path': 'exp/ECL-FEDformer2023-09-08-19:56:39.585732', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 19:56:39,586 - [*] phase 0 start training
+0 69680
+train 33745
+val 10801
+test 10801
+2023-09-08 19:56:40,488 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[19, 50, 63, 81, 83, 95, 104, 110, 124, 134, 144, 156, 162, 191, 204, 218, 244, 249, 250, 252, 259, 277, 278, 306, 312, 321, 322, 323, 336, 357, 367, 377]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[5, 6, 18, 37, 47, 68, 80, 112, 129, 153, 167, 195, 201, 220, 225, 229, 232, 239, 249, 250, 294, 296, 299, 315, 328, 344, 347, 350, 353, 358, 362, 376]
+modes_kv=32, index_kv=[0, 2, 3, 5, 6, 8, 10, 11, 12, 14, 16, 17, 18, 20, 21, 22, 23, 24, 26, 28, 29, 32, 33, 34, 37, 38, 40, 42, 44, 45, 46, 47]
+1 True None
+weawew exp/ECL-FEDformer2023-09-06-22:39:43.537032/0/0.3716_epoch_15.pkl
+2023-09-08 19:57:21,142 - [*] loss:0.6064
+2023-09-08 19:57:21,218 - [*] phase 0, testing
+2023-09-08 19:57:27,089 - T:720	MAE	0.540940	RMSE	0.606206	MAPE	254.602551
+2023-09-08 19:57:27,090 - 720	mae	0.5409	
+2023-09-08 19:57:27,090 - 720	rmse	0.6062	
+2023-09-08 19:57:27,091 - 720	mape	254.6026	
+----*-----
+2023-09-08 19:58:05,988 - [*] loss:0.6340
+2023-09-08 19:58:06,057 - [*] phase 0, testing
+2023-09-08 19:58:12,019 - T:720	MAE	0.555126	RMSE	0.633799	MAPE	261.772609
+2023-09-08 19:58:48,867 - [*] loss:0.8268
+2023-09-08 19:58:48,936 - [*] phase 0, testing
+2023-09-08 19:58:55,104 - T:720	MAE	0.638124	RMSE	0.826390	MAPE	308.938837
+2023-09-08 19:59:37,353 - [*] loss:0.7139
+2023-09-08 19:59:37,427 - [*] phase 0, testing
+2023-09-08 19:59:42,972 - T:720	MAE	0.599279	RMSE	0.713714	MAPE	262.411332
+2023-09-08 20:00:23,599 - [*] loss:0.6368
+2023-09-08 20:00:23,670 - [*] phase 0, testing
+2023-09-08 20:00:28,257 - T:720	MAE	0.559346	RMSE	0.636598	MAPE	249.375582
+----*-----
+avg under noise: 0.5879686772823334 0.7026252299547195
+2023-09-08 20:01:06,492 - [*] loss:0.6066
+2023-09-08 20:01:06,572 - [*] phase 0, testing
+2023-09-08 20:01:11,220 - T:720	MAE	0.541074	RMSE	0.606405	MAPE	254.651976
+2023-09-08 20:01:11,221 - 720	mae	0.5411	
+2023-09-08 20:01:11,222 - 720	rmse	0.6064	
+2023-09-08 20:01:11,222 - 720	mape	254.6520	
+----*-----
+2023-09-08 20:01:49,753 - [*] loss:0.6343
+2023-09-08 20:01:49,839 - [*] phase 0, testing
+2023-09-08 20:01:55,604 - T:720	MAE	0.555138	RMSE	0.634043	MAPE	261.764908
+2023-09-08 20:02:34,657 - [*] loss:0.8294
+2023-09-08 20:02:34,729 - [*] phase 0, testing
+2023-09-08 20:02:39,184 - T:720	MAE	0.639423	RMSE	0.828977	MAPE	309.462786
+2023-09-08 20:03:17,564 - [*] loss:0.7137
+2023-09-08 20:03:17,636 - [*] phase 0, testing
+2023-09-08 20:03:21,350 - T:720	MAE	0.599339	RMSE	0.713492	MAPE	262.736320
+2023-09-08 20:03:54,672 - [*] loss:0.6370
+2023-09-08 20:03:54,748 - [*] phase 0, testing
+2023-09-08 20:03:58,870 - T:720	MAE	0.559426	RMSE	0.636764	MAPE	249.371386
+----*-----
+avg under noise: 0.5883316546678543 0.7033189982175827
+2023-09-08 20:04:01,214 - logger name:exp/ECL-FEDformer2023-09-08-20:04:01.213896/ECL-FEDformer.log
+2023-09-08 20:04:01,214 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 720, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 0.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woSUP_720.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-20:04:01.213896', 'path': 'exp/ECL-FEDformer2023-09-08-20:04:01.213896', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 20:04:01,215 - [*] phase 0 start training
+0 69680
+train 33745
+val 10801
+test 10801
+2023-09-08 20:04:02,101 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[19, 50, 63, 81, 83, 95, 104, 110, 124, 134, 144, 156, 162, 191, 204, 218, 244, 249, 250, 252, 259, 277, 278, 306, 312, 321, 322, 323, 336, 357, 367, 377]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[5, 6, 18, 37, 47, 68, 80, 112, 129, 153, 167, 195, 201, 220, 225, 229, 232, 239, 249, 250, 294, 296, 299, 315, 328, 344, 347, 350, 353, 358, 362, 376]
+modes_kv=32, index_kv=[0, 2, 3, 5, 6, 8, 10, 11, 12, 14, 16, 17, 18, 20, 21, 22, 23, 24, 26, 28, 29, 32, 33, 34, 37, 38, 40, 42, 44, 45, 46, 47]
+1 True None
+weawew exp/ECL-FEDformer2023-09-07-01:31:15.089741/0/0.3752_epoch_27.pkl
+2023-09-08 20:04:40,153 - [*] loss:0.5288
+2023-09-08 20:04:40,340 - [*] phase 0, testing
+2023-09-08 20:04:44,785 - T:720	MAE	0.484013	RMSE	0.528627	MAPE	259.235144
+2023-09-08 20:04:44,787 - 720	mae	0.4840	
+2023-09-08 20:04:44,787 - 720	rmse	0.5286	
+2023-09-08 20:04:44,787 - 720	mape	259.2351	
+----*-----
+2023-09-08 20:05:22,678 - [*] loss:0.5531
+2023-09-08 20:05:22,751 - [*] phase 0, testing
+2023-09-08 20:05:24,947 - T:720	MAE	0.496305	RMSE	0.552897	MAPE	265.543842
+2023-09-08 20:06:02,227 - [*] loss:0.6893
+2023-09-08 20:06:02,307 - [*] phase 0, testing
+2023-09-08 20:06:03,575 - T:720	MAE	0.556598	RMSE	0.689066	MAPE	306.086111
+2023-09-08 20:06:43,192 - [*] loss:0.6294
+2023-09-08 20:06:43,654 - [*] phase 0, testing
+2023-09-08 20:06:45,155 - T:720	MAE	0.538822	RMSE	0.629213	MAPE	272.215271
+2023-09-08 20:07:23,358 - [*] loss:0.5375
+2023-09-08 20:07:23,432 - [*] phase 0, testing
+2023-09-08 20:07:24,856 - T:720	MAE	0.487066	RMSE	0.537343	MAPE	243.769312
+----*-----
+avg under noise: 0.519697792828083 0.602129727602005
+2023-09-08 20:07:27,138 - logger name:exp/ECL-FEDformer2023-09-08-20:07:27.137708/ECL-FEDformer.log
+2023-09-08 20:07:27,138 - params : {'loss': 'huber', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 1, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 720, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_woTMP_720.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-20:07:27.137708', 'path': 'exp/ECL-FEDformer2023-09-08-20:07:27.137708', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 20:07:27,138 - [*] phase 0 start training
+0 69680
+train 33745
+val 10801
+test 10801
+2023-09-08 20:07:28,019 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[19, 50, 63, 81, 83, 95, 104, 110, 124, 134, 144, 156, 162, 191, 204, 218, 244, 249, 250, 252, 259, 277, 278, 306, 312, 321, 322, 323, 336, 357, 367, 377]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[5, 6, 18, 37, 47, 68, 80, 112, 129, 153, 167, 195, 201, 220, 225, 229, 232, 239, 249, 250, 294, 296, 299, 315, 328, 344, 347, 350, 353, 358, 362, 376]
+modes_kv=32, index_kv=[0, 2, 3, 5, 6, 8, 10, 11, 12, 14, 16, 17, 18, 20, 21, 22, 23, 24, 26, 28, 29, 32, 33, 34, 37, 38, 40, 42, 44, 45, 46, 47]
+1 True None
+weawew exp/ECL-FEDformer2023-09-07-04:44:17.707148/0/0.3752_epoch_25.pkl
+2023-09-08 20:08:06,560 - [*] loss:0.5292
+2023-09-08 20:08:06,629 - [*] phase 0, testing
+2023-09-08 20:08:07,893 - T:720	MAE	0.484069	RMSE	0.529042	MAPE	258.683467
+2023-09-08 20:08:07,894 - 720	mae	0.4841	
+2023-09-08 20:08:07,894 - 720	rmse	0.5290	
+2023-09-08 20:08:07,894 - 720	mape	258.6835	
+----*-----
+2023-09-08 20:08:45,244 - [*] loss:0.5531
+2023-09-08 20:08:45,317 - [*] phase 0, testing
+2023-09-08 20:08:46,611 - T:720	MAE	0.496107	RMSE	0.552990	MAPE	264.871383
+2023-09-08 20:09:23,962 - [*] loss:0.6898
+2023-09-08 20:09:24,037 - [*] phase 0, testing
+2023-09-08 20:09:25,317 - T:720	MAE	0.556663	RMSE	0.689581	MAPE	305.787611
+2023-09-08 20:10:05,414 - [*] loss:0.6297
+2023-09-08 20:10:05,496 - [*] phase 0, testing
+2023-09-08 20:10:06,788 - T:720	MAE	0.538518	RMSE	0.629476	MAPE	271.595740
+2023-09-08 20:10:44,282 - [*] loss:0.5377
+2023-09-08 20:10:44,373 - [*] phase 0, testing
+2023-09-08 20:10:45,574 - T:720	MAE	0.486857	RMSE	0.537582	MAPE	243.237615
+----*-----
+avg under noise: 0.5195361077785492 0.6024072021245956
+2023-09-08 20:10:47,880 - logger name:exp/ECL-FEDformer2023-09-08-20:10:47.880381/ECL-FEDformer.log
+2023-09-08 20:10:47,881 - params : {'loss': 'mse', 'conf': 'ECL-FEDformer', 'data_name': 'ETTm1', 'iteration': 1, 'train': 0, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': False, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 0, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.05, 'fc_dropout': 0.05, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 512, 'd_model': 128, 'n_heads': 8, 'seq_len': 96, 'pred_len': 720, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 0, 'always_align': 1, 'refiner': 0, 'rec_block_num': 1, 'enhance': 0, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 2, 'early_break': 0, 'early_stop': 10, 'lo': 'ablation/ECL-FEDformer_ori_720.log', '/* model related args*/': '//', 'model_name': 'FEDformer', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 0, 'pct_start': 0.2, 'num_kernels': 6, 'top_k': 5, 'moving_avg': 25, 'indie': 0, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-FEDformer', 'time': '2023-09-08-20:10:47.880381', 'path': 'exp/ECL-FEDformer2023-09-08-20:10:47.880381', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-08 20:10:47,881 - [*] phase 0 start training
+0 69680
+train 33745
+val 10801
+test 10801
+2023-09-08 20:10:48,780 - [*] phase 0 Dataset load!
+dropout 0.05
+dropout 0.05
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 15, 16, 17, 19, 22, 23, 24, 26, 27, 28, 30, 31, 34, 37, 39, 40, 43, 44, 45, 46, 47]
+fourier enhanced block used!
+modes=32, index=[19, 50, 63, 81, 83, 95, 104, 110, 124, 134, 144, 156, 162, 191, 204, 218, 244, 249, 250, 252, 259, 277, 278, 306, 312, 321, 322, 323, 336, 357, 367, 377]
+ fourier enhanced cross attention used!
+modes_q=32, index_q=[5, 6, 18, 37, 47, 68, 80, 112, 129, 153, 167, 195, 201, 220, 225, 229, 232, 239, 249, 250, 294, 296, 299, 315, 328, 344, 347, 350, 353, 358, 362, 376]
+modes_kv=32, index_kv=[0, 2, 3, 5, 6, 8, 10, 11, 12, 14, 16, 17, 18, 20, 21, 22, 23, 24, 26, 28, 29, 32, 33, 34, 37, 38, 40, 42, 44, 45, 46, 47]
+0 True None
+weawew exp/ECL-FEDformer2023-09-07-07:56:22.984234/0/1.0439_epoch_13.pkl
+2023-09-08 20:11:26,768 - [*] loss:0.6309
+2023-09-08 20:11:26,839 - [*] phase 0, testing
+2023-09-08 20:11:28,049 - T:720	MAE	0.563183	RMSE	0.630374	MAPE	276.468992
+2023-09-08 20:11:28,050 - 720	mae	0.5632	
+2023-09-08 20:11:28,050 - 720	rmse	0.6304	
+2023-09-08 20:11:28,050 - 720	mape	276.4690	
+----*-----
+2023-09-08 20:12:05,277 - [*] loss:0.6400
+2023-09-08 20:12:05,361 - [*] phase 0, testing
+2023-09-08 20:12:06,666 - T:720	MAE	0.562917	RMSE	0.639556	MAPE	274.220061
+2023-09-08 20:12:42,573 - [*] loss:0.7934
+2023-09-08 20:12:42,655 - [*] phase 0, testing
+2023-09-08 20:12:43,934 - T:720	MAE	0.611389	RMSE	0.793317	MAPE	300.277615
+2023-09-08 20:13:25,898 - [*] loss:0.7334
+2023-09-08 20:13:25,974 - [*] phase 0, testing
+2023-09-08 20:13:27,326 - T:720	MAE	0.609483	RMSE	0.733065	MAPE	275.646114
+2023-09-08 20:14:04,198 - [*] loss:0.6493
+2023-09-08 20:14:04,270 - [*] phase 0, testing
+2023-09-08 20:14:05,628 - T:720	MAE	0.572325	RMSE	0.648900	MAPE	266.878748
+----*-----
+avg under noise: 0.5890285074710846 0.7037094384431839

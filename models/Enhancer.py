@@ -89,12 +89,13 @@ class Enhancer(object):
         # plt.savefig('before2.png')
         # plt.close()
         b = x.shape[0] 
+        window = int( self.args.seq_len / 336 * 72)
         for i in range(b): 
             c_idx = torch.randint(low=0, high=x.shape[1] - 1, size=(x.shape[1],), device=x.device) 
-            t_idx = torch.randint(low=0, high=x.shape[2] - 72, size=(1,), device=x.device) 
-            x[i, :, t_idx:t_idx+72] = x[max(i - 1, 0), c_idx, t_idx:t_idx+72] #todo
+            t_idx = torch.randint(low=0, high=x.shape[2] - window, size=(1,), device=x.device) 
+            x[i, :, t_idx:t_idx+window] = x[max(i - 1, 0), c_idx, t_idx:t_idx+window] #todo
             if self.args.add_noise: 
-                x[i, :, t_idx:t_idx+72] +=  torch.randn(size=x[max(i - 1, 0), c_idx, t_idx:t_idx+72].shape).to(self.args.device) * self.jitter_sigma 
+                x[i, :, t_idx:t_idx+window] +=  torch.randn(size=x[max(i - 1, 0), c_idx, t_idx:t_idx+window].shape).to(self.args.device) * self.jitter_sigma 
             #* change here， 随机 + 组合 set_zero + substitude 增大扰动 
             #* 等下再加点扰动和噪声 
         # plt.plot(x[3][1].cpu().numpy()) 
@@ -126,6 +127,8 @@ class Enhancer(object):
     def set_zero(self, x): 
         if x.shape[2] == 1: return x
         x = x.permute(0, 2, 1)
+        window = int( self.args.seq_len / 336 * 72)
+
         # import matplotlib.pyplot as plt
         # plt.plot(x[3][1].cpu().numpy()) 
         # plt.savefig('before2.png')
@@ -133,8 +136,8 @@ class Enhancer(object):
         b = x.shape[0] 
         for i in range(b): 
             c_idx = torch.randint(low=0, high=x.shape[1] - 1, size=(x.shape[1],), device=x.device) 
-            t_idx = torch.randint(low=0, high=x.shape[2] - 72, size=(1,), device=x.device) 
-            x[i, :, t_idx:t_idx+72] = 0 #todo
+            t_idx = torch.randint(low=0, high=x.shape[2] - window, size=(1,), device=x.device) 
+            x[i, :, t_idx:t_idx+window] = 0 #todo
         # plt.plot(x[3][1].cpu().numpy()) 
         # plt.savefig('after2.png')
         # plt.close()

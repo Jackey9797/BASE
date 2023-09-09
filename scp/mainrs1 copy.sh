@@ -9,13 +9,13 @@ for model in "${models[@]}"
 do
   for data_name in "${data_names[@]}"
   do
-    for pred_len in 96 192
+    for pred_len in 336 720
     do 
       python -u main.py \
           --conf "$model" \
           --noise_rate 0.5 \
           --idx -1 \
-          --device "cuda:0" \
+          --device "cuda:1" \
           --aligner 1 \
           --loss huber \
           --refiner 1 \
@@ -31,7 +31,7 @@ do
           --conf "$model" \
           --noise_rate 0.5 \
           --idx -1 \
-          --device "cuda:0" \
+          --device "cuda:1" \
           --aligner 0 \
           --loss mse \
           --refiner 0 \
