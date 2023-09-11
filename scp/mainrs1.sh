@@ -3,13 +3,13 @@
 
 
 models=("ECL-PatchTST")
-data_names=("ETTh2")
+data_names=("weather")
 
 for model in "${models[@]}"
 do
   for data_name in "${data_names[@]}"
   do
-    for pred_len in 96 192
+    for pred_len in 336
     do 
       python -u main.py \
           --conf "$model" \

@@ -804,6 +804,21 @@ class base_framework:
 
                 print("----*-----")
                 print('avg under noise:', mae_ / 4, mse_ / 4)
+
+                self.args.test_en=0
+                self.args.use_cm=0
+                self.test_model()
+                self.report_result()
+                mae_, mse_ = 0, 0
+                print("----*-----")               
+                for i in [1, 2, 4, 7]: 
+                    self.args.test_en = i 
+                    mae, mse = self.test_model()
+                    mae_ += mae 
+                    mse_ += mse 
+
+                print("----*-----")
+                print('avg under noise:', mae_ / 4, mse_ / 4)
             elif self.args.summary: 
                 #* ds + model for all len and all noise type and have and not  
                 df = [pd.DataFrame(columns=['len', 're', 'mse', 'mae']) for i in range(8)]

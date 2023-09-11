@@ -2,14 +2,14 @@
 #!/bin/bash
 
 
-models=("ECL-PatchTST")
+models=("ECL-Informer")
 data_names=("ETTh2")
 
 for model in "${models[@]}"
 do
   for data_name in "${data_names[@]}"
   do
-    for pred_len in 336 720
+    for pred_len in 192
     do 
       python -u main.py \
           --conf "$model" \
