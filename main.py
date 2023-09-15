@@ -413,9 +413,9 @@ class base_framework:
             loss_anchor = 0
 
             loss_fb=0
-            # loss_fb = func.mse_loss(self.T.feed_back_nn(true.permute(0, 2, 1).detach()).permute(0, 2, 1), batch_x) 
-            # xx = torch.mean(func.mse_loss(self.T.feed_back_nn(true.detach()), batch_x, reduction='none'), dim = (1,2)).numpy() 
-            # yy = torch.mean(func.mse_loss(true, pred_S, reduction='none'), dim = (1,2)).numpy()
+            reg = 0
+            
+            
             # x_name = 'corr/' +  str(self.args.epoch) + 'x{}.npy'.format(cn)
             # y_name = 'corr/' +  str(self.args.epoch) + 'y{}.npy'.format(cn)
             # np.save(x_name, xx)
@@ -424,19 +424,30 @@ class base_framework:
 
             if self.args.enhance: #* train reconstructor
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1).to(self.args.device)
-                anchor_F = F_T # B * C * D * P_num 
-                anchor_F = anchor_F.reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).permute(0, 2, 1)
-                # print("lst", anchor_F.permute(0, 1, 3, 2).reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).shape)
-                # print(anchor_F.shape) # (B * C) * P_num * D 
-                rec_F = self.S.correction_module.Refiner.rec(anchor_F) 
+                # anchor_F = F_T # B * C * D * P_num 
+                # anchor_F = anchor_F.reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).permute(0, 2, 1)
+                # # print("lst", anchor_F.permute(0, 1, 3, 2).reshape(-1, anchor_F.shape[-2], anchor_F.shape[-1]).shape)
+                # # print(anchor_F.shape) # (B * C) * P_num * D 
+                # rec_F = self.S.correction_module.Refiner.rec(anchor_F) 
                 # print(anchor_F.shape) # (B * C) * P_num * D 
 
                 # print(rec_pred.shape, rec_F.shape, normal_mask.shape, anchor_F.shape) # check shape is right? 
                 # print("w",anchor_F.shape, rec_F.shape)
-                loss_rec = func.mse_loss(rec_F.reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, anchor_F.reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, reduction="mean") 
+                # loss_rec = func.mse_loss(rec_F.reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, anchor_F.reshape(normal_mask.shape[0], normal_mask.shape[1], -1) * normal_mask, reduction="mean") 
                 #* see which way really work as AD scorer -> reconstruct F is OK
-                loss_anchor += 2 * loss_rec
+                # loss_anchor += 2 * loss_rec
+                loss_fb = func.mse_loss(self.T.feed_back_nn(true.permute(0, 2, 1).detach()).permute(0, 2, 1), batch_x) 
 
+                xx = torch.mean(func.mse_loss(self.T.feed_back_nn(true.permute(0, 2, 1).detach()).permute(0, 2, 1), batch_x, reduction='none'), dim = 1).detach() 
+                # yy = torch.mean(func.mse_loss(true, pred_S, reduction='none'), dim = 2).detach()
+                xx = (xx - xx.min()) / (xx.max() - xx.min()) 
+                mask_ =  (self.args.rs_after - self.args.rs_after.min()) / (self.args.rs_after.max() - self.args.rs_after.min())
+                # print(mask_.shape, xx.shape)
+                mask_ =  mask_ > xx  
+                if self.epoch > 1:
+                    reg = self.args.rs_after * mask_.detach() 
+                    reg = torch.mean(reg)
+                    
 
             loss_KD = 0   #* KD part
             if self.args.always_align: self.args.need_align = 1 
@@ -448,11 +459,12 @@ class base_framework:
              
             # print(self.args.rs_before, self.args.rs_after)
             loss_S = self.lossfunc(pred_S, true, reduction="mean") * self.args.omega 
-            if self.args.refiner: loss_S  += self.lossfunc(_pred_S, true, reduction="mean") + self.args.rs_after * self.args.sup_weight # only influence ref 
+            if cn % 40 == 1: 
+                print(reg, loss_fb, loss_S)
+            if self.args.refiner: loss_S  += self.lossfunc(_pred_S, true, reduction="mean") + reg # only influence ref 
             loss_T = self.lossfunc(pred_T, true, reduction="none").mean(dim=1)
             loss_T = (loss_T * (1 - label.to(self.args.device))).mean()
             if self.args.grad_norm: loss_T = loss_T * (len(label.flatten()) / label.sum()) 
-            
             
             loss = loss_S + loss_T + loss_KD * self.args.alpha + loss_anchor * self.args.beta + loss_fb
             training_loss += float(loss)
@@ -964,7 +976,7 @@ def parse_args():
     parser.add_argument("--build_graph", action="store_true", default=False)
     parser.add_argument("--same_init", action="store_true", default=True)
     parser.add_argument("--grad_norm", action="store_true", default=False)
-    parser.add_argument("--refiner_residual", type=int, default=0)
+    parser.add_argument("--refiner_residual", type=int, default=1)
     parser.add_argument("--root_path", type=str, default="")
     parser.add_argument("--exp_path", type=str, default="exp/")
     parser.add_argument("--val_test_mix", action="store_true", default=False)

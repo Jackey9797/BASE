@@ -1,0 +1,389 @@
+2023-09-15 05:29:30,841 - logger name:exp/ECL-PatchTST2023-09-15-05:29:30.841098/ECL-PatchTST.log
+2023-09-15 05:29:30,841 - params : {'loss': 'huber', 'conf': 'ECL-PatchTST', 'data_name': 'ETTm1', 'iteration': 1, 'train': 1, 'mainrs': 0, 'abl': 1, 'abl_tmp_context': 0, 'abl_ae': 0, 'no_tmp': 0, 'load': True, 'build_graph': False, 'same_init': True, 'grad_norm': False, 'refiner_residual': 1, 'root_path': '', 'exp_path': 'exp/', 'val_test_mix': False, 'lr': 0.0001, 'lradj': 'TST', 'dropout': 0.2, 'fc_dropout': 0.2, 'head_dropout': 0.0, 'patch_len': 16, 'stride': 8, 'd_ff': 256, 'd_model': 128, 'n_heads': 16, 'seq_len': 336, 'pred_len': 720, 'noise_rate': 0.5, 'device': device(type='cuda', index=0), 'test_model_path': '/Disk/fhyega/code/BASE/exp/ECL-PatchTST2023-08-26-13:08:31.837686/0/best_model.pkl', 'idx': -1, 'aligner': 1, 'always_align': 1, 'refiner': 1, 'rec_block_num': 1, 'enhance': 1, 'enhance_type': 5, 'seed': 34, 'batch_size': 64, 'share_head': 0, 'add_noise': 1, 'add_norm': 0, 'jitter_sigma': 0.4, 'slope_rate': 0.01, 'slope_range': 0.2, 'alpha': 10.0, 'beta': 1.0, 'gamma': 0.15, 'feature_jittering': 1, 'rec_intra_feature': 0, 'rec_ori': 1, 'mid_dim': 128, 'test_en': 0, 'debugger': 0, 'summary': 0, 'omega': 1.0, 'theta': 1.5, 'mask_border': 1, 'sup_weight': 10.0, 'rec_length_ratio': 0.8, 'ref_dropout': 0.0, 'ref_block_num': 1, 'add_FFN': 1, 'add_residual': 0, 'rec_all': 0, 'e_layers': 3, 'early_break': 0, 'early_stop': 10, 'lo': None, '/* model related args*/': '//', 'model_name': 'PatchTST', 'label_len': 48, 'features': 'M', 'target': 'OT', 'graph_input': False, 'individual': False, 'd_layers': 1, 'factor': 1, 'des': 'Exp', 'padding_patch': 'end', 'revin': 1, 'affine': 0, 'subtract_last': 0, 'decomposition': 0, 'kernel_size': 25, 'output_attention': 0, 'embed_type': 0, 'activation': 'gelu', 'distil': 1, 'linear_output': 1, 'pct_start': 0.2, 'indie': 1, '/*train related args*/': '//', 'epoch': 30, '/*dataset related args*/': '//', 'save_data_path': 'data/ECL/', 'data_process': True, 'embed': 'timeF', 'freq': 'h', 'begin_phase': 0, 'end_phase': 1, 'phase_len': -1, 'val_ratio': 0.33, 'graph_size': 321, '/*strategy related args*/': '//', 'strategy': 'incremental', 'increase': False, 'detect': False, 'detect_strategy': 'feature', 'replay': False, 'replay_strategy': 'random', 'repaly_num_samples': 100, 'ewc': False, 'ewc_strategy': 'ewc', 'ewc_lambda': 0.0001, 'subgraph_train': False, 'num_hops': 2, 'logname': 'ECL-PatchTST', 'time': '2023-09-15-05:29:30.841098', 'path': 'exp/ECL-PatchTST2023-09-15-05:29:30.841098', 'num_workers': 4, 'start_train': 0, 'train_mode': 'pretrain', 'get_score': False, 'use_cm': True, 'logger': <Logger __main__ (INFO)>}
+2023-09-15 05:29:30,841 - [*] phase 0 start training
+0 69680
+train 33505
+val 10801
+test 10801
+2023-09-15 05:29:31,663 - [*] phase 0 Dataset load!
+1 True None
+2023-09-15 05:29:31,805 - [*] phase 0 Training start
+train 33505
+2023-09-15 05:30:11,595 - epoch:0, training loss:0.2154 validation loss:0.3418
+(33505, 7)
+(33505, 7) True
+train 33505
+vs, vt 0.3418014968288015 0.3463657772576315
+Updating learning rate to 1.0434787053479493e-05
+Updating learning rate to 1.0434787053479493e-05
+(33505, 7)
+(33505, 7) True
+train 33505
+0 tensor(1.2621, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1741, device='cuda:0', grad_fn=<MulBackward0>)
+0 tensor(0.9896, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1751, device='cuda:0', grad_fn=<MulBackward0>)
+0 tensor(0.8734, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1765, device='cuda:0', grad_fn=<MulBackward0>)
+0 tensor(0.7442, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1975, device='cuda:0', grad_fn=<MulBackward0>)
+0 tensor(0.6549, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1703, device='cuda:0', grad_fn=<MulBackward0>)
+0 tensor(0.6260, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1962, device='cuda:0', grad_fn=<MulBackward0>)
+0 tensor(0.5936, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1787, device='cuda:0', grad_fn=<MulBackward0>)
+0 tensor(0.5080, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1767, device='cuda:0', grad_fn=<MulBackward0>)
+0 tensor(0.5495, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1996, device='cuda:0', grad_fn=<MulBackward0>)
+0 tensor(0.5502, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1944, device='cuda:0', grad_fn=<MulBackward0>)
+0 tensor(0.4660, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1740, device='cuda:0', grad_fn=<MulBackward0>)
+0 tensor(0.4747, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1827, device='cuda:0', grad_fn=<MulBackward0>)
+0 tensor(0.4504, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1794, device='cuda:0', grad_fn=<MulBackward0>)
+0 tensor(0.4392, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1906, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.3422459472830479 0.3422218156901337
+need align? ->  True 0.3422218156901337
+2023-09-15 05:32:04,998 - epoch:1, training loss:2.1594 validation loss:0.3422
+Updating learning rate to 2.8013878029600176e-05
+Updating learning rate to 2.8013878029600176e-05
+(33505, 7)
+(33505, 7) True
+train 33505
+tensor(5.8528, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.4434, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1809, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(3.3837, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.4321, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1814, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(3.1555, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3850, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1582, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(2.7530, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.4342, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1905, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(2.5723, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.4157, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1740, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(2.0517, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3938, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1868, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(1.9134, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.4258, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1834, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(1.6654, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.4177, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1899, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(1.7647, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3793, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1720, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(1.3152, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3944, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1922, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(1.3226, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.4408, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1924, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(1.2873, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3962, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1720, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(1.0536, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3655, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1624, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.8378, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3907, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1842, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.3408729191097987 0.3452253433374258
+need align? ->  False 0.3422218156901337
+2023-09-15 05:33:29,811 - epoch:2, training loss:3.4761 validation loss:0.3409
+Updating learning rate to 5.202403513565041e-05
+Updating learning rate to 5.202403513565041e-05
+(33505, 7)
+(33505, 7) True
+train 33505
+tensor(1.1135, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.4052, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1946, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.9212, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3110, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1564, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.9004, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3759, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1767, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.7704, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3599, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1688, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.7536, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3504, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1808, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.6089, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3778, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1974, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.6656, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3398, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1698, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.3858, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3507, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1816, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.5749, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3590, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1730, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.5217, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3506, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1560, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.4696, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3934, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1824, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.4157, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3368, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1899, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.3851, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3465, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1922, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.3707, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3434, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1636, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.3427578723994938 0.3505318214642931
+need align? ->  True 0.3422218156901337
+2023-09-15 05:34:54,799 - epoch:3, training loss:1.9597 validation loss:0.3428
+Updating learning rate to 7.602774803421264e-05
+Updating learning rate to 7.602774803421264e-05
+(33505, 7)
+(33505, 7) True
+train 33505
+tensor(0.3659, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3570, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1745, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.3112, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3421, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1846, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.2993, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3519, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1854, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.2739, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3475, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1797, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.2421, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.4100, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1884, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.1877, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3812, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1795, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.1909, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3678, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1920, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.1836, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3358, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1682, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.1488, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3384, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1818, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.1375, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3558, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1769, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.1212, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3620, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1766, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.1044, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3357, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1631, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0857, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3395, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1732, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0801, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3575, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1728, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.3402475473090742 0.34833630483002354
+need align? ->  False 0.3422218156901337
+2023-09-15 05:36:19,900 - epoch:4, training loss:1.4476 validation loss:0.3402
+Updating learning rate to 9.35892341838241e-05
+Updating learning rate to 9.35892341838241e-05
+(33505, 7)
+(33505, 7) True
+train 33505
+tensor(0.0790, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3424, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1681, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0637, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3420, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1990, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0562, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3477, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1652, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0473, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3182, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1745, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0410, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3509, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1716, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0313, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3292, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1855, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0239, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3648, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1852, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0295, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3554, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1770, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0182, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3493, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1828, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0193, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3607, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1710, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0160, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3576, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1815, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0191, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3243, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1763, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0231, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3636, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1717, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0139, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3036, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1649, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.3405697075925635 0.34917293872529936
+need align? ->  False 0.3422218156901337
+2023-09-15 05:37:45,149 - epoch:5, training loss:1.2584 validation loss:0.3406
+Updating learning rate to 9.999999843392645e-05
+Updating learning rate to 9.999999843392645e-05
+(33505, 7)
+(33505, 7) True
+train 33505
+tensor(0.0106, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3419, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1990, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0129, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3183, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1902, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0137, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3380, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1881, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0113, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3427, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1783, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0135, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3376, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1913, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0093, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3180, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1790, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0136, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.2973, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1749, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0105, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3359, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1925, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0082, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3526, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1889, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0104, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3875, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.2056, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0092, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3776, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1947, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0043, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3416, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1823, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0093, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3655, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1731, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0092, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3859, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1909, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.3500842372693959 0.34968860112351074
+need align? ->  True 0.3422218156901337
+2023-09-15 05:39:10,491 - epoch:6, training loss:1.2192 validation loss:0.3501
+Updating learning rate to 9.957060978821996e-05
+Updating learning rate to 9.957060978821996e-05
+(33505, 7)
+(33505, 7) False
+train 33505
+tensor(0.0087, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3697, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1794, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0057, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3123, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1888, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0116, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3193, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1856, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0089, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3440, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1928, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0072, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3368, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1782, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0087, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3644, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1945, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0079, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3330, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1841, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0108, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3517, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1660, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0086, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3471, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1912, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0075, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3448, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1815, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0066, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3745, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1974, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0063, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3201, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1776, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0094, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3499, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1676, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0054, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3625, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1765, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.3446397777845168 0.3593032160806938
+need align? ->  True 0.3422218156901337
+2023-09-15 05:40:35,793 - epoch:7, training loss:1.2048 validation loss:0.3446
+Updating learning rate to 9.829305768752296e-05
+Updating learning rate to 9.829305768752296e-05
+(33505, 7)
+(33505, 7) False
+train 33505
+tensor(0.0082, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3368, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1843, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0061, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3702, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1780, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0092, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3524, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.2044, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0018, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.2915, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1616, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0113, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3039, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1644, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0054, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3467, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1715, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0050, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3227, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1785, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0045, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3758, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1922, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0066, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3046, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1632, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0056, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3166, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1932, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0129, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3360, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1837, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0065, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3024, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1605, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0058, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3458, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1807, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0082, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3508, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1837, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.3420007837682786 0.3603211081415944
+need align? ->  False 0.3422218156901337
+2023-09-15 05:42:01,275 - epoch:8, training loss:1.1942 validation loss:0.3420
+Updating learning rate to 9.618920140248274e-05
+Updating learning rate to 9.618920140248274e-05
+(33505, 7)
+(33505, 7) False
+train 33505
+tensor(0.0069, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3725, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.2022, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0096, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3736, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1795, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0053, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.2912, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1727, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0061, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3500, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1794, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0047, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3283, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1873, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0071, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3421, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1952, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0072, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3094, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1630, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0053, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3058, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1701, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0064, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3478, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1770, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0068, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3187, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1824, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0064, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3656, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1924, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0043, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3041, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1599, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0039, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3666, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1774, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0067, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3043, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1718, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.3412174531782167 0.3592253355144044
+need align? ->  False 0.3422218156901337
+2023-09-15 05:43:26,436 - epoch:9, training loss:1.1876 validation loss:0.3412
+Updating learning rate to 9.329503849743553e-05
+Updating learning rate to 9.329503849743553e-05
+(33505, 7)
+(33505, 7) True
+train 33505
+tensor(0.0108, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3386, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1750, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0037, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3357, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1672, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0033, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3030, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1773, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0039, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3492, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1947, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0049, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3247, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1691, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0053, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3638, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1672, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0049, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.2871, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1632, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0044, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3353, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1680, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0052, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3852, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1884, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0044, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3127, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1722, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0058, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3219, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1825, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0065, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3701, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1726, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0051, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3980, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1907, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0063, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3632, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1757, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.3413625220663449 0.36061855568688295
+need align? ->  False 0.3422218156901337
+2023-09-15 05:44:51,654 - epoch:10, training loss:1.1825 validation loss:0.3414
+Updating learning rate to 8.96600889021002e-05
+Updating learning rate to 8.96600889021002e-05
+(33505, 7)
+(33505, 7) False
+train 33505
+tensor(0.0051, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3254, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1744, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0028, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3324, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1820, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0031, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3208, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1818, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0017, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3121, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1781, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0042, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3165, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1712, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0043, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3145, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1639, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0054, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.2968, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1676, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0045, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3050, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1611, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0057, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3110, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1749, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0057, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3313, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1772, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0052, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3246, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1694, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0050, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3238, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1631, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0066, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3102, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1678, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0035, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3335, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1832, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.3436981586397752 0.3623653166657369
+need align? ->  True 0.3422218156901337
+2023-09-15 05:46:16,881 - epoch:11, training loss:1.1782 validation loss:0.3437
+Updating learning rate to 8.534654761185139e-05
+Updating learning rate to 8.534654761185139e-05
+(33505, 7)
+(33505, 7) False
+train 33505
+tensor(0.0038, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3215, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1730, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0110, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3605, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1976, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0032, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.2958, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1636, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0112, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.2881, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1627, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0047, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3801, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1723, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0098, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3303, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1670, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0028, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3537, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1871, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0073, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3383, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1641, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0057, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3504, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1832, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0065, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3315, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1823, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0034, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3729, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1854, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0017, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3362, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1820, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0036, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3107, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1770, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0046, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3230, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1791, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.3416122943162918 0.3680606088518391
+need align? ->  False 0.3422218156901337
+2023-09-15 05:47:42,169 - epoch:12, training loss:1.1752 validation loss:0.3416
+Updating learning rate to 8.042822051410483e-05
+Updating learning rate to 8.042822051410483e-05
+(33505, 7)
+(33505, 7) True
+train 33505
+tensor(0.0031, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3352, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1848, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0027, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3177, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1738, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0036, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3687, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1821, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0035, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3365, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1824, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0056, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3196, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1639, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0027, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3106, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1785, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0035, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.2848, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1694, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0056, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3262, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1744, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0030, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3162, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1747, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0035, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3453, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1889, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0024, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3229, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1767, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0036, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3189, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1685, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0049, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3630, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1871, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0041, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3041, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1602, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.34068801090914824 0.37596401047600797
+need align? ->  False 0.3422218156901337
+2023-09-15 05:49:07,407 - epoch:13, training loss:1.1714 validation loss:0.3407
+Updating learning rate to 7.498926154912086e-05
+Updating learning rate to 7.498926154912086e-05
+(33505, 7)
+(33505, 7) True
+train 33505
+tensor(0.0040, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3474, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.2040, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0028, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3620, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1846, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0025, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3021, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1850, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0025, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3242, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1876, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0040, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3353, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1668, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0035, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3013, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1751, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0055, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3085, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1623, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0015, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3295, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1736, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0027, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3244, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1688, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0043, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3519, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1844, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0024, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.2909, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1528, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0029, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.2935, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1602, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0025, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.2757, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1614, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0031, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3125, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1691, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.34195680193294437 0.3655339297810955
+need align? ->  False 0.3422218156901337
+2023-09-15 05:50:32,466 - epoch:14, training loss:1.1683 validation loss:0.3420
+Updating learning rate to 6.912273281275466e-05
+Updating learning rate to 6.912273281275466e-05
+(33505, 7)
+(33505, 7) True
+train 33505
+tensor(0.0037, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3528, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1789, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0034, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3533, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1736, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0029, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.2972, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1464, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0029, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3836, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1925, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0049, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3284, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1753, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0026, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3391, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1650, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0032, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3353, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1732, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0032, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3419, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1854, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0024, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3148, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1889, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0028, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3231, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1744, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0026, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3031, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1550, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0030, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3435, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1913, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0034, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3680, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1908, device='cuda:0', grad_fn=<MulBackward0>)
+tensor(0.0046, device='cuda:0', grad_fn=<MeanBackward0>) tensor(0.3691, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.1798, device='cuda:0', grad_fn=<MulBackward0>)
+vs, vt 0.3421970629215946 0.36002554343296933
+need align? ->  False 0.3422218156901337
+2023-09-15 05:51:57,645 - epoch:15, training loss:1.1657 validation loss:0.3422
+check exp/ECL-PatchTST2023-09-15-05:29:30.841098/0/0.3402_epoch_4.pkl  &  0.3422218156901337
+2023-09-15 05:52:02,234 - [*] loss:0.4391
+2023-09-15 05:52:02,295 - [*] phase 0, testing
+2023-09-15 05:52:03,261 - T:720	MAE	0.424845	RMSE	0.438888	MAPE	254.602695
+2023-09-15 05:52:03,276 - 720	mae	0.4248	
+2023-09-15 05:52:03,276 - 720	rmse	0.4389	
+2023-09-15 05:52:03,276 - 720	mape	254.6027	
+----*-----
+2023-09-15 05:52:08,057 - [*] loss:0.4487
+2023-09-15 05:52:08,116 - [*] phase 0, testing
+2023-09-15 05:52:09,058 - T:720	MAE	0.435517	RMSE	0.448509	MAPE	254.531860
+2023-09-15 05:52:13,719 - [*] loss:0.4680
+2023-09-15 05:52:13,779 - [*] phase 0, testing
+2023-09-15 05:52:14,754 - T:720	MAE	0.448943	RMSE	0.467747	MAPE	252.369761
+2023-09-15 05:52:22,034 - [*] loss:0.4956
+2023-09-15 05:52:22,093 - [*] phase 0, testing
+2023-09-15 05:52:23,044 - T:720	MAE	0.475550	RMSE	0.495453	MAPE	260.215640
+2023-09-15 05:52:27,755 - [*] loss:0.4361
+2023-09-15 05:52:27,814 - [*] phase 0, testing
+2023-09-15 05:52:28,774 - T:720	MAE	0.430615	RMSE	0.435886	MAPE	231.888676
+----*-----
+avg under noise: 0.44765640795230865 0.46189866960048676
+2023-09-15 05:52:32,783 - [*] loss:0.4391
+2023-09-15 05:52:32,844 - [*] phase 0, testing
+2023-09-15 05:52:33,808 - T:720	MAE	0.424846	RMSE	0.438889	MAPE	254.604578
+2023-09-15 05:52:33,809 - 720	mae	0.4248	
+2023-09-15 05:52:33,809 - 720	rmse	0.4389	
+2023-09-15 05:52:33,809 - 720	mape	254.6046	
+----*-----
+2023-09-15 05:52:37,908 - [*] loss:0.4489
+2023-09-15 05:52:37,969 - [*] phase 0, testing
+2023-09-15 05:52:38,927 - T:720	MAE	0.435623	RMSE	0.448630	MAPE	254.749107
+2023-09-15 05:52:42,980 - [*] loss:0.4678
+2023-09-15 05:52:43,039 - [*] phase 0, testing
+2023-09-15 05:52:43,997 - T:720	MAE	0.448897	RMSE	0.467596	MAPE	252.489758
+2023-09-15 05:52:50,747 - [*] loss:0.4959
+2023-09-15 05:52:50,808 - [*] phase 0, testing
+2023-09-15 05:52:51,773 - T:720	MAE	0.475679	RMSE	0.495703	MAPE	260.000157
+2023-09-15 05:52:55,873 - [*] loss:0.4358
+2023-09-15 05:52:55,935 - [*] phase 0, testing
+2023-09-15 05:52:56,914 - T:720	MAE	0.430440	RMSE	0.435620	MAPE	231.852150
+----*-----
+avg under noise: 0.44766003638505936 0.46188700944185257

@@ -143,6 +143,7 @@ class Ref_block(nn.Module):
     ):
         if self.args.no_tmp: return x + self.FFN(x)
         key_mask = mask
+        key_mask = None 
         out_1, _ = self.self_attn(x, x, x, key_padding_mask=key_mask, attn_mask=None) 
         # out_1 = self.to_out(x) 
 
@@ -251,8 +252,8 @@ class Refiner(nn.Module):
         #     Refiner_block(args, args.d_model, add_residual= self.refiner_residual) for _ in range(self.refiner_block_num)
         # ])
         self.ref = nn.ModuleList([Ref_block(args, args.d_model, add_residual= self.rec_residual) for _ in range(self.ref_block_num)])
-        self.rec = nn.Sequential(*[Rec_block(args, args.d_model, add_residual= self.rec_residual) for _ in range(self.rec_block_num)])
-        self.rec_head = ReconHead(args.d_model, 8, 0.1)
+        # self.rec = nn.Sequential(*[Rec_block(args, args.d_model, add_residual= self.rec_residual) for _ in range(self.rec_block_num)])
+        # self.rec_head = ReconHead(args.d_model, 8, 0.1)
 
     def forward(self, x):
         # x: [Batch, C，P, d ]
@@ -260,26 +261,28 @@ class Refiner(nn.Module):
         x = x.reshape(-1, x.shape[-2], x.shape[-1]).detach()  #! detach here
         # print(x.requires_grad)
         # if rec == False: # in P branch
-        for i in self.rec.parameters():
-            i.requires_grad = False
+        # for i in self.rec.parameters():
+        #     i.requires_grad = False
         # print("lst", x.shape)
         
-        r = self.rec(x) 
-        # print(r.requires_grad)
+        # r = self.ref(x) 
+        # # print(r.requires_grad)
         
 
-        rec_score = torch.mean((r - x) ** 2, dim=[2])
-        q = torch.tensor([0.25, 0.5, 0.75], device=r.device) 
-        q1, q2, q3 = torch.quantile(rec_score, q, dim=-1) 
-        rec_score = (rec_score > (q3 + self.args.theta * (q3 - q1)).unsqueeze(-1)) # [890 42]
-        # rec_score = (rec_score > 0.1) # [890 42]
-        self.args.rs_before = torch.mean(torch.mean((r - x) ** 2, dim=[2]) ) 
+        # rec_score = torch.mean((r - x) ** 2, dim=[2])
+        # q = torch.tensor([0.25, 0.5, 0.75], device=r.device) 
+        # q1, q2, q3 = torch.quantile(rec_score, q, dim=-1) 
+        # rec_score = (rec_score > (q3 + self.args.theta * (q3 - q1)).unsqueeze(-1)) # [890 42]
+        # # rec_score = (rec_score > 0.1) # [890 42]
+        # self.args.rs_before = torch.mean(torch.mean((r - x) ** 2, dim=[2]) ) 
 
         #* --- reconstruct ---
-        if not self.args.no_tmp :x_ = x * (~rec_score).unsqueeze(-1)
-        else : x_ = x
+        # if not self.args.no_tmp :x_ = x * (~rec_score).unsqueeze(-1)
+        # else : x_ = x
+        x_ = x
+        r = x
         for i in range(self.ref_block_num): 
-            x_ = self.ref[i](x_, mask=rec_score) #? Do we need mask? 
+            x_ = self.ref[i](x_, mask=None) #? Do we need mask? 
         #* --- reconstruct ---
         # print(x_.requires_grad)
         
@@ -287,17 +290,17 @@ class Refiner(nn.Module):
         # set all idx of rec_sc of x to x_'s value todo  #* 两种实现 #todo 
         #* 中间加正则限制 
 
-        if not self.args.rec_all:
-            x_[rec_score == 0] = x[rec_score == 0]  #* keep normal patch still
-        x_ = torch.cat([x_[:, :-int(x.shape[1] * (1 - self.args.rec_length_ratio)), :], x[:, -int(x.shape[1] * (1 - self.args.rec_length_ratio)):, :]], dim=1)   #* keep last half
+        # if not self.args.rec_all:
+        #     x_[rec_score == 0] = x[rec_score == 0]  #* keep normal patch still
+        # x_ = torch.cat([x_[:, :-int(x.shape[1] * (1 - self.args.rec_length_ratio)), :], x[:, -int(x.shape[1] * (1 - self.args.rec_length_ratio)):, :]], dim=1)   #* keep last half
         
-        r = self.rec(x_)   #? whehter use rec score as parameters
+        # r = self.rec(x_)   #? whehter use rec score as parameters
 
         # if not self.args.rec_all:
-        self.args.rs_after = torch.mean(torch.mean((r - x_) ** 2, dim=[2])) 
+        self.args.rs_after = torch.norm((r - x_).reshape(tmp, 7 , -1), p=None, dim=-1) 
         # print( torch.mean((r - x_) ** 2, dim=[2]))
-        for i in self.rec.parameters():
-            i.requires_grad = True
+        # for i in self.rec.parameters():
+        #     i.requires_grad = True
         # if self.args.train == 0: print("aha")
         x_ = x_.reshape(tmp, -1, x_.shape[-2], x_.shape[-1]) 
         return x_
