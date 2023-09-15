@@ -17,6 +17,7 @@ class Model(nn.Module):
         # if hasattr(self.base_model, "configs"): self.base_model.configs.cm = None 
         self.args = args 
         print(self.args.refiner, self.args.use_cm,self.args.cm)
+        self.feed_back_nn = nn.Linear(self.args.pred_len, self.args.seq_len)
 
         #todo 
 

@@ -412,6 +412,16 @@ class base_framework:
             loss_rec = 0
             loss_anchor = 0
 
+            loss_fb=0
+            # loss_fb = func.mse_loss(self.T.feed_back_nn(true.permute(0, 2, 1).detach()).permute(0, 2, 1), batch_x) 
+            # xx = torch.mean(func.mse_loss(self.T.feed_back_nn(true.detach()), batch_x, reduction='none'), dim = (1,2)).numpy() 
+            # yy = torch.mean(func.mse_loss(true, pred_S, reduction='none'), dim = (1,2)).numpy()
+            # x_name = 'corr/' +  str(self.args.epoch) + 'x{}.npy'.format(cn)
+            # y_name = 'corr/' +  str(self.args.epoch) + 'y{}.npy'.format(cn)
+            # np.save(x_name, xx)
+            # np.save(y_name, yy)
+
+
             if self.args.enhance: #* train reconstructor
                 normal_mask = (1 - label).reshape(len(label),label.shape[-1],1).to(self.args.device)
                 anchor_F = F_T # B * C * D * P_num 
@@ -444,7 +454,7 @@ class base_framework:
             if self.args.grad_norm: loss_T = loss_T * (len(label.flatten()) / label.sum()) 
             
             
-            loss = loss_S + loss_T + loss_KD * self.args.alpha + loss_anchor * self.args.beta
+            loss = loss_S + loss_T + loss_KD * self.args.alpha + loss_anchor * self.args.beta + loss_fb
             training_loss += float(loss)
             loss.backward()
             self.optimizer_S.step()
